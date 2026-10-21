@@ -122,12 +122,17 @@
    been live-verified to render without clipping or overlap -- so this base
    sits inside a range the layout is known to survive rather than being a
    new, untested size. */
---fs-1:13px;
---fs-2:15px;
---fs-3:17px;
---fs-4:20px;
---fs-5:28px;
---fs-6:36px;
+/* Owner report, third time (2026-10-21, standalone VINDHYA repo): font
+   size requested bigger again. Not re-verified live against the
+   1512/820/390/320px breakpoint sweep the two earlier bumps did (no
+   browser/screenshot tool available in this session) -- check for
+   clipping/overlap on the actual deployed site before relying on this. */
+--fs-1:15px;
+--fs-2:17px;
+--fs-3:19px;
+--fs-4:22px;
+--fs-5:30px;
+--fs-6:38px;
 }
 @media(max-width:768px){
   :root{
@@ -135,12 +140,12 @@
        no text anywhere on the mobile screen -- the one a farmer actually
        uses -- may render below 14px. --fs-1 and --fs-2 collapse to the
        same 14px value rather than leaving a sub-14px step. */
-    --fs-1:14px;
-    --fs-2:14px;
-    --fs-3:16px;
-    --fs-4:20px;
-    --fs-5:24px;
-    --fs-6:28px;
+    --fs-1:15px;
+    --fs-2:15px;
+    --fs-3:18px;
+    --fs-4:22px;
+    --fs-5:26px;
+    --fs-6:30px;
   }
 }
 /* Self-hosted, not a CDN link (owner spec 2.3) -- so the portal looks
@@ -294,6 +299,15 @@ body{min-height:100%;background:var(--bg-deep);color:var(--text);font-family:'In
    already used by .map-info-bar/.login-card elsewhere in this file rather
    than inventing a new visual idiom. */
 .hero-music-control{position:fixed;top:1rem;right:1rem;z-index:1500;display:flex;align-items:center;gap:0.5rem;background:rgba(20,28,40,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.18);border-radius:var(--radius-20);padding:0.4rem 0.75rem;box-shadow:0 2px 12px rgba(0,0,0,0.25);}
+/* Owner request (2026-10-21): no language option visible before the
+   app/topbar's own .topbar-lang button -- a first-time visitor on #hero
+   or #loginGate had no way to switch to Hindi. Same .lang-toggle class
+   already wired by toggleGlobalLang()/bootLang() (querySelectorAll loop),
+   just given a fixed top-left position so it survives both pre-app
+   screens (#hero and #loginGate swap display:none/flex on the same
+   element tree, this sits outside both as a sibling). Left side, not
+   right, to stay clear of .hero-music-control. */
+.pre-app-lang-toggle{position:fixed;top:1rem;left:1rem;z-index:1600;background:rgba(20,28,40,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.18)!important;color:#fff!important;box-shadow:0 2px 12px rgba(0,0,0,0.25);}
 .hero-music-toggle{background:none;border:none;color:#fff;font-size:var(--fs-3);cursor:pointer;width:26px;height:26px;display:flex;align-items:center;justify-content:center;opacity:0.9;transition:opacity 0.2s;}
 .hero-music-toggle:hover{opacity:1;}
 .hero-music-toggle.muted{opacity:0.5;}
@@ -918,7 +932,7 @@ body.role-view-farmer:not(.role-advanced) #sidebar .nav-item[data-role-tech="1"]
 /* Farmer: larger base type. Bumps the shared --fs-* scale rather than
    hardcoding sizes, so every card/label/axis grows together and nothing
    has to be restyled per component. */
-body.role-view-farmer{--fs-1:14px;--fs-2:16.5px;--fs-3:19px;--fs-4:24px;--fs-5:32px;}
+body.role-view-farmer{--fs-1:16px;--fs-2:18.5px;--fs-3:21px;--fs-4:26px;--fs-5:34px;}
 /* At the farmer scale the 280px Climate Metrics column is simply too
    narrow to keep label and value side by side -- sharing ~195px between
    a 22px value and its label shreds the label into one word per line.
@@ -1595,6 +1609,7 @@ body.mk-modal-open #pane-merakhet.active{
 </section>
 
 <!-- ============================================================ HERO ============================================================ -->
+<button class="lang-toggle pre-app-lang-toggle" onclick="toggleGlobalLang()" title="Switch language / भाषा बदलें"><i class="fa fa-language"></i> HI</button>
 <section id="hero">
   <!-- HERO SLIDESHOW -->
   <div class="hero-slideshow" id="heroSlideshow">
