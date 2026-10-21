@@ -12,7 +12,7 @@ Synthetic district, village, and cadastral records were removed in the
 ## Repository layout
 
 ```
-cNARMADA_IITIndore/
+vindhya-climate-portal/
 ├── app.py                       Streamlit host (iframe + GitHub raw data)
 ├── requirements.txt             full pinned dependency set
 ├── .env.example                 data paths / keys (copy to .env)

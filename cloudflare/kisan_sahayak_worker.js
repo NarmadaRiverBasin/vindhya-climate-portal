@@ -122,7 +122,7 @@ const EMBEDDING_DIMENSIONS = 768;
 // fetches this session (200 OK on mp_climate_data.json, mandi_prices.json,
 // a crop_stats_des_by_district file, a climate/<state>/<district>.json
 // file, and the HF village_profiles file, 2026-08-08).
-const GH_PAGES_BASE = 'https://narmadariverbasin.github.io/cNARMADA_IITIndore/dashboard/data/'; // repo moved 2026-09 from vindhyaresearch25-a11y/vindhya-climate-portal
+const GH_PAGES_BASE = 'https://narmadariverbasin.github.io/vindhya-climate-portal/dashboard/data/';
 const HF_DATA_BASE = 'https://huggingface.co/datasets/vindhyaresearch/vindhya-climate/resolve/main/';
 
 // The 5 districts with real IMD-derived data in mp_climate_data.json (see

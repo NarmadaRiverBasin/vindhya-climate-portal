@@ -11,8 +11,8 @@ import os
 st.set_page_config(page_title="MP Climate Intelligence", layout="wide", page_icon="\U0001f33e")
 
 DASHBOARD_DIR = os.path.join(os.path.dirname(__file__), 'dashboard')
-GITHUB_RAW = "https://raw.githubusercontent.com/NarmadaRiverBasin/cNARMADA_IITIndore/main/dashboard/data"
-GITHUB_BASE = "https://raw.githubusercontent.com/NarmadaRiverBasin/cNARMADA_IITIndore/main/dashboard"
+GITHUB_RAW = "https://raw.githubusercontent.com/NarmadaRiverBasin/vindhya-climate-portal/main/dashboard/data"
+GITHUB_BASE = "https://raw.githubusercontent.com/NarmadaRiverBasin/vindhya-climate-portal/main/dashboard"
 
 _URL_PATCHES = [
     ("'data/mp_climate_data.json'",        f"'{GITHUB_RAW}/mp_climate_data.json'"),
