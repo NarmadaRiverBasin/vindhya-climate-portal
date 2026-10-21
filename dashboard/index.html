@@ -127,25 +127,33 @@
    1512/820/390/320px breakpoint sweep the two earlier bumps did (no
    browser/screenshot tool available in this session) -- check for
    clipping/overlap on the actual deployed site before relying on this. */
---fs-1:15px;
---fs-2:17px;
---fs-3:19px;
---fs-4:22px;
---fs-5:30px;
---fs-6:38px;
+/* Owner report, fourth round (2026-10-21): after the bumps above, text
+   now reads too BIG -- rather than guess at yet another fixed number,
+   --fs-user-scale is a user-controlled multiplier (default 1, set via
+   the A-/A+ resize control -- see fontScaleCycle()/FONT_SCALE_STORAGE_KEY
+   in the inline <script>), persisted in localStorage so it survives
+   reloads. Every --fs-* below multiplies through calc(), so one control
+   fixes the whole page at once instead of re-picking a base size again. */
+--fs-1:calc(15px * var(--fs-user-scale,1));
+--fs-2:calc(17px * var(--fs-user-scale,1));
+--fs-3:calc(19px * var(--fs-user-scale,1));
+--fs-4:calc(22px * var(--fs-user-scale,1));
+--fs-5:calc(30px * var(--fs-user-scale,1));
+--fs-6:calc(38px * var(--fs-user-scale,1));
 }
 @media(max-width:768px){
   :root{
     /* Phase B rule (2026-08-06) overrides A4's original 12px mobile floor:
        no text anywhere on the mobile screen -- the one a farmer actually
        uses -- may render below 14px. --fs-1 and --fs-2 collapse to the
-       same 14px value rather than leaving a sub-14px step. */
-    --fs-1:15px;
-    --fs-2:15px;
-    --fs-3:18px;
-    --fs-4:22px;
-    --fs-5:26px;
-    --fs-6:30px;
+       same 14px value rather than leaving a sub-14px step. Still scaled
+       by --fs-user-scale like the desktop block above. */
+    --fs-1:calc(15px * var(--fs-user-scale,1));
+    --fs-2:calc(15px * var(--fs-user-scale,1));
+    --fs-3:calc(18px * var(--fs-user-scale,1));
+    --fs-4:calc(22px * var(--fs-user-scale,1));
+    --fs-5:calc(26px * var(--fs-user-scale,1));
+    --fs-6:calc(30px * var(--fs-user-scale,1));
   }
 }
 /* Self-hosted, not a CDN link (owner spec 2.3) -- so the portal looks
@@ -316,6 +324,16 @@ body{min-height:100%;background:var(--bg-deep);color:var(--text);font-family:'In
    element tree, this sits outside both as a sibling). Left side, not
    right, to stay clear of .hero-music-control. */
 .pre-app-lang-toggle{position:fixed;top:1rem;left:1rem;z-index:1600;background:rgba(20,28,40,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.18)!important;color:#fff!important;box-shadow:0 2px 12px rgba(0,0,0,0.25);}
+/* Font-size resize control (2026-10-21) -- A-/A+ either side of the
+   current percentage, same fixed top-left stack as the language toggle
+   just above it. .font-scale-ctrl is reused verbatim for the in-app
+   topbar version below (topbar-lang already supplies that button's own
+   chrome there, this class only supplies the inner button-group layout). */
+.font-scale-ctrl{display:flex;align-items:center;gap:0.3rem;}
+.font-scale-ctrl button{background:transparent;border:none;color:inherit;cursor:pointer;font-weight:800;font-size:var(--fs-1);padding:0 0.15rem;line-height:1;}
+.font-scale-ctrl button:hover{opacity:0.75;}
+.font-scale-label{min-width:2.6em;text-align:center;font-size:var(--fs-1);opacity:0.9;}
+.pre-app-font-scale{position:fixed;top:3.4rem;left:1rem;z-index:1600;background:rgba(20,28,40,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.18);color:#fff;box-shadow:0 2px 12px rgba(0,0,0,0.25);border-radius:var(--radius-20,20px);padding:0.3rem 0.6rem;}
 .hero-music-toggle{background:none;border:none;color:#fff;font-size:var(--fs-3);cursor:pointer;width:26px;height:26px;display:flex;align-items:center;justify-content:center;opacity:0.9;transition:opacity 0.2s;}
 .hero-music-toggle:hover{opacity:1;}
 .hero-music-toggle.muted{opacity:0.5;}
@@ -939,7 +957,7 @@ body.role-view-farmer:not(.role-advanced) #sidebar .nav-item[data-role-tech="1"]
 /* Farmer: larger base type. Bumps the shared --fs-* scale rather than
    hardcoding sizes, so every card/label/axis grows together and nothing
    has to be restyled per component. */
-body.role-view-farmer{--fs-1:16px;--fs-2:18.5px;--fs-3:21px;--fs-4:26px;--fs-5:34px;}
+body.role-view-farmer{--fs-1:calc(16px * var(--fs-user-scale,1));--fs-2:calc(18.5px * var(--fs-user-scale,1));--fs-3:calc(21px * var(--fs-user-scale,1));--fs-4:calc(26px * var(--fs-user-scale,1));--fs-5:calc(34px * var(--fs-user-scale,1));}
 /* At the farmer scale the 280px Climate Metrics column is simply too
    narrow to keep label and value side by side -- sharing ~195px between
    a 22px value and its label shreds the label into one word per line.
@@ -1617,6 +1635,11 @@ body.mk-modal-open #pane-merakhet.active{
 
 <!-- ============================================================ HERO ============================================================ -->
 <button class="lang-toggle pre-app-lang-toggle" onclick="toggleGlobalLang()" title="Switch language / भाषा बदलें"><i class="fa fa-language"></i> HI</button>
+<div class="pre-app-font-scale font-scale-ctrl" title="Text size / अक्षर का आकार">
+  <button onclick="cycleFontScale(-1)" aria-label="Decrease text size">A-</button>
+  <span class="font-scale-label">100%</span>
+  <button onclick="cycleFontScale(1)" aria-label="Increase text size">A+</button>
+</div>
 <section id="hero">
   <!-- HERO SLIDESHOW -->
   <div class="hero-slideshow" id="heroSlideshow">
@@ -1790,6 +1813,11 @@ body.mk-modal-open #pane-merakhet.active{
       <button class="topbar-toggle" onclick="toggleSidebar()"><i class="fa fa-bars"></i></button>
       <div class="topbar-title">VINDHYA CLIMATE INTELLIGENCE</div>
       <button class="topbar-lang" id="topbarHomeBtn" onclick="showHero()" title="Home / मुख्य पृष्ठ पर वापस जाएँ"><i class="fa fa-house"></i> <span data-i18n>Home</span></button>
+      <div class="topbar-lang font-scale-ctrl" title="Text size / अक्षर का आकार">
+        <button onclick="cycleFontScale(-1)" aria-label="Decrease text size">A-</button>
+        <span class="font-scale-label">100%</span>
+        <button onclick="cycleFontScale(1)" aria-label="Increase text size">A+</button>
+      </div>
       <button class="topbar-lang" id="topbarLangBtn" onclick="toggleGlobalLang()" title="Switch language / भाषा बदलें"><i class="fa fa-language"></i> <span id="topbarLangLabel">हिंदी</span></button>
       <!-- item 0D: always-visible role switcher. Re-personalises the
            default view without ever re-asking for name/organisation
@@ -3408,6 +3436,34 @@ var LANG_STORAGE_KEY = 'vindhya_lang';
 let isHindi = (function(){
   try { return localStorage.getItem(LANG_STORAGE_KEY) === 'hi'; } catch (e) { return false; }
 })();
+
+// Owner report, fourth round on font size (2026-10-21): after three
+// rounds of bumping the base --fs-* scale (too small -> bigger -> bigger
+// still -> now too BIG), guessing another fixed number would just repeat
+// the same cycle. --fs-user-scale (set on :root, every --fs-* above
+// multiplies through it via calc()) is a user-controlled zoom instead --
+// persisted in localStorage so it survives reloads, same pattern as
+// LANG_STORAGE_KEY above.
+var FONT_SCALE_STORAGE_KEY = 'vindhya_font_scale';
+var FONT_SCALE_STEPS = [0.75, 0.85, 1, 1.15, 1.3, 1.45];
+function getFontScale(){
+  try {
+    var v = parseFloat(localStorage.getItem(FONT_SCALE_STORAGE_KEY));
+    return FONT_SCALE_STEPS.indexOf(v) >= 0 ? v : 1;
+  } catch (e) { return 1; }
+}
+function applyFontScale(v){
+  document.documentElement.style.setProperty('--fs-user-scale', v);
+  try { localStorage.setItem(FONT_SCALE_STORAGE_KEY, v); } catch (e) {}
+  document.querySelectorAll('.font-scale-label').forEach(function(el){ el.textContent = Math.round(v * 100) + '%'; });
+}
+function cycleFontScale(dir){
+  var cur = getFontScale();
+  var idx = FONT_SCALE_STEPS.indexOf(cur);
+  idx = Math.min(FONT_SCALE_STEPS.length - 1, Math.max(0, idx + dir));
+  applyFontScale(FONT_SCALE_STEPS[idx]);
+}
+applyFontScale(getFontScale()); // apply on boot, before first paint of anything measuring size
 
 // Single dictionary, English text -> Hindi text, for every data-i18n'd
 // static label in this file (sidebar nav, section headers, card labels,
