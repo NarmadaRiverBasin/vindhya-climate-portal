@@ -45,19 +45,54 @@ numbers, parcel polygons, girdawari records, land status, all NDVI/NDWI/EVI
 series and health scores, all weather events, damage areas, loss percentages,
 AI confidence and evidence scores, and all premium/claim values.
 
-DETERMINISM: fixed SEED -> the same 100 farmers regenerate identically.
+LIVE_SATELLITE_CHECK field (added 2026-10-21, owner request): each farmer's
+`live_satellite_check` is a REAL, additive field -- NOT synthetic -- a live
+Google Earth Engine query against that farmer's actual (synthetic) parcel
+polygon, via the real deployed Mera Khet Worker's /analyze endpoint (the
+exact same call dashboard/mera_khet.js makes for a real farmer-drawn field).
+It sits ALONGSIDE the synthetic scenario-driven rs_series/tech fields above,
+never replacing them -- the scenario story (drought/flood/pest/etc) stays
+intentionally fabricated for demonstration, while this one field shows what
+today's actual satellite conditions are at that location, honestly labelled
+as a live snapshot, not tied to the parcel's assigned scenario. This is the
+"Optional per-parcel live satellite check" already named in the REAL-inputs
+table in docs/DATA_SOURCES.md's crop-insurance-pilot section -- that line
+predates this script actually calling it; this generator is what makes it
+real rather than just documented.
 
-Run:  python3 dashboard/crop_insurance_pilot/generate_synthetic_pilot.py
+DETERMINISM: fixed SEED -> the same 100 farmers' synthetic fields regenerate
+identically. live_satellite_check is NOT deterministic across runs (it is a
+real-time satellite query -- rerunning this script later will show whatever
+the real conditions are at that later time).
+
+Run (needs network -- calls the live Worker 100 times):
+  python3 dashboard/crop_insurance_pilot/generate_synthetic_pilot.py
 """
 
 import json
 import math
 import os
 import random
+import time
 from collections import defaultdict
 
+import requests
 from shapely.geometry import shape, box, Point, mapping
 from shapely.ops import transform as shp_transform
+
+WORKER_ANALYZE_URL = "https://vindhya-mera-khet.vindhyaresearch25.workers.dev/analyze"
+
+
+def call_live_analyze(ring_lonlat):
+    """Real live GEE query via the deployed Mera Khet Worker -- same
+    contract as dashboard/mera_khet_pilot/generate_synthetic_pilot.py's
+    call_analyze(). Any failure is written honestly (available: false),
+    never substituted with a plausible-looking guess."""
+    try:
+        r = requests.post(WORKER_ANALYZE_URL, json={"ring": ring_lonlat}, timeout=60)
+        return r.json()
+    except Exception as e:
+        return {"available": False, "reason": "generator_request_failed", "detail": str(e)[:200]}
 
 SEED = 20260819  # fixed -> identical dataset on every run
 
@@ -558,6 +593,14 @@ def build_farmer(n, pm, scenario, scen_label, crop, binfo, base, rng, props, lon
     parcel_deg = round_geom(to_degrees(pm, lon0, lat0))
     cen_deg = to_degrees(pm.centroid, lon0, lat0)
 
+    # Real, live GEE query against this farmer's actual (synthetic) parcel
+    # ring -- see this module's header for why this is additive, not a
+    # replacement for the scenario-driven rs_series/tech fields below.
+    # Worker's validateRing expects [lon, lat] pairs; shapely's own
+    # exterior.coords are already (x, y) = (lon, lat), no swap needed.
+    ring_for_worker = [[lon, lat] for lon, lat in parcel_deg.exterior.coords]
+    live_check = call_live_analyze(ring_for_worker)
+
     def geo(g):
         if g is None or g.is_empty or g.geom_type not in ("Polygon", "MultiPolygon"):
             return None
@@ -585,6 +628,20 @@ def build_farmer(n, pm, scenario, scen_label, crop, binfo, base, rng, props, lon
         "geometry": mapping(parcel_deg),
         "components": {k: geo(comps[k]) for k in
                        ("cultivated", "bund", "fallow", "noncrop", "road", "water")},
+
+        "live_satellite_check": {
+            "note": "REAL, not synthetic -- a live Google Earth Engine query against this "
+                    "farmer's actual parcel polygon, generated at script-run time. Independent "
+                    "of the scenario/rs_series fields above, which stay deliberately synthetic "
+                    "for demonstration.",
+            "available": bool(live_check.get("available")),
+            "ndvi_now": live_check.get("ndvi"),
+            "cropland_fraction_now": live_check.get("cropland_fraction"),
+            "field_wetness_index_relative_pct": live_check.get("field_wetness_index_relative"),
+            "field_wetness_caveat": live_check.get("field_wetness_index_caveat"),
+            "source": live_check.get("source"),
+            "error": None if live_check.get("available") else (live_check.get("reason") or live_check.get("error")),
+        },
 
         "girdawari": {
             "crop": crop, "season": season, "reported_area_ha": reported_area,
@@ -674,8 +731,13 @@ def main():
     for i, pm in enumerate(parcels_m):
         scenario, scen_label = scen_list[i]
         crop = crops[i % len(crops)]
-        farmers.append(build_farmer(i + 1, pm, scenario, scen_label, crop,
-                                    base[crop], base, rng, props, lon0, lat0))
+        t0 = time.time()
+        f = build_farmer(i + 1, pm, scenario, scen_label, crop,
+                          base[crop], base, rng, props, lon0, lat0)
+        farmers.append(f)
+        lc = f["live_satellite_check"]
+        print(f"[{i+1}/100] SF-{i+1:03d}: live GEE check available={lc['available']} "
+              f"in {time.time()-t0:.1f}s")
 
     disclaimer = (
         "This is a Pilot Study/Proof-of-Concept based entirely on synthetic and simulated "

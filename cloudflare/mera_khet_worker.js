@@ -241,6 +241,117 @@ async function getGeeAccessToken(env) {
 // node numbering or structure without re-verifying against a live GEE
 // project -- this is not hand-rolled JSON, it is a template.
 // ---------------------------------------------------------------------
+// ---------------------------------------------------------------------
+// /tile/{z}/{x}/{y} -- real Sentinel-2 true-colour basemap tiles, served
+// directly from Google Earth Engine (owner request 2026-10-21: "cadastral
+// map ... Google Earth Engine se link kar do"). Standard XYZ/Web Mercator
+// slippy-map tile math (every mapping library, incl. Leaflet, assumes
+// this convention -- not invented here).
+// ---------------------------------------------------------------------
+function tileLon(x, z) { return (x / Math.pow(2, z)) * 360 - 180; }
+function tileLat(y, z) {
+  const n = Math.PI - (2 * Math.PI * y) / Math.pow(2, z);
+  return (180 / Math.PI) * Math.atan(0.5 * (Math.exp(n) - Math.exp(-n)));
+}
+function tileBounds(z, x, y) {
+  return { west: tileLon(x, z), east: tileLon(x + 1, z), north: tileLat(y, z), south: tileLat(y + 1, z) };
+}
+
+// Same real-dataset choice already verified for /analyze's NDVI field
+// (COPERNICUS/S2_SR_HARMONIZED) -- least-cloudy real scene in the last
+// S2_WINDOW_MONTHS, true-colour (B4/B3/B2) visualisation. NEVER a
+// synthetic/painted basemap -- every tile is a real satellite image.
+function buildTileExpression(boundsRing, startDate, endDate) {
+  return {
+    result: '0',
+    values: {
+      '1': ringToPolygonNode(boundsRing),
+      '2': { constantValue: 'system:time_start' },
+      '0': { functionInvocationValue: { functionName: 'Image.visualize', arguments: {
+        bands: { constantValue: ['B4', 'B3', 'B2'] },
+        min: { constantValue: 0 }, max: { constantValue: 3000 },
+        image: { functionInvocationValue: { functionName: 'Collection.first', arguments: {
+          collection: { functionInvocationValue: { functionName: 'Collection.limit', arguments: {
+            ascending: { constantValue: true },
+            collection: { functionInvocationValue: { functionName: 'Collection.filter', arguments: {
+              collection: { functionInvocationValue: { functionName: 'Collection.filter', arguments: {
+                collection: { functionInvocationValue: { functionName: 'Collection.filter', arguments: {
+                  collection: { functionInvocationValue: { functionName: 'ImageCollection.load', arguments: {
+                    id: { constantValue: 'COPERNICUS/S2_SR_HARMONIZED' },
+                  } } },
+                  filter: { functionInvocationValue: { functionName: 'Filter.intersects', arguments: {
+                    leftField: { constantValue: '.all' },
+                    rightValue: { functionInvocationValue: { functionName: 'Feature', arguments: {
+                      geometry: { valueReference: '1' },
+                    } } } } } },
+                } } },
+                filter: { functionInvocationValue: { functionName: 'Filter.dateRangeContains', arguments: {
+                  leftValue: { functionInvocationValue: { functionName: 'DateRange', arguments: {
+                    end: { constantValue: endDate }, start: { constantValue: startDate },
+                  } } },
+                  rightField: { valueReference: '2' },
+                } } },
+              } } },
+              filter: { functionInvocationValue: { functionName: 'Filter.lessThan', arguments: {
+                leftField: { constantValue: 'CLOUDY_PIXEL_PERCENTAGE' },
+                rightValue: { constantValue: 20 },
+              } } },
+            } } },
+            key: { constantValue: 'CLOUDY_PIXEL_PERCENTAGE' },
+          } } },
+        } } },
+      } } },
+    },
+  };
+}
+
+const TILE_CACHE_SECONDS = 7 * 24 * 3600; // same composite window reused all week; Cloudflare edge-caches the repeat tile requests
+
+async function handleTile(z, x, y, env) {
+  const zNum = parseInt(z, 10), xNum = parseInt(x, 10), yNum = parseInt(y, 10);
+  if (!Number.isInteger(zNum) || !Number.isInteger(xNum) || !Number.isInteger(yNum) || zNum < 10 || zNum > 18) {
+    return new Response('invalid or out-of-range tile coordinates', { status: 400 });
+  }
+  if (!env.GEE_SERVICE_ACCOUNT_EMAIL || !env.GEE_SERVICE_ACCOUNT_KEY || !env.GEE_PROJECT_ID) {
+    return new Response('GEE credentials not configured on the server', { status: 501 });
+  }
+  const token = await getGeeAccessToken(env);
+  if (!token) return new Response('GEE auth failed', { status: 502 });
+
+  const b = tileBounds(zNum, xNum, yNum);
+  const ring = [[b.west, b.north], [b.west, b.south], [b.east, b.south], [b.east, b.north], [b.west, b.north]];
+  const expression = buildTileExpression(ring, monthsAgoIso(S2_WINDOW_MONTHS), isoDate(new Date()));
+  const scaleX = (b.east - b.west) / 256, scaleY = -(b.north - b.south) / 256;
+
+  const url = 'https://earthengine.googleapis.com/v1/projects/' + encodeURIComponent(env.GEE_PROJECT_ID) + '/image:computePixels';
+  const resp = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+    body: JSON.stringify({
+      expression,
+      fileFormat: 'PNG',
+      grid: {
+        dimensions: { width: 256, height: 256 },
+        affineTransform: { scaleX, scaleY, translateX: b.west, translateY: b.north, shearX: 0, shearY: 0 },
+        crsCode: 'EPSG:4326',
+      },
+    }),
+  });
+  if (!resp.ok) {
+    const errText = await resp.text().catch(() => '');
+    return new Response('GEE tile compute failed: ' + errText.slice(0, 300), { status: 502 });
+  }
+  const png = await resp.arrayBuffer();
+  return new Response(png, {
+    status: 200,
+    headers: {
+      'Content-Type': 'image/png',
+      'Cache-Control': 'public, max-age=' + TILE_CACHE_SECONDS,
+      'Access-Control-Allow-Origin': '*',
+    },
+  });
+}
+
 function ringToPolygonNode(ring) {
   return {
     functionInvocationValue: {
@@ -737,6 +848,8 @@ export default {
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: corsHeaders(origin) });
     const url = new URL(request.url);
     if (request.method === 'POST' && url.pathname === '/analyze') return handleAnalyze(request, env);
+    const tileMatch = request.method === 'GET' && url.pathname.match(/^\/tile\/(\d+)\/(\d+)\/(\d+)(?:\.png)?$/);
+    if (tileMatch) return handleTile(tileMatch[1], tileMatch[2], tileMatch[3], env);
     return jsonResponse({ available: false, error: 'not_found' }, 404, origin);
   },
 };

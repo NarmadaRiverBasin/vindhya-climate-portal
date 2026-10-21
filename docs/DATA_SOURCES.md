@@ -453,7 +453,8 @@ research pilot study. It is bounded as follows and must stay bounded:
 | Census population / households | Fields carried in that same SoI/NWDP feature |
 | Per-crop yield baselines and PMFBY threshold yields (mean of best 5 of last 7 available years x indemnity level) | DES, data.desagri.gov.in, Indore district (`dashboard/data/crop_stats_des_by_district/madhya_pradesh/indore.json`) |
 | Farmer premium-share caps (Kharif 2%, Rabi 1.5%, annual commercial/horticultural 5%) | Notified PMFBY scheme parameters |
-| Optional per-parcel live satellite check (Sentinel-2 NDVI, Dynamic World cropland fraction, Sentinel-1 backscatter) | Live Google Earth Engine via the existing Mera Khet Worker; verified working from the deployed origin 2026-09-02 |
+| Per-parcel live satellite check (Sentinel-2 NDVI, Dynamic World cropland fraction, Sentinel-1 field wetness) -- `live_satellite_check` field, all 100 farmers | Live Google Earth Engine via the existing Mera Khet Worker's /analyze endpoint; this line described it as "optional"/planned since 2026-09-02 but the generator didn't actually call it -- wired in 2026-10-21 (owner request), now a real field on every farmer record, additive alongside (never replacing) the scenario-driven synthetic rs_series |
+| Satellite basemap on the Insurance Validation map ("Satellite (GEE)" toggle) | Live Sentinel-2 true-colour tiles computed via Earth Engine's REST API (`image:computePixels`), served through a new `/tile/{z}/{x}/{y}` route on the same Mera Khet Worker -- added 2026-10-21, real imagery, not a third-party tile provider |
 
 **Synthetic / simulated (the subject of the pilot):** the 100 farmers, their
 IDs, khasra numbers and parcel polygons; girdawari records and land status;

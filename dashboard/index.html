@@ -1878,9 +1878,9 @@ body.mk-modal-open #pane-merakhet.active{
 		<div class="map-timeline" id="mapTimeline">
           <button class="tl-btn" id="tlPlayBtn" onclick="toggleTimeline()" title="Play"><i class="fa fa-play"></i></button>
           <span class="tl-label" id="tlYearLabel">2024</span>
-          <input type="range" class="tl-slider" id="tlSlider" min="2000" max="2024" value="2024" step="1" oninput="setTimelineYear(parseInt(this.value))">
-          <button class="tl-btn" id="tlModeBtn" onclick="toggleForecastMode()" title="Trend Forecast"><i class="fa fa-clock-rotate-left"></i></button>
-          <span class="tl-range">2000 — <span id="tlMaxYear">2024</span> <span id="tlMode" class="u-green-bold">H</span></span>
+          <input type="range" class="tl-slider" id="tlSlider" min="2000" max="2026" value="2024" step="1" oninput="setTimelineYear(parseInt(this.value))">
+          <button class="tl-btn" id="tlModeBtn" onclick="toggleForecastMode()" title="Trend Forecast (2027-2040)"><i class="fa fa-clock-rotate-left"></i></button>
+          <span class="tl-range">2000 — <span id="tlMaxYear">2026</span> <span id="tlMode" class="u-green-bold">H</span></span>
         </div>
 
         <!-- ===== CASCADING LOCATION SELECTOR: Country > State > District > Block > Village ===== -->
@@ -4160,11 +4160,16 @@ function toggleForecastMode(){
     if (modeLbl) modeLbl.textContent = 'Trend';
     slider.value = Math.min(parseInt(slider.value), 2040);
   } else {
-    slider.max = '2024';
+    // 2025-2026 sit alongside real history by default (not gated behind
+    // this toggle) -- setTimelineYear()'s own isFc=year>2024 check still
+    // honestly marks them "F:"/orange since they're the OLS trend, not
+    // real IMD/GEE-observed data. This toggle now only decides whether
+    // 2027-2040 (pure trend extrapolation) is reachable.
+    slider.max = '2026';
     btn.innerHTML = '<i class="fa fa-clock-rotate-left"></i>';
-    btn.title = 'Show historical only';
+    btn.title = 'Trend Forecast (2027-2040)';
     if (modeLbl) modeLbl.textContent = 'H';
-    slider.value = Math.min(parseInt(slider.value), 2024);
+    slider.value = Math.min(parseInt(slider.value), 2026);
   }
   setTimelineYear(parseInt(slider.value));
   var maxLbl = document.getElementById('tlMaxYear');

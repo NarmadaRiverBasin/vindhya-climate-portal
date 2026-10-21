@@ -47,7 +47,7 @@
   var MANDI = null;
 
   var DATA = null, FARMERS = [], META = {};
-  var map = null, baseCad = null, baseSat = null;
+  var map = null, baseCad = null, baseSat = null, baseGee = null;
   var layerVillage = null, layerParcels = null, layerLabels = null,
       layerSelected = null, layerComponents = null;
   var selected = null;
@@ -152,6 +152,15 @@
     baseSat = L.tileLayer(
       'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
       { maxZoom: 19, attribution: 'Tiles &copy; Esri' });
+    // Owner request (2026-10-21): "Google Earth Engine se link kar do" --
+    // real Sentinel-2 tiles computed live via Earth Engine's REST API
+    // (cloudflare/mera_khet_worker.js's new /tile/{z}/{x}/{y} route, same
+    // GEE service account /analyze already uses), not a third-party
+    // satellite provider. Cloudflare edge-caches each tile for a week
+    // (Cache-Control set by the Worker) so repeat views don't re-run GEE.
+    baseGee = L.tileLayer(
+      'https://vindhya-mera-khet.vindhyaresearch25.workers.dev/tile/{z}/{x}/{y}',
+      { minZoom: 10, maxZoom: 18, maxNativeZoom: 18, attribution: 'Imagery &copy; Google Earth Engine / Copernicus Sentinel-2' });
     baseCad.addTo(map);
 
     layerVillage = L.layerGroup().addTo(map);
@@ -162,6 +171,7 @@
 
     el('btnBaseCad').onclick = function () { setBase('cad'); };
     el('btnBaseSat').onclick = function () { setBase('sat'); };
+    el('btnBaseGee').onclick = function () { setBase('gee'); };
     el('btnLyrKhasra').onclick = function () {
       showKhasra = !showKhasra; this.classList.toggle('on', showKhasra);
       if (showKhasra) map.addLayer(layerLabels); else map.removeLayer(layerLabels);
@@ -191,11 +201,11 @@
   }
 
   function setBase(which) {
-    var cad = which === 'cad';
-    el('btnBaseCad').classList.toggle('on', cad);
-    el('btnBaseSat').classList.toggle('on', !cad);
-    if (cad) { map.removeLayer(baseSat); baseCad.addTo(map); }
-    else { map.removeLayer(baseCad); baseSat.addTo(map); }
+    el('btnBaseCad').classList.toggle('on', which === 'cad');
+    el('btnBaseSat').classList.toggle('on', which === 'sat');
+    el('btnBaseGee').classList.toggle('on', which === 'gee');
+    [baseCad, baseSat, baseGee].forEach(function (l) { if (map.hasLayer(l)) map.removeLayer(l); });
+    ({ cad: baseCad, sat: baseSat, gee: baseGee })[which].addTo(map);
   }
 
   function drawVillage(geo) {
