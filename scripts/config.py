@@ -292,3 +292,57 @@ GWL_SOURCE_META = {
               "as an observation.",
     "data_quality": "verified-official (real CGWB dataset, government portal, no login)",
 }
+
+# ---------- GEE NATIONAL SOIL TYPE (2026-10-21) ----------
+# Owner asked for real national soil-type coverage. Checked first, per this
+# repo's convention: Soil Health Card portal (soilhealth.dac.gov.in) and
+# data.gov.in -- data.gov.in's own page states no API exists for this
+# dataset (can only submit a request). ICAR-NBSS&LUP's BHOOMI Geoportal
+# (bhoomigeoportal-nbsslup.in) hosts real district-level soil texture/type
+# layers but exposes no documented WMS/WFS/REST endpoint or bulk export --
+# same "institutional request needed, not a fetch-script problem" class as
+# the cadastral gap in docs/PANEL_SOURCE_AUDIT.md. Neither is usable here.
+#
+# OpenLandMap/SOL/SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- CHOSEN instead: a real,
+# public, global 250m soil-texture-class raster (ISRIC/OpenLandMap, 1950-2018
+# training period), confirmed live in the GEE catalog and queryable with the
+# same service-account credentials already used for climate/NDVI/soil
+# moisture. This is coarser-provenance than an Indian government ground
+# survey would be (global model, not India-specific field sampling) -- every
+# output file's metadata says so explicitly, never presented as a Soil
+# Health Card equivalent.
+SOIL_TEXTURE_COLLECTION_IMAGE = "OpenLandMap/SOL/SOL_TEXTURE-CLASS_USDA-TT_M/v02"
+SOIL_TEXTURE_BAND = "b0"  # 0cm (surface) depth band; the asset also has b10/b30/b60/b100/b200
+SOIL_TEXTURE_SCALE_METERS = 250
+# Real USDA 12-class texture scheme this band's integer values encode --
+# verified against the asset's own GEE catalog page (2026-10-21), not
+# guessed from the class count alone.
+SOIL_TEXTURE_CLASSES = {
+    1: "Clay", 2: "Silty Clay", 3: "Sandy Clay", 4: "Clay Loam",
+    5: "Silty Clay Loam", 6: "Sandy Clay Loam", 7: "Loam", 8: "Silty Loam",
+    9: "Sandy Loam", 10: "Silt", 11: "Loamy Sand", 12: "Sand",
+}
+
+NATIONAL_SOIL_TYPE_OUT_DIR = PROJECT_ROOT / "dashboard" / "data" / "soil_type"
+
+SOIL_TYPE_SOURCE_META = {
+    "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / "
+              "OpenLandMap project), via Google Earth Engine -- a global statistical soil map, "
+              "NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no "
+              "public bulk API as of 2026-10-21 -- see scripts/config.py's header above for "
+              "what was checked and rejected).",
+    "resolution": "250 m native pixel, surface (0cm) depth band",
+    "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries "
+           "b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports "
+           "surface texture only, matching what a farmer standing in the field would judge by hand.",
+    "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster "
+              "pixels inside that polygon (the dominant texture class by pixel count -- a "
+              "categorical class cannot be averaged, so mode, not mean, is the only honest "
+              "reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() "
+              "call per district over that district's whole village FeatureCollection, not one "
+              "GEE call per village.",
+    "classes": SOIL_TEXTURE_CLASSES,
+    "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, confirmed live in the "
+                    "GEE catalog 2026-10-21) -- global model resolution, not a substitute for "
+                    "an official in-field Soil Health Card test result.",
+}

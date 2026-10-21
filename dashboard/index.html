@@ -1736,6 +1736,7 @@ body.mk-modal-open #pane-merakhet.active{
       <div class="nav-item" onclick="setNav(this,&#39;liveweather&#39;)"><span class="nav-icon"><i class="fa fa-cloud-sun"></i></span><span class="nav-label" data-i18n>Live Weather</span></div>
       <div class="nav-item" onclick="setNav(this,&#39;compare&#39;)"><span class="nav-icon"><i class="fa fa-code-compare"></i></span><span class="nav-label" data-i18n>Compare</span></div>
       <div class="nav-item" onclick="setNav(this,&#39;soil&#39;)"><span class="nav-icon"><i class="fa fa-layer-group"></i></span><span class="nav-label" data-i18n>Soil Moisture</span></div>
+      <div class="nav-item" onclick="setNav(this,&#39;soiltype&#39;)"><span class="nav-icon"><i class="fa fa-layer-group"></i></span><span class="nav-label" data-i18n>Soil Type</span><span class="nav-badge" data-i18n>NEW</span></div>
       <div class="nav-section-title" data-i18n>CLIMATE HAZARD</div>
       <div class="nav-item" onclick="setNav(this,&#39;heatwaves&#39;);focusHazard(&#39;heat&#39;)"><span class="nav-icon"><i class="fa fa-sun"></i></span><span class="nav-label" data-i18n>Heat Waves</span><span id="nav-badge-heat" class="nav-badge u-hidden" data-i18n>ALERT</span></div>
       <div class="nav-item" onclick="setNav(this,&#39;precip&#39;);focusHazard(&#39;rain&#39;)"><span class="nav-icon"><i class="fa fa-cloud-showers-heavy"></i></span><span class="nav-label" data-i18n>Extreme Precipitation</span></div>
@@ -1743,6 +1744,7 @@ body.mk-modal-open #pane-merakhet.active{
       <div class="nav-section-title" data-i18n>AGRICULTURE</div>
       <div class="nav-item" onclick="setNav(this,&#39;ground&#39;)"><span class="nav-icon"><i class="fa fa-water"></i></span><span class="nav-label" data-i18n>Groundwater &amp; Irrigation</span></div>
       <div class="nav-item" onclick="setNav(this,&#39;crop&#39;)"><span class="nav-icon"><i class="fa fa-wheat-awn"></i></span><span class="nav-label" data-i18n>Crop Health</span></div>
+      <div class="nav-item" onclick="setNav(this,&#39;cropyield&#39;)"><span class="nav-icon"><i class="fa fa-chart-line"></i></span><span class="nav-label" data-i18n>Crop Yield Outlook</span><span class="nav-badge" data-i18n>NEW</span></div>
       <!-- "Farmer Advisory" sidebar item removed (owner instruction
            2026-08-14). It only ever jumped to setBtmTab('agriculture') --
            the actual advisory cards (adv-card-0..5) live in the always-
@@ -3127,6 +3129,12 @@ function setNav(el,section){
   } else if (section === 'soil') {
     setBtmTab('soilmoisture');
     if (typeof window.VindhyaSoilMoisture !== 'undefined') window.VindhyaSoilMoisture.reload();
+  } else if (section === 'soiltype') {
+    setBtmTab('soiltype');
+    if (typeof window.VindhyaSoilType !== 'undefined') window.VindhyaSoilType.reload();
+  } else if (section === 'cropyield') {
+    setBtmTab('cropyield');
+    if (typeof window.VindhyaCropYield !== 'undefined') window.VindhyaCropYield.reload();
   } else if (section === 'crop' || section === 'advisory') {
     setBtmTab('agriculture');
   } else if (section === 'ground') {
@@ -5453,6 +5461,8 @@ async function runChatCompletion(){
 <script src="state_aggregate_loader.js"></script>
 <script src="national_forecast_loader.js"></script><script src="validation_loader.js"></script>
 <script src="soil_moisture_loader.js"></script>
+<script src="soil_type_loader.js"></script>
+<script src="crop_yield_loader.js"></script>
 <script src="advisory_loader.js"></script>
 <script src="groundwater_loader.js"></script>
 <script src="national_cmip6_loader.js"></script>

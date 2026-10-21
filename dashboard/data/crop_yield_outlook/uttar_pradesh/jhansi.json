@@ -1,0 +1,590 @@
+{
+ "metadata": {
+  "source": "Directorate of Economics and Statistics (DES), Dept. of Agriculture and Farmers Welfare, data.desagri.gov.in -- same real district-wise crop APY records already in dashboard/data/crop_stats_des_by_district/, re-aggregated here, no new fetch.",
+  "state": "Uttar Pradesh",
+  "district": "Jhansi",
+  "method": "Deterministic OLS trend (numpy.polyfit, degree 1) on each crop+season's real yield_per_ha history across all available DES years -- NOT a satellite/ML prediction (docs/CROP_YIELD_METHODOLOGY.md's literature-grounded parcel-level model remains blocked on ground truth, see its §7). next_year_yield_indicative is the trend line's value one year past the last real DES year; _lo95/_hi95 is a 95% band from the real residual standard deviation, no random noise injected. Minimum 5 real years required per crop+season or it is omitted.",
+  "data_quality": "Indicative trend derived from verified-official real history -- not independently validated against a held-out year, not a substitute for an official crop forecast.",
+  "last_updated": "2026-10-21"
+ },
+ "crops": {
+  "Rice|Kharif": {
+   "crop": "Rice",
+   "season": "Kharif",
+   "unit": "tonnes/hectare",
+   "n_real_years": 23,
+   "year_range": [
+    2000,
+    2022
+   ],
+   "yield_per_ha_mean": 1.649,
+   "yield_per_ha_stddev": 0.534,
+   "trend_slope_per_year": 0.0586,
+   "next_year": 2023,
+   "next_year_yield_indicative": 2.352,
+   "next_year_yield_lo95": 1.635,
+   "next_year_yield_hi95": 3.069
+  },
+  "Arhar/Tur|Kharif": {
+   "crop": "Arhar/Tur",
+   "season": "Kharif",
+   "unit": "tonnes/hectare",
+   "n_real_years": 20,
+   "year_range": [
+    2000,
+    2022
+   ],
+   "yield_per_ha_mean": 0.827,
+   "yield_per_ha_stddev": 0.478,
+   "trend_slope_per_year": 0.0136,
+   "next_year": 2023,
+   "next_year_yield_indicative": 0.976,
+   "next_year_yield_lo95": 0.055,
+   "next_year_yield_hi95": 1.896
+  },
+  "Bajra|Kharif": {
+   "crop": "Bajra",
+   "season": "Kharif",
+   "unit": "tonnes/hectare",
+   "n_real_years": 23,
+   "year_range": [
+    2000,
+    2022
+   ],
+   "yield_per_ha_mean": 1.084,
+   "yield_per_ha_stddev": 0.452,
+   "trend_slope_per_year": 0.0285,
+   "next_year": 2023,
+   "next_year_yield_indicative": 1.426,
+   "next_year_yield_lo95": 0.622,
+   "next_year_yield_hi95": 2.229
+  },
+  "Gram|Rabi": {
+   "crop": "Gram",
+   "season": "Rabi",
+   "unit": "tonnes/hectare",
+   "n_real_years": 23,
+   "year_range": [
+    2000,
+    2022
+   ],
+   "yield_per_ha_mean": 0.998,
+   "yield_per_ha_stddev": 0.365,
+   "trend_slope_per_year": 0.0232,
+   "next_year": 2023,
+   "next_year_yield_indicative": 1.276,
+   "next_year_yield_lo95": 0.627,
+   "next_year_yield_hi95": 1.925
+  },
+  "Groundnut|Kharif": {
+   "crop": "Groundnut",
+   "season": "Kharif",
+   "unit": "tonnes/hectare",
+   "n_real_years": 22,
+   "year_range": [
+    2000,
+    2022
+   ],
+   "yield_per_ha_mean": 0.863,
+   "yield_per_ha_stddev": 0.303,
+   "trend_slope_per_year": 0.0219,
+   "next_year": 2023,
+   "next_year_yield_indicative": 1.12,
+   "next_year_yield_lo95": 0.6,
+   "next_year_yield_hi95": 1.641
+  },
+  "Jowar|Kharif": {
+   "crop": "Jowar",
+   "season": "Kharif",
+   "unit": "tonnes/hectare",
+   "n_real_years": 23,
+   "year_range": [
+    2000,
+    2022
+   ],
+   "yield_per_ha_mean": 0.97,
+   "yield_per_ha_stddev": 0.511,
+   "trend_slope_per_year": 0.045,
+   "next_year": 2023,
+   "next_year_yield_indicative": 1.509,
+   "next_year_yield_lo95": 0.695,
+   "next_year_yield_hi95": 2.323
+  },
+  "Linseed|Rabi": {
+   "crop": "Linseed",
+   "season": "Rabi",
+   "unit": "tonnes/hectare",
+   "n_real_years": 23,
+   "year_range": [
+    2000,
+    2022
+   ],
+   "yield_per_ha_mean": 0.523,
+   "yield_per_ha_stddev": 0.137,
+   "trend_slope_per_year": 0.0101,
+   "next_year": 2023,
+   "next_year_yield_indicative": 0.645,
+   "next_year_yield_lo95": 0.411,
+   "next_year_yield_hi95": 0.878
+  },
+  "Maize|Kharif": {
+   "crop": "Maize",
+   "season": "Kharif",
+   "unit": "tonnes/hectare",
+   "n_real_years": 23,
+   "year_range": [
+    2000,
+    2022
+   ],
+   "yield_per_ha_mean": 0.709,
+   "yield_per_ha_stddev": 0.342,
+   "trend_slope_per_year": 0.0162,
+   "next_year": 2023,
+   "next_year_yield_indicative": 0.903,
+   "next_year_yield_lo95": 0.267,
+   "next_year_yield_hi95": 1.539
+  },
+  "Maize|Rabi": {
+   "crop": "Maize",
+   "season": "Rabi",
+   "unit": "tonnes/hectare",
+   "n_real_years": 7,
+   "year_range": [
+    2000,
+    2018
+   ],
+   "yield_per_ha_mean": 2.603,
+   "yield_per_ha_stddev": 0.606,
+   "trend_slope_per_year": 0.0611,
+   "next_year": 2019,
+   "next_year_yield_indicative": 3.057,
+   "next_year_yield_lo95": 2.079,
+   "next_year_yield_hi95": 4.034
+  },
+  "Moong(Green Gram)|Kharif": {
+   "crop": "Moong(Green Gram)",
+   "season": "Kharif",
+   "unit": "tonnes/hectare",
+   "n_real_years": 20,
+   "year_range": [
+    2000,
+    2022
+   ],
+   "yield_per_ha_mean": 0.26,
+   "yield_per_ha_stddev": 0.123,
+   "trend_slope_per_year": 0.0027,
+   "next_year": 2023,
+   "next_year_yield_indicative": 0.29,
+   "next_year_yield_lo95": 0.051,
+   "next_year_yield_hi95": 0.529
+  },
+  "Sesamum|Kharif": {
+   "crop": "Sesamum",
+   "season": "Kharif",
+   "unit": "tonnes/hectare",
+   "n_real_years": 23,
+   "year_range": [
+    2000,
+    2022
+   ],
+   "yield_per_ha_mean": 0.19,
+   "yield_per_ha_stddev": 0.102,
+   "trend_slope_per_year": 0.0036,
+   "next_year": 2023,
+   "next_year_yield_indicative": 0.233,
+   "next_year_yield_lo95": 0.038,
+   "next_year_yield_hi95": 0.428
+  },
+  "Small millets|Kharif": {
+   "crop": "Small millets",
+   "season": "Kharif",
+   "unit": "tonnes/hectare",
+   "n_real_years": 15,
+   "year_range": [
+    2000,
+    2021
+   ],
+   "yield_per_ha_mean": 0.695,
+   "yield_per_ha_stddev": 0.187,
+   "trend_slope_per_year": 0.0131,
+   "next_year": 2022,
+   "next_year_yield_indicative": 0.832,
+   "next_year_yield_lo95": 0.511,
+   "next_year_yield_hi95": 1.154
+  },
+  "Urad|Kharif": {
+   "crop": "Urad",
+   "season": "Kharif",
+   "unit": "tonnes/hectare",
+   "n_real_years": 20,
+   "year_range": [
+    2000,
+    2022
+   ],
+   "yield_per_ha_mean": 0.287,
+   "yield_per_ha_stddev": 0.15,
+   "trend_slope_per_year": -0.0016,
+   "next_year": 2023,
+   "next_year_yield_indicative": 0.269,
+   "next_year_yield_lo95": 0.0,
+   "next_year_yield_hi95": 0.562
+  },
+  "Wheat|Rabi": {
+   "crop": "Wheat",
+   "season": "Rabi",
+   "unit": "tonnes/hectare",
+   "n_real_years": 23,
+   "year_range": [
+    2000,
+    2022
+   ],
+   "yield_per_ha_mean": 2.586,
+   "yield_per_ha_stddev": 0.583,
+   "trend_slope_per_year": 0.0379,
+   "next_year": 2023,
+   "next_year_yield_indicative": 3.041,
+   "next_year_yield_lo95": 2.011,
+   "next_year_yield_hi95": 4.071
+  },
+  "Rapeseed &Mustard|Rabi": {
+   "crop": "Rapeseed &Mustard",
+   "season": "Rabi",
+   "unit": "tonnes/hectare",
+   "n_real_years": 23,
+   "year_range": [
+    2000,
+    2022
+   ],
+   "yield_per_ha_mean": 0.726,
+   "yield_per_ha_stddev": 0.223,
+   "trend_slope_per_year": 0.0157,
+   "next_year": 2023,
+   "next_year_yield_indicative": 0.914,
+   "next_year_yield_lo95": 0.527,
+   "next_year_yield_hi95": 1.3
+  },
+  "Barley|Rabi": {
+   "crop": "Barley",
+   "season": "Rabi",
+   "unit": "tonnes/hectare",
+   "n_real_years": 23,
+   "year_range": [
+    2000,
+    2022
+   ],
+   "yield_per_ha_mean": 2.014,
+   "yield_per_ha_stddev": 0.524,
+   "trend_slope_per_year": 0.0607,
+   "next_year": 2023,
+   "next_year_yield_indicative": 2.743,
+   "next_year_yield_lo95": 2.085,
+   "next_year_yield_hi95": 3.4
+  },
+  "Masoor|Rabi": {
+   "crop": "Masoor",
+   "season": "Rabi",
+   "unit": "tonnes/hectare",
+   "n_real_years": 21,
+   "year_range": [
+    2000,
+    2022
+   ],
+   "yield_per_ha_mean": 0.788,
+   "yield_per_ha_stddev": 0.301,
+   "trend_slope_per_year": 0.0187,
+   "next_year": 2023,
+   "next_year_yield_indicative": 1.001,
+   "next_year_yield_lo95": 0.463,
+   "next_year_yield_hi95": 1.539
+  },
+  "Peas & beans (Pulses)|Rabi": {
+   "crop": "Peas & beans (Pulses)",
+   "season": "Rabi",
+   "unit": "tonnes/hectare",
+   "n_real_years": 19,
+   "year_range": [
+    2000,
+    2022
+   ],
+   "yield_per_ha_mean": 1.377,
+   "yield_per_ha_stddev": 0.341,
+   "trend_slope_per_year": 0.0041,
+   "next_year": 2023,
+   "next_year_yield_indicative": 1.421,
+   "next_year_yield_lo95": 0.756,
+   "next_year_yield_hi95": 2.087
+  },
+  "Soyabean|Kharif": {
+   "crop": "Soyabean",
+   "season": "Kharif",
+   "unit": "tonnes/hectare",
+   "n_real_years": 23,
+   "year_range": [
+    2000,
+    2022
+   ],
+   "yield_per_ha_mean": 0.772,
+   "yield_per_ha_stddev": 0.435,
+   "trend_slope_per_year": 0.0075,
+   "next_year": 2023,
+   "next_year_yield_indicative": 0.861,
+   "next_year_yield_lo95": 0.015,
+   "next_year_yield_hi95": 1.708
+  },
+  "Moong(Green Gram)|Summer": {
+   "crop": "Moong(Green Gram)",
+   "season": "Summer",
+   "unit": "tonnes/hectare",
+   "n_real_years": 17,
+   "year_range": [
+    2002,
+    2022
+   ],
+   "yield_per_ha_mean": 0.755,
+   "yield_per_ha_stddev": 0.119,
+   "trend_slope_per_year": 0.0136,
+   "next_year": 2023,
+   "next_year_yield_indicative": 0.892,
+   "next_year_yield_lo95": 0.72,
+   "next_year_yield_hi95": 1.065
+  },
+  "Onion|Rabi": {
+   "crop": "Onion",
+   "season": "Rabi",
+   "unit": "tonnes/hectare",
+   "n_real_years": 19,
+   "year_range": [
+    2002,
+    2022
+   ],
+   "yield_per_ha_mean": 15.962,
+   "yield_per_ha_stddev": 3.394,
+   "trend_slope_per_year": 0.0205,
+   "next_year": 2023,
+   "next_year_yield_indicative": 16.171,
+   "next_year_yield_lo95": 9.524,
+   "next_year_yield_hi95": 22.819
+  },
+  "Onion|Summer": {
+   "crop": "Onion",
+   "season": "Summer",
+   "unit": "tonnes/hectare",
+   "n_real_years": 16,
+   "year_range": [
+    2002,
+    2022
+   ],
+   "yield_per_ha_mean": 13.307,
+   "yield_per_ha_stddev": 2.076,
+   "trend_slope_per_year": 0.2623,
+   "next_year": 2023,
+   "next_year_yield_indicative": 15.996,
+   "next_year_yield_lo95": 13.253,
+   "next_year_yield_hi95": 18.739
+  },
+  "Urad|Summer": {
+   "crop": "Urad",
+   "season": "Summer",
+   "unit": "tonnes/hectare",
+   "n_real_years": 14,
+   "year_range": [
+    2002,
+    2022
+   ],
+   "yield_per_ha_mean": 0.684,
+   "yield_per_ha_stddev": 0.196,
+   "trend_slope_per_year": 0.0172,
+   "next_year": 2023,
+   "next_year_yield_indicative": 0.876,
+   "next_year_yield_lo95": 0.545,
+   "next_year_yield_hi95": 1.207
+  },
+  "Sugarcane|Kharif": {
+   "crop": "Sugarcane",
+   "season": "Kharif",
+   "unit": "tonnes/hectare",
+   "n_real_years": 16,
+   "year_range": [
+    2004,
+    2019
+   ],
+   "yield_per_ha_mean": 36.136,
+   "yield_per_ha_stddev": 9.022,
+   "trend_slope_per_year": 0.1992,
+   "next_year": 2020,
+   "next_year_yield_indicative": 37.83,
+   "next_year_yield_lo95": 20.239,
+   "next_year_yield_hi95": 55.42
+  },
+  "Potato|Rabi": {
+   "crop": "Potato",
+   "season": "Rabi",
+   "unit": "tonnes/hectare",
+   "n_real_years": 19,
+   "year_range": [
+    2004,
+    2022
+   ],
+   "yield_per_ha_mean": 23.207,
+   "yield_per_ha_stddev": 4.343,
+   "trend_slope_per_year": 0.3818,
+   "next_year": 2023,
+   "next_year_yield_indicative": 27.026,
+   "next_year_yield_lo95": 19.565,
+   "next_year_yield_hi95": 34.486
+  },
+  "Sunflower|Summer": {
+   "crop": "Sunflower",
+   "season": "Summer",
+   "unit": "tonnes/hectare",
+   "n_real_years": 8,
+   "year_range": [
+    2004,
+    2019
+   ],
+   "yield_per_ha_mean": 1.719,
+   "yield_per_ha_stddev": 0.337,
+   "trend_slope_per_year": -0.0583,
+   "next_year": 2020,
+   "next_year_yield_indicative": 1.281,
+   "next_year_yield_lo95": 0.85,
+   "next_year_yield_hi95": 1.712
+  },
+  "Sannhamp|Kharif": {
+   "crop": "Sannhamp",
+   "season": "Kharif",
+   "unit": "tonnes/hectare",
+   "n_real_years": 16,
+   "year_range": [
+    2004,
+    2022
+   ],
+   "yield_per_ha_mean": 0.358,
+   "yield_per_ha_stddev": 0.229,
+   "trend_slope_per_year": 0.0081,
+   "next_year": 2023,
+   "next_year_yield_indicative": 0.438,
+   "next_year_yield_lo95": 0.0,
+   "next_year_yield_hi95": 0.877
+  },
+  "Ginger|Kharif": {
+   "crop": "Ginger",
+   "season": "Kharif",
+   "unit": "tonnes/hectare",
+   "n_real_years": 16,
+   "year_range": [
+    2006,
+    2022
+   ],
+   "yield_per_ha_mean": 3.856,
+   "yield_per_ha_stddev": 1.277,
+   "trend_slope_per_year": 0.1374,
+   "next_year": 2023,
+   "next_year_yield_indicative": 5.041,
+   "next_year_yield_lo95": 2.9,
+   "next_year_yield_hi95": 7.182
+  },
+  "Garlic|Rabi": {
+   "crop": "Garlic",
+   "season": "Rabi",
+   "unit": "tonnes/hectare",
+   "n_real_years": 13,
+   "year_range": [
+    2006,
+    2022
+   ],
+   "yield_per_ha_mean": 5.741,
+   "yield_per_ha_stddev": 0.559,
+   "trend_slope_per_year": 0.072,
+   "next_year": 2023,
+   "next_year_yield_indicative": 6.334,
+   "next_year_yield_lo95": 5.503,
+   "next_year_yield_hi95": 7.164
+  },
+  "Dry chillies|Kharif": {
+   "crop": "Dry chillies",
+   "season": "Kharif",
+   "unit": "tonnes/hectare",
+   "n_real_years": 13,
+   "year_range": [
+    2007,
+    2022
+   ],
+   "yield_per_ha_mean": 0.987,
+   "yield_per_ha_stddev": 0.045,
+   "trend_slope_per_year": 0.0004,
+   "next_year": 2023,
+   "next_year_yield_indicative": 0.99,
+   "next_year_yield_lo95": 0.901,
+   "next_year_yield_hi95": 1.079
+  },
+  "Coriander|Rabi": {
+   "crop": "Coriander",
+   "season": "Rabi",
+   "unit": "tonnes/hectare",
+   "n_real_years": 15,
+   "year_range": [
+    2007,
+    2022
+   ],
+   "yield_per_ha_mean": 0.61,
+   "yield_per_ha_stddev": 0.125,
+   "trend_slope_per_year": 0.0163,
+   "next_year": 2023,
+   "next_year_yield_indicative": 0.743,
+   "next_year_yield_lo95": 0.547,
+   "next_year_yield_hi95": 0.94
+  },
+  "Guar seed|Kharif": {
+   "crop": "Guar seed",
+   "season": "Kharif",
+   "unit": "tonnes/hectare",
+   "n_real_years": 15,
+   "year_range": [
+    2007,
+    2022
+   ],
+   "yield_per_ha_mean": 0.781,
+   "yield_per_ha_stddev": 0.065,
+   "trend_slope_per_year": -0.0112,
+   "next_year": 2023,
+   "next_year_yield_indicative": 0.685,
+   "next_year_yield_lo95": 0.612,
+   "next_year_yield_hi95": 0.758
+  },
+  "Sweet potato|Kharif": {
+   "crop": "Sweet potato",
+   "season": "Kharif",
+   "unit": "tonnes/hectare",
+   "n_real_years": 6,
+   "year_range": [
+    2009,
+    2017
+   ],
+   "yield_per_ha_mean": 12.155,
+   "yield_per_ha_stddev": 0.939,
+   "trend_slope_per_year": -0.2629,
+   "next_year": 2018,
+   "next_year_yield_indicative": 10.797,
+   "next_year_yield_lo95": 9.816,
+   "next_year_yield_hi95": 11.777
+  },
+  "Turmeric|Rabi": {
+   "crop": "Turmeric",
+   "season": "Rabi",
+   "unit": "tonnes/hectare",
+   "n_real_years": 7,
+   "year_range": [
+    2010,
+    2016
+   ],
+   "yield_per_ha_mean": 2.427,
+   "yield_per_ha_stddev": 0.777,
+   "trend_slope_per_year": -0.3146,
+   "next_year": 2017,
+   "next_year_yield_indicative": 1.169,
+   "next_year_yield_lo95": 0.276,
+   "next_year_yield_hi95": 2.061
+  }
+ }
+}

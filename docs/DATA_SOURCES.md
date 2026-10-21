@@ -58,7 +58,7 @@ by design, not a real loss.
 | Cadastral parcels | **disabled** — pending MP Bhulekh / Bhu-Naksha Revenue Dept. records | — | — | — | Not available | — |
 | `data/ndvi/<state_slug>/<district_slug>.json` (Phase 8.4, national NDVI beyond MP) | MODIS Terra Vegetation Indices 16-Day Global 250m (MOD13Q1 v061), via Google Earth Engine | 250 m native pixel, one value/year = spatial mean of that year's temporal-mean composite over the district polygon | EPSG:4326 | `scripts/10_gee_national_ndvi.py`: per-calendar-year `ee.ImageCollection('MODIS/061/MOD13Q1').select('NDVI').mean()` then `reduceRegion` (mean+stdDev+count combined reducer, `bestEffort=True`), scaled by MOD13Q1's documented 0.0001 factor. State-by-state, resumable (`--resume`), heartbeat file `logs/gee_ndvi_heartbeat.json`. **Distinct from and never merged with `data/dicra_ndvi.json`** (UNDP DiCRA, MP's 52 districts) — `dashboard/national_ndvi_loader.js` explicitly skips any district `dicra_ndvi.json` already owns. `scripts/build_ndvi_manifest.py` counts real files into `data/ndvi_manifest.json`, read by the loader (GitHub Pages can't list a directory client-side) | Verified-official (real MODIS product), benchmarked+run for Tripura (8 districts) 2026-08-08 — see `NIGHT_LOG.md`'s 2026-08-08 entry for exact per-district timing | 2026-08-08 |
 | `data/validation/<state_slug>/<district_slug>.json` (Phase 8.6, extended 2026-08-12 per PENDING.md item 7; 5 files: Bhopal/Indore/Jabalpur/Rewa/Sidhi) | ERA5-Land (ECMWF, Tmax → mean summer temperature + heatwave days) + CHIRPS (UCSB, precipitation) via Google Earth Engine, compared AGAINST the existing real IMD-derived series for the SAME district/years (`data/mp_climate_data.json` `charts.annual_trends` for rainfall/heatwave-days, `outputs/village_indices_per_year.parquet` village-mean for temperature) — validates IMD, never substitutes for it | Same as the GEE climate layer (ERA5-Land ~9 km, CHIRPS ~5.5 km) vs IMD ~5.5 km | EPSG:4326 | `scripts/11_build_validation.py`: per-year alignment on real years present on both sides only (no interpolation); CHIRPS `annual_rain_mm` and ERA5-Land `mean_summer_tmax`/`heatwave_days` all via `02_compute_indices.py`'s `extreme_for_village()`/`heatwave_for_village()` (identical IMD criteria) — imported directly, not reimplemented; real Pearson r, mean bias (GEE − IMD), RMSE, n, AND both series' actual per-year values (for the dashboard's line chart) computed and written into each file, plus a verdict string built from the actual numbers | Verified: real correlations computed 2026-08-12 (Bhopal: rainfall r=0.93, temperature r=0.96, heatwave-days r=0.85, n=25 years each — temperature correlates markedly better than the derived heatwave-day count, which is sparse/near-zero in most years; see file for the other 4 districts, all r≥0.71 rainfall / r≥0.96 temperature) | 2026-08-12 |
-| `data/soil_moisture/<state_slug>/<district_slug>.json` (MERA_KHET_PROMPT.md B1, 22 districts as of 2026-08-09: all of Goa/Delhi/Chandigarh/Puducherry/Sikkim) | NASA SMAP L4 Global 3-hourly 9km Surface and Root Zone Soil Moisture (`NASA/SMAP/SPL4SMGP/008`), via Google Earth Engine. Checked and rejected first: `NASA_USDA/HSL/SMAP10KM_soil_moisture` (its own GEE catalog page: data collection ended August 2022 — stale) and `NASA/SMAP/SPL4SMGP/007` (deprecated in favour of /008) | `sm_surface` band, ~9 km (SMAP EASE-Grid 2.0 native spacing; GEE reports an 11,000 m pixel size for this asset — same "reported pixel size vs. documented native resolution" gap already noted for ERA5-Land) | EPSG:4326 | `scripts/13_gee_national_soil_moisture.py`: each district's real SMAP grid cells (not a single reduceRegion mean) sampled directly via `ee.Image.sample()` over the last 5 days of 3-hourly images (mean per cell) — every cell keeps its own value AND lon/lat. Village tier = nearest cell to the village polygon's centroid (scipy cKDTree, one vectorised query per district, not 654,285 individual GEE calls). Block tier = mean+stddev of its villages' assigned cells, grouped by the village layer's `sdcode` field (= `blocks/<state>.geojson`'s `block_lgd`). District tier = mean+stddev of the real cells sampled directly over the district polygon. State tier computed client-side in `dashboard/soil_moisture_loader.js` (mean+stddev of district means, N shown against the state's real total district count via `districts_index.json`) — never precomputed/frozen server-side so it always reflects current real coverage. `dashboard/data/soil_moisture/manifest.json` (`scripts/13_...`'s own `write_manifest()`) lists which district files are real | Verified-official (real NASA SMAP L4 dataset); benchmarked on Goa (2 districts, ~2s/district GEE time) 2026-08-09, then extended to Delhi/Chandigarh/Puducherry/Sikkim (20 more districts, ~6.7s/district average incl. one 76.7s outlier) — 733-district national run NOT done, deliberately stopped after this benchmark+extension per MERA_KHET_PROMPT.md's "naapo" (measure first) instruction; see heartbeat `logs/gee_soil_moisture_heartbeat.json` | 2026-08-09 |
+| `data/soil_moisture/<state_slug>/<district_slug>.json` (MERA_KHET_PROMPT.md B1, **733/733 districts, all 36 states/UTs — national run completed 2026-08-12**) | NASA SMAP L4 Global 3-hourly 9km Surface and Root Zone Soil Moisture (`NASA/SMAP/SPL4SMGP/008`), via Google Earth Engine. Checked and rejected first: `NASA_USDA/HSL/SMAP10KM_soil_moisture` (its own GEE catalog page: data collection ended August 2022 — stale) and `NASA/SMAP/SPL4SMGP/007` (deprecated in favour of /008) | `sm_surface` band, ~9 km (SMAP EASE-Grid 2.0 native spacing; GEE reports an 11,000 m pixel size for this asset — same "reported pixel size vs. documented native resolution" gap already noted for ERA5-Land) | EPSG:4326 | `scripts/13_gee_national_soil_moisture.py`: each district's real SMAP grid cells (not a single reduceRegion mean) sampled directly via `ee.Image.sample()` over the last 5 days of 3-hourly images (mean per cell) — every cell keeps its own value AND lon/lat. Village tier = nearest cell to the village polygon's centroid (scipy cKDTree, one vectorised query per district, not 654,285 individual GEE calls). Block tier = mean+stddev of its villages' assigned cells, grouped by the village layer's `sdcode` field (= `blocks/<state>.geojson`'s `block_lgd`). District tier = mean+stddev of the real cells sampled directly over the district polygon. State tier computed client-side in `dashboard/soil_moisture_loader.js` (mean+stddev of district means, N shown against the state's real total district count via `districts_index.json`) — never precomputed/frozen server-side so it always reflects current real coverage. `dashboard/data/soil_moisture/manifest.json` (`scripts/13_...`'s own `write_manifest()`) lists which district files are real | Verified-official (real NASA SMAP L4 dataset); benchmarked on Goa (2 districts, ~2s/district GEE time) 2026-08-08, extended to Delhi/Chandigarh/Puducherry/Sikkim (20 more districts) same day, then the remaining 711 districts completed 2026-08-12 (this entry had been left un-updated at the Aug-9 "benchmark only, national run not done" wording even though the run itself finished days later — corrected 2026-10-21 by actually counting the files on disk: `find dashboard/data/soil_moisture -mindepth 2 -name '*.json' \| wc -l` = 733); see heartbeat `logs/gee_soil_moisture_heartbeat.json` | 2026-08-12 |
 | `data/advisory/<state_slug>/<district_slug>.json` (PENDING.md item 13, district tier, 731 districts as of 2026-08-12) | **Derived, not independently observed** — combines the real climate (`data/climate/` or `data/mp_climate_data.json`), NDVI (`data/dicra_ndvi.json` or `data/ndvi/`) and soil-moisture (`data/soil_moisture/`) rows above into four rule-based flags: `heatwave_risk`, `drought_risk`, `vegetation_stress` (NDVI, only where an NDVI file exists), `irrigation_need` (soil moisture, only where a soil-moisture file exists). **Explicitly NOT a machine-learning model and reports no confidence/probability score** — every flag is a fixed threshold on an already-published real number, cited by exact source file + field name in the flag's own `basis` object | District tier only (climate/NDVI inputs have no sub-district resolution of their own); each flag's own resolution is inherited from its source row above | EPSG:4326 | `scripts/15_build_advisory.py`: fixed threshold rules, see `docs/METHODOLOGY.md` Sec 9 for the exact per-flag table (reuses `national_climate_loader.js`'s heatwave bands, `scripts/config.py`'s real SPI thresholds, and `soil_moisture_loader.js`'s irrigation reference band verbatim rather than inventing new ones); NDVI flag computes a real z-score of the district's latest year against its own prior-years mean/stddev, with a partial-year guard (caps severity at MODERATE) when the latest year's composite count is well below typical, to avoid a seasonal-bias false HIGH. `dashboard/data/advisory/manifest.json` lists which district files are real and per-flag-type coverage counts | Derived (rule-based) — not a primary source in its own right; each flag's real underlying value is Verified per its own source row above | 2026-08-12 |
 
 ## Market and trade sources: status
@@ -624,10 +624,61 @@ grid (advisory flags, per-district crop tables).
 - Fabricated cadastral parcels with invented owner names (`09_generate_cadastral.py`, `cadastral_kundam.geojson`)
 - Random noise injection in forecasts; hardcoded API key fallback
 
+## Soil type (`data/soil_type/<state_slug>/<district_slug>.json`, added 2026-10-21)
+
+Owner asked for real national soil-type coverage. Soil Health Card portal
+(soilhealth.dac.gov.in) and ICAR-NBSS&LUP's BHOOMI Geoportal
+(bhoomigeoportal-nbsslup.in) were checked first (2026-10-21) -- both host
+real district-level soil data but neither exposes a public bulk API/WMS/
+WFS endpoint; data.gov.in's own listing confirms no API exists for the
+Soil Health Card dataset. Same class of gap as the cadastral map below --
+an institutional data-sharing request, not a fetch-script problem.
+
+Used instead: `OpenLandMap/SOL/SOL_TEXTURE-CLASS_USDA-TT_M/v02` (ISRIC/
+OpenLandMap), a real, public, global 250m soil-texture-class raster,
+confirmed live in the GEE catalog and queryable with the same service
+account already used for climate/NDVI/soil moisture. **This is a global
+statistical soil map, not an India-specific ground survey** -- every
+output file's `metadata` says so explicitly, never presented as a Soil
+Health Card equivalent. `scripts/17_gee_national_soil_type.py`: per
+district, `ee.Reducer.mode()` (dominant USDA texture class by pixel
+count -- a category cannot be averaged) plus the real pixel-count
+histogram behind it; village tier is one batched `sampleRegions()` call
+per district over real village centroids (not one GEE call per village).
+No block tier yet (honest gap). `dashboard/soil_type_loader.js` renders
+it as its own bottom-panel tab (sidebar nav → Soil Type). National run
+started 2026-10-21, in progress -- check
+`dashboard/data/soil_type/manifest.json` for current real coverage.
+
+## Crop yield outlook (`data/crop_yield_outlook/<state_slug>/<district_slug>.json`, added 2026-10-21)
+
+Owner asked for crop yield prediction. `docs/CROP_YIELD_METHODOLOGY.md` §3
+is the literature-grounded design for a real parcel-level satellite/ML
+crop-type-and-yield model -- it remains genuinely blocked on ground truth
+(CCE/Digital Crop Survey/UPAg access, §7), and this file does not attempt
+to work around that block or fabricate what it would produce.
+
+What this IS: a deterministic OLS trend (`numpy.polyfit`, degree 1) on
+each district+crop+season's real `yield_per_ha` history already in
+`dashboard/data/crop_stats_des_by_district/` (DES, data.desagri.gov.in,
+2000-01 to 2022-23) -- same "no random noise, residual-based 95% band"
+discipline already used for `forecast_2040.json`
+(`scripts/07_build_dicra_forecast.py`) and the groundwater trend
+(`scripts/16_fetch_groundwater.py`). `scripts/18_build_crop_yield_outlook.py`
+requires 5+ real DES years per crop+season or it is omitted (693/733
+districts, 22,762 crop+season series as of 2026-10-21). Rendered by
+`dashboard/crop_yield_loader.js` as its own bottom-panel tab ("Yield
+Outlook"). Every number is labelled indicative; this is a trend
+projection on real district history, not a satellite/ML model and not a
+substitute for an official crop forecast.
+
 ## Authoritative sources for planned integrations
 
 Weather/climate: IMD (mausam.imd.gov.in API), NASA POWER (free REST, no key),
-Copernicus ERA5 (CDS API). Soil: Soil Health Card portal, NBSS&LUP, ICAR.
-Remote sensing: Sentinel-2, Landsat, MODIS, SMAP via GEE. Markets: AGMARKNET
-via data.gov.in API (key required). Groundwater: CGWB India-WRIS. Schemes:
-PMFBY, PM-KISAN portals. Land records: MP Bhulekh / Bhu-Naksha.
+Copernicus ERA5 (CDS API). Soil: Soil Health Card portal, NBSS&LUP, ICAR --
+**no public bulk API exists for either as of 2026-10-21** (see the soil-type
+section above for what was checked); OpenLandMap/ISRIC via GEE is the real
+substitute in use, not these two. Remote sensing: Sentinel-2, Landsat,
+MODIS, SMAP via GEE. Markets: AGMARKNET via data.gov.in API (key required).
+Groundwater: CGWB India-WRIS. Schemes: PMFBY, PM-KISAN portals. Land
+records: MP Bhulekh / Bhu-Naksha.

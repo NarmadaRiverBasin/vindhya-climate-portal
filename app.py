@@ -29,6 +29,9 @@ _URL_PATCHES = [
     # concatenation), so it needs its own exact-match patch, distinct from
     # the 'data/soil_moisture/' prefix patch below.
     ("'data/soil_moisture/manifest.json'", f"'{GITHUB_RAW}/soil_moisture/manifest.json'"),
+    # 2026-10-21: soil type manifest, same single-closed-literal pattern.
+    ("'data/soil_type/manifest.json'",     f"'{GITHUB_RAW}/soil_type/manifest.json'"),
+    ("'data/crop_yield_outlook/manifest.json'", f"'{GITHUB_RAW}/crop_yield_outlook/manifest.json'"),
     # PENDING.md item 13 (2026-08-12): advisory layer manifest -- same
     # single-closed-literal pattern as the soil moisture manifest above.
     ("'data/advisory/manifest.json'",      f"'{GITHUB_RAW}/advisory/manifest.json'"),
@@ -53,6 +56,7 @@ _JS_FILES = ['mp_climate_loader.js', 'dicra_ndvi_loader.js', 'cadastral_loader.j
              'knowledge_base_loader.js',
              'national_selector.js',
              'national_ndvi_loader.js', 'validation_loader.js', 'soil_moisture_loader.js',
+             'soil_type_loader.js', 'crop_yield_loader.js',
              'advisory_loader.js', 'national_forecast_loader.js', 'groundwater_loader.js',
              # item 0D three-role layered view -- no data fetches of its own,
              # but its <script src> must still be inlined or it 404s here.
@@ -149,6 +153,22 @@ def get_html_content():
     html = html.replace(
         "'data/soil_moisture/'",
         f"'{GITHUB_RAW}/soil_moisture/'"
+    )
+
+    # Soil type files ('data/soil_type/' + stateSlug + '/' + dslug +
+    # '.json'), used by soil_type_loader.js (2026-10-21, real OpenLandMap/
+    # ISRIC texture class via GEE). Manifest literal patched separately below.
+    html = html.replace(
+        "'data/soil_type/'",
+        f"'{GITHUB_RAW}/soil_type/'"
+    )
+
+    # Crop yield outlook files ('data/crop_yield_outlook/' + stateSlug +
+    # '/' + dslug + '.json'), used by crop_yield_loader.js (2026-10-21,
+    # real DES yield trend). Manifest literal patched separately below.
+    html = html.replace(
+        "'data/crop_yield_outlook/'",
+        f"'{GITHUB_RAW}/crop_yield_outlook/'"
     )
 
     # Advisory files ('data/advisory/' + stateSlug + '/' + dslug + '.json'),
