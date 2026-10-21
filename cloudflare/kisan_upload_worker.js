@@ -57,7 +57,10 @@
  * the previous day's.
  */
 
-const ALLOWED_ORIGIN = 'https://narmadariverbasin.github.io'; // repo moved 2026-09 from vindhyaresearch25-a11y/vindhya-climate-portal to NarmadaRiverBasin/cNARMADA_IITIndore
+const ALLOWED_ORIGINS = new Set([
+  'https://narmadariverbasin.github.io', // cNARMADA_IITIndore (NARMADA RIVER BASIN MANAGEMENT)
+  'https://vindhya-climate.pages.dev', // VINDHYA Climate Portal, standalone Cloudflare Pages deployment
+]);
 const DAILY_LIMIT_PER_IP = 20;
 // India's real bounding box (generous -- includes Andaman & Nicobar,
 // Lakshadweep) -- anything outside this is rejected outright per B4
@@ -79,7 +82,7 @@ function corsHeaders(origin) {
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
   };
-  if (origin === ALLOWED_ORIGIN) headers['Access-Control-Allow-Origin'] = ALLOWED_ORIGIN;
+  if (ALLOWED_ORIGINS.has(origin)) headers['Access-Control-Allow-Origin'] = origin;
   return headers;
 }
 

@@ -105,7 +105,8 @@
  */
 
 const ALLOWED_ORIGINS = new Set([
-  'https://narmadariverbasin.github.io', // repo moved 2026-09 from vindhyaresearch25-a11y/vindhya-climate-portal to NarmadaRiverBasin/cNARMADA_IITIndore
+  'https://narmadariverbasin.github.io', // cNARMADA_IITIndore (NARMADA RIVER BASIN MANAGEMENT)
+  'https://vindhya-climate.pages.dev', // VINDHYA Climate Portal, standalone Cloudflare Pages deployment
   'http://localhost:8000',
   'http://127.0.0.1:8000',
 ]);
