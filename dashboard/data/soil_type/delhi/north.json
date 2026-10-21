@@ -1,0 +1,402 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Delhi",
+  "district": "North",
+  "district_lgd": 80,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (61/62 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 7,
+  "dominant_class": "Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 549,
+   "Loam": 4772
+  },
+  "n_pixels": 5321
+ },
+ "villages": {
+  "63949": [
+   "Shanjar Pur Un Inhabited",
+   432,
+   7,
+   "Loam"
+  ],
+  "63911": [
+   "Mukhmel Pur CT",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63922": [
+   "Bawana CT",
+   430,
+   4,
+   "Clay Loam"
+  ],
+  "63923": [
+   "Darya Pur Kalan CT",
+   430,
+   7,
+   "Loam"
+  ],
+  "63916": [
+   "Khera Kalan CT",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63889": [
+   "Katewara",
+   430,
+   7,
+   "Loam"
+  ],
+  "63888": [
+   "Mungesh Pur",
+   430,
+   7,
+   "Loam"
+  ],
+  "276401": [
+   "North Delhi Municipal Corporation",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63892": [
+   "Sultan Pur Dabas",
+   430,
+   7,
+   "Loam"
+  ],
+  "63904": [
+   "Pansali",
+   430,
+   7,
+   "Loam"
+  ],
+  "63903": [
+   "Kankar Khera",
+   430,
+   7,
+   "Loam"
+  ],
+  "63897": [
+   "Hiranki",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63874": [
+   "Qullak Pur",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63875": [
+   "Jhangola",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63877": [
+   "Sunger Pur Delhi",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63878": [
+   "Tigi Pur",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63898": [
+   "Mohd Pur Ramzan Pur",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63901": [
+   "Nangli Poona",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63902": [
+   "Bodh Pur Bija Pur",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63900": [
+   "Garhi Khasru",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63896": [
+   "Zind Pur",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63886": [
+   "Hareoli",
+   430,
+   7,
+   "Loam"
+  ],
+  "63891": [
+   "Nangal Thakran",
+   430,
+   7,
+   "Loam"
+  ],
+  "63890": [
+   "Bazid Pur Thakran",
+   430,
+   7,
+   "Loam"
+  ],
+  "63887": [
+   "Ochandi",
+   430,
+   7,
+   "Loam"
+  ],
+  "63871": [
+   "Taj Pur Kalan",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63870": [
+   "Hamid Pur",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63869": [
+   "Singhola",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63868": [
+   "Singhu",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63894": [
+   "Holambi Khurd",
+   430,
+   7,
+   "Loam"
+  ],
+  "63884": [
+   "Sanoth",
+   430,
+   7,
+   "Loam"
+  ],
+  "63895": [
+   "Holambi Kalan",
+   430,
+   7,
+   "Loam"
+  ],
+  "63893": [
+   "Iradat Nagar Alias Naya Bans",
+   430,
+   7,
+   "Loam"
+  ],
+  "63880": [
+   "Kham Pur",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63881": [
+   "Shah Pur Garhi",
+   430,
+   7,
+   "Loam"
+  ],
+  "63885": [
+   "Ghoga",
+   430,
+   7,
+   "Loam"
+  ],
+  "63866": [
+   "Lam Pur",
+   430,
+   7,
+   "Loam"
+  ],
+  "63882": [
+   "Kureni",
+   430,
+   7,
+   "Loam"
+  ],
+  "63867": [
+   "Mamoor Pur",
+   430,
+   7,
+   "Loam"
+  ],
+  "63879": [
+   "Fateh Pur Jat",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63883": [
+   "Raja Pur Kalan Un Inhabited",
+   430,
+   7,
+   "Loam"
+  ],
+  "63876": [
+   "Sunger Pur Shahdara Un Inhabited",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63910": [
+   "Ali Pur CT",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63907": [
+   "Tikri Khurd CT",
+   430,
+   7,
+   "Loam"
+  ],
+  "63873": [
+   "Palla",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63872": [
+   "Akbar Pur Majra",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63906": [
+   "Bhor Garh CT",
+   430,
+   4,
+   "Clay Loam"
+  ],
+  "63914": [
+   "Libas Pur CT",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63915": [
+   "Siras Pur CT",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63921": [
+   "Pooth Khurd CT",
+   430,
+   7,
+   "Loam"
+  ],
+  "63920": [
+   "Barwala CT",
+   430,
+   7,
+   "Loam"
+  ],
+  "63918": [
+   "Pehlad Pur Bangar CT",
+   430,
+   4,
+   "Clay Loam"
+  ],
+  "63917": [
+   "Sahibabad Daulat Pur CT",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63950": [
+   "Bhalswa Jahangir Pur CT",
+   432,
+   4,
+   "Clay Loam"
+  ],
+  "63905": [
+   "Bankner CT",
+   430,
+   7,
+   "Loam"
+  ],
+  "63913": [
+   "Qadi Pur CT",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63919": [
+   "Khera Khurd CT",
+   430,
+   7,
+   "Loam"
+  ],
+  "63912": [
+   "Ibrahim Pur CT",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63908": [
+   "Bakhtawar Pur CT",
+   6076,
+   7,
+   "Loam"
+  ],
+  "63909": [
+   "Bankauli CT",
+   6076,
+   7,
+   "Loam"
+  ]
+ },
+ "village_count_total": 62,
+ "village_count_sampled": 61
+}

@@ -1,0 +1,2047 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Assam",
+  "district": "Hailakandi",
+  "district_lgd": 289,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (336/337 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 11432,
+   "Sandy Clay Loam": 6490,
+   "Loam": 5516
+  },
+  "n_pixels": 23439
+ },
+ "villages": {
+  "301162": [
+   "Dholai Molai Pt Ix",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "999999": [
+   "Katakhal R F",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "300986": [
+   "Barjurai",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "300978": [
+   "H P C Township CT",
+   2106,
+   7,
+   "Loam"
+  ],
+  "301228": [
+   "Duttapur",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301240": [
+   "Ramnathpur F V",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301123": [
+   "Nunai F V",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301122": [
+   "Dhalchera Tripura Punjee",
+   2108,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301157": [
+   "Rongpur Pt Viii",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301222": [
+   "Nandagram N C Pt Ii",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301226": [
+   "Jamira Ptiv",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301225": [
+   "Jamira Pt Iii",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301221": [
+   "Nandagram N C Pt I",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301220": [
+   "Katanala N C",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301208": [
+   "Dharapur N C",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301209": [
+   "Krishnapur N C",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301211": [
+   "Boldaboldi Pt Iii",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301210": [
+   "Kalyanpur N C",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301212": [
+   "Boldaboldi Pt Ii",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301218": [
+   "Jamira Pt Vi",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301223": [
+   "Jamira Pt Vii",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301224": [
+   "Jamira Pt Ii",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301219": [
+   "Jamira Pt V",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301213": [
+   "Boldaboldi Pt I",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301217": [
+   "Jamira Pt I",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301216": [
+   "Janira Bagan Bosti",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301214": [
+   "Palaicherra Pt Ii",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301227": [
+   "Jalnacherra Grant",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301215": [
+   "Palaicherra Pt I",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301205": [
+   "Sultani",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301206": [
+   "Sultanicherra T E",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301204": [
+   "Karichera",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301200": [
+   "Madhabpur",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301201": [
+   "Rampur",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301180": [
+   "Pratap Nagar",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301184": [
+   "Lochanpur",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301183": [
+   "Durgapur",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301188": [
+   "Alaicherra Pt Iv",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301202": [
+   "Alaicherra Pt Iii",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301182": [
+   "Nehal Chandpur",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301138": [
+   "Ahyalapur N C",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301137": [
+   "Ramsantipur",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301207": [
+   "Santipur N C",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301134": [
+   "Paglacherra N C",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301136": [
+   "Dhancherra N C",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301139": [
+   "Bhagabanpur",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301140": [
+   "Harishnagar Pt Iii",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301135": [
+   "Telecherra N C",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301141": [
+   "Bipincherra",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301142": [
+   "Harishnagar Pt Ii",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301143": [
+   "Harishnagar Pt I",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301133": [
+   "Kaliganj N C",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301145": [
+   "Araynapur",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301146": [
+   "Alexanderpur Grant",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301181": [
+   "Lalpani N C",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301179": [
+   "Maharpur",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301186": [
+   "Alaicherra Pt Vii",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301178": [
+   "Alaicherra Pt Ii",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301203": [
+   "Shyampur",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301187": [
+   "Alaicherra Pt V",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301199": [
+   "Dariaghat Grant",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301189": [
+   "Kukicherra Grant",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301177": [
+   "Alaicherra Pt I",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301190": [
+   "Baruncherra Pt I",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301173": [
+   "Baruncherra Pt Ii",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301174": [
+   "Dholai Molai Pt Viii",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301172": [
+   "Dholai Molai Pt Xii",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301176": [
+   "Dholai Molai Pt Vii T E",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301198": [
+   "Gendacherra",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301175": [
+   "Dholai Molai Pt Iii",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301171": [
+   "Dholai Molai Pt X",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301167": [
+   "Dholai Molai Pt V",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301170": [
+   "Dholai Molai Pt Xi",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301161": [
+   "Rupacherra Punjee",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301164": [
+   "Dholai Molai Pt Vi",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301169": [
+   "Dholai Molai Pt Iv",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301160": [
+   "Rupacherra Tea Garden",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301144": [
+   "Katlicherra Grant",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301168": [
+   "Dholai Molai Pt Ii",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301166": [
+   "Dholai Molai Pt I",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301147": [
+   "Rangabak Pt I",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301148": [
+   "Rangabak Pt Ii",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301165": [
+   "Rongpur Pt Iv",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301229": [
+   "Baruncherra F V",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301195": [
+   "Bhai Bonti",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301230": [
+   "Kukicherra F V",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301194": [
+   "Panch Pirar Mukam",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301191": [
+   "Raifalmara",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301231": [
+   "Kanchiwala F V",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301192": [
+   "Gollacherra",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301193": [
+   "Kachurthal",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301196": [
+   "Bagmara",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301197": [
+   "Bangla Vasha",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301232": [
+   "Jalnacherra F V",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301233": [
+   "Sahabmara F V",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301234": [
+   "Bathcherra F V",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301235": [
+   "Gutguti Pakuwa F V",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301236": [
+   "Bagcherra F V",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301238": [
+   "Garmura F V",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301237": [
+   "Damcherra F V",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301239": [
+   "Jakabpur F V",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301163": [
+   "Makengipur",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301149": [
+   "Digar Apin",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301185": [
+   "Alaicherra Pt Vi",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301035": [
+   "Bandukmara Grant",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301009": [
+   "Kanchanpur Pt Iii",
+   2107,
+   7,
+   "Loam"
+  ],
+  "301010": [
+   "Kanchanpur Pt Ii",
+   2107,
+   7,
+   "Loam"
+  ],
+  "301006": [
+   "Itorkandi Pt Ii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301011": [
+   "Kanchanpur Pt I",
+   2107,
+   7,
+   "Loam"
+  ],
+  "301005": [
+   "Narainpur Pt Iv",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301002": [
+   "Itorkandi Pt I",
+   2107,
+   7,
+   "Loam"
+  ],
+  "301003": [
+   "Narainpur Pt Iii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301004": [
+   "Narainpur Pt V",
+   2107,
+   7,
+   "Loam"
+  ],
+  "301012": [
+   "Tupkhana",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301013": [
+   "Vichingcha Pt Ii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "249944": [
+   "Hailakandi",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301001": [
+   "Narainpur Pt Ii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "300993": [
+   "Narainpur Pt I",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "300992": [
+   "Chandpur",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301008": [
+   "Kanchanpur Grant",
+   2107,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301007": [
+   "Itorkandi Grant",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301000": [
+   "Gangpar Dhonkar Pt Iv",
+   2107,
+   7,
+   "Loam"
+  ],
+  "301014": [
+   "Rangauti Pt Ii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "300999": [
+   "Lakhirbond Pt Ii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301018": [
+   "Chepti Brojapur",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301017": [
+   "Bilpar Dhumkar",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301016": [
+   "Rangauti Pt I",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301015": [
+   "Rangauti Pt Iii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301030": [
+   "Paikan",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301029": [
+   "Brojapur Pt I",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301031": [
+   "Matijuri",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301028": [
+   "Brojapur Pt Ii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301032": [
+   "Borhailakandi Pt Iii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301038": [
+   "Bashdahar Pt I",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301039": [
+   "Rongpur",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301040": [
+   "Dakhin Sonapur Pt I",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301037": [
+   "Bashdahar Pt Ii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301033": [
+   "Borhailakandi Pt Ii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301026": [
+   "Bondukmara",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301027": [
+   "Bahadurpur Pt Ii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301019": [
+   "Bahadurpur Pt I",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301023": [
+   "Bhajantipur Pt I",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301024": [
+   "Ratanpur Pt Ii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301025": [
+   "Ratanpur Pt I",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301034": [
+   "Purbagool",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301036": [
+   "Borhailakandi Pt I",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301041": [
+   "Dakhin Sonapur Pt Ii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301042": [
+   "Sudorshonpur Pt I",
+   2107,
+   7,
+   "Loam"
+  ],
+  "301096": [
+   "Ramchandi N C",
+   2108,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301097": [
+   "Kulicherra N C",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301098": [
+   "Ramchandi Pt Iii",
+   2108,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301100": [
+   "Ramchandi Pt Ii",
+   2108,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301099": [
+   "Ramchandi Pt I",
+   2108,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301101": [
+   "Bangalpur",
+   2108,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301106": [
+   "Dakhin Jansbad Pt Ii",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301119": [
+   "Rongpur Pt Vi",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301118": [
+   "Rongpur Pt V",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301117": [
+   "Joykrishnapur",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301103": [
+   "Dakhinjansbad Pt I",
+   2108,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301092": [
+   "Kaiya Grant",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301102": [
+   "Tantoo",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301093": [
+   "Bangalpur Grant",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301094": [
+   "Joynagar",
+   2108,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301095": [
+   "Joynagar Punjee N C",
+   2108,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301055": [
+   "Bongalnagar Grant",
+   2108,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301071": [
+   "Aynakhal",
+   2108,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301072": [
+   "Behul",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301074": [
+   "Saidpur",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301073": [
+   "Bhabanipur",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301070": [
+   "Purbo Kitterbond Pt Ii",
+   2108,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301062": [
+   "Purbo Kitterbond Pt I",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301058": [
+   "Paschim Kitterbond Pt Ii",
+   2108,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301057": [
+   "Paschim Kitterbond Pt I",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301056": [
+   "Lakshinagar Pt Ii",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301054": [
+   "Lakshinagar Pt I",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301053": [
+   "Nischintapur Pt I",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301052": [
+   "Nischintapur Pt Ii",
+   2108,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301059": [
+   "Monachura Grant",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301060": [
+   "Nischintapur Pt Iii",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301061": [
+   "Rajyeswarpur Pt I",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301045": [
+   "Bowarghat Pt Ii",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301051": [
+   "Borbond Pt Ii",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301050": [
+   "Borbond Pt I",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301044": [
+   "Bowarghat Pt I",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301043": [
+   "Vichingcha Pt I",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301046": [
+   "Borbond Pt Iii",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301047": [
+   "Dudpur",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301048": [
+   "Chandrapur",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301049": [
+   "Kuchila Grant",
+   2108,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301065": [
+   "Nityanandapur Pt I",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301066": [
+   "Nimaichandpur Pt I",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301081": [
+   "Sudorshonpur Pt Ii",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301080": [
+   "Sudorshonpur Pt Iii",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301067": [
+   "Nimaichandpur Pt Ii",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301079": [
+   "Rajyeswarpur Pt Vi",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301083": [
+   "Gobil",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301082": [
+   "Kalachera Grant",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301064": [
+   "Nityanandapur Pt Ii",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301063": [
+   "Rajyeswarpur Pt Ii",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301068": [
+   "Rajyeswarpur Pt V",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301069": [
+   "Rajyeswarpur Pt Iii",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301075": [
+   "Chandrapur Pt Ii",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301076": [
+   "Chandrapur Pt I",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301077": [
+   "Rajyeswarpur Pt Iv",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301078": [
+   "Rajyeswarpur Pt Vii",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301086": [
+   "Rajyeswarpur Pt Viii",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301085": [
+   "Rajyeswarpur Pt Ix",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301084": [
+   "Gaglachera Grant",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301088": [
+   "Umednagar",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301087": [
+   "Uttarjashabad Pt Ii",
+   2108,
+   7,
+   "Loam"
+  ],
+  "249945": [
+   "Lala",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301090": [
+   "Jalalpur",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301089": [
+   "Lala Pt I",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301105": [
+   "Niamatpur",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301104": [
+   "Sheralipur",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301107": [
+   "Abdullapur Pt I",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301091": [
+   "Dhanipur",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301109": [
+   "Bishnupur",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301108": [
+   "Sarbanandapur",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301115": [
+   "Abdullapur Pt Ii",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301120": [
+   "Mahamadpur Pt Ii",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301116": [
+   "Mahamadpur Pt I",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301114": [
+   "Nizvesnupur Pt I",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301110": [
+   "Nizvesnupur Pt Ii",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301111": [
+   "Uttarjasnabad Pt I",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301112": [
+   "Lalamukh Grant",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301113": [
+   "Lalachera Grant",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301121": [
+   "Nunaikhal Grant",
+   2108,
+   4,
+   "Clay Loam"
+  ],
+  "301125": [
+   "Lalachera F V",
+   2108,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301124": [
+   "Kacharital F V",
+   2108,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301126": [
+   "Bilaipur F V",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301130": [
+   "Mulapur N C",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301131": [
+   "Dinanathpur Pt Ii",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301132": [
+   "Dinanathpur Pt I",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301153": [
+   "Apin Pt Ii",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301152": [
+   "Apin Pt I",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301154": [
+   "Rongpur Pt I",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301155": [
+   "Rongpur Pt Ii",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301158": [
+   "Sahabad Pt Ii",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301159": [
+   "Sahabad Pt I",
+   2109,
+   4,
+   "Clay Loam"
+  ],
+  "301156": [
+   "Rongpur Pt Vii",
+   2109,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "301150": [
+   "Rongpur Pt Iii",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301151": [
+   "Apin Grant Lata Kandi Grant",
+   2109,
+   7,
+   "Loam"
+  ],
+  "301127": [
+   "Lalpani F V",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301128": [
+   "Borthal F V",
+   2108,
+   7,
+   "Loam"
+  ],
+  "301129": [
+   "Dhalchera F V",
+   2108,
+   7,
+   "Loam"
+  ],
+  "300915": [
+   "Kalinagar Pt I",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300961": [
+   "Bansbari Grant",
+   2106,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "300962": [
+   "Bansbari Pt I",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300960": [
+   "Bansbari Pt Ii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300963": [
+   "Bhatirkupa Pt I",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300972": [
+   "Matirgram",
+   2106,
+   7,
+   "Loam"
+  ],
+  "300973": [
+   "Sayedbond Pt Ii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300971": [
+   "Sayedbond Pt I",
+   2106,
+   7,
+   "Loam"
+  ],
+  "300974": [
+   "Nitainagar Pt Ii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300970": [
+   "Sayedbond Pt Iii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300975": [
+   "Nitainagar Pt I",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300977": [
+   "Mohanpur Pt Ii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300976": [
+   "Mohanpur Pt I",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300968": [
+   "Mohanpur Pt Vi",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300967": [
+   "Mohanpur Pt Iii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300955": [
+   "Mohanpur Pt Iv",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300954": [
+   "Mohanpur Pt V",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300951": [
+   "Narainpur Pt I",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300952": [
+   "Narainpur Pt Ii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300953": [
+   "Burni Brease Grant",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300939": [
+   "Narainpur Pt Iii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300959": [
+   "Chandipur Pt Iv",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300966": [
+   "Algapur Pt Iii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300958": [
+   "Algapur Pt I",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300964": [
+   "Bornagad",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300969": [
+   "Algapur Pt V",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300965": [
+   "Algapur Pt Iv",
+   2106,
+   7,
+   "Loam"
+  ],
+  "300947": [
+   "Chandipur Pt Iii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300948": [
+   "Kapnarpar",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300957": [
+   "Padmarpar",
+   2106,
+   7,
+   "Loam"
+  ],
+  "300950": [
+   "Bakri Howar Pt Xii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300943": [
+   "Bakri Howar Pt Xi",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300942": [
+   "Bakri Howar Pt X",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300941": [
+   "Kalinagar Pt Vii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300935": [
+   "Bakri Howar Pt Ix",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300938": [
+   "Narainpur Pt Iv",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300937": [
+   "Kalinagar Pt Viii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300940": [
+   "Kalinagar Pt Vi",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300936": [
+   "Kalinagar Pt V",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300934": [
+   "Bakri Howar Pt Viii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300933": [
+   "Bakri Howar Pt V",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300926": [
+   "Bakri Howar Pt Vii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300925": [
+   "Kalinagar Pt Iv",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300924": [
+   "Kalinagar Pt Iii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300927": [
+   "Bakri Howar Pt Vi",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300928": [
+   "Bakri Howar Pt Iv",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300922": [
+   "Bakri Howar Pt Ii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300923": [
+   "Bakri Howar Pt Iii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300921": [
+   "Uttar Kanchanpur Pt Ii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300920": [
+   "Dholidahar",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300929": [
+   "Chiparsangam Pt I",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300930": [
+   "Chandipur Pt I",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300931": [
+   "Chiparsangan Pt Ii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300932": [
+   "Chiparsangan Pt Iii",
+   2106,
+   7,
+   "Loam"
+  ],
+  "300949": [
+   "Nabin Sonapur",
+   2106,
+   7,
+   "Loam"
+  ],
+  "300944": [
+   "Bhatisang Jurai",
+   2106,
+   7,
+   "Loam"
+  ],
+  "300945": [
+   "Chandipur Pt Ii",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300946": [
+   "Chandipur Grant",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300919": [
+   "Dholidahar Grant",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300918": [
+   "Dakhin Badarpur",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300917": [
+   "Uttar Kanchanpur Pt I",
+   2106,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "300910": [
+   "Uttarbadarpur",
+   2106,
+   7,
+   "Loam"
+  ],
+  "300909": [
+   "Thandapur",
+   2106,
+   7,
+   "Loam"
+  ],
+  "300911": [
+   "Badarpur Grant",
+   2106,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "300912": [
+   "Panchgram",
+   2106,
+   7,
+   "Loam"
+  ],
+  "300916": [
+   "Bakori Hawar Pt I",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300913": [
+   "Polaspur",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300990": [
+   "Chakchandpur",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "300989": [
+   "Balikandi Grant",
+   2107,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "300979": [
+   "Balikandi Pt I",
+   2107,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "300980": [
+   "Balikandi Pt Ii",
+   2107,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "300981": [
+   "Sibuttar",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "300988": [
+   "Ujankupa Pt Ii",
+   2107,
+   7,
+   "Loam"
+  ],
+  "300987": [
+   "Ujankupa Pt I",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "300991": [
+   "Ujankupa Pt Iii",
+   2107,
+   7,
+   "Loam"
+  ],
+  "300994": [
+   "Gangpar Dhonkar Pt Iii",
+   2107,
+   7,
+   "Loam"
+  ],
+  "300983": [
+   "Bhatirkupa Pt Iii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "300982": [
+   "Bhatirkupa Pt Ii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "300984": [
+   "Boalipar Pt I",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "300985": [
+   "Boalipar Pt Ii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "300995": [
+   "Lakhirbond Pt I",
+   2107,
+   7,
+   "Loam"
+  ],
+  "300996": [
+   "Boalipar Pt Iii",
+   2107,
+   7,
+   "Loam"
+  ],
+  "300998": [
+   "Bisnughar",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "300997": [
+   "Nitainagar Pt Iii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301020": [
+   "Purba Sonapur",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301021": [
+   "Bhajantipur Pt Ii",
+   2107,
+   4,
+   "Clay Loam"
+  ],
+  "301022": [
+   "Mohanpur Grant",
+   2106,
+   4,
+   "Clay Loam"
+  ],
+  "300956": [
+   "Algapur Pt Ii",
+   2106,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 337,
+ "village_count_sampled": 336
+}

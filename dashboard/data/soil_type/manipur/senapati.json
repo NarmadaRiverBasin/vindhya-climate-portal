@@ -1,0 +1,895 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Manipur",
+  "district": "Senapati",
+  "district_lgd": 257,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "full"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay": 2,
+   "Clay Loam": 25849,
+   "Loam": 5174
+  },
+  "n_pixels": 31026
+ },
+ "villages": {
+  "999999": [
+   "Data Partially Available",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268493": [
+   "Changsang",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268494": [
+   "Leisangphung",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268431": [
+   "Taphou Phyamai",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268437": [
+   "Makhrelui",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268436": [
+   "Ikailongdi",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268435": [
+   "Rikhumai Taphou",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268467": [
+   "Takeimei",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268425": [
+   "Maram Khunou",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268432": [
+   "Taphou Oneame",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268433": [
+   "Taphou Pudunamei",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268434": [
+   "Taphou Ngaihang",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268424": [
+   "Emesiiphro",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268429": [
+   "Makeng Cheijinba Katomei",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268427": [
+   "Katomei Makeng",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268430": [
+   "Taphou Naga",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268428": [
+   "Katomei Centre",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268426": [
+   "Katomei",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268438": [
+   "Senapati",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268440": [
+   "Khabung Karong",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268441": [
+   "Kathikho",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268492": [
+   "Phoibung Kuki",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268491": [
+   "Bollen Kuki",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268402": [
+   "Tamphung",
+   1858,
+   7,
+   "Loam"
+  ],
+  "268403": [
+   "Chakha",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268404": [
+   "Khangjang",
+   1858,
+   7,
+   "Loam"
+  ],
+  "268405": [
+   "Thuyen",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268406": [
+   "Yangkhunou",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268407": [
+   "Bedramei",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268408": [
+   "Zenamci",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268409": [
+   "Zenamyi",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268414": [
+   "Willong Khullen",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268411": [
+   "Kenelu",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268412": [
+   "Kamalong",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268410": [
+   "Yangkhullen",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268413": [
+   "Willong Khunou",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268416": [
+   "Sangkunglung",
+   1858,
+   7,
+   "Loam"
+  ],
+  "268415": [
+   "Shang Khumei",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268418": [
+   "Oklong",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268417": [
+   "Rajamei",
+   1858,
+   7,
+   "Loam"
+  ],
+  "268419": [
+   "Oklong Maryam",
+   1858,
+   7,
+   "Loam"
+  ],
+  "268420": [
+   "Oklong Khunou",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268421": [
+   "Kanem",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268422": [
+   "Makulongdi",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268490": [
+   "Nsebekie",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268460": [
+   "Pungdunglung",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268471": [
+   "New Magaimai",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268423": [
+   "Sadim Naga Emesho Sadim",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268452": [
+   "Puni Pfosemai",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268449": [
+   "Mao Marafii",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268485": [
+   "Khabung",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268439": [
+   "Mao Karong",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268489": [
+   "Ngatan",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268486": [
+   "Sorbung",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268455": [
+   "Toklung",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268487": [
+   "Khamsom",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268488": [
+   "Tingsong",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268518": [
+   "Purul Rosofii",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268519": [
+   "Purul Atongba",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268520": [
+   "Purul Akutpa",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268521": [
+   "Shirong",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268524": [
+   "Kodom Khavii",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268528": [
+   "Ngari Raidolumai",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268529": [
+   "Ngari Khullen",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268530": [
+   "Ngari Lishang",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268531": [
+   "Thiwa",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268532": [
+   "Thiwa Songdo",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268533": [
+   "Khongdei Khuman",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268534": [
+   "Khongdei Shimphung",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268535": [
+   "Khongdei Ngawar",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268536": [
+   "Ngamju",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268537": [
+   "Oinam",
+   1860,
+   7,
+   "Loam"
+  ],
+  "268538": [
+   "Thingba Khullen",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268539": [
+   "Thingba Khunou",
+   1860,
+   7,
+   "Loam"
+  ],
+  "268540": [
+   "Keiye",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268541": [
+   "Raafii",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268542": [
+   "Kapao",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268495": [
+   "Washangphung",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268516": [
+   "Koide Makha",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268465": [
+   "Chowainamei Khullen",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268459": [
+   "Mao Pundung",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268453": [
+   "Emefiithumai",
+   1858,
+   7,
+   "Loam"
+  ],
+  "268466": [
+   "Chowainamei Khunou",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268478": [
+   "Pudunamei",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268476": [
+   "Rabunamei",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268477": [
+   "Punanamei",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268475": [
+   "Namgailong Rongmei",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268474": [
+   "Kayinu",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268472": [
+   "Song Song",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268479": [
+   "Chowainu",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268473": [
+   "Kalinamei",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268470": [
+   "Phikomai",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268482": [
+   "Shajouba",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268483": [
+   "Makhel",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268480": [
+   "Robve Solephe",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268481": [
+   "Tobumei",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268469": [
+   "Tadubi",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268468": [
+   "Chakumei",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268450": [
+   "Khriidziiphi",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268484": [
+   "Keibi",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268464": [
+   "New Makhan",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268463": [
+   "Makhan Lovadziingho",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268458": [
+   "Makhan Khuman",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268461": [
+   "Makhan Khullen",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268442": [
+   "Maram Mathak Sagei",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268462": [
+   "Makhan Centre",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268443": [
+   "Maram Khulakpa Sagei",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268444": [
+   "Maram Makha Sagei",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268448": [
+   "Lairoching",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268447": [
+   "Maram Sagonbam",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268446": [
+   "Maram Centre",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268445": [
+   "Maram Kavanam",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268457": [
+   "Maram Bazar",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268454": [
+   "New Maram",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268451": [
+   "Khongnem",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268456": [
+   "Maram Ramlung",
+   1858,
+   4,
+   "Clay Loam"
+  ],
+  "268515": [
+   "Maiba",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268509": [
+   "Tungam Afii",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268512": [
+   "Khaikho",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268510": [
+   "Saranamei",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268507": [
+   "Tungam Makhufii",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268506": [
+   "Paomata Centre",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268511": [
+   "Rakhutao",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268508": [
+   "Tungam Khullen",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268517": [
+   "Koide Mathak",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268514": [
+   "Phuba Thapham",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268513": [
+   "Phuba Khuman",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268505": [
+   "Tungjoy",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268504": [
+   "Tungjoy Rikhubumai",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268502": [
+   "Liyai Khunou",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268503": [
+   "Liyai Khullen",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268500": [
+   "Chingmei Khunou",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268501": [
+   "Chingmei Khullen",
+   1859,
+   7,
+   "Loam"
+  ],
+  "268497": [
+   "New Laii",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268499": [
+   "Katafiimei",
+   1859,
+   7,
+   "Loam"
+  ],
+  "268498": [
+   "Laii",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268496": [
+   "Laii Sarafii",
+   1859,
+   4,
+   "Clay Loam"
+  ],
+  "268522": [
+   "Lakhamei",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268523": [
+   "Kodom Khullen",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268525": [
+   "Phaibung Khullen",
+   1860,
+   7,
+   "Loam"
+  ],
+  "268526": [
+   "Phaibung Khunou",
+   1860,
+   4,
+   "Clay Loam"
+  ],
+  "268527": [
+   "Lower Phaibung",
+   1860,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 144,
+ "village_count_sampled": 144
+}

@@ -1,0 +1,4789 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Assam",
+  "district": "Goalpara",
+  "district_lgd": 287,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (791/840 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 7,
+  "dominant_class": "Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 11980,
+   "Sandy Clay Loam": 5937,
+   "Loam": 14278
+  },
+  "n_pixels": 32197
+ },
+ "villages": {
+  "281878": [
+   "Kaimari",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282471": [
+   "Thekashu Pt I CT",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "281852": [
+   "Salbari Pt I",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281853": [
+   "Gosaidubi Hindupara",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281858": [
+   "Khalisavita Hindupara",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281874": [
+   "Bandormatha",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281873": [
+   "Saldhowa",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281872": [
+   "Gosaidubi Muslimpara",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281876": [
+   "Chaibari",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281877": [
+   "Choukatola",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281880": [
+   "Holdibari Pt Ii",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281883": [
+   "Gerapara",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281855": [
+   "Haruaphuta",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281867": [
+   "Ghunghunivita",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281868": [
+   "Eklasalbari",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281881": [
+   "Chataimari",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281870": [
+   "Holdibari",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281866": [
+   "Garojan",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281869": [
+   "Simlabari",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281864": [
+   "Dapkarvita",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281871": [
+   "Bausatari",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281879": [
+   "Rakhalkillah",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281865": [
+   "Golokerpam",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281856": [
+   "Morichbari Reserve",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281862": [
+   "Bherveri",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281857": [
+   "Charaghar",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281859": [
+   "Satsia Khamar",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281860": [
+   "Bhimkhaj",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281861": [
+   "Khalisavita Muslimpara",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281863": [
+   "Katlamari",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281882": [
+   "Gumaijhar",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281977": [
+   "Abhirampara",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281838": [
+   "Ghugudoba",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281836": [
+   "Damribhasa",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281835": [
+   "Shialkanda",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281828": [
+   "Katarihara",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281832": [
+   "Bhalukmari",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281833": [
+   "Baroudmari",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281834": [
+   "Tekona",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281829": [
+   "Bamunervita",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281837": [
+   "Basmura",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281827": [
+   "Sardarvita",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281807": [
+   "Khoksarvita",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281806": [
+   "Tariar Vita",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281805": [
+   "Uttar Satvendi",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281803": [
+   "Takimari",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281804": [
+   "Dakhin Satvendi",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281802": [
+   "Barotang Vita",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281801": [
+   "Chatotang Vita",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281830": [
+   "Bannyguri",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281831": [
+   "Chatoudmari",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281978": [
+   "Nayapara",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281976": [
+   "Kulamuwa",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281975": [
+   "Nalbari",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282005": [
+   "Chatabari Pt I",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282012": [
+   "Trichimkali Pandoba Pt I",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282006": [
+   "Chatabari Pt Ii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281825": [
+   "Dhobakura",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281966": [
+   "Bowalmari",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282016": [
+   "Depalchang",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282108": [
+   "Dhum Bandha",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "281962": [
+   "Silapani",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282004": [
+   "Hatisila Muslimpara",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281843": [
+   "Simulkandi",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281998": [
+   "Bapurvita Pt I",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282003": [
+   "Hatisila Ravapara",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281844": [
+   "Manaspara Reserve",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281997": [
+   "Bapurvita Pt Ii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281996": [
+   "Dhamar Reserve",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281840": [
+   "Rajmitapantai",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282002": [
+   "Salpara",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281841": [
+   "Kharuvas",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282010": [
+   "Dipkai Pt Ii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281999": [
+   "Bapurvita Pt Iii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282009": [
+   "Dipkai Pt I",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282007": [
+   "Baida Pt I",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281992": [
+   "Dhamar Bill",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282019": [
+   "Magho Pt I",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282023": [
+   "Nahalirvita",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281846": [
+   "Kaltapur",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281849": [
+   "Kolabari",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281847": [
+   "Khurshapakhiri Pt Ii",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281850": [
+   "Hosdoba",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281967": [
+   "Nidanpur Part I",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281968": [
+   "Sigri Part I",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281848": [
+   "Khurshapakhiri Pt Iii",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281994": [
+   "Medhipara Pt Ii",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281991": [
+   "Sigri Pt Ii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281875": [
+   "Kursapakhri Pt I",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281970": [
+   "Dhokapara",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281988": [
+   "Lambupara",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281969": [
+   "Deonapara Pt I",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281971": [
+   "Panisali",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "801553": [
+   "Lakhipur Tc",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282027": [
+   "Nidanpur Pt Ii CT",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281984": [
+   "Ghunghunivita",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281982": [
+   "Boistompara",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281973": [
+   "Rongadoba",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281972": [
+   "Tharka",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281974": [
+   "Bamundoba",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282001": [
+   "Jurigaon",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282184": [
+   "Borjora",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "281995": [
+   "Hatogaon Pt I",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281990": [
+   "Balaikhamar",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281986": [
+   "Besarkona",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281983": [
+   "Janjipara Pt Ii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281981": [
+   "Janjipara Pt I",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281980": [
+   "Goyram Kushi",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281979": [
+   "Krishapur",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281985": [
+   "Deonapara Pt Ii",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281989": [
+   "Gobal",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281987": [
+   "Lahapara",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281993": [
+   "Medhipara Pt I",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282000": [
+   "Hatogaon Pt Ii",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282026": [
+   "Fakirmara Pt Ii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282013": [
+   "Trichimkalipandoba Pt Ii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282025": [
+   "Kurung",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282008": [
+   "Baida Pt Ii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282024": [
+   "Fakirmara Pt I",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282022": [
+   "Mogho Hatisila",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282020": [
+   "Magho Pt Ii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281839": [
+   "Kesarapara",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281845": [
+   "Manaspara",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282241": [
+   "Kaimari Pt Ii",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282243": [
+   "Berubari Pt Ii",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282242": [
+   "Berubari Pt I",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282238": [
+   "Halowapara",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282237": [
+   "Kukurkata",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282239": [
+   "Darakona",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282240": [
+   "Nadirkona",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282390": [
+   "Belpara Pt I",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282202": [
+   "Ajagar Pahar N C",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282212": [
+   "Paglijhara",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282378": [
+   "Paikan Pt Ii",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282358": [
+   "Paikan Pt I",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282187": [
+   "Gosai Ga Dhawa",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282380": [
+   "Barmohara Pt I",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282213": [
+   "Bar Vita",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282217": [
+   "Kalindi Doba",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282381": [
+   "Barmohara Pt Ii",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282186": [
+   "Ketkibari",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282208": [
+   "Sijukona",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282218": [
+   "Tilapara",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282216": [
+   "Geradubi",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282207": [
+   "Badhapur",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282219": [
+   "Amjonga Pt Ii",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282222": [
+   "Katasibari",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282382": [
+   "Pachim Dairang",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282185": [
+   "Thakur Billa",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282220": [
+   "Amjonga Pt I",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282206": [
+   "Rangchai",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282221": [
+   "Changmari",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282377": [
+   "Krishnai Guria Pt I",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282376": [
+   "Krishnai Guria Pt Ii",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282244": [
+   "Boro Khashi Khagra",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282215": [
+   "Baijuri",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282223": [
+   "Taranti",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282214": [
+   "Barduk",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282205": [
+   "Khakshipara",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282204": [
+   "Megh Dam",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282230": [
+   "Baida",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282224": [
+   "Soto Kashi Khagra",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282386": [
+   "Pub Dairang",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282383": [
+   "Selapara",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282203": [
+   "Hati Gaon",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282231": [
+   "Kachumari",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282225": [
+   "Gendabari",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282396": [
+   "Senimari Pt I",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282226": [
+   "Borali",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282229": [
+   "Naya Gaon",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282384": [
+   "Tarathop",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282228": [
+   "Mechelkhowa",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282394": [
+   "Pub Jira",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282387": [
+   "Pachimjira",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282401": [
+   "Chenimari Pt Ii",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282227": [
+   "Mongrai",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282385": [
+   "Khardang Pt I",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282388": [
+   "Khardang Pt Ii",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282393": [
+   "Manjuli Hills",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282233": [
+   "Rangdam",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282391": [
+   "Bamun Panikhowa",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282234": [
+   "Chak Dam",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282389": [
+   "Belpara Pt Ii",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282392": [
+   "Khamari",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282232": [
+   "Khankhal",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282017": [
+   "Mogho Pt Iii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282235": [
+   "Kaimari Pt I",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282021": [
+   "Balachari",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282246": [
+   "Pancha Ratna Sal Forest",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282245": [
+   "Sutki Sal Forest",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282236": [
+   "Nibari",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282450": [
+   "Nakma Kundi",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282449": [
+   "Nishangram",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282448": [
+   "Chituk",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282469": [
+   "Kuchdhowa Chechapani Pt Ii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282367": [
+   "Dhaigaon",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282372": [
+   "Karkashi",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282483": [
+   "Kanyakuchi Saljhar",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282413": [
+   "Kuchdhowa Chechapani Pt I",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282342": [
+   "Upartola Pt Ii",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282374": [
+   "Kalpani Ghilajani",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282333": [
+   "Karipara Pt Iii",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282328": [
+   "Rabhapara",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282341": [
+   "Upartola Pt I",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282332": [
+   "Karipara Pt Ii",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282373": [
+   "Pahidal",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282414": [
+   "Kuchdhowa Chechapani Pt Iii",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282429": [
+   "Kanyakuchi Pahar",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282337": [
+   "Guwabari",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282412": [
+   "Deulguri Pt I",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282348": [
+   "Upartola Pt Iii",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282329": [
+   "Sarapara",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282485": [
+   "Kanyakuchi",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282335": [
+   "Barigaon",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282427": [
+   "Rong Rong Para",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282415": [
+   "Deulguri Pt Ii",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282408": [
+   "Khara Pt I",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282409": [
+   "Khara Medhipara",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282375": [
+   "Salpara Molandubi Pt Ii",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282428": [
+   "Kuchdhowapara Pt I",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282336": [
+   "Dabli",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282406": [
+   "Guabari Mandal Gram Hills",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282407": [
+   "Lakheraj Mandal Gram Pt Ii",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282411": [
+   "Latapara",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282420": [
+   "Baje Mandal Sialmari",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282410": [
+   "Tangabari",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282416": [
+   "Darakhpara",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282400": [
+   "Hatimura Pt Ii",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282419": [
+   "Khara Pt Ii",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282421": [
+   "Lakheraj Mandalgram Pt I",
+   2016,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282417": [
+   "Nabagram",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282440": [
+   "Mowamari",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282398": [
+   "Darapara Pt I",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282418": [
+   "Fafal",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282434": [
+   "Kachari Para",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282426": [
+   "Manupara",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282423": [
+   "Lela",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282424": [
+   "Rowmari",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282397": [
+   "Hatimura Pt I",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282433": [
+   "Kushdhowa Para Pt Ii",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282432": [
+   "Moish Khulipara",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282441": [
+   "Bar Matia Pt Ii",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282442": [
+   "Barmatia Pt I",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282425": [
+   "Charaimari",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282438": [
+   "Dighali",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282439": [
+   "Bagulamari",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282437": [
+   "Siluk Pt I",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282458": [
+   "Tarapara",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282436": [
+   "Purani Bhita",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282443": [
+   "Bar Pathar",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282402": [
+   "Ghoraputa",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282435": [
+   "Suchia Pahar Pt Ii",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282468": [
+   "Thekashu Pt Iii",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282453": [
+   "Suchia Pahar Pt I",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282457": [
+   "Prithupara",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282395": [
+   "Senimari Pt Iii",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282452": [
+   "Khara Bagaribari",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282444": [
+   "Bandar Shee Pt I",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282462": [
+   "Jakhowapara",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282455": [
+   "Rang Pathar",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282447": [
+   "Habanggiri",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282465": [
+   "Melopara Pt I",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282451": [
+   "Siluk Pt Ii",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282456": [
+   "Nalbari",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282463": [
+   "Santipur",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282454": [
+   "Suchia",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282422": [
+   "Rambuk",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282445": [
+   "Bandar Shee Pt Ii",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282446": [
+   "Bandar Shee Pt Iii",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282484": [
+   "Chatabari",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282399": [
+   "Darapara Pt Ii",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "281778": [
+   "Monkala",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281784": [
+   "Chotogandua",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281785": [
+   "Khalisamari No I",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281782": [
+   "Banchadoba",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281781": [
+   "Moamari",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281812": [
+   "Superivita",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281826": [
+   "Tarangapur",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281777": [
+   "Balapara",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281783": [
+   "Tulsibari",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281792": [
+   "Khalisamari",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281811": [
+   "Jaleswar Bill",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281809": [
+   "Rowarvita",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281810": [
+   "Fashartari",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281796": [
+   "Therthuridoba",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281808": [
+   "Kodamtola",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281795": [
+   "Batabari",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281786": [
+   "Doloni",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281760": [
+   "Bakpara Dineralga Pt I",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281761": [
+   "Bakpara Dineralga Pt Ii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281766": [
+   "Chaildhara",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281767": [
+   "Pathakata Pt Ii",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281768": [
+   "Fulkakata",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281797": [
+   "Tanganmari",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281799": [
+   "Bhomorarvita",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281789": [
+   "Kodamtola River Block N C",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281800": [
+   "River Block N C",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281798": [
+   "Nankurvita",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282404": [
+   "Salpara Molandubi Pt I CT",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282403": [
+   "Kharijapikon CT",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282405": [
+   "Asudubi CT",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282472": [
+   "Thekashu Pt Ii CT",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282470": [
+   "Damara Patpara CT",
+   2016,
+   7,
+   "Loam"
+  ],
+  "281885": [
+   "Cholakura",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281909": [
+   "Rowkhowa River N C Pt Iv",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281914": [
+   "Rowkhowa Pt Iii",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282043": [
+   "River Block No Iii N C",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281913": [
+   "Rowkhowa Pt Ii",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281906": [
+   "Singulipara Pt Iii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282045": [
+   "Birsing Halang Char Pt Ii",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281912": [
+   "Kistomoni Pt Ii",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281905": [
+   "Singulipara Pt Ii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281915": [
+   "Borar Char Pt Ii",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282054": [
+   "Tiapara",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282052": [
+   "Nasnipara",
+   2014,
+   7,
+   "Loam"
+  ],
+  "281921": [
+   "Kistomoni Pt I",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281899": [
+   "Chular Char",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281918": [
+   "Rowkhowa Pt I",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281923": [
+   "Thailapara Pt I",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282056": [
+   "Bollpuri",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282057": [
+   "Hajua Char",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282072": [
+   "Sonahara",
+   2014,
+   7,
+   "Loam"
+  ],
+  "281924": [
+   "Thailapara Pt Ii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282058": [
+   "Hajua Char",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282059": [
+   "Hajua Char",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282060": [
+   "Ram Hari Char Pt Iii",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282073": [
+   "Roumari",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282074": [
+   "Nalanga",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281937": [
+   "Niz Bogribari",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282079": [
+   "Tapar Vita",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282077": [
+   "Balar Vita",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282089": [
+   "Nalonga Pahar",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282075": [
+   "Rakhal Dubi",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282076": [
+   "Khateya Tari",
+   2014,
+   7,
+   "Loam"
+  ],
+  "281943": [
+   "Jaybhum",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282082": [
+   "Soulmari",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282078": [
+   "Abrar Vita",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "281934": [
+   "Chitolmari Pt I",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281952": [
+   "Khudra Paitori",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281950": [
+   "Puthimari",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282087": [
+   "Thepkai",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281953": [
+   "Swari Paitari",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281954": [
+   "Bhoismari",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281951": [
+   "Lejam",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281945": [
+   "Niz Balikashi",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282086": [
+   "Simlabari",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282083": [
+   "Katilar Tari",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282084": [
+   "Ambari",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282142": [
+   "Boko Garopara",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282085": [
+   "Kadotika",
+   2014,
+   7,
+   "Loam"
+  ],
+  "281948": [
+   "Bordol",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282143": [
+   "Lampara",
+   2014,
+   7,
+   "Loam"
+  ],
+  "281779": [
+   "Kaminirvita",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282092": [
+   "Batabari",
+   2014,
+   7,
+   "Loam"
+  ],
+  "281958": [
+   "Saktola",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281815": [
+   "Fetangapara",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282099": [
+   "Latima",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282096": [
+   "Boro Boguan",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "281964": [
+   "Nizkusakati",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281956": [
+   "Mothabari",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282097": [
+   "Haridar Boguan",
+   2014,
+   7,
+   "Loam"
+  ],
+  "281816": [
+   "Badbadia",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281960": [
+   "Aolatoli",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281819": [
+   "Haguripara",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281957": [
+   "Khonar Pubpar",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282145": [
+   "Bamundonga Pt I",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282104": [
+   "Haldibari",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282144": [
+   "Bamundanga Pt Ii",
+   2014,
+   7,
+   "Loam"
+  ],
+  "281823": [
+   "Karirbari",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282100": [
+   "Sabaji Baguan",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282053": [
+   "Ramhari Char Pt Ii",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282091": [
+   "Markula",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282094": [
+   "Sinabari",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282093": [
+   "Kangai Pashimpar",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "281820": [
+   "Thongpara",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281814": [
+   "Gerapuri",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282103": [
+   "Garo Bhat Khawa",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "281821": [
+   "Chulkani",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281780": [
+   "Panikamritari",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281822": [
+   "Saptibari",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282101": [
+   "Narangabari",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282113": [
+   "Kangair Pubpar",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282102": [
+   "Muralijhar",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282114": [
+   "Pandoba",
+   2014,
+   7,
+   "Loam"
+  ],
+  "281813": [
+   "Chilarvita",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282106": [
+   "Bangaljar",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282112": [
+   "Palasbari",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281842": [
+   "Takimari Reserve",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281959": [
+   "Kursakati",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282015": [
+   "Maladhara Pt I",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281961": [
+   "Likiri Para",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281963": [
+   "Faringapara",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281824": [
+   "Kathuri",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282111": [
+   "Darirpar",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282109": [
+   "Phakritari",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "281965": [
+   "Chakbabill",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282014": [
+   "Maladhara Pt Ii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282110": [
+   "Ara Bhandha",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282107": [
+   "Chakla Gaon",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282011": [
+   "Lemakona",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281911": [
+   "Kistomoni",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281910": [
+   "Rowkhowa Pt Iv",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281902": [
+   "Kalir Alga",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281901": [
+   "Jamira Bari Algarchar Pt Iv",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282080": [
+   "Genda Uri",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "281942": [
+   "Koreya",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282081": [
+   "Doshara Korea",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "281941": [
+   "Moamari",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281772": [
+   "Geramari Pt Ii",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281936": [
+   "Feshartari",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281944": [
+   "Niz Sharo Khowa",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281935": [
+   "Hostani",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281931": [
+   "Geramari Pt I",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281776": [
+   "Chatapara",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281775": [
+   "Kherdoba",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281947": [
+   "Kaji Pata",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281946": [
+   "Sonalurtol",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281818": [
+   "Baurartal",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "282098": [
+   "Soto Boguan",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282051": [
+   "Ramhari Char No I",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282047": [
+   "Dakhin Katlamari Pt I",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282046": [
+   "Birsing Halanga Char Pt I",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282049": [
+   "Dakhin Katlamari Pt Ii",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282028": [
+   "Halanga Char N C",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282044": [
+   "Halanga Char",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282030": [
+   "Bhasani Para Pt Ii",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282029": [
+   "Bhasani Para Pt I",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282032": [
+   "Kristamoni Para Pt I",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282031": [
+   "Nun Khawa Pt I",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282042": [
+   "Bhasanipara Pt Iii",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282034": [
+   "Nun Khawa Pt Ii",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282033": [
+   "Nunkhawa Pt Iii",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282036": [
+   "Katlamari Char",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282039": [
+   "Sader Alga Pt I",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282040": [
+   "Khewan Khawa Pt I",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282041": [
+   "Khewan Khawa Pt Ii",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282035": [
+   "Sader Alga",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282050": [
+   "Katlamari",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282038": [
+   "Sader Alga Pt Ii",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282037": [
+   "Uttarkatlamari",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281955": [
+   "Boro Paitari",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281769": [
+   "Pathakata Pt I",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281907": [
+   "Rowkhowa River N C Pt I",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281895": [
+   "Killahara Pt I",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281888": [
+   "Killahara Pt V",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281894": [
+   "Killahara Pt Iii",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281887": [
+   "Bamuneralga Pt Ii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281886": [
+   "Cholakura Pt Iii",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281889": [
+   "Killahara Pt Ii",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281884": [
+   "Cholakura",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281890": [
+   "Killahara Pt Iv",
+   2013,
+   4,
+   "Clay Loam"
+  ],
+  "281771": [
+   "Kodalkati",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281908": [
+   "Singulipara Killahara Pt Iii",
+   2013,
+   7,
+   "Loam"
+  ],
+  "281897": [
+   "Singulipara Killahara Pt Ii",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "281891": [
+   "Bamuner Alga Pt I",
+   2013,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282252": [
+   "Baladmari Char Pt Iii",
+   2015,
+   7,
+   "Loam"
+  ],
+  "249834": [
+   "Goalpara",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282125": [
+   "Pancha Ratna N C",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282122": [
+   "Dakur Vita",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282116": [
+   "Khutamari",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282115": [
+   "Paglar Tag N C",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282251": [
+   "Baladmari Char Pt I",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282127": [
+   "Hurkakuchi",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282066": [
+   "Nij Satra Pur",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282064": [
+   "Nij Barvita",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282065": [
+   "Munsirvita",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282117": [
+   "Dari Duri",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282253": [
+   "Baladmari Char Pt Ii",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282067": [
+   "Sutki N C",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282068": [
+   "Sutki",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282062": [
+   "Kharmuja",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282123": [
+   "Makri",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282063": [
+   "Bamirampara",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282257": [
+   "Dekdhowa N C Dekdhowa Natunbasti",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282118": [
+   "Tarai Bari",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282260": [
+   "Ujirer Char Ujirer Char and Dobapa",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282163": [
+   "Boladmari",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282069": [
+   "Saharia",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282256": [
+   "Dekdhowa",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282254": [
+   "Helapakhri",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282258": [
+   "Paharsing Para",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282162": [
+   "Jungle Block",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282259": [
+   "Ujirer Char Nc Fakir Para",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282121": [
+   "Bang Kanda",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282264": [
+   "Rakhyasini Jangle Block",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282128": [
+   "Dakur Vita N C",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282255": [
+   "Rakhyasini Pahar",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282120": [
+   "Matia Garopara",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282261": [
+   "Dubapara Lupta Char",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282090": [
+   "Telipara",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282164": [
+   "Dasarapara Matia",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282280": [
+   "Darogar Alga",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282291": [
+   "Basantapur",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282133": [
+   "Matia",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282160": [
+   "Gendera N C",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282262": [
+   "Dubapara",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282070": [
+   "Haripur Kawan Khawa",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282095": [
+   "Kalyanpur",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282263": [
+   "Rakhyasini Garopara Pt I",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282290": [
+   "Basantapur N C",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282165": [
+   "Bhaiskhuli",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282268": [
+   "Rakhyasini Garopara Pt Ii",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282265": [
+   "Rakhyasini Jhar Pt Ii",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282269": [
+   "Futuripara",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282292": [
+   "Bahati River Block Pt I",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282283": [
+   "Singimari Char",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282071": [
+   "Deo Dhuturi",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282278": [
+   "Bhatiapara",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282281": [
+   "Pakhiura Char",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282166": [
+   "Kurowa Bhasa",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282266": [
+   "Rakhyasini Jhar Pt I",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282119": [
+   "Bardamal",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282293": [
+   "Bahati Char Pt Ii",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282131": [
+   "Kochpara",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282161": [
+   "Gendera",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282289": [
+   "Buduchar N C",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282277": [
+   "Dashabhuja Debasthan",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282282": [
+   "Pakhiura N C",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282134": [
+   "Rampur",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282159": [
+   "Solmari",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282088": [
+   "Nalonga Pahartoli",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282279": [
+   "Dakaidal",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282308": [
+   "Bahati Pt Ii",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282288": [
+   "Buduchar",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282139": [
+   "Kathalguri",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282309": [
+   "Singramari River Block",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282158": [
+   "Chamaguri",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282136": [
+   "Bhaiskhuli",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282167": [
+   "Goraimari",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282296": [
+   "Mamudpur Pt I",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282156": [
+   "Budhipara",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282306": [
+   "Bahati",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282284": [
+   "Mornai",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282155": [
+   "Nichinta",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282154": [
+   "Jokrapara",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282276": [
+   "Tinkoniapara",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282270": [
+   "Harimura",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282295": [
+   "Dalgoma",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282267": [
+   "Moijonga",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282157": [
+   "Jungle Block",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282135": [
+   "Gandamari",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282287": [
+   "Kodamtola Gopalpur",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282310": [
+   "Singramari",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282314": [
+   "Balapara",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282153": [
+   "Rakhapara",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282297": [
+   "Borobalupara Banbabu Para",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282271": [
+   "Lalabori",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282316": [
+   "Sutarpara",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282137": [
+   "Bairang",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282177": [
+   "Dorapara",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282298": [
+   "Gosaibori",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282138": [
+   "Soto Damal",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282171": [
+   "Agia Part Ii",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282294": [
+   "Mamudpur Pt Ii",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282275": [
+   "Dahikata",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282317": [
+   "Simlitola Char",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282285": [
+   "Monakasa",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282305": [
+   "Nayapara Pt I",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282318": [
+   "Simlitola Char Pt Ii",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282311": [
+   "Nayapara Pt Ii",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282349": [
+   "Khagrabari",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282355": [
+   "Tukura Pt I",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282152": [
+   "Rangchaipara",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282319": [
+   "Nobagata Simlitola",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282369": [
+   "Bhojmala Pt Ii",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282312": [
+   "Garopara Tari",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282315": [
+   "Sutarpara Char",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282320": [
+   "Bharbari",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282170": [
+   "Kal Pani Chandamari",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282356": [
+   "Hadigaon",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282357": [
+   "Bujruk Manikpur",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282359": [
+   "Khamar Manikpur",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282150": [
+   "Baikunthapur",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282151": [
+   "Bhetaipara",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282303": [
+   "Sidhabari Pt I",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282360": [
+   "Bhela Khamar",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282286": [
+   "Pachim Matia",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282149": [
+   "Deauli",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282304": [
+   "Sidhabari Pt Ii",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282174": [
+   "Bhendara",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282140": [
+   "Mojai Rabhapara",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282141": [
+   "Barjora",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282350": [
+   "Fofanga Pt I",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282175": [
+   "Balijana",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282299": [
+   "Pub Matia",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282197": [
+   "Sat Baini Hill Block",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282302": [
+   "Gunialguri",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282323": [
+   "Ronua",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282322": [
+   "Pokalagi",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282361": [
+   "Khamar Pakhiriguri Dhundipara",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282321": [
+   "Goromari",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282352": [
+   "Fofanga Pt Iii",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282273": [
+   "Tengabari",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282274": [
+   "Gajiajani",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282301": [
+   "Bakaitari Pt I",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282199": [
+   "Kalapani",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282334": [
+   "Singijani",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282172": [
+   "Dalok",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282146": [
+   "Mojai Garopara",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282148": [
+   "Darka Kacharipara Pt I",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282180": [
+   "Dewlijara",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282370": [
+   "Karkasi Damas",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282272": [
+   "Bhojmala Pt I Mornoi",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282179": [
+   "Narayanpara",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282340": [
+   "Mujguri",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282474": [
+   "Barbari",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282300": [
+   "Korua Bari",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282345": [
+   "Toplakhowa",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282473": [
+   "Domnapara Pt I",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282338": [
+   "Dahela",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282364": [
+   "Barvita",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282354": [
+   "Tukura Pt Ii",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282344": [
+   "Baguan Pt Ii",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282196": [
+   "Jagna Raj Bangsipara",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282363": [
+   "Kharija Manikpur",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282324": [
+   "Bakaitari Pt Ii",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282343": [
+   "Baguan Pt I",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282362": [
+   "Jatsorabdi",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282190": [
+   "Tisimpur",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282368": [
+   "Khilasastra",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282351": [
+   "Fofanga Pt Ii",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282200": [
+   "Kukuria Pt I",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282193": [
+   "Rajapara",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282365": [
+   "Sardarpara",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282339": [
+   "Mujguri Islampur",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282326": [
+   "Khalaipara",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282147": [
+   "Darka Rabhapara Pt I",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282325": [
+   "Bakaitari Pt Iii",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282481": [
+   "Kankata Pt I",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282346": [
+   "Baguan Pt Iii",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282181": [
+   "Kisordubi",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282191": [
+   "Hatighopa",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282371": [
+   "Dhaigaon Damas",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282353": [
+   "Tukura Pt Iii",
+   2015,
+   4,
+   "Clay Loam"
+  ],
+  "282327": [
+   "Bamunpara",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282347": [
+   "Baguan Pt Iv",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282330": [
+   "Karipara Pt Iv",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282182": [
+   "Dark Kacharipara Pt Ii",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282183": [
+   "Dark Rabhapara Pt Ii",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282201": [
+   "Kukuria Pt Ii",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282379": [
+   "Kharmohara",
+   2015,
+   7,
+   "Loam"
+  ],
+  "282189": [
+   "Silchak Domal",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282188": [
+   "Chaplongkata",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282331": [
+   "Karipara Pt I",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282366": [
+   "Khairapara",
+   2015,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282210": [
+   "Sat Baini",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282209": [
+   "Hasila Bill",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282018": [
+   "Balachari Amguri",
+   2013,
+   7,
+   "Loam"
+  ],
+  "282192": [
+   "Boghmara",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282176": [
+   "Debattar Bapupara Pt I",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282194": [
+   "Keotpara",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282198": [
+   "Chandamari Sat Baini",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282173": [
+   "Agni Part I",
+   2014,
+   7,
+   "Loam"
+  ],
+  "282195": [
+   "Joggapara Derek",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282211": [
+   "Matia Garo Para Pt Ii",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282132": [
+   "Sarapara",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282130": [
+   "Kalyanpur N C",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282129": [
+   "Kalyanpur",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282247": [
+   "Sal Forest Dakur Vita",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282124": [
+   "Khar Boja",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282126": [
+   "Pancha Ratna",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282178": [
+   "Debattar Bapupara Pt Ii",
+   2014,
+   4,
+   "Clay Loam"
+  ],
+  "282248": [
+   "Gobindapur CT",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282249": [
+   "Bhalukdubi CT",
+   2014,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282491": [
+   "Sikajuli Kuhiarbari",
+   2017,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282487": [
+   "Allibari",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282489": [
+   "Kahibari Pt Ii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282517": [
+   "Garuchatka Pt Ii",
+   2017,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282495": [
+   "Bangaon",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282486": [
+   "Chowkapara Kahibari",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282496": [
+   "Tiplai Pt Ii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282490": [
+   "Kahibari Pt I",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282494": [
+   "Garuchatka Pt I",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282518": [
+   "Bijoypur Bangaon",
+   2017,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282519": [
+   "Ambari Pt Iii",
+   2017,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282521": [
+   "Khutabari Pt I",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282515": [
+   "Chitalmari Bangaon",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282520": [
+   "Chaplai Pt Ii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282497": [
+   "Sikajulighagra Mowamari",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282522": [
+   "Khutabari Pt V",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282499": [
+   "Khilamara",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282500": [
+   "Budlung Pahar",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282531": [
+   "Dhontola Pt I",
+   2017,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282516": [
+   "Dhantola Pt Ii",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282498": [
+   "Bhalukjuli",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282514": [
+   "Bamuni Gaon Pt I",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282513": [
+   "Bamuni Gaon Pt Ii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282527": [
+   "Chaplai Pt I",
+   2017,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282524": [
+   "Bardal Pt I",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282512": [
+   "Ghagra Pahar",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282526": [
+   "Khutabari Pt Iii",
+   2017,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282532": [
+   "Kathalmuri Palsa",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282525": [
+   "Khutabari Pt Ii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282566": [
+   "Bardal Pt Ii",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282529": [
+   "Ambari Pt Ii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282511": [
+   "Ouguri",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282565": [
+   "Khutabari Pt Iv",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282528": [
+   "Ambari Pt Iv",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282535": [
+   "Patpara Pt I",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282534": [
+   "Kathalmuri",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282510": [
+   "Ghagra Saljhar",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282567": [
+   "Ghilabari",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282504": [
+   "Kayashthapara",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282530": [
+   "Ambari Pt I",
+   2017,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282508": [
+   "Budlung Garopara",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282533": [
+   "Palsa",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282564": [
+   "Piplibari",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282509": [
+   "Budlung Saljhar",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282501": [
+   "Kahibari Garopara",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282568": [
+   "Jogipara Pt I",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282536": [
+   "Gohaiburi",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282507": [
+   "Budlung Chanchali Para",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282503": [
+   "Thakuriapara",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282561": [
+   "Gathiapara",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282563": [
+   "Maslam Pt Ii",
+   2017,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282562": [
+   "Khekapara",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282537": [
+   "Khamar",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282570": [
+   "Jogipara Pt Iii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282431": [
+   "Chouka Kata",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282506": [
+   "Bakrapara Pt I",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282557": [
+   "Patpara Pt Ii",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282539": [
+   "Bakrapara Pt Ii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282538": [
+   "Fakirpara",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282569": [
+   "Jogipara Pt Ii",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282430": [
+   "Moishkhuli Khamar",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282560": [
+   "Aoimari",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282502": [
+   "Garopara",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282559": [
+   "Patpara Pt Iii",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282505": [
+   "Majpara Khamar",
+   2017,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282571": [
+   "Dighali Pt Ii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282572": [
+   "Dighali Pt Iii",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282540": [
+   "Panditpara",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282573": [
+   "Maslam Pt I",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282541": [
+   "Sarapara Pt Ii",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282575": [
+   "Saljhar Block",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282543": [
+   "Baniapara",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282542": [
+   "Mahajanpara",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282459": [
+   "Patiarpara Pt I",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282574": [
+   "Kathakuthi Pt Ii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282578": [
+   "Dighali Pt I",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282577": [
+   "Kathakuthi Pt I",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282544": [
+   "Dosimapara",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282556": [
+   "Sarapara Pt I",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282554": [
+   "Madang Pt Iii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282553": [
+   "Mandang Pt Ii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282460": [
+   "Patiarpara Pt Ii",
+   2016,
+   4,
+   "Clay Loam"
+  ],
+  "282597": [
+   "Dhupdhara Pt Ii",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282576": [
+   "Kathakathi Pt Vii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282545": [
+   "Sardarpara",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282546": [
+   "Badiarpara",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282555": [
+   "Sarapara Rangjuli Saljhar",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282581": [
+   "Kathakuthi Pt Iv",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282461": [
+   "Hajaripara",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282547": [
+   "Jaldhapara",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282580": [
+   "Kathakuthi Pt Iii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282549": [
+   "Rowmari Pt I",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282464": [
+   "Rowmari Pt Ii",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282550": [
+   "Hadipara Bhamra Pathar",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282582": [
+   "Kathakuthi Pt V",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282583": [
+   "Kathakuthi Pt Vi",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282551": [
+   "Sildubipara Pt I",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282584": [
+   "Ambuk Pt I",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282552": [
+   "Sildubipara Pt Ii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282587": [
+   "Shyama Gaon Pt I",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282588": [
+   "Dumapara Pt I",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282586": [
+   "Shyama Gaon Pt Ii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282585": [
+   "Ambuk Pt Ii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282589": [
+   "Bardamal Athiabari",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282593": [
+   "Dumapara Pt Ii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282594": [
+   "Ambuk Pt Iii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282592": [
+   "Chekowari Pt I",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282467": [
+   "Gadim Pathar",
+   2016,
+   7,
+   "Loam"
+  ],
+  "282466": [
+   "Melopara Pt Ii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282590": [
+   "Athiabari",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282595": [
+   "Chekowari Pt Ii",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282591": [
+   "Chekowari Pt Iii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282596": [
+   "Dhupdhara Pt I",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282579": [
+   "Dhupdhara Pt Iii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282523": [
+   "Talipara Kouridubi",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282488": [
+   "Ganesh Pahar",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282558": [
+   "Madang Pt I",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282548": [
+   "Adopara",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282476": [
+   "Kamar Pota",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282477": [
+   "Gerua",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282478": [
+   "Tiplai Pt I",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282475": [
+   "Simlitola",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282492": [
+   "Tipli Pt Iii",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282480": [
+   "Simlitola T E",
+   2017,
+   7,
+   "Loam"
+  ],
+  "282482": [
+   "Kankata Pt Ii",
+   2017,
+   4,
+   "Clay Loam"
+  ],
+  "282493": [
+   "Ullubari Choutra Naitarabeel",
+   2017,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282479": [
+   "Rakshini Pahar",
+   2017,
+   7,
+   "Loam"
+  ]
+ },
+ "village_count_total": 840,
+ "village_count_sampled": 791
+}

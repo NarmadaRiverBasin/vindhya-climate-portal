@@ -1,0 +1,5822 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Odisha",
+  "district": "Sonepur",
+  "district_lgd": 372,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (995/1001 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 23562,
+   "Sandy Clay Loam": 4238,
+   "Loam": 11657,
+   "Sandy Loam": 48
+  },
+  "n_pixels": 39506
+ },
+ "villages": {
+  "999999": [
+   "Reserve Forest",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419810": [
+   "Sukhilasar Jungle",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419771": [
+   "Rengsa Jungle",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419782": [
+   "Telnadi Ka",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419800": [
+   "Karla Muhan Jungle",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419806": [
+   "Sindhijore",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419808": [
+   "Ainlapali Jungle",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419811": [
+   "Malpada",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419813": [
+   "Dungripali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419784": [
+   "Balipata",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419789": [
+   "Rengsa",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419809": [
+   "Sukhilasar",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419781": [
+   "Chirbahal",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419772": [
+   "Arda",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419792": [
+   "Badamunda",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419790": [
+   "Budhakhaman",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419786": [
+   "Junani",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419791": [
+   "Khairbhadi",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419794": [
+   "Charbhata Jungle",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419797": [
+   "Jhilimunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419796": [
+   "Charbhata",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419783": [
+   "Badjorjhar",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419805": [
+   "Sindhol",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419804": [
+   "Balikhamar",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419814": [
+   "Jharbahali",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419785": [
+   "Badtenda",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419807": [
+   "Ainlapali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419795": [
+   "Saiduli",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419780": [
+   "Jadapali",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419762": [
+   "Pol Bandh",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419801": [
+   "Karla Muhan",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419803": [
+   "Putukipali",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419799": [
+   "Rengalibahali",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419776": [
+   "Putukipali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419766": [
+   "Kumbharmunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419723": [
+   "Surjamunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419736": [
+   "Bahiramuhan",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419802": [
+   "Bileiberna",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419768": [
+   "Kulthiapadar",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419767": [
+   "Janakpur",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419778": [
+   "Debandh",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419779": [
+   "Tithipali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419774": [
+   "Singhari",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419763": [
+   "Dangajor",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419787": [
+   "Khamanjungle",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419769": [
+   "Kulthia Padar Jungle",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419812": [
+   "Basasankar",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419770": [
+   "Hafriaberna",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419773": [
+   "Sagarpali Jungle",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419777": [
+   "Lukapali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419735": [
+   "Bahiramuhan Jungle",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419793": [
+   "Charaniapali",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419798": [
+   "Rengali Bahali Jungle",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419706": [
+   "Ludriamunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419689": [
+   "Bheluapadar",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419737": [
+   "Dahi Berna",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419738": [
+   "Jam Jhar",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419739": [
+   "Jam Pali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419700": [
+   "Kumarpali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419755": [
+   "Kamsara Jungle",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419681": [
+   "Padmapur",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419656": [
+   "Suktelnadi",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419632": [
+   "Chuhanpali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419703": [
+   "Gunjimunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419630": [
+   "Majhipali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419675": [
+   "Daitpur",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419717": [
+   "Koyapadar",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419724": [
+   "Bandhakhol",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419720": [
+   "Katapali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419729": [
+   "Guhiraghat",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419722": [
+   "Jharmunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419728": [
+   "Pudugpathor",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419726": [
+   "Pandaripita",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419721": [
+   "Tulunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419750": [
+   "Dubula",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419754": [
+   "Jamkani Jungle",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419745": [
+   "Baghia",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419752": [
+   "Jamkani",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419742": [
+   "Khuntbandh",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419730": [
+   "Kirasira",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419716": [
+   "Nadhara",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419725": [
+   "Naktikana",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419705": [
+   "Chandanpali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419710": [
+   "Tentulikhunti",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419708": [
+   "Silatimunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "250549": [
+   "Tarbha Nac",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419741": [
+   "Rugudipali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419715": [
+   "Narda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419714": [
+   "Kutsira",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419707": [
+   "Tentuliamunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419704": [
+   "Laxmimunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419687": [
+   "Makadchuan",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419686": [
+   "Deogaon",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419734": [
+   "Bandhpali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419757": [
+   "Lembupali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419743": [
+   "Talpadar",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419732": [
+   "Brahmani",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419765": [
+   "Runjphatamunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419699": [
+   "Rugudipali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419744": [
+   "Purunapani",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419756": [
+   "Mahulpali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419719": [
+   "Palsapadar",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419749": [
+   "Badmal",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419713": [
+   "Jurabandh",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419712": [
+   "Sargaj",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419761": [
+   "Nuapali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419760": [
+   "Raikeda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419764": [
+   "Badphatamunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419747": [
+   "Sardhapali",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419746": [
+   "Dumerpali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419753": [
+   "Badjor",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419748": [
+   "Patharteka",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419759": [
+   "Pandakimal",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419718": [
+   "Kamsara",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419711": [
+   "Baghia Munda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419709": [
+   "Balmunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419685": [
+   "Sargijharia",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419688": [
+   "Bhaludunguri",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419691": [
+   "Badbhainro",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419758": [
+   "Chheliadungri",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419775": [
+   "Sagarpali",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419740": [
+   "Nuamunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419727": [
+   "Bhalupatdungri",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419731": [
+   "Babajimathadungri",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419751": [
+   "Dubula Jungle",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419648": [
+   "Tilesara",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419626": [
+   "Sankhachol",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419618": [
+   "Paikbahal",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419647": [
+   "Jarajaring",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419646": [
+   "Pua",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419611": [
+   "Menda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419679": [
+   "Garja",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419678": [
+   "Jadamunda",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419673": [
+   "Nuapali",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419680": [
+   "Sibtula",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419635": [
+   "Baladi",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419628": [
+   "Dunguripali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419653": [
+   "Rambhasindhol",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419677": [
+   "Jhartarbha",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419690": [
+   "Barkani",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419676": [
+   "Haridapali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419682": [
+   "Manhira",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419683": [
+   "Atasingha",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419637": [
+   "Kutsira",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419638": [
+   "Malisirgidi",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419636": [
+   "Bagbahali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419639": [
+   "Budelbahal",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419645": [
+   "Kekatpali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419633": [
+   "Salepali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419642": [
+   "Matikod",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419644": [
+   "Takarla",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419643": [
+   "Badkadalipali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419658": [
+   "Thakapali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419651": [
+   "Bhalubahal",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419652": [
+   "Dilkhuspur",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419659": [
+   "Khari",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419641": [
+   "Naikenpalli",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419640": [
+   "Singbahali",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419616": [
+   "Deulpadar",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419655": [
+   "Ghatkaintara",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419650": [
+   "Rangpur",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419649": [
+   "Fakiramunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419623": [
+   "Narayanpur",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419631": [
+   "Badbahali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419654": [
+   "Adakata",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419634": [
+   "Baladi Jangle",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419684": [
+   "Chandanpali Chadeipali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419627": [
+   "Patayatpali",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419625": [
+   "Sankhachol Jangle",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419657": [
+   "Taraikela",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419613": [
+   "Kandhapali",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "418937": [
+   "Dablong Jungle",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418896": [
+   "Phatamunda",
+   3133,
+   7,
+   "Loam"
+  ],
+  "418891": [
+   "Champaduli",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418900": [
+   "Mahulpali",
+   3133,
+   7,
+   "Loam"
+  ],
+  "418897": [
+   "Dumerpali",
+   3133,
+   7,
+   "Loam"
+  ],
+  "418899": [
+   "Gajamal",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418892": [
+   "Tileimal",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418893": [
+   "Sahajbahal",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418898": [
+   "Karlajuri",
+   3133,
+   7,
+   "Loam"
+  ],
+  "418895": [
+   "Ichhapur",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418894": [
+   "Kandumunda",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418952": [
+   "Asurmundajungle",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418973": [
+   "Rengalijungle",
+   3133,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419619": [
+   "Dheramunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "418974": [
+   "Kudadera",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418967": [
+   "Khemundiamunda",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418927": [
+   "Babupali",
+   3133,
+   7,
+   "Loam"
+  ],
+  "418956": [
+   "Majhimunda",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418961": [
+   "Baslat",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418936": [
+   "Matiapali",
+   3133,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "418941": [
+   "Lachhipur",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418944": [
+   "Lupursingha",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418966": [
+   "Jhilimunda",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418968": [
+   "Pipilipali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418977": [
+   "Bajikhol",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418942": [
+   "Bhursapali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419614": [
+   "Rajapali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "418949": [
+   "Rengali",
+   3133,
+   7,
+   "Loam"
+  ],
+  "419609": [
+   "Ranisarda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419617": [
+   "Dahimal",
+   3140,
+   7,
+   "Loam"
+  ],
+  "418962": [
+   "Dablongjungle",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418939": [
+   "Biseswarpali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418953": [
+   "Asurmunda",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419622": [
+   "Sankadalipali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "418958": [
+   "Chhakormal",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418965": [
+   "Jhankarpali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419603": [
+   "Kumunde",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "418976": [
+   "Jamkhol",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419610": [
+   "Arda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419615": [
+   "Brahmanipali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419612": [
+   "Khagsakana",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419604": [
+   "Kumundejangle",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "418938": [
+   "Biseswarpalijungle",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418978": [
+   "Chandrapur",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418933": [
+   "Singhjuri",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419606": [
+   "Fatamunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "418969": [
+   "Bisalpalijungle",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418950": [
+   "Luhurapalijungle",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419608": [
+   "Ranisardajangle",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "418935": [
+   "Matiapali Jungle",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419607": [
+   "Kandhapali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419620": [
+   "Tileimal",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "418957": [
+   "Dablang",
+   3133,
+   7,
+   "Loam"
+  ],
+  "418964": [
+   "Dumerkhol",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418971": [
+   "Saharapali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418954": [
+   "Chaurasipur",
+   3133,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "418955": [
+   "Bisalpali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418951": [
+   "Dabapali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418970": [
+   "Luhurapali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418959": [
+   "Badipadia",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418963": [
+   "Chahatakhol",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418932": [
+   "Balapurjungle",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418972": [
+   "Gindladadar",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418943": [
+   "Gurandipali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419621": [
+   "Paikbahaljangle",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "418934": [
+   "Singhjuri Jungle",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418979": [
+   "Jamkholjungle",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418940": [
+   "Anganadi",
+   3133,
+   7,
+   "Loam"
+  ],
+  "418960": [
+   "Chhakormal Jungle",
+   3133,
+   7,
+   "Loam"
+  ],
+  "418884": [
+   "Bandhapali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418886": [
+   "Sialbahali",
+   3133,
+   7,
+   "Loam"
+  ],
+  "418874": [
+   "Thenganal",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419071": [
+   "Sanbhalupali",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "418911": [
+   "Gadhapali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418918": [
+   "Bileibahali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418917": [
+   "Patharkhandi",
+   3133,
+   7,
+   "Loam"
+  ],
+  "419022": [
+   "Salepali",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "419082": [
+   "Sahajbahal",
+   3135,
+   7,
+   "Loam"
+  ],
+  "418931": [
+   "Balapur",
+   3133,
+   7,
+   "Loam"
+  ],
+  "418875": [
+   "Pankel",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419073": [
+   "Phul Changhri Dungri",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419020": [
+   "Gajabandh",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "419080": [
+   "Nandanmal",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419017": [
+   "Brahmanipali",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "419076": [
+   "Kulthipali",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "418907": [
+   "Poind",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418920": [
+   "Mahubahali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419021": [
+   "Salepalijungle",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418878": [
+   "Tuniamunda",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418885": [
+   "Barpadar",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419015": [
+   "Kundupali",
+   3134,
+   7,
+   "Loam"
+  ],
+  "418882": [
+   "Lariabahal",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418883": [
+   "Gambharipali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418888": [
+   "Salgul",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418887": [
+   "Majhimunda",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418908": [
+   "Badphatamunda",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419012": [
+   "Andharibanji",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418912": [
+   "Digsira",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418909": [
+   "Chamarpur",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418919": [
+   "Julunda",
+   3133,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "418914": [
+   "Tamamura",
+   3133,
+   7,
+   "Loam"
+  ],
+  "419006": [
+   "Sialinalijungle",
+   3134,
+   7,
+   "Loam"
+  ],
+  "419001": [
+   "Kandagarh",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418889": [
+   "Kankarajuri",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418923": [
+   "Sialjuri",
+   3133,
+   7,
+   "Loam"
+  ],
+  "418913": [
+   "Dahukbud",
+   3133,
+   7,
+   "Loam"
+  ],
+  "418921": [
+   "Amamunda",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419002": [
+   "Dhatukipali",
+   3134,
+   7,
+   "Loam"
+  ],
+  "418903": [
+   "Jampali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418930": [
+   "Naktamunda",
+   3133,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "418924": [
+   "Mahada",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418928": [
+   "Bausuni Bahal",
+   3133,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419025": [
+   "Kuhibahal",
+   3134,
+   7,
+   "Loam"
+  ],
+  "418890": [
+   "Chhanchani",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418868": [
+   "Dunguripali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418870": [
+   "Sadhapali",
+   3133,
+   7,
+   "Loam"
+  ],
+  "419077": [
+   "Gania",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419009": [
+   "Chanabeda",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "419023": [
+   "Kalsaipali",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418901": [
+   "Sukha",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418910": [
+   "Sunapali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418904": [
+   "Badnuapali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418916": [
+   "Kapasira",
+   3133,
+   7,
+   "Loam"
+  ],
+  "419018": [
+   "Kainshkanda",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "419013": [
+   "Kushdadar",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "419016": [
+   "Gidhmal",
+   3134,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "418926": [
+   "Chaukamal",
+   3133,
+   7,
+   "Loam"
+  ],
+  "418929": [
+   "Siali",
+   3133,
+   7,
+   "Loam"
+  ],
+  "418906": [
+   "Cherupali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418902": [
+   "Haldi",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419079": [
+   "Jashapur",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419078": [
+   "Bhimtikira",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419019": [
+   "Rangapur",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "419027": [
+   "Padhanpalijungle",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418905": [
+   "Kushamal",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418922": [
+   "Khurdiabahal",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419070": [
+   "Sanbhalupalijungle",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419026": [
+   "Padhanpali",
+   3134,
+   7,
+   "Loam"
+  ],
+  "419024": [
+   "Samarchipa",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418915": [
+   "Bhatbahali",
+   3133,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "418881": [
+   "Baidupali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418876": [
+   "Ainlasari",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418880": [
+   "Sahala",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418869": [
+   "Kudharikata",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419005": [
+   "Pandarapali",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418877": [
+   "Samaleichuan",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419007": [
+   "Sialinali",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "419003": [
+   "Baghahandi",
+   3134,
+   7,
+   "Loam"
+  ],
+  "418871": [
+   "Salepali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418867": [
+   "Chingerkata",
+   3133,
+   7,
+   "Loam"
+  ],
+  "419004": [
+   "Bairagimunda",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418873": [
+   "Pipilipali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419008": [
+   "Chandali",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418866": [
+   "Khuntpali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418925": [
+   "Mahadajangale",
+   3133,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "418879": [
+   "Gandapali",
+   3133,
+   7,
+   "Loam"
+  ],
+  "419066": [
+   "Ratnasinghasanpur",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419011": [
+   "Andharibanjijungle",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "419010": [
+   "Sulei",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "419075": [
+   "Kulthipalijungle",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419064": [
+   "Adakasa",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419014": [
+   "Brahmanipali Jungle",
+   3134,
+   7,
+   "Loam"
+  ],
+  "419074": [
+   "Adakasajungle",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419072": [
+   "Pujadungri",
+   3135,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419170": [
+   "Paruapali",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419572": [
+   "Majhi Fabsi",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419292": [
+   "Ballabhapali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419289": [
+   "Naikapali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419494": [
+   "Gariamunda",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419694": [
+   "Panimurajangle",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419702": [
+   "Bankeda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419701": [
+   "Maradu Guchha",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419733": [
+   "Bhurad",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419692": [
+   "Sanbhainro",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419697": [
+   "Budelmunda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419695": [
+   "Panimura",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419698": [
+   "Maraduguchhajangle",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419696": [
+   "Budelmundajangle",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419579": [
+   "Samiabhag",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419600": [
+   "Haladipali",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419587": [
+   "Baljuri",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419590": [
+   "Dahaja",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419596": [
+   "Janmura",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419594": [
+   "Pipilipali",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419588": [
+   "Sahajpita",
+   3139,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419585": [
+   "Baidyanath",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419584": [
+   "Dunguripali",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419567": [
+   "Gadia",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419601": [
+   "Dunguripali",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419574": [
+   "Sialjhuli",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419589": [
+   "Lakarma",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419668": [
+   "Satrupali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419693": [
+   "Kendumunda",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419669": [
+   "Pandkimal",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419670": [
+   "Baghiabahali",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419575": [
+   "Kharjhura Jungal",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419663": [
+   "Kankeda",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419593": [
+   "Singhari",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419586": [
+   "Rupali Or Chhepapali",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419582": [
+   "Eswaripali Khameswaripali",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419674": [
+   "Garamahul",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419662": [
+   "Arakhpadar",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419667": [
+   "Chirgunimuhan",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419671": [
+   "Katapali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419660": [
+   "Bandhapali",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419571": [
+   "Mahule",
+   3139,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419665": [
+   "Khaliapali",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419576": [
+   "Kharjhura",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419581": [
+   "Bagduli",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419629": [
+   "Mukundapur",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419583": [
+   "Narsing Garh",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419664": [
+   "Mahul Khunt",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419661": [
+   "Bahirkhaman",
+   3140,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419568": [
+   "Medinipali",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419598": [
+   "Baldapali",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419595": [
+   "Gatarkela",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419666": [
+   "Bijapadar",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419562": [
+   "Buromunda",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419597": [
+   "Kustapali",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419580": [
+   "Chhatapipal",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419577": [
+   "Baghapali",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419569": [
+   "Deuli",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419573": [
+   "Uparfabsi",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419672": [
+   "Garamahul Jangle",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419570": [
+   "Mahule Jungal",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419591": [
+   "Gandabahali",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419563": [
+   "Mallikmunda",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419564": [
+   "Sagarpali",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419537": [
+   "Gailberna",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419380": [
+   "Bhajabalpur",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419352": [
+   "Daldaba",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419099": [
+   "Bausuni",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419357": [
+   "Sansanpur",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419220": [
+   "Dasarajpurpandiafal",
+   3136,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419106": [
+   "Sakma",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419207": [
+   "Dhuldhula",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419539": [
+   "Bisimunda",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419210": [
+   "Khaliapali",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419103": [
+   "Fapasi",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419206": [
+   "Lambakani",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419358": [
+   "Gopalpur",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419104": [
+   "Bausuni Jungle",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419223": [
+   "Gaurgaon",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419208": [
+   "Jampali",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419548": [
+   "Babupali",
+   3139,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419221": [
+   "Amurda",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419354": [
+   "Bidurpali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419369": [
+   "Hikudi",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419376": [
+   "Sripura",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419534": [
+   "Mayurudan",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419348": [
+   "Sanankaria",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419225": [
+   "Pipalikani",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419560": [
+   "Haradkhol",
+   3139,
+   7,
+   "Loam"
+  ],
+  "418982": [
+   "Govindapur",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419375": [
+   "Sauripali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419215": [
+   "Manamal",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419224": [
+   "Udepadar",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419211": [
+   "Kukia",
+   3136,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419205": [
+   "Jagannathpali",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419558": [
+   "Majhimunda",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419550": [
+   "Baiganjuri",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419383": [
+   "Hingama",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419530": [
+   "Nandanmal",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419553": [
+   "Badajhinki",
+   3139,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419557": [
+   "Arjunpur",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419366": [
+   "Khajariapali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419528": [
+   "Dhaurakhaman",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419531": [
+   "Madhupur",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419532": [
+   "Sargunamunda",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419533": [
+   "Nagapali Or Thapapali",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419368": [
+   "Nuagaon",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419349": [
+   "Badankaria",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419592": [
+   "Dhubamunda",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419552": [
+   "Sanjhinki",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419540": [
+   "Khairtikira",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419108": [
+   "Padhanpali",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419218": [
+   "Nimna",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419365": [
+   "Badhila",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419371": [
+   "Marichapur",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419566": [
+   "Kainful",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419109": [
+   "Mahadebpali",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419102": [
+   "Ghantopali",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419213": [
+   "Panchamahala",
+   3136,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419538": [
+   "Jaganathpali",
+   3139,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419559": [
+   "Sanfabsi",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419355": [
+   "Naikapada",
+   3137,
+   7,
+   "Loam"
+  ],
+  "250550": [
+   "Sonapur M",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419527": [
+   "Rugudipali",
+   3139,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419529": [
+   "Jharpada",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419346": [
+   "Kesalpura",
+   3137,
+   7,
+   "Loam"
+  ],
+  "418946": [
+   "Khaliapali",
+   3133,
+   7,
+   "Loam"
+  ],
+  "419374": [
+   "Raksa",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419377": [
+   "Bijepur",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419545": [
+   "Pratappur",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419551": [
+   "Dhubabahali",
+   3139,
+   7,
+   "Loam"
+  ],
+  "418981": [
+   "Raipali",
+   3133,
+   7,
+   "Loam"
+  ],
+  "419536": [
+   "Kendumunda",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419105": [
+   "Bhikabahali",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419115": [
+   "Pandakital",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419214": [
+   "Barigaon",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419114": [
+   "Ghodadhar",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "418945": [
+   "Kudopali",
+   3133,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419098": [
+   "Tundupali",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419547": [
+   "Kabattalai",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419382": [
+   "Lehedi",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419535": [
+   "Karlakhaman",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419555": [
+   "Kalapathar",
+   3139,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419549": [
+   "Pansiali",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419556": [
+   "Kulipali",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419565": [
+   "Kasurpali",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419561": [
+   "Ainlapali",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419381": [
+   "Patrapali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419543": [
+   "Jampali",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "418980": [
+   "Pandakital",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419378": [
+   "Mundoghat",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419544": [
+   "Banbija Bankbija",
+   3139,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419525": [
+   "Kirtipur",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419217": [
+   "Telenda",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419219": [
+   "Dasarajpurpandafal",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "418947": [
+   "Banktentuli",
+   3133,
+   7,
+   "Loam"
+  ],
+  "419364": [
+   "Bejpali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419113": [
+   "Sansamura",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419110": [
+   "Gariapali",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419356": [
+   "Bisipara",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419203": [
+   "Didimal",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419202": [
+   "Pipalkuda",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419209": [
+   "Maraloi",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419201": [
+   "Badmal",
+   3136,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "418948": [
+   "Kudopalijungle",
+   3133,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419554": [
+   "Kalapathar Jungal",
+   3139,
+   7,
+   "Loam"
+  ],
+  "418983": [
+   "Govindapurjungle",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419526": [
+   "Kirtipur Jangle",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419107": [
+   "Nagapali",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419541": [
+   "Sargunamunda Jungle",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419546": [
+   "Saradhapali",
+   3139,
+   7,
+   "Loam"
+  ],
+  "419379": [
+   "Lankabahal",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419350": [
+   "Sarkaridadar",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419353": [
+   "Daldaba Jungle",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419373": [
+   "Dudupali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419370": [
+   "Jogi Gumpha",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419362": [
+   "Gobindapali",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419361": [
+   "Bhejimal",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419367": [
+   "Halhalpur",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419212": [
+   "Balbasapur",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419222": [
+   "Baidapali",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419094": [
+   "Sahaj Bahal",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419542": [
+   "Nandanmal Jungle",
+   3139,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419602": [
+   "Mahanadi Kha",
+   3139,
+   4,
+   "Clay Loam"
+  ],
+  "419347": [
+   "Kesalpurajungle",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419360": [
+   "Kapileswarbhumi",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419359": [
+   "Achyutpali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419372": [
+   "Baghalpur",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419363": [
+   "Palash",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419521": [
+   "Kudapadajungle",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419111": [
+   "Kartang",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419204": [
+   "Kapasira",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419112": [
+   "Anganadi",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419216": [
+   "Mahanadi Ka",
+   3136,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419157": [
+   "Matupali",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419174": [
+   "Hatimunda",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419052": [
+   "Ganeshpur",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419191": [
+   "Sindiriabahal",
+   3136,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419083": [
+   "Banjipali",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419087": [
+   "Silati Jungle",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419293": [
+   "Harinapali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419154": [
+   "Jaunrabhounra",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419186": [
+   "Pandakital",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419179": [
+   "Kutmenda",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419184": [
+   "Jharabahali",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419162": [
+   "Badmal",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419058": [
+   "Gulunda",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419171": [
+   "Meghanad",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419060": [
+   "Piteipali",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419081": [
+   "Meghala",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419097": [
+   "Seledi",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419195": [
+   "Gandabahal",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419193": [
+   "Lastala",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419185": [
+   "Jharabahalijungle",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419180": [
+   "Kutmendajungle",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419164": [
+   "Badmaljungle",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419188": [
+   "Pipalkata",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419089": [
+   "Charda",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419063": [
+   "Chulimal",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419189": [
+   "Pipalkatajungle",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419053": [
+   "Bisalpali",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419198": [
+   "Matikhai",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419101": [
+   "Katapali",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419100": [
+   "Kaintara",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419192": [
+   "Barpadar",
+   3136,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419152": [
+   "Radhanagar",
+   3136,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419194": [
+   "Maulimal",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419183": [
+   "Mankadabahal",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419190": [
+   "Nakdein",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419196": [
+   "Puturupali",
+   3136,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419519": [
+   "Mundidamak",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419199": [
+   "Gailmura",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419095": [
+   "Gadgad Bahal",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419091": [
+   "Sankara",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419059": [
+   "Gajabandha",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419200": [
+   "Badali",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419168": [
+   "Dhelei",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419197": [
+   "Ulunda",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419092": [
+   "Padhipali",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419150": [
+   "Hatipahul",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419158": [
+   "Sahanidiha",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419287": [
+   "Ranipali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419151": [
+   "Ganjachhapper",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419062": [
+   "Bhandar",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419056": [
+   "Antarda",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419088": [
+   "Silati",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419187": [
+   "Khemaloi",
+   3136,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419167": [
+   "Dipapali",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419093": [
+   "Phul Muthi",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419085": [
+   "Kaudiamunda",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419057": [
+   "Dharapali",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419182": [
+   "Kalipur",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419181": [
+   "Patrapali",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419161": [
+   "Chadeipank",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419159": [
+   "Manpur",
+   3136,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419061": [
+   "Mahulpali",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419065": [
+   "Kadalipali",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419096": [
+   "Bhramarpalijungle",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419148": [
+   "Chadeigudi",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419054": [
+   "Kadalipali",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "250551": [
+   "Binika Nac",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419169": [
+   "Meghanadjungle",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419153": [
+   "Ganjachhapperjungle",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419067": [
+   "Papi",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419160": [
+   "Chadeipankjungle",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419090": [
+   "Charda Jungle",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419084": [
+   "Bagbahali Jungle",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419177": [
+   "Singhapali",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419178": [
+   "Singhapalijungle",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419175": [
+   "Mentakani",
+   3136,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419163": [
+   "Ainlachhat",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419165": [
+   "Bagharmunda",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419166": [
+   "Daltangar",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419294": [
+   "Krushnanagar",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419290": [
+   "Baghapali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419291": [
+   "Jagannathpali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419351": [
+   "Anantapali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419173": [
+   "Dhourabhuin",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419086": [
+   "Bagbahali",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419055": [
+   "Antarda Jungle",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419176": [
+   "Rengali",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419172": [
+   "Tentulikhol",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419464": [
+   "Yubaranisitapur",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419309": [
+   "Barajhula",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419418": [
+   "Bhaliapadar",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419315": [
+   "Mrusundhi",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419472": [
+   "Buthipadar",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419325": [
+   "Mendamal",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419326": [
+   "Jambhalipali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419327": [
+   "Jayapur",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419516": [
+   "Kudapada",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419330": [
+   "Babupali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419386": [
+   "Paikpali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419416": [
+   "Sandha",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419424": [
+   "Phulchara",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419421": [
+   "Deuli",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419398": [
+   "Rathapur",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419413": [
+   "Ranapali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419511": [
+   "Bad Khamar",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419518": [
+   "Yudhistirpur",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419513": [
+   "Godhaneswar",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419425": [
+   "Bagbar",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419414": [
+   "Champamal",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419512": [
+   "Ektal",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419393": [
+   "Ghamadiapali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419343": [
+   "Gunjipali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419396": [
+   "Bhudobar",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419410": [
+   "Goudkela",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419388": [
+   "Mahada",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419337": [
+   "Khirpur",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419465": [
+   "Barghat",
+   3138,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419318": [
+   "Duhulpali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419471": [
+   "Rambhipali",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419522": [
+   "Jatesingha",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419411": [
+   "Ufula",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419385": [
+   "Brahmanipali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419321": [
+   "Hilung",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419480": [
+   "Balarampur",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419384": [
+   "Gurpanga",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419504": [
+   "Kamira",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419338": [
+   "Saharapali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419395": [
+   "Kumarkeli",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419515": [
+   "Anandapur",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419442": [
+   "Sankirasira Jungle",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419506": [
+   "Nuapada",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419390": [
+   "Paligaon",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419479": [
+   "Bikalpur",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419387": [
+   "Parbatipur",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419407": [
+   "Kamalpur",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419389": [
+   "Gumurdula",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419466": [
+   "Adal",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419403": [
+   "Kanpur",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419345": [
+   "Limbapali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419404": [
+   "Dantapali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419446": [
+   "Khanahata Jungle",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419300": [
+   "Birsinghapur",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419342": [
+   "Jamgaon",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419481": [
+   "Lakhani",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419408": [
+   "Khambeswaripali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419400": [
+   "Bhangamunda",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419320": [
+   "Manikpur",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419317": [
+   "Tentulimahada",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419392": [
+   "Tikuda",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419412": [
+   "Laturpet",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419401": [
+   "Yamapali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419332": [
+   "Bagchhera",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419503": [
+   "Amsarbhata",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419419": [
+   "Deulmunda",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419415": [
+   "Krushnapali",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419508": [
+   "Kelgaon",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419514": [
+   "Dunguri",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419316": [
+   "Madhupur",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419523": [
+   "Keutipali",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419422": [
+   "Kumursingha",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419409": [
+   "Buroghat",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419402": [
+   "Dahanipali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419304": [
+   "Puleswar",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419302": [
+   "Bamaraj",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419399": [
+   "Pandiapali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419328": [
+   "Padhanpali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419423": [
+   "Nuagad",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419405": [
+   "Naikpali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419397": [
+   "Apatnuagarh",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419476": [
+   "Rajanpali",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419406": [
+   "Tithipali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419417": [
+   "Jharkumunda",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419517": [
+   "Basudevpur",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419394": [
+   "Gandpali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419509": [
+   "Govindapur",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419312": [
+   "Gopapali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419324": [
+   "Amulyamaniranipur",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419333": [
+   "Kairajhuli",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419329": [
+   "Nuapali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419462": [
+   "Bankia",
+   3138,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419510": [
+   "Chandali",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419331": [
+   "Kalapathar",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419335": [
+   "Kudapada",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419334": [
+   "Jaloi",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419313": [
+   "Bhutiapali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419339": [
+   "Radhiapali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419470": [
+   "Gudipali",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419340": [
+   "Gagankhalai",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419341": [
+   "Ghikundi",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419310": [
+   "Ludumunda",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419463": [
+   "Chauka",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419474": [
+   "Sunariberni",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419475": [
+   "Barapadar",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419311": [
+   "Karadapal",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419391": [
+   "Khapuripur",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419301": [
+   "Joyapur Jungle",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419299": [
+   "Badpur",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419322": [
+   "Patharghat",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419420": [
+   "Lumurjena",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419323": [
+   "Baghamari",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419319": [
+   "Akhabhanganal",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419478": [
+   "Helamura",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419344": [
+   "Jaloijungle",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419520": [
+   "Hariharjor",
+   3138,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419469": [
+   "Chandipur",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419336": [
+   "Baidhapali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419473": [
+   "Pandua",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419248": [
+   "Goudgad",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419298": [
+   "Kadodar",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419285": [
+   "Redam",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419270": [
+   "Umadeipali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419265": [
+   "Khairmal",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419453": [
+   "Burbuda",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419258": [
+   "Badmal",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419249": [
+   "Malidadar",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419460": [
+   "Mendilipali",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419277": [
+   "Goghat",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419434": [
+   "Sankirasira",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419254": [
+   "Bahal Padar",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419454": [
+   "Bisalpali",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419461": [
+   "Purastampoli",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419433": [
+   "Badkirasira",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419428": [
+   "Bhaludunguri",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419455": [
+   "Chingranali",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419458": [
+   "Bhaludungrijungle",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419235": [
+   "Luhakhandi",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419278": [
+   "Kunjapali",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419269": [
+   "Bairagipali",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419236": [
+   "Mahukhandi",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419303": [
+   "Rugudipali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419467": [
+   "Rijumunda",
+   3138,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419250": [
+   "Kuhidadar",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419252": [
+   "Dadarpali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419234": [
+   "Sagajuri",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419266": [
+   "Baghartaila",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419459": [
+   "Luturpanka",
+   3138,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419264": [
+   "Khairmal Jungle",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419306": [
+   "Kadalipali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419297": [
+   "Gailgudi",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419441": [
+   "Yubarajpur",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419284": [
+   "Golabandha",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419308": [
+   "Telipali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419262": [
+   "Hirapali",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419477": [
+   "Janakpur",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419314": [
+   "Ghantopali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419276": [
+   "Baraghatdadar",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419282": [
+   "Kotsamalijungle",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419283": [
+   "Kotsamali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419305": [
+   "Balipali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419280": [
+   "Khuntulapali Jungle",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419260": [
+   "Jatiapali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419456": [
+   "Bardakata",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419267": [
+   "Achandbaghartaila",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419295": [
+   "Gargadabahal",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419263": [
+   "Amatpali",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419261": [
+   "Kenjhiriapali",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419457": [
+   "Ghichapali",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419257": [
+   "Kenjheriapali Jungle",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419281": [
+   "Khuntulapali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419241": [
+   "Surdhapali Jungle",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419431": [
+   "Sahajlatha",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419444": [
+   "Tulasipur",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419445": [
+   "Chupukadadar",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419432": [
+   "Nuapali",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419443": [
+   "Badkirasirijungle",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419448": [
+   "Kusadadar",
+   3138,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419451": [
+   "Patrapali",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419426": [
+   "Gudguda",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419427": [
+   "Gudgudajungle",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419450": [
+   "Hatilimunda",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419429": [
+   "Kundapal",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419430": [
+   "Puipani",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419440": [
+   "Tileimal",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419296": [
+   "Kulbasa",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419288": [
+   "Kudapada",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419271": [
+   "Litipali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419272": [
+   "Lttipali Jungle",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419273": [
+   "Bagabahali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419226": [
+   "Khajuriapali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419228": [
+   "Sunapali",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419229": [
+   "Podamal",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419240": [
+   "Kendupali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419259": [
+   "Kesalgaon",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419255": [
+   "Amarpali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419253": [
+   "Badmal Jungle",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419239": [
+   "Brahmanipali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419238": [
+   "Masinapalijungle",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419246": [
+   "Gania Jungle",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419244": [
+   "Durjantaila",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419237": [
+   "Masinapali",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419251": [
+   "Dadarpalijungle",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419307": [
+   "Telipalijungle",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419268": [
+   "Baghartaila Jungle",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419449": [
+   "Burbuda Jungle",
+   3138,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419447": [
+   "Kusadadarjungle",
+   3138,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419452": [
+   "Asurnali",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419279": [
+   "Dianapali",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419274": [
+   "Bairagipali Jungle",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419275": [
+   "Bagabahali Jungle",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419233": [
+   "Rijhaidadarjungle",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419247": [
+   "Goudgadjungle",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419242": [
+   "Surdhapali",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419468": [
+   "Khandahata",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419524": [
+   "Subalaya CT",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419488": [
+   "Bhatapadar",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419501": [
+   "Pitamahul",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419486": [
+   "Sanbardakata",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419487": [
+   "Rajbahadurpali",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419502": [
+   "Tebhapadar",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419485": [
+   "Sangrampur",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419489": [
+   "Kasalpur",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419483": [
+   "Sergeda",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419482": [
+   "Madhupur",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419484": [
+   "Durgadebipali",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419491": [
+   "Pitamahul Jungle",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419500": [
+   "Durdura",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419497": [
+   "Duleswar",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419496": [
+   "Kunjamahul",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419498": [
+   "Malidadar",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419499": [
+   "Duleswar Jungle",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419495": [
+   "Thakurpur",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419492": [
+   "Thakurpurjungle",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419490": [
+   "Rathartaila",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419507": [
+   "Mahanadi Ga",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419436": [
+   "Suliadadar",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419439": [
+   "Tamkiadadar",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419437": [
+   "Butukhaman",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419435": [
+   "Tileimaljungle",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "419438": [
+   "Budelbahali",
+   3138,
+   4,
+   "Clay Loam"
+  ],
+  "418995": [
+   "Mayabarha",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418999": [
+   "Mahulpali",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418872": [
+   "Langalkata",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418990": [
+   "Tangarkarle",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "419000": [
+   "Bankipali",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418860": [
+   "Rabangudajungle",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418855": [
+   "Dunguripali",
+   3133,
+   7,
+   "Loam"
+  ],
+  "418852": [
+   "Lingmarni",
+   3133,
+   7,
+   "Loam"
+  ],
+  "418987": [
+   "Sarasmal",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418986": [
+   "Sahajbahal",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418992": [
+   "Amamunda",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418991": [
+   "Badkarle",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418865": [
+   "Chindajuri",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418997": [
+   "Balenpali",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418854": [
+   "Beheramal",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418863": [
+   "Titerkund",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418864": [
+   "Sannuapali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418858": [
+   "Gulihapadar",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418988": [
+   "Rampur",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "419031": [
+   "Asurgarh",
+   3135,
+   7,
+   "Loam"
+  ],
+  "418993": [
+   "Pandakital",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "419029": [
+   "Ainlamunda",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419030": [
+   "Teleimal",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "418985": [
+   "Dhanbasa",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418989": [
+   "Katapali",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418862": [
+   "Patharkhandi",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418861": [
+   "Antapali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419069": [
+   "Kamira",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "418853": [
+   "Bahubasa",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418857": [
+   "Chhitkelbandhali",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419028": [
+   "Bhabanipali",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "418994": [
+   "Naikenpali",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "419032": [
+   "Talmunda",
+   3135,
+   7,
+   "Loam"
+  ],
+  "418998": [
+   "Jibandadar",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418996": [
+   "Khaliapali",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418856": [
+   "Ludukibeda",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "418984": [
+   "Badbhalupali",
+   3134,
+   4,
+   "Clay Loam"
+  ],
+  "418859": [
+   "Rabanguda",
+   3133,
+   4,
+   "Clay Loam"
+  ],
+  "419121": [
+   "Beheramaljungle",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419040": [
+   "Jiranadi",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419035": [
+   "Khairmal",
+   3135,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419128": [
+   "Kamalkata",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419116": [
+   "Dhanbahalijungle",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419049": [
+   "Manigaon",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419130": [
+   "Hud",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419046": [
+   "Sarangapali",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419149": [
+   "Pardiapali",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419068": [
+   "Singhijuba",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419122": [
+   "Dejharan",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419037": [
+   "Babupali",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419038": [
+   "Khaliapali",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419155": [
+   "Dakhinipalijungle",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419051": [
+   "Sindurpur",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419156": [
+   "Dakhinipali",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419139": [
+   "Brahmanipali",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419044": [
+   "Sarguna",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419125": [
+   "Patrapali",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419132": [
+   "Sindhol",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419034": [
+   "Palsapali",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419131": [
+   "Mundomahul",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419041": [
+   "Bankigiridi",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419123": [
+   "Patrapalijungle",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419118": [
+   "Kapasira",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419042": [
+   "Kukudajholi",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419140": [
+   "Dabapali",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419033": [
+   "Bagdia",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419050": [
+   "Cherupali",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419047": [
+   "Akhidadar",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419043": [
+   "Jampali",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419045": [
+   "Balaranga",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419048": [
+   "Arigaon",
+   3135,
+   4,
+   "Clay Loam"
+  ],
+  "419036": [
+   "Dendupadar",
+   3135,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419135": [
+   "Lamtul",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419137": [
+   "Gindilamal",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419138": [
+   "Dengurdar",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419119": [
+   "Beheramal",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419133": [
+   "Shindhol Jungle",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419134": [
+   "Lamtul Jungle",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419136": [
+   "Kusumpal",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419127": [
+   "Budhijharan",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419129": [
+   "Keutipali",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419117": [
+   "Dhanbahali",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419120": [
+   "Kutapali",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419141": [
+   "Sarmundapal",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419039": [
+   "Hutuma",
+   3135,
+   7,
+   "Loam"
+  ],
+  "419145": [
+   "Sulia",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419146": [
+   "Suliajungle",
+   3136,
+   7,
+   "Loam"
+  ],
+  "419142": [
+   "Kharapura",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419144": [
+   "Krushnapurjungle",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419143": [
+   "Kharapurajungle",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419231": [
+   "Dhauradadar Jungle",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419230": [
+   "Dhauradadar",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419788": [
+   "Arda Jungle",
+   3140,
+   7,
+   "Loam"
+  ],
+  "419624": [
+   "Jamdadar",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "419605": [
+   "Fatamundajangle",
+   3140,
+   4,
+   "Clay Loam"
+  ],
+  "418975": [
+   "Pandkital Jungle",
+   3133,
+   7,
+   "Loam"
+  ],
+  "419505": [
+   "Surubalijore",
+   3138,
+   9,
+   "Sandy Loam"
+  ],
+  "419286": [
+   "Redam Jungle",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419227": [
+   "Sarasdadar",
+   3137,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "419256": [
+   "Balimal",
+   3137,
+   7,
+   "Loam"
+  ],
+  "419245": [
+   "Gania",
+   3137,
+   4,
+   "Clay Loam"
+  ],
+  "419493": [
+   "Gariamundajungle",
+   3138,
+   7,
+   "Loam"
+  ],
+  "419147": [
+   "Guja",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419124": [
+   "Salepali",
+   3136,
+   4,
+   "Clay Loam"
+  ],
+  "419126": [
+   "Budhijharanjungle",
+   3136,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 1001,
+ "village_count_sampled": 995
+}

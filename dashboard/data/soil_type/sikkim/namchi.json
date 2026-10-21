@@ -1,0 +1,949 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Sikkim",
+  "district": "Namchi",
+  "district_lgd": 227,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "full"
+ },
+ "district": {
+  "dominant_class_id": 6,
+  "dominant_class": "Sandy Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 1870,
+   "Loam": 11155,
+   "Sandy Loam": 241
+  },
+  "n_pixels": 13267
+ },
+ "villages": {
+  "999999": [
+   "R F",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261162": [
+   "Passi",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261125": [
+   "Sorok",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261124": [
+   "Gom",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261123": [
+   "Dorop",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261130": [
+   "Mikkhola",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261136": [
+   "Rong",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261131": [
+   "Manpur",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261132": [
+   "Kitam",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261133": [
+   "Kartikey",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261145": [
+   "Lungchok",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261134": [
+   "Sumbuk",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261146": [
+   "Kamarey",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261135": [
+   "Suntaley",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261147": [
+   "Panchgharey",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261148": [
+   "Turuk",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261137": [
+   "Pallum",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261156": [
+   "Sadam",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261155": [
+   "Sukrabarey",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261153": [
+   "Paiyong",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261154": [
+   "Suntoley",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261149": [
+   "Ramabung",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261126": [
+   "Shyampani",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261150": [
+   "Kerabari",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261151": [
+   "Melli",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261163": [
+   "Kateng Bokrang",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261193": [
+   "Pamphok",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261152": [
+   "Mellidara",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261223": [
+   "Sanganath",
+   1552,
+   4,
+   "Clay Loam"
+  ],
+  "261118": [
+   "Poklok",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261121": [
+   "Salghari",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261120": [
+   "Chisopani",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261119": [
+   "Tinik",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261127": [
+   "Sangbung",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261122": [
+   "Dhargaon",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261128": [
+   "Assangthang",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261158": [
+   "Rabikhola",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261172": [
+   "Perbing",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261138": [
+   "Singtam",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261115": [
+   "Kamrang",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261107": [
+   "Wok",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261144": [
+   "Maniram",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261129": [
+   "Kopchey",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261117": [
+   "Denchung",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261116": [
+   "Tinzeer",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261143": [
+   "Phalidara",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261142": [
+   "Salleybong",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261140": [
+   "Boomtar",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261110": [
+   "Jaubari",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261139": [
+   "Bul",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261157": [
+   "Rabitar",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261111": [
+   "Tingrithang",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261141": [
+   "Singhithang",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261224": [
+   "Tinkitam",
+   1552,
+   4,
+   "Clay Loam"
+  ],
+  "261247": [
+   "Deu",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261174": [
+   "Nizrameng",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261114": [
+   "Pakjer",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261106": [
+   "Chumlok",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261105": [
+   "Omchu",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261113": [
+   "Pabong Mamley",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261108": [
+   "Chemchey",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261109": [
+   "Damthang",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261112": [
+   "Mamley",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261183": [
+   "Temi",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261182": [
+   "Temi Tea Estate",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261181": [
+   "Aifaltar",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261208": [
+   "Lingding",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261215": [
+   "Kewzing",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261220": [
+   "Lamting",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261219": [
+   "Hingdam",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261222": [
+   "Tingmo",
+   1552,
+   4,
+   "Clay Loam"
+  ],
+  "261216": [
+   "Dalep",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261217": [
+   "Lingzo",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261207": [
+   "Namlung",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261218": [
+   "Legship",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261244": [
+   "Satam",
+   1552,
+   4,
+   "Clay Loam"
+  ],
+  "261212": [
+   "Jarrong",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261206": [
+   "Polok",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261209": [
+   "Ralong",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261211": [
+   "Deythang",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261213": [
+   "Barfung",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261243": [
+   "Yangang",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261225": [
+   "Rayong",
+   1552,
+   4,
+   "Clay Loam"
+  ],
+  "261242": [
+   "Rangang",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261240": [
+   "Namphok",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261241": [
+   "Gagyong",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261226": [
+   "Sangmoo",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261245": [
+   "Namprik",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261221": [
+   "Mangbrue",
+   1552,
+   4,
+   "Clay Loam"
+  ],
+  "261246": [
+   "Ben",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261227": [
+   "Rabong",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261184": [
+   "Tarku",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261161": [
+   "Rateypani",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261214": [
+   "Bakhim",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261210": [
+   "Ralong Monastery",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261248": [
+   "Lingmo Forest Block",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261159": [
+   "Tangzi",
+   1551,
+   7,
+   "Loam"
+  ],
+  "801420": [
+   "Jorethang",
+   1551,
+   7,
+   "Loam"
+  ],
+  "801419": [
+   "Namchi M Cl",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261170": [
+   "Phong",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261171": [
+   "Chuba",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261197": [
+   "Namchi Forest Block",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261173": [
+   "Rameng",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261175": [
+   "Barul",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261176": [
+   "Barnyak",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261177": [
+   "Thangsing",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261180": [
+   "Gangchung",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261187": [
+   "Doring",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261164": [
+   "Pakytam",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261160": [
+   "Bikmat",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261165": [
+   "Nalam Kolbung",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261194": [
+   "Donak",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261192": [
+   "Khanamtek",
+   1551,
+   4,
+   "Clay Loam"
+  ],
+  "261191": [
+   "Turung",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261167": [
+   "Maneydara",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261166": [
+   "Nagi",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261179": [
+   "Tokdey",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261186": [
+   "Pabong Gangchung",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261190": [
+   "Tsalumthang",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261189": [
+   "Namphing",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261188": [
+   "Rashyap",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261178": [
+   "Tokal",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261185": [
+   "Tanak",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261195": [
+   "Mamring",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261168": [
+   "Kabrey",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261169": [
+   "Karek",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261196": [
+   "Temi Forest Block",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261233": [
+   "Lingmo",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261236": [
+   "Tokday Lingmo",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261235": [
+   "Kolthang",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261237": [
+   "Mangzing",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261238": [
+   "Neh Brum",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261239": [
+   "Sripatam",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261205": [
+   "Borong",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261204": [
+   "Phamthang",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261228": [
+   "Sokpay",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261203": [
+   "Sada",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261252": [
+   "Kewzing Forest Block",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261232": [
+   "Kau",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261229": [
+   "Lingi",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261230": [
+   "Lower Paiyong",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261231": [
+   "Upper Paiyong",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261234": [
+   "Pepthang",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261199": [
+   "Jorethang Forest Block",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261198": [
+   "Majhitar Forest Block",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261200": [
+   "Melli Forest Block",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261201": [
+   "Namthang Forest Block",
+   1551,
+   7,
+   "Loam"
+  ],
+  "261250": [
+   "Ralang Forest Block",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261249": [
+   "Yangyang Forest Block",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261251": [
+   "Rabongla Forest Block",
+   1552,
+   7,
+   "Loam"
+  ],
+  "261202": [
+   "Mamring Forest Block",
+   1551,
+   7,
+   "Loam"
+  ]
+ },
+ "village_count_total": 159,
+ "village_count_sampled": 159
+}

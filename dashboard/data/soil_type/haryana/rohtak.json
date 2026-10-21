@@ -1,0 +1,932 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Haryana",
+  "district": "Rohtak",
+  "district_lgd": 73,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "full"
+ },
+ "district": {
+  "dominant_class_id": 6,
+  "dominant_class": "Sandy Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 2499,
+   "Sandy Clay Loam": 276,
+   "Loam": 27810,
+   "Sandy Loam": 6
+  },
+  "n_pixels": 30592
+ },
+ "villages": {
+  "61594": [
+   "Jindran Kalan",
+   405,
+   7,
+   "Loam"
+  ],
+  "800413": [
+   "Meham",
+   404,
+   7,
+   "Loam"
+  ],
+  "61585": [
+   "Muradpur Tekna",
+   404,
+   7,
+   "Loam"
+  ],
+  "61588": [
+   "Mokhra Kheri",
+   404,
+   7,
+   "Loam"
+  ],
+  "61625": [
+   "Dobh",
+   405,
+   7,
+   "Loam"
+  ],
+  "61598": [
+   "Maroudi Rangran",
+   405,
+   7,
+   "Loam"
+  ],
+  "61604": [
+   "Anwal",
+   405,
+   7,
+   "Loam"
+  ],
+  "61590": [
+   "Saimpal",
+   405,
+   7,
+   "Loam"
+  ],
+  "61595": [
+   "Lahli",
+   405,
+   7,
+   "Loam"
+  ],
+  "61597": [
+   "Baniyani",
+   405,
+   7,
+   "Loam"
+  ],
+  "61599": [
+   "Maroudi Jatan",
+   405,
+   7,
+   "Loam"
+  ],
+  "61603": [
+   "Patwapur",
+   405,
+   7,
+   "Loam"
+  ],
+  "61591": [
+   "Kherari",
+   405,
+   7,
+   "Loam"
+  ],
+  "61602": [
+   "Ballab",
+   405,
+   7,
+   "Loam"
+  ],
+  "61613": [
+   "Taimurpur",
+   405,
+   7,
+   "Loam"
+  ],
+  "61612": [
+   "Garhi Ballab",
+   405,
+   7,
+   "Loam"
+  ],
+  "61606": [
+   "Gudhan",
+   405,
+   7,
+   "Loam"
+  ],
+  "61616": [
+   "Matana",
+   405,
+   7,
+   "Loam"
+  ],
+  "61614": [
+   "Sundana",
+   405,
+   7,
+   "Loam"
+  ],
+  "61605": [
+   "Nigana",
+   405,
+   7,
+   "Loam"
+  ],
+  "61611": [
+   "Kahnaur",
+   405,
+   4,
+   "Clay Loam"
+  ],
+  "61607": [
+   "Katesra",
+   405,
+   7,
+   "Loam"
+  ],
+  "61615": [
+   "Masudpur",
+   405,
+   7,
+   "Loam"
+  ],
+  "61610": [
+   "Sanga Hera",
+   405,
+   4,
+   "Clay Loam"
+  ],
+  "61609": [
+   "Pilana",
+   405,
+   7,
+   "Loam"
+  ],
+  "61593": [
+   "Kalanaur Kalan Part",
+   405,
+   4,
+   "Clay Loam"
+  ],
+  "61592": [
+   "Kalanaur Khurd Part",
+   405,
+   7,
+   "Loam"
+  ],
+  "61608": [
+   "Manjha",
+   405,
+   7,
+   "Loam"
+  ],
+  "61565": [
+   "Chandi",
+   404,
+   7,
+   "Loam"
+  ],
+  "61579": [
+   "Bharan",
+   404,
+   7,
+   "Loam"
+  ],
+  "61582": [
+   "Nidana",
+   404,
+   7,
+   "Loam"
+  ],
+  "61560": [
+   "Farmana Khas",
+   404,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "61558": [
+   "Seman",
+   404,
+   7,
+   "Loam"
+  ],
+  "61559": [
+   "Bedwa",
+   404,
+   7,
+   "Loam"
+  ],
+  "61567": [
+   "Bainsi",
+   404,
+   7,
+   "Loam"
+  ],
+  "61563": [
+   "Kharak Jatan",
+   404,
+   7,
+   "Loam"
+  ],
+  "61562": [
+   "Gugaheri",
+   404,
+   7,
+   "Loam"
+  ],
+  "61561": [
+   "Farmana Badshahpur",
+   404,
+   7,
+   "Loam"
+  ],
+  "61564": [
+   "Lakhan Majra",
+   404,
+   7,
+   "Loam"
+  ],
+  "61569": [
+   "Bhaini Chanderpal",
+   404,
+   7,
+   "Loam"
+  ],
+  "61570": [
+   "Bhaini Surjan",
+   404,
+   7,
+   "Loam"
+  ],
+  "61568": [
+   "Nindana",
+   404,
+   7,
+   "Loam"
+  ],
+  "61566": [
+   "Kherainti",
+   404,
+   7,
+   "Loam"
+  ],
+  "61571": [
+   "Bhaini Maharajpur",
+   404,
+   7,
+   "Loam"
+  ],
+  "61575": [
+   "Kheri Maham",
+   404,
+   7,
+   "Loam"
+  ],
+  "61574": [
+   "Maham Rural Part",
+   404,
+   7,
+   "Loam"
+  ],
+  "61584": [
+   "Madina Kaursan",
+   404,
+   7,
+   "Loam"
+  ],
+  "61586": [
+   "Mokhra Khas",
+   404,
+   7,
+   "Loam"
+  ],
+  "61572": [
+   "Bhaini Bharon",
+   404,
+   7,
+   "Loam"
+  ],
+  "61581": [
+   "Gorawar",
+   404,
+   7,
+   "Loam"
+  ],
+  "61580": [
+   "Ajaib",
+   404,
+   4,
+   "Clay Loam"
+  ],
+  "61576": [
+   "Shekhupur Titri",
+   404,
+   7,
+   "Loam"
+  ],
+  "61577": [
+   "Bahlba",
+   404,
+   7,
+   "Loam"
+  ],
+  "61583": [
+   "Madina Gindhran",
+   404,
+   7,
+   "Loam"
+  ],
+  "61573": [
+   "Sisar Khas",
+   404,
+   7,
+   "Loam"
+  ],
+  "61578": [
+   "Kharkhra",
+   404,
+   7,
+   "Loam"
+  ],
+  "61643": [
+   "Chiri",
+   405,
+   7,
+   "Loam"
+  ],
+  "61644": [
+   "Nandal",
+   405,
+   4,
+   "Clay Loam"
+  ],
+  "61642": [
+   "Garauthi",
+   405,
+   7,
+   "Loam"
+  ],
+  "61638": [
+   "Bhagotipur",
+   405,
+   7,
+   "Loam"
+  ],
+  "61637": [
+   "Samar Gopalpur",
+   405,
+   7,
+   "Loam"
+  ],
+  "61635": [
+   "Bahu Akberpur",
+   405,
+   4,
+   "Clay Loam"
+  ],
+  "61636": [
+   "Singhpura",
+   405,
+   7,
+   "Loam"
+  ],
+  "61634": [
+   "Bahu Jamalpur",
+   405,
+   7,
+   "Loam"
+  ],
+  "61589": [
+   "Basana",
+   405,
+   7,
+   "Loam"
+  ],
+  "61633": [
+   "Taja Majra",
+   405,
+   7,
+   "Loam"
+  ],
+  "61632": [
+   "Gaddi Kheri",
+   405,
+   7,
+   "Loam"
+  ],
+  "61596": [
+   "Bhali Anandpur",
+   405,
+   7,
+   "Loam"
+  ],
+  "61631": [
+   "Kutana Part",
+   405,
+   7,
+   "Loam"
+  ],
+  "61645": [
+   "Kharak Churangla",
+   405,
+   4,
+   "Clay Loam"
+  ],
+  "61587": [
+   "Mokhra Kheri Rojh",
+   404,
+   7,
+   "Loam"
+  ],
+  "800415": [
+   "Kalanaur",
+   405,
+   7,
+   "Loam"
+  ],
+  "61684": [
+   "Kisranti",
+   406,
+   7,
+   "Loam"
+  ],
+  "61682": [
+   "Nonond",
+   406,
+   7,
+   "Loam"
+  ],
+  "61685": [
+   "Morkheri",
+   406,
+   7,
+   "Loam"
+  ],
+  "61681": [
+   "Kheri Sadh",
+   406,
+   7,
+   "Loam"
+  ],
+  "61627": [
+   "Kanheli Part",
+   405,
+   7,
+   "Loam"
+  ],
+  "61624": [
+   "Sunari Khurd",
+   405,
+   7,
+   "Loam"
+  ],
+  "61622": [
+   "Pahrawar",
+   405,
+   7,
+   "Loam"
+  ],
+  "61686": [
+   "Samchana",
+   406,
+   7,
+   "Loam"
+  ],
+  "61693": [
+   "Atail",
+   406,
+   7,
+   "Loam"
+  ],
+  "61623": [
+   "Maina",
+   405,
+   7,
+   "Loam"
+  ],
+  "61695": [
+   "Kharawar",
+   406,
+   7,
+   "Loam"
+  ],
+  "61696": [
+   "Karor",
+   406,
+   7,
+   "Loam"
+  ],
+  "61694": [
+   "Gandhra",
+   406,
+   7,
+   "Loam"
+  ],
+  "61600": [
+   "Garnawathi",
+   405,
+   4,
+   "Clay Loam"
+  ],
+  "61619": [
+   "Baland",
+   405,
+   7,
+   "Loam"
+  ],
+  "61621": [
+   "Simli",
+   405,
+   7,
+   "Loam"
+  ],
+  "61620": [
+   "Karountha",
+   405,
+   7,
+   "Loam"
+  ],
+  "61692": [
+   "Dataur",
+   406,
+   7,
+   "Loam"
+  ],
+  "61691": [
+   "Gijji",
+   406,
+   7,
+   "Loam"
+  ],
+  "61697": [
+   "Chulliana",
+   406,
+   7,
+   "Loam"
+  ],
+  "61601": [
+   "Kakrana",
+   405,
+   7,
+   "Loam"
+  ],
+  "61689": [
+   "Bhainsru Khurd",
+   406,
+   7,
+   "Loam"
+  ],
+  "61688": [
+   "Bhainsru Kalan",
+   406,
+   7,
+   "Loam"
+  ],
+  "61698": [
+   "Ismaila 11B",
+   406,
+   7,
+   "Loam"
+  ],
+  "61700": [
+   "Ismaila 9 B",
+   406,
+   7,
+   "Loam"
+  ],
+  "61690": [
+   "Naya Bans",
+   406,
+   7,
+   "Loam"
+  ],
+  "61618": [
+   "Ritauli",
+   405,
+   7,
+   "Loam"
+  ],
+  "61701": [
+   "Garhi Sampla",
+   406,
+   7,
+   "Loam"
+  ],
+  "61699": [
+   "Kultana",
+   406,
+   7,
+   "Loam"
+  ],
+  "61617": [
+   "Kabulpur",
+   405,
+   7,
+   "Loam"
+  ],
+  "61626": [
+   "Jalalpur",
+   405,
+   7,
+   "Loam"
+  ],
+  "61687": [
+   "Hassangarh",
+   406,
+   7,
+   "Loam"
+  ],
+  "61646": [
+   "Katwara",
+   405,
+   7,
+   "Loam"
+  ],
+  "61654": [
+   "Ghilor Khurd",
+   405,
+   7,
+   "Loam"
+  ],
+  "61647": [
+   "Sanghi",
+   405,
+   7,
+   "Loam"
+  ],
+  "61652": [
+   "Sahan Majra",
+   405,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "61653": [
+   "Jassia",
+   405,
+   7,
+   "Loam"
+  ],
+  "61648": [
+   "Khidwali",
+   405,
+   7,
+   "Loam"
+  ],
+  "61656": [
+   "Kahni 7",
+   405,
+   7,
+   "Loam"
+  ],
+  "61649": [
+   "Ghuskani",
+   405,
+   7,
+   "Loam"
+  ],
+  "61650": [
+   "Jindran",
+   405,
+   7,
+   "Loam"
+  ],
+  "61641": [
+   "Titoli",
+   405,
+   7,
+   "Loam"
+  ],
+  "61661": [
+   "Dhamar",
+   405,
+   7,
+   "Loam"
+  ],
+  "61659": [
+   "Rithal Narwal",
+   405,
+   7,
+   "Loam"
+  ],
+  "61651": [
+   "Bahmanwas",
+   405,
+   7,
+   "Loam"
+  ],
+  "61662": [
+   "Basantpur",
+   405,
+   7,
+   "Loam"
+  ],
+  "61660": [
+   "Kiloi Khas",
+   405,
+   7,
+   "Loam"
+  ],
+  "61664": [
+   "Chamaria",
+   405,
+   7,
+   "Loam"
+  ],
+  "61640": [
+   "Sasrauli",
+   405,
+   7,
+   "Loam"
+  ],
+  "61663": [
+   "Makrouli Kalan",
+   405,
+   4,
+   "Clay Loam"
+  ],
+  "61669": [
+   "Ladhot",
+   405,
+   7,
+   "Loam"
+  ],
+  "61672": [
+   "Polangi",
+   405,
+   4,
+   "Clay Loam"
+  ],
+  "61639": [
+   "Sunderpur",
+   405,
+   7,
+   "Loam"
+  ],
+  "61665": [
+   "Nasirpur",
+   405,
+   7,
+   "Loam"
+  ],
+  "61670": [
+   "Kiloi Dopana",
+   405,
+   7,
+   "Loam"
+  ],
+  "61666": [
+   "Sarai Ahmed",
+   405,
+   7,
+   "Loam"
+  ],
+  "61671": [
+   "Rurki",
+   405,
+   7,
+   "Loam"
+  ],
+  "61673": [
+   "Mungan",
+   405,
+   4,
+   "Clay Loam"
+  ],
+  "61667": [
+   "Makrouli Khurd",
+   405,
+   7,
+   "Loam"
+  ],
+  "61668": [
+   "Bhaiyan Pur",
+   405,
+   7,
+   "Loam"
+  ],
+  "61678": [
+   "Bhalot",
+   405,
+   7,
+   "Loam"
+  ],
+  "61677": [
+   "Assan",
+   405,
+   7,
+   "Loam"
+  ],
+  "61674": [
+   "Bakheta",
+   405,
+   7,
+   "Loam"
+  ],
+  "61629": [
+   "Bohar Part",
+   405,
+   7,
+   "Loam"
+  ],
+  "61675": [
+   "Humayunpur",
+   405,
+   7,
+   "Loam"
+  ],
+  "61680": [
+   "Baliana",
+   406,
+   7,
+   "Loam"
+  ],
+  "61676": [
+   "Kansala",
+   405,
+   7,
+   "Loam"
+  ],
+  "61683": [
+   "Pakasma",
+   406,
+   7,
+   "Loam"
+  ],
+  "61655": [
+   "Ghilor Kalan",
+   405,
+   7,
+   "Loam"
+  ],
+  "61657": [
+   "Rithal Phogat",
+   405,
+   7,
+   "Loam"
+  ],
+  "61658": [
+   "Kahni 1",
+   405,
+   7,
+   "Loam"
+  ],
+  "61630": [
+   "Rohtak Rural Part",
+   405,
+   7,
+   "Loam"
+  ],
+  "61628": [
+   "Garhi Bohar",
+   405,
+   7,
+   "Loam"
+  ],
+  "800416": [
+   "Sampla",
+   406,
+   7,
+   "Loam"
+  ],
+  "61679": [
+   "Sunari Kalan CT",
+   405,
+   7,
+   "Loam"
+  ],
+  "800414": [
+   "Rohtak",
+   405,
+   7,
+   "Loam"
+  ]
+ },
+ "village_count_total": 148,
+ "village_count_sampled": 148
+}

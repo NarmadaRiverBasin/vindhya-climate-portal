@@ -1,0 +1,4855 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Meghalaya",
+  "district": "South Garo Hills",
+  "district_lgd": 277,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (805/806 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 27427,
+   "Sandy Clay Loam": 2006,
+   "Loam": 3891
+  },
+  "n_pixels": 33324
+ },
+ "villages": {
+  "275867": [
+   "Cherengpara I",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275878": [
+   "Konapara",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275954": [
+   "Tinak Songgital",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275692": [
+   "Bolchim Songgital",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275884": [
+   "Ronsigre",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275851": [
+   "Damalgre",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275841": [
+   "Mengnabari",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275786": [
+   "Mitap Megapgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275946": [
+   "Bolmapara",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275615": [
+   "Rimrang Asimgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275655": [
+   "Rongkeragre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "276160": [
+   "Badima",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276173": [
+   "Dabram",
+   1977,
+   7,
+   "Loam"
+  ],
+  "275757": [
+   "Bolchim Songgital",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "276004": [
+   "Sibbari Old Bazar",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275824": [
+   "Bremgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "276081": [
+   "Seel Adugre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276236": [
+   "Sijubari",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "999999": [
+   "Data Partially Available",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "275826": [
+   "Atesia Nokat",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275827": [
+   "Dangsugri",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275828": [
+   "Dimapara",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275829": [
+   "Makaburipara",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275830": [
+   "Rongsugri",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275831": [
+   "Megua Abagiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275837": [
+   "Enggokgre",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275856": [
+   "Siwalkhosigre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275858": [
+   "Dindinnigri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275859": [
+   "Gaijanggri",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275860": [
+   "Meka Adu",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275861": [
+   "Mineng",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275862": [
+   "Doragre",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275863": [
+   "Sempara",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275864": [
+   "Jatrakona I",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275865": [
+   "New Jatrakona",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275866": [
+   "Bandapara",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275868": [
+   "Chereng Keragittim",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275869": [
+   "Silbaripara",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275870": [
+   "Nagrajora",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275871": [
+   "Charipara",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275872": [
+   "Gandhibor",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275873": [
+   "Konagittim",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275874": [
+   "Kadimboka",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275875": [
+   "Upper Gasuapara",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275876": [
+   "Lower Gasuapara",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275877": [
+   "Rongsepgri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275838": [
+   "Shrikagre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275857": [
+   "Araligop",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275850": [
+   "Rongsigre",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275879": [
+   "Rangajhora",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275883": [
+   "Rakipara",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275885": [
+   "Gobrakura",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275887": [
+   "Fakirkona",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275988": [
+   "Ampangdamgiri",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275989": [
+   "Namchapara",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275990": [
+   "Kujolgiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275991": [
+   "Kolapara",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275992": [
+   "Bilkona",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275993": [
+   "Dumnikura",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275994": [
+   "Ramchengga",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275996": [
+   "Kapasipara",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275997": [
+   "Jatapara",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275886": [
+   "Tanaikhona",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275847": [
+   "Rongbokgre",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275848": [
+   "Damal Nokat",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275849": [
+   "Kondok",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275852": [
+   "Attesia Songmong",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275855": [
+   "Rongsanggre",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275880": [
+   "Angratuli",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275882": [
+   "Telikali",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275881": [
+   "Dahapara",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275854": [
+   "Molmegre I Gasuapara Gs Circle",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275853": [
+   "Molmegre Ii",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275839": [
+   "Dakolgiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275840": [
+   "Narongkolgri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275842": [
+   "Dagandagre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275843": [
+   "Songkalakgre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275844": [
+   "Rongronggre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275845": [
+   "Gungre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275846": [
+   "Somongre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275939": [
+   "Pikapara",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275949": [
+   "Betdigre",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275959": [
+   "Rongdikgiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275960": [
+   "Balmoragre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275961": [
+   "Sawekolgiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275962": [
+   "Atabenga",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275963": [
+   "Buga Dongram",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275964": [
+   "Andamari",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275965": [
+   "Bremgre",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275967": [
+   "Somegre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275968": [
+   "Tebisokgre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275969": [
+   "Nilwasagiri",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275970": [
+   "Darit Betigre",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275971": [
+   "Watregre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275972": [
+   "Rongchonggre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275973": [
+   "Darit Simragittim",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275974": [
+   "Tebokgre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275975": [
+   "Wakskogre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275977": [
+   "Darokgiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275978": [
+   "Aritakgiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275979": [
+   "Chambil Tolejang",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275980": [
+   "Jadugiri",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275981": [
+   "Chimagre",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275982": [
+   "Rongmasugittim",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275966": [
+   "Brenggre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275832": [
+   "Mangkenggre Songmong",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275833": [
+   "Chirenpara",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275834": [
+   "Gandugri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275835": [
+   "Mangkeng Nokat",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275836": [
+   "Pilnigri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275888": [
+   "Dasinggiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275889": [
+   "Domiagre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275890": [
+   "Dasing Nokat",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275891": [
+   "Boldamgre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275892": [
+   "Dompaigiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275894": [
+   "Tojanang Daruda",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275895": [
+   "Upper Rangmai",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275896": [
+   "Goripara",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275897": [
+   "Silki Adu",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275898": [
+   "Galwangittok",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275899": [
+   "Molmigre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275900": [
+   "Karawenggiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275911": [
+   "Rongmai Jongjanggittim",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275912": [
+   "Ruatsogiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275913": [
+   "Chittilonggiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275914": [
+   "Drong Songmong",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275915": [
+   "Ruga Nokatgiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275916": [
+   "Drong Walbakgiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275917": [
+   "Donigre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275918": [
+   "Ruga Makbilkol",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275919": [
+   "Ruga Doldoma",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275921": [
+   "Ruga Songmong",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275922": [
+   "Ruga Ading",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275923": [
+   "Ruga Reginggittim",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275925": [
+   "Chitompagre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275926": [
+   "Megua Songmong",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275927": [
+   "Dopagre",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275929": [
+   "Rangra Kantalu",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275930": [
+   "Rangrachi",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275611": [
+   "Rongkugiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275612": [
+   "Adugre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275613": [
+   "Rongkanggittim",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275614": [
+   "Satilokgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275676": [
+   "Alla Rongpakgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275677": [
+   "Nokatgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275678": [
+   "Dajigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275679": [
+   "Wangmagre Darinanggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275680": [
+   "Noranggiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275681": [
+   "Rimrang Adinggiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275682": [
+   "Allagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275683": [
+   "Ashugre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275684": [
+   "Anigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275685": [
+   "Asinanggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275689": [
+   "Chandigiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275731": [
+   "Sonaramgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275764": [
+   "Mibonpara",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275920": [
+   "Chimengkari",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275924": [
+   "Ruga Denigre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275928": [
+   "Rongra",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275688": [
+   "Chandi Rongdigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275893": [
+   "Rangmai Songmong",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275901": [
+   "Inchagiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275902": [
+   "Genabra",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275903": [
+   "Wagebokgre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275904": [
+   "Dilnigre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275905": [
+   "Dabingre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275909": [
+   "Rangra Jalang",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275910": [
+   "Rengguagre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275931": [
+   "Kasigiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275932": [
+   "Rangmai Aruak",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275933": [
+   "Rangmai Songgital",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275934": [
+   "Waibagre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275935": [
+   "Dasing Bibra",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275936": [
+   "Rangmai Chigitchak",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275937": [
+   "Silanggiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275938": [
+   "Wasagiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275940": [
+   "Gnengkolsi Songgitcham",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275941": [
+   "Dabin Songgital",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275942": [
+   "Dabin Songmong",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275943": [
+   "Somolgre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275944": [
+   "Konchikolgre",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275945": [
+   "Kalsigiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275947": [
+   "Chigitchakgiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275948": [
+   "Rangra Nokatgre",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275950": [
+   "Bamon Bajra",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275952": [
+   "Dollongre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275953": [
+   "Chawek Chibanda",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275955": [
+   "Ginengkolsigre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275956": [
+   "Aringakolgiri",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275957": [
+   "Tenakgre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275958": [
+   "Tenak Songgitcham",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275906": [
+   "Kallanggre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275907": [
+   "Walkamgre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275908": [
+   "Dabin Somol",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275951": [
+   "Bolma Chiringre",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275762": [
+   "Agalgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275763": [
+   "Makbilkolgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275766": [
+   "Balsiragre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275767": [
+   "Gaturagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275768": [
+   "Mon Songmong",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275770": [
+   "Chitimgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275787": [
+   "Megapgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275788": [
+   "Mitap Bodola",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275789": [
+   "Guripatal",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275790": [
+   "Mitap Songmong",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275791": [
+   "Galwanggre",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275792": [
+   "Babilbanda",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275793": [
+   "Dadinggiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275795": [
+   "Genduagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275797": [
+   "Mon Bangamgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275798": [
+   "Rongjajonggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275799": [
+   "Tebilgiri",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275814": [
+   "Kokigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275817": [
+   "Ronganggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275765": [
+   "Galwanggitok",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275769": [
+   "Adanggiri",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275794": [
+   "Chandigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275796": [
+   "Dumindigre",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275818": [
+   "Silkigiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275616": [
+   "Sangknigiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275618": [
+   "Chigisimgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275619": [
+   "Digranggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275620": [
+   "Rombagiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275621": [
+   "Rontragiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275660": [
+   "Dorek Asim",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275665": [
+   "Ganchikalak",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275666": [
+   "Raja Ronggat",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275667": [
+   "Waidagiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275669": [
+   "Dokananggiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275670": [
+   "Rongrak Teksragre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275671": [
+   "Nachi Adugiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275673": [
+   "Chigranggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275674": [
+   "Alla Nokatgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275686": [
+   "Dagalgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275687": [
+   "Ganchigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275690": [
+   "Dibandagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275691": [
+   "Dikigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275693": [
+   "Bangguagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275695": [
+   "Asimgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275720": [
+   "Ranigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275721": [
+   "Rongrak Asimgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275722": [
+   "Dendamgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275723": [
+   "Rongsimagiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275724": [
+   "Rongtrakusik",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275725": [
+   "Eldimiramgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275726": [
+   "Tejagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275727": [
+   "Bolchimdagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275728": [
+   "Bolchimda Songgitcham",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275729": [
+   "Imaragre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275730": [
+   "Kama Anegre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275732": [
+   "Bakatagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275664": [
+   "Duragiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275668": [
+   "Noranggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275672": [
+   "Roriagre Chigranggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275675": [
+   "Boldam Sangkni",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275694": [
+   "Mekragiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275733": [
+   "Gagagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275734": [
+   "Darenanggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275735": [
+   "Wainabenggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275736": [
+   "Watregiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275738": [
+   "Magapagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275761": [
+   "Daramgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275714": [
+   "Bolchugre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275715": [
+   "Damet Rongsnagre",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275716": [
+   "Mon Adanggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275719": [
+   "Aggittinggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275737": [
+   "Bakwenanggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275739": [
+   "Dibaigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275740": [
+   "Sabeagre",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275756": [
+   "Sonawarigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275758": [
+   "Dagalgre",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275759": [
+   "Rompagiri",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275760": [
+   "Janeagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275659": [
+   "Chokpotgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275661": [
+   "Daringgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275663": [
+   "Daji Teksragre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275696": [
+   "Dagal Nokatgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275697": [
+   "Dagal Songgital",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275698": [
+   "Wagebokgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275717": [
+   "Dametgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275718": [
+   "Dagal Songmong",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275699": [
+   "Bibragre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275651": [
+   "Warimagiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275643": [
+   "Warima Chokkela",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275700": [
+   "Mitap Bodola",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275638": [
+   "Dobagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275639": [
+   "Dindingre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275640": [
+   "Damet Bugakolgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275644": [
+   "Bolsal Ading",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275645": [
+   "Warima Dooldu",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275646": [
+   "Daji Boldakgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275642": [
+   "Chokpot Bazar",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275650": [
+   "Dajinggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275517": [
+   "Durabanda Agitok",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275518": [
+   "Dura Dobagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275519": [
+   "Durabanda Chambugong",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275520": [
+   "Awegre",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275521": [
+   "Anchigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275523": [
+   "Wage Chiringgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275524": [
+   "Dana Adugre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275525": [
+   "Dobagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275526": [
+   "Mekalpara",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275527": [
+   "Mikadogre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275528": [
+   "Rongdigiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275529": [
+   "Rongdi Anchenggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275530": [
+   "Bramagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275531": [
+   "Rongdi Adinggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275533": [
+   "Semenanggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275534": [
+   "Sasatgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275535": [
+   "Marakapara",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275536": [
+   "Kalsinpara",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275537": [
+   "Dapgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275538": [
+   "Rekonanggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275539": [
+   "Karijhoragre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275540": [
+   "Dap Asakgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275541": [
+   "Bolkongpara",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275542": [
+   "Soksomarenggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275543": [
+   "Rongsigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275545": [
+   "Dura Asimgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275546": [
+   "Romba Songgitalgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275547": [
+   "Songsak Nokatgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275549": [
+   "Bandaregre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275550": [
+   "Sandong",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275551": [
+   "Gandak Nawepilgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275552": [
+   "Ruabangagre",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275553": [
+   "Dagal Songgital",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275554": [
+   "Damalgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275555": [
+   "Budugre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275556": [
+   "Ganchi Rondigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275557": [
+   "Bugigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275558": [
+   "Akoksigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275559": [
+   "Anchenggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275560": [
+   "Rongpakgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275561": [
+   "Rongmegre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275562": [
+   "Kalbang Rongbilbanggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275563": [
+   "Rongasigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275564": [
+   "Chiringmagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275565": [
+   "Rongru Asim",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275566": [
+   "Songsanggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275568": [
+   "Rongru Watregiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275569": [
+   "Kalbanggiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275571": [
+   "Sembu Rongtolgittim",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275586": [
+   "Rampragre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275588": [
+   "Minchi Chiringgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275589": [
+   "Kama Minchi Chiringgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275592": [
+   "Rongdenggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275593": [
+   "Darengsagiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275594": [
+   "Chibokgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275595": [
+   "Adilmagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275596": [
+   "Rongtonggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275597": [
+   "Nokatgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275598": [
+   "Gangugre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275599": [
+   "Deku Bazar",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275600": [
+   "Dorangre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275601": [
+   "Dopananggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275602": [
+   "Dangjinggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275603": [
+   "Asimgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275605": [
+   "Allekapara",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275606": [
+   "Dankipara",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275607": [
+   "Depotagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275608": [
+   "Kalupara",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275609": [
+   "Dumindigiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275610": [
+   "Dawagiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275617": [
+   "Simkalanggiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275622": [
+   "Bikinggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275623": [
+   "Gandinanggiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275624": [
+   "Kenegre Dobogre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275625": [
+   "Chiangalgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275626": [
+   "Duragre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275627": [
+   "Wakjapakre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275628": [
+   "Daji Rongkuakgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275629": [
+   "Chisrenggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275630": [
+   "Waro Songgitcham",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275631": [
+   "Waro Songgital",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275632": [
+   "Daji Rongbinggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275633": [
+   "Dingbinggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275641": [
+   "Daji Badima",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275647": [
+   "Songma Matchokgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275648": [
+   "Sembu Jingjanggitim",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275649": [
+   "Sembu Singronggittim",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275652": [
+   "Warima Duragre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275653": [
+   "Sembu Rongsnagiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275654": [
+   "Sembu Nokatgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275656": [
+   "Sembu Jakinggittim",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275657": [
+   "Sembu Jibongittim",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275658": [
+   "Dasamgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275662": [
+   "Abendagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275522": [
+   "Rongdi Anchenggiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275532": [
+   "Rebodotgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275544": [
+   "Nokatgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275548": [
+   "Rongsimagiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275567": [
+   "Rongma Kakijagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275590": [
+   "Rongbinggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275591": [
+   "Daji Adugre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275604": [
+   "Tepotagiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "276142": [
+   "Gitinggre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276209": [
+   "Bul Awe",
+   1978,
+   7,
+   "Loam"
+  ],
+  "276220": [
+   "Dawek Gittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276221": [
+   "Alokpang Dabrek",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276222": [
+   "Angkema",
+   1978,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276223": [
+   "Alokpang Nokalgre",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276225": [
+   "Wasogittim",
+   1978,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276227": [
+   "Karwani",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276228": [
+   "Reserve Gittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276249": [
+   "Meata",
+   1978,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276250": [
+   "Bubanipur",
+   1978,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276251": [
+   "Bilkona",
+   1978,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276252": [
+   "Rangasora",
+   1978,
+   7,
+   "Loam"
+  ],
+  "276289": [
+   "Nolbari",
+   1978,
+   7,
+   "Loam"
+  ],
+  "276224": [
+   "Rongkrekgittim",
+   1978,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276226": [
+   "Pilot Project",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276113": [
+   "Balkal Dongrugittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276114": [
+   "Dawakol",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276116": [
+   "Tainang Songmong",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276122": [
+   "Rompa Asim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276123": [
+   "Mindikgre",
+   1977,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276124": [
+   "Bamon Wakchol",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276125": [
+   "Chengbagre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276126": [
+   "Waramgre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276127": [
+   "Bamongre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276129": [
+   "Dipogre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276130": [
+   "Adapgre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276131": [
+   "Dokgre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276132": [
+   "Lower Dosogre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276133": [
+   "Wamisenggre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276134": [
+   "Rongbatgittim",
+   1977,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276135": [
+   "Upper Dosogre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276136": [
+   "Namisikgre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276138": [
+   "Tainang Matcha Nokpante",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276139": [
+   "Gokapepchandal",
+   1977,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276140": [
+   "Goka Imika",
+   1977,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276141": [
+   "Chibrenggre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276144": [
+   "Mikpak Balsrigittim",
+   1977,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276145": [
+   "Agronggre",
+   1977,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276146": [
+   "Goka Wakchol",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276147": [
+   "Lotnagar",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276148": [
+   "Masighat",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276149": [
+   "Dabi Songgital",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276150": [
+   "Agimpal Nokma Colony",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276153": [
+   "Dubagre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276154": [
+   "Jaksongram Songgital",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276155": [
+   "Asokgre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276156": [
+   "Gandragre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276157": [
+   "Lower Rongdotchi",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276158": [
+   "Upper Rongdotchi",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276159": [
+   "Eringgre",
+   1977,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276161": [
+   "Sibbari",
+   1977,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276163": [
+   "Banajuri",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276164": [
+   "Domdoma",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276165": [
+   "Baniagre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276166": [
+   "Upper Chambil Badimagre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276167": [
+   "Bedolboi",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276169": [
+   "Nilwagre",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276170": [
+   "Nilwa Adinggre",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276171": [
+   "Rangchikip",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276172": [
+   "Netri",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276174": [
+   "Dasanggre",
+   1977,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276176": [
+   "Jaksongram",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276177": [
+   "Dabigre",
+   1977,
+   7,
+   "Loam"
+  ],
+  "275976": [
+   "Darit Wakcholgre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275983": [
+   "Baman Jadugiri",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275984": [
+   "Onajora",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275985": [
+   "Dimagiri",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "275986": [
+   "Dima Chigitchak",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275987": [
+   "Chengkali",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275995": [
+   "Batabari",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "275998": [
+   "Defuliapara",
+   1976,
+   7,
+   "Loam"
+  ],
+  "275999": [
+   "Konkona",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276000": [
+   "Gosegaon",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "276001": [
+   "Mandanggre",
+   1976,
+   4,
+   "Clay Loam"
+  ],
+  "276002": [
+   "Baigonkona",
+   1976,
+   7,
+   "Loam"
+  ],
+  "276003": [
+   "Sibbari New Market",
+   1976,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276005": [
+   "Daldamgre",
+   1976,
+   7,
+   "Loam"
+  ],
+  "276128": [
+   "Damakgir",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276143": [
+   "Dabit Songital",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276151": [
+   "Dabit Ampangdam",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276152": [
+   "Dabit Gonganagar",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276175": [
+   "Arapara",
+   1977,
+   7,
+   "Loam"
+  ],
+  "275811": [
+   "Chidabetgre",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275819": [
+   "Bolasinggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275820": [
+   "Kemranggiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275821": [
+   "Rongrikimgre",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275822": [
+   "Silki Achakchiring",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275823": [
+   "Bolma Chiringgre",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275825": [
+   "Boldamgre",
+   1975,
+   7,
+   "Loam"
+  ],
+  "249809": [
+   "Baghmara",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276066": [
+   "Aruak Songgitcham",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276068": [
+   "Eman Marakgittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276069": [
+   "Eman Doku Awe",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276070": [
+   "Emangre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276071": [
+   "Eman Prang Ading",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276072": [
+   "Eman Warima",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276065": [
+   "Chignap",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276067": [
+   "Eman Rompagre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276078": [
+   "Eman Gatabil",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276079": [
+   "Ringramgre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276080": [
+   "Megadop",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276083": [
+   "Rongmatma",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276096": [
+   "Baladinggre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276097": [
+   "Ruthagre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276098": [
+   "Dikgronggre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276099": [
+   "Denggagre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276100": [
+   "Bajragre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276101": [
+   "Gara Samka",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276102": [
+   "Dangsu Colony",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276103": [
+   "Gare Songgital",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "275636": [
+   "Jalegre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275637": [
+   "Dobogre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275701": [
+   "Dagal Asimgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275702": [
+   "Dagal Gopgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275703": [
+   "Kenegre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275704": [
+   "Kilbolmagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275705": [
+   "Kilbolma Asimgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275706": [
+   "Agolgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275707": [
+   "Papa Asakgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275708": [
+   "Papa Songmong",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275709": [
+   "Papa Songgital",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275710": [
+   "Kilbolma Damalgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275711": [
+   "Kene Chaneagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275712": [
+   "Nodonggiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275713": [
+   "Bilgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275741": [
+   "Mon Rongsnagre",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275742": [
+   "Jongkolgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275743": [
+   "Ringkap Songgital",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275744": [
+   "Kene Anchenggiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275745": [
+   "Papa Dajinggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275746": [
+   "Kantasigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275747": [
+   "Radigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275748": [
+   "Dasolgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275749": [
+   "Kene Badimagiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275750": [
+   "Tepantogre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275751": [
+   "Damikchigre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275752": [
+   "Kimdegonggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275753": [
+   "Nanil Songgittal",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275754": [
+   "Narongkolgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275755": [
+   "Ringkap Sonawari",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275771": [
+   "Ringkap Songmong",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275772": [
+   "Balwat Rongchanggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275773": [
+   "Daldogre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275774": [
+   "Nanil Songmong",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275775": [
+   "Mandang Redinggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275776": [
+   "Betramgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275777": [
+   "Duchinggiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275778": [
+   "Dasol Chigitchak",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275779": [
+   "Palwalgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275780": [
+   "Songgotagiri",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275781": [
+   "Rongbilbanggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275782": [
+   "Daramgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275783": [
+   "Balwatgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275784": [
+   "Gilmatkolgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275785": [
+   "Rongrakgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275800": [
+   "Gongganggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275801": [
+   "Silki Betagiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275802": [
+   "Darik Banajuri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275803": [
+   "Samkagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275804": [
+   "Chigitchakgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275805": [
+   "Tengki Songmong",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275806": [
+   "Dangilgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275807": [
+   "Mon Dobakolgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275808": [
+   "Silki Christiangittim",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275809": [
+   "Asimdikgre",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275810": [
+   "Tengki Badimagiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275813": [
+   "Chambuagre",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275815": [
+   "Silki Rongsibogre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275816": [
+   "Silki Ampangdamgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275812": [
+   "Wagebokgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "276183": [
+   "Dajonggittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276184": [
+   "Rewak Daburam",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276185": [
+   "Rewak Watregittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276186": [
+   "Rewak Songmong",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276187": [
+   "Rongjakgittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276082": [
+   "Mandang",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276084": [
+   "Nengkongdorotgittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276085": [
+   "Wakgru Ading",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276086": [
+   "Nengkong Songmong",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276091": [
+   "Janthagre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276092": [
+   "Ronchekgre",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276093": [
+   "Bunakol",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276094": [
+   "Matmagittik",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276095": [
+   "Chramgre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276104": [
+   "Balkal Asim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276105": [
+   "Darit Asim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276106": [
+   "Choklokgittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276107": [
+   "Karukol Adinggre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276108": [
+   "Nojimpagittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276109": [
+   "Karukol Matchok Gaakram",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276110": [
+   "Karukol Jalaigre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276111": [
+   "Tainang Bugakol",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276117": [
+   "Alokpang Songgitcham",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276118": [
+   "Alokpang Bobragittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276119": [
+   "Balkal Watre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276120": [
+   "Karukol Konagittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276121": [
+   "Chigitchakgre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276137": [
+   "Goka Songmong",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276112": [
+   "Karukol Tainang",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276063": [
+   "Siju Nengru Gittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276064": [
+   "Aruak Nokatgre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276073": [
+   "Dadugre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276087": [
+   "Chibegre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276088": [
+   "Chibe Songganget",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276089": [
+   "Asimgre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276090": [
+   "Nengruth",
+   1977,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276182": [
+   "Siju Arteka",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276077": [
+   "Siju Dobakol",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276076": [
+   "Siju Rongkenggittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276062": [
+   "Siju Garugittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276074": [
+   "Siju Duramong",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276075": [
+   "Siju Asakbanda",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276210": [
+   "Rongru Asim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276212": [
+   "Rongreng Bibra",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276213": [
+   "Halwa Atong",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276214": [
+   "Matchakal Naweram",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276215": [
+   "Kunchung",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276216": [
+   "Dambuk Jonkol",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276217": [
+   "Taidang",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276218": [
+   "Kasarisora",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276219": [
+   "Halwa Ambeng",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276229": [
+   "Ampanggre",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276230": [
+   "Dambuk Atong",
+   1978,
+   7,
+   "Loam"
+  ],
+  "276231": [
+   "Halwa Bilda",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276232": [
+   "Nengsara",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276233": [
+   "Seelpang",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276234": [
+   "Rona Agal",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276235": [
+   "Gulpani Songmong",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276237": [
+   "Rongmin Chiring",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276238": [
+   "Rantanggre",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276240": [
+   "Rantangsora",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276241": [
+   "Teptepa",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276242": [
+   "Kosigre",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276243": [
+   "Donala Nokat",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276244": [
+   "Gulpani Nokat",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276245": [
+   "Rongjol Songgital",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276246": [
+   "Inolgre",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276247": [
+   "Bolbokgre",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276248": [
+   "Panda Bolsilgre",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276253": [
+   "Panda Chikasin",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276254": [
+   "Dambuk Aga",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276255": [
+   "Dambuk Ading",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276256": [
+   "Bolchugiri",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276257": [
+   "Dilsinggiri",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276258": [
+   "Gaobari",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276259": [
+   "Amonggre",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276260": [
+   "Dagalgittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276261": [
+   "Rongtotma",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276262": [
+   "New Rongara",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276263": [
+   "Dobakol",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276264": [
+   "Bolgisigittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276265": [
+   "Rompa Ading",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276266": [
+   "Rompa Songmong",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276272": [
+   "Mohadeo Songmong",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276273": [
+   "New Rompa",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276274": [
+   "Hatisia",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276275": [
+   "New Bonbera",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276276": [
+   "Sanbana",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276277": [
+   "Lower Galasora",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276278": [
+   "Makbiljora",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276279": [
+   "Jiranggittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276280": [
+   "Malikona",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276281": [
+   "Potchismile",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276282": [
+   "Gulpani Bibra",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276283": [
+   "Dimchanggittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276284": [
+   "Wachal Chiring",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276285": [
+   "Wage Kona",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276286": [
+   "Agatchikona",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276287": [
+   "New Gajipur",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276288": [
+   "Bolchu Ading",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276290": [
+   "Taraibari",
+   1978,
+   7,
+   "Loam"
+  ],
+  "276291": [
+   "Badimbari",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276292": [
+   "Horipur",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276293": [
+   "Dambuk Apal",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276294": [
+   "Simakona",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276295": [
+   "Rubber Gittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276296": [
+   "Toklekbari",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276297": [
+   "Imbloka",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276298": [
+   "Matchakol",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276299": [
+   "Gramkol",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276300": [
+   "Nadangkol",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276301": [
+   "Chenggni Songgital",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276302": [
+   "Chenggni Champa",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276303": [
+   "Upper Galasora",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276305": [
+   "Kanai",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276306": [
+   "Hatibel",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276307": [
+   "Dulbeta",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276308": [
+   "Adachepa",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276309": [
+   "Bonberra",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276310": [
+   "Batlaban",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276311": [
+   "Nikwatgre",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276312": [
+   "Mohadeo Warima",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276313": [
+   "Warima Konagittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276178": [
+   "Siju Songital",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276179": [
+   "Rongsu Agal",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276180": [
+   "Kalu Songmong",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276181": [
+   "Rongsu Rongregittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276188": [
+   "Dakopgre",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276189": [
+   "Rewak Kambepal",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276190": [
+   "Mallengma",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276191": [
+   "Rongsu Mongbitgittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276192": [
+   "Rongsu Rongwak",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276199": [
+   "Mongmabel",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276200": [
+   "Chutmang Songmong",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276201": [
+   "Chandra Suk",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276202": [
+   "Rongaigittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276203": [
+   "Naweram Asim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276204": [
+   "Matchirampat",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276208": [
+   "Samangittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276211": [
+   "Moradam",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276060": [
+   "Siju Songmong",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276061": [
+   "Siju Ganga Awe",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276194": [
+   "Medugittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276195": [
+   "Meengittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276196": [
+   "Dallenggittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276197": [
+   "Gongagittim",
+   1978,
+   7,
+   "Loam"
+  ],
+  "276198": [
+   "Chutmang Gonggrot",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276205": [
+   "Rongchenggre",
+   1978,
+   7,
+   "Loam"
+  ],
+  "276206": [
+   "Chimitap",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276207": [
+   "Teksragittim",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276193": [
+   "Hangsapal",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276033": [
+   "Nengbrekgittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276035": [
+   "Darang Dajugittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276045": [
+   "Badri Rongdong",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276046": [
+   "Siju Tengkigittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276049": [
+   "Siju Damik Gittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276050": [
+   "Siju Medical Colony",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276051": [
+   "Rangpinram",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276052": [
+   "Dochetgittim",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276053": [
+   "Tolegre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276054": [
+   "Tolebrugittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276055": [
+   "Aruakgre Songgital",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276056": [
+   "Gongjagre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276057": [
+   "Siju Jadi Gindam",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276058": [
+   "Siju Taikumgittim",
+   1977,
+   7,
+   "Loam"
+  ],
+  "275570": [
+   "Jetragiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275572": [
+   "Darengiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275573": [
+   "Paromgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275574": [
+   "Rongma Paromgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275575": [
+   "Dabalgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275576": [
+   "Emandurabangda",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275577": [
+   "Ganchikalak Dobagre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275578": [
+   "Kakijagiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275581": [
+   "Rongma Rekmanggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275582": [
+   "Tokrok Anchenggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275583": [
+   "Budu Watregiri",
+   1975,
+   7,
+   "Loam"
+  ],
+  "275584": [
+   "Reni Adinggre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275585": [
+   "Reni Badima",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275587": [
+   "Simbu Raongkiragiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275634": [
+   "Bugakolgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275635": [
+   "Budu Asimgre",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275579": [
+   "Gopgiri",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "275580": [
+   "Redingsi Songgital",
+   1975,
+   4,
+   "Clay Loam"
+  ],
+  "276006": [
+   "Sudugre",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276007": [
+   "Gare Songmong",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276008": [
+   "Sudu Boldak",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276009": [
+   "Sudu Nengjaring",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276010": [
+   "Gare Nengjabing",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276011": [
+   "Gare Chigitchak",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276012": [
+   "Rongkandi Dengjama",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276013": [
+   "Rongkandi Bolsalgittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276014": [
+   "Chekwe",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276015": [
+   "Rongkandi Songgital",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276016": [
+   "Jangkalgittim Awe",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276017": [
+   "Nongalbibra Bazar",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276018": [
+   "Dobakol Changgalgittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276019": [
+   "Nongalbibra",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276267": [
+   "Rantangre",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276020": [
+   "Imbikgittim",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276021": [
+   "Lower Patalgittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276022": [
+   "Darang Boldak",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276023": [
+   "Darang Chiga",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276024": [
+   "Dobakol Nengja",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276025": [
+   "Gare Ringdigittim",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276026": [
+   "Jongsinggittim",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276027": [
+   "Nongal Colony",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276028": [
+   "Dobakol Awemong",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276029": [
+   "Agrenggitim",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276030": [
+   "Era Aning",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276031": [
+   "Pattal Gittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276032": [
+   "Darang Akep",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276034": [
+   "Nengsranggittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276036": [
+   "Jadigittim",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276037": [
+   "Coal India Colony",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276038": [
+   "Mengkulgittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276039": [
+   "Rongsa Awe",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276040": [
+   "Jaisrugittim",
+   1977,
+   7,
+   "Loam"
+  ],
+  "276041": [
+   "Badri Rongdong Kamagittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276042": [
+   "Badri Rongding Awe",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276043": [
+   "Darang Dura",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276044": [
+   "Badri Watregittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276047": [
+   "Badri Maidugittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276059": [
+   "Siju Rongmikgittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276048": [
+   "Badri Rongdimgittim",
+   1977,
+   4,
+   "Clay Loam"
+  ],
+  "276268": [
+   "Gandigre",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276269": [
+   "Lower Nekora",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276270": [
+   "Moheskola",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276271": [
+   "Upper Nekkora",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276314": [
+   "Ailatuli",
+   1978,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276316": [
+   "Upper Pasgao",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276317": [
+   "Bandrasora",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276318": [
+   "Lower Pasgao",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276320": [
+   "Rambil Gittim",
+   1978,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276239": [
+   "Rangtang Songmong",
+   1978,
+   4,
+   "Clay Loam"
+  ],
+  "276315": [
+   "Betgora",
+   1978,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "276319": [
+   "Sapaisora",
+   1978,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 806,
+ "village_count_sampled": 805
+}

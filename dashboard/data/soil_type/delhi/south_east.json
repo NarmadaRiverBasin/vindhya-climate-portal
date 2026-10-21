@@ -1,0 +1,102 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Delhi",
+  "district": "South East",
+  "district_lgd": 670,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "full"
+ },
+ "district": {
+  "dominant_class_id": 7,
+  "dominant_class": "Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 526,
+   "Loam": 1301
+  },
+  "n_pixels": 1827
+ },
+ "villages": {
+  "276402": [
+   "South Delhi Municipal Corporation",
+   455,
+   7,
+   "Loam"
+  ],
+  "276447": [
+   "New Delhi Municipal Council",
+   455,
+   7,
+   "Loam"
+  ],
+  "64082": [
+   "Pul Pehlad CT",
+   456,
+   7,
+   "Loam"
+  ],
+  "64084": [
+   "Mithe Pur CT",
+   6081,
+   7,
+   "Loam"
+  ],
+  "64085": [
+   "Molar Band CT",
+   6081,
+   4,
+   "Clay Loam"
+  ],
+  "64083": [
+   "Taj Pul CT",
+   6081,
+   7,
+   "Loam"
+  ],
+  "64080": [
+   "Saidabad CT",
+   455,
+   7,
+   "Loam"
+  ],
+  "64081": [
+   "Kotla Mahigiran CT",
+   6081,
+   7,
+   "Loam"
+  ],
+  "64086": [
+   "Aali CT",
+   6081,
+   4,
+   "Clay Loam"
+  ],
+  "64087": [
+   "Jait Pur CT",
+   6081,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 11,
+ "village_count_sampled": 11
+}

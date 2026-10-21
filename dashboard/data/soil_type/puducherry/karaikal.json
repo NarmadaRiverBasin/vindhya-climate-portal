@@ -1,0 +1,218 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Puducherry",
+  "district": "Karaikal",
+  "district_lgd": 598,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (29/30 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay": 12,
+   "Clay Loam": 2404,
+   "Sandy Clay Loam": 2,
+   "Loam": 23
+  },
+  "n_pixels": 2441
+ },
+ "villages": {
+  "644987": [
+   "Kottucherry",
+   5914,
+   4,
+   "Clay Loam"
+  ],
+  "644993": [
+   "Polagam",
+   5914,
+   4,
+   "Clay Loam"
+  ],
+  "644992": [
+   "Keezhaiyur South",
+   5914,
+   4,
+   "Clay Loam"
+  ],
+  "644991": [
+   "Keezhaiyur North",
+   5914,
+   4,
+   "Clay Loam"
+  ],
+  "644990": [
+   "Neravy",
+   5914,
+   4,
+   "Clay Loam"
+  ],
+  "644989": [
+   "Kizhamanai",
+   5914,
+   4,
+   "Clay Loam"
+  ],
+  "644984": [
+   "Poovam",
+   5914,
+   4,
+   "Clay Loam"
+  ],
+  "644988": [
+   "Vizhidiur",
+   5914,
+   4,
+   "Clay Loam"
+  ],
+  "645009": [
+   "Sethur",
+   5915,
+   4,
+   "Clay Loam"
+  ],
+  "644985": [
+   "Thiruvettakudy",
+   5914,
+   4,
+   "Clay Loam"
+  ],
+  "644983": [
+   "Varichikudy North",
+   5914,
+   4,
+   "Clay Loam"
+  ],
+  "644986": [
+   "Varichikudy South",
+   5914,
+   4,
+   "Clay Loam"
+  ],
+  "253096": [
+   "Karaikal",
+   5914,
+   4,
+   "Clay Loam"
+  ],
+  "644998": [
+   "Puthakudy",
+   5915,
+   4,
+   "Clay Loam"
+  ],
+  "644999": [
+   "Nedungadu",
+   5915,
+   4,
+   "Clay Loam"
+  ],
+  "644997": [
+   "Ponbethy",
+   5915,
+   4,
+   "Clay Loam"
+  ],
+  "644996": [
+   "Kurumbagaram",
+   5915,
+   4,
+   "Clay Loam"
+  ],
+  "645000": [
+   "Melakasakudy",
+   5915,
+   4,
+   "Clay Loam"
+  ],
+  "645001": [
+   "Ambagarathur",
+   5915,
+   4,
+   "Clay Loam"
+  ],
+  "645004": [
+   "Sorakudy",
+   5915,
+   4,
+   "Clay Loam"
+  ],
+  "645005": [
+   "Subrayapuram",
+   5915,
+   4,
+   "Clay Loam"
+  ],
+  "645006": [
+   "Keezhavoor Part",
+   5915,
+   4,
+   "Clay Loam"
+  ],
+  "645011": [
+   "Pettai",
+   5915,
+   4,
+   "Clay Loam"
+  ],
+  "645007": [
+   "Thirunallar",
+   5915,
+   4,
+   "Clay Loam"
+  ],
+  "645008": [
+   "Thennankudy",
+   5915,
+   4,
+   "Clay Loam"
+  ],
+  "645003": [
+   "Thevamapuram",
+   5915,
+   4,
+   "Clay Loam"
+  ],
+  "645002": [
+   "Nallazhundur",
+   5915,
+   4,
+   "Clay Loam"
+  ],
+  "645010": [
+   "Sellur",
+   5915,
+   4,
+   "Clay Loam"
+  ],
+  "644995": [
+   "Thirumalairayanpattinam CT",
+   5914,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 30,
+ "village_count_sampled": 29
+}

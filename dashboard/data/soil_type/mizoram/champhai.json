@@ -1,0 +1,613 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Mizoram",
+  "district": "Champhai",
+  "district_lgd": 262,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "full"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 55879,
+   "Sandy Clay Loam": 12,
+   "Loam": 3732
+  },
+  "n_pixels": 59624
+ },
+ "villages": {
+  "999999": [
+   "Data Partially Available",
+   1906,
+   4,
+   "Clay Loam"
+  ],
+  "271307": [
+   "Demdum",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271317": [
+   "Khuailui",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271377": [
+   "Sialhawk",
+   1911,
+   4,
+   "Clay Loam"
+  ],
+  "271376": [
+   "Tlangpui",
+   1911,
+   4,
+   "Clay Loam"
+  ],
+  "271335": [
+   "Tlangmawi",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "249775": [
+   "Biate",
+   1911,
+   4,
+   "Clay Loam"
+  ],
+  "271350": [
+   "Buang",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271349": [
+   "Zawngtetui",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271357": [
+   "Bungzung",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271356": [
+   "Leisenzo",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271351": [
+   "Khuangleng",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271352": [
+   "Bulfekzawl",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271353": [
+   "Hruaikawn",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271354": [
+   "New Hruaikawn",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271355": [
+   "Sesih",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271363": [
+   "Lianpui",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271362": [
+   "Sazep",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271364": [
+   "Vangchhia",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271358": [
+   "Vanzau",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271361": [
+   "Leithum",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271360": [
+   "Dungtlang",
+   1909,
+   7,
+   "Loam"
+  ],
+  "271368": [
+   "Khawbung South",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271369": [
+   "Zawlsei",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271367": [
+   "Samthang New",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271366": [
+   "Samthang Old",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271365": [
+   "Vaphai",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271370": [
+   "Chawngtui East",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271371": [
+   "Farkawn",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271373": [
+   "Khankawn",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271375": [
+   "Khuangthing",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271374": [
+   "Thekpui",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271372": [
+   "Thekte",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271378": [
+   "Riangtlei",
+   1911,
+   4,
+   "Clay Loam"
+  ],
+  "271359": [
+   "Dungtlang Old",
+   1909,
+   4,
+   "Clay Loam"
+  ],
+  "271319": [
+   "Puilo",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271318": [
+   "Arro",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271320": [
+   "Chhawrtui",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271334": [
+   "Lungtan",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271332": [
+   "New Chalrang",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271331": [
+   "Chalrang",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "249774": [
+   "Khawhai",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271308": [
+   "Phunchawngzawl",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271300": [
+   "Pawlrang",
+   1906,
+   4,
+   "Clay Loam"
+  ],
+  "271301": [
+   "Changzawl",
+   1906,
+   4,
+   "Clay Loam"
+  ],
+  "271302": [
+   "Hliappui",
+   1906,
+   4,
+   "Clay Loam"
+  ],
+  "271303": [
+   "Hliappui S",
+   1906,
+   4,
+   "Clay Loam"
+  ],
+  "271304": [
+   "Saichal",
+   1906,
+   4,
+   "Clay Loam"
+  ],
+  "271309": [
+   "Vankal",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271305": [
+   "Dulte",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271306": [
+   "Kawlkulh South",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271336": [
+   "Zaupui",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271313": [
+   "Pamchung",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271312": [
+   "Aiduzawl",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271311": [
+   "Rabung",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271310": [
+   "Khualen",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271314": [
+   "Tualpui",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271315": [
+   "Ngaizawl",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271316": [
+   "Neihdawn",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271322": [
+   "Chawngtlai",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271321": [
+   "Hmuncheng",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271333": [
+   "Melhnih Chalrang",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271329": [
+   "Tualte",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271330": [
+   "Vangtlang",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271325": [
+   "Tuipui",
+   1908,
+   4,
+   "Clay Loam"
+  ],
+  "271324": [
+   "Mualzen",
+   1908,
+   7,
+   "Loam"
+  ],
+  "271337": [
+   "Dilkawn",
+   1908,
+   4,
+   "Clay Loam"
+  ],
+  "271328": [
+   "Kelkang",
+   1908,
+   4,
+   "Clay Loam"
+  ],
+  "271338": [
+   "Zokhawthar",
+   1908,
+   4,
+   "Clay Loam"
+  ],
+  "271327": [
+   "Melbuk",
+   1908,
+   4,
+   "Clay Loam"
+  ],
+  "271326": [
+   "Mualkawi",
+   1908,
+   4,
+   "Clay Loam"
+  ],
+  "271342": [
+   "Lungphunlian",
+   1908,
+   4,
+   "Clay Loam"
+  ],
+  "271341": [
+   "Tualcheng",
+   1908,
+   4,
+   "Clay Loam"
+  ],
+  "271344": [
+   "Hnahlan",
+   1908,
+   4,
+   "Clay Loam"
+  ],
+  "271340": [
+   "Murlen",
+   1908,
+   4,
+   "Clay Loam"
+  ],
+  "271346": [
+   "Vapar",
+   1908,
+   4,
+   "Clay Loam"
+  ],
+  "271345": [
+   "N Diltlang",
+   1908,
+   4,
+   "Clay Loam"
+  ],
+  "271348": [
+   "N Khawbung",
+   1908,
+   4,
+   "Clay Loam"
+  ],
+  "271347": [
+   "Ngur",
+   1908,
+   4,
+   "Clay Loam"
+  ],
+  "249772": [
+   "Khawzawl",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "271343": [
+   "Khuangphah",
+   1908,
+   7,
+   "Loam"
+  ],
+  "271323": [
+   "Khawpuitan",
+   1907,
+   4,
+   "Clay Loam"
+  ],
+  "801510": [
+   "Champhai",
+   1908,
+   4,
+   "Clay Loam"
+  ],
+  "271289": [
+   "Chiahpui",
+   1906,
+   4,
+   "Clay Loam"
+  ],
+  "271291": [
+   "Khawkawn",
+   1906,
+   4,
+   "Clay Loam"
+  ],
+  "271292": [
+   "Mimbung",
+   1906,
+   4,
+   "Clay Loam"
+  ],
+  "271293": [
+   "Hrianghmun",
+   1906,
+   7,
+   "Loam"
+  ],
+  "271294": [
+   "Teikhang",
+   1906,
+   4,
+   "Clay Loam"
+  ],
+  "271290": [
+   "N E Khawdungsei",
+   1906,
+   4,
+   "Clay Loam"
+  ],
+  "271297": [
+   "Ngopa",
+   1906,
+   4,
+   "Clay Loam"
+  ],
+  "271295": [
+   "Kawlbem",
+   1906,
+   4,
+   "Clay Loam"
+  ],
+  "271299": [
+   "Lamzawl",
+   1906,
+   4,
+   "Clay Loam"
+  ],
+  "271298": [
+   "Selam",
+   1906,
+   4,
+   "Clay Loam"
+  ],
+  "271339": [
+   "Vaikhawtlang",
+   1908,
+   4,
+   "Clay Loam"
+  ],
+  "271296": [
+   "Tualbung",
+   1906,
+   7,
+   "Loam"
+  ]
+ },
+ "village_count_total": 99,
+ "village_count_sampled": 99
+}

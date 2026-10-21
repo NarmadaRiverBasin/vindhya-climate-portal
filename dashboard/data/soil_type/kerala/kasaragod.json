@@ -1,0 +1,770 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Kerala",
+  "district": "Kasaragod",
+  "district_lgd": 558,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (121/122 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 6,
+  "dominant_class": "Sandy Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 3428,
+   "Sandy Clay Loam": 28335,
+   "Loam": 376,
+   "Sandy Loam": 18
+  },
+  "n_pixels": 32159
+ },
+ "villages": {
+  "627076": [
+   "Kayyar",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627065": [
+   "Kadambar",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627130": [
+   "Puthur CT",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627127": [
+   "Shiriya CT",
+   5932,
+   4,
+   "Clay Loam"
+  ],
+  "627135": [
+   "Chemnad CT",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627077": [
+   "Kudalmarkala",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627105": [
+   "Nekraje",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627106": [
+   "Ubrangala",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627072": [
+   "Ichilangod",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627082": [
+   "Angadimogaru",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627095": [
+   "Ujarulvar",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627071": [
+   "Kodibail",
+   5932,
+   4,
+   "Clay Loam"
+  ],
+  "627079": [
+   "Chippar",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627133": [
+   "Kudlu CT",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627134": [
+   "Chengala CT",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627175": [
+   "Nileshwar",
+   5631,
+   4,
+   "Clay Loam"
+  ],
+  "627126": [
+   "Mangalpady CT",
+   5932,
+   4,
+   "Clay Loam"
+  ],
+  "627128": [
+   "Koipady CT",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627125": [
+   "Uppala CT",
+   5932,
+   4,
+   "Clay Loam"
+  ],
+  "627108": [
+   "Nettanige",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627073": [
+   "Heroor",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627172": [
+   "Maniyat CT",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627174": [
+   "South Thrikkaripur CT",
+   5631,
+   7,
+   "Loam"
+  ],
+  "627100": [
+   "Kalnad",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627173": [
+   "North Thrikkaripur CT",
+   5631,
+   4,
+   "Clay Loam"
+  ],
+  "627102": [
+   "Thekkil",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627094": [
+   "Kidoor",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "252108": [
+   "Kasaragod",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627090": [
+   "Bela",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627107": [
+   "Kumbadaje",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627160": [
+   "Kilayikode",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627101": [
+   "Perumbala",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627110": [
+   "Adhur",
+   5630,
+   4,
+   "Clay Loam"
+  ],
+  "627093": [
+   "Kannur",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627114": [
+   "Bedadka",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627112": [
+   "Muliyar",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627103": [
+   "Muttathody",
+   5630,
+   4,
+   "Clay Loam"
+  ],
+  "627121": [
+   "Kunjathur CT",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627115": [
+   "Munnad",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627087": [
+   "Padre",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627154": [
+   "Madikai",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627141": [
+   "Belur",
+   5933,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627153": [
+   "Ambalathara",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627161": [
+   "Thimiri",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627139": [
+   "Periya",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627157": [
+   "Cheemeni Ii",
+   5933,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627137": [
+   "Panayal",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627138": [
+   "Chithari",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627140": [
+   "Pullur",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627164": [
+   "Udinoor",
+   5631,
+   4,
+   "Clay Loam"
+  ],
+  "627123": [
+   "Hosabettu CT",
+   5932,
+   4,
+   "Clay Loam"
+  ],
+  "627113": [
+   "Kolathur",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627136": [
+   "Pallikkara Ii",
+   5631,
+   4,
+   "Clay Loam"
+  ],
+  "252110": [
+   "Kanhangad",
+   5631,
+   4,
+   "Clay Loam"
+  ],
+  "627099": [
+   "Patla",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627109": [
+   "Bellur",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627104": [
+   "Pady",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627111": [
+   "Karadka",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627159": [
+   "Kayyur",
+   5631,
+   4,
+   "Clay Loam"
+  ],
+  "627122": [
+   "Manjeshwar CT",
+   5932,
+   4,
+   "Clay Loam"
+  ],
+  "627156": [
+   "Karindalam",
+   5933,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627147": [
+   "West Eleri",
+   5933,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627151": [
+   "Parappa",
+   5933,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627152": [
+   "Thayanur",
+   5933,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627155": [
+   "Kinanoor",
+   5933,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627117": [
+   "Karivedakam",
+   5630,
+   4,
+   "Clay Loam"
+  ],
+  "627060": [
+   "Kodalamogaru",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627068": [
+   "Majibail",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627162": [
+   "Kodakkad",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627096": [
+   "Bombrana",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627158": [
+   "Cheemeni",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627149": [
+   "Chittarikkal",
+   5933,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627148": [
+   "Palavayal",
+   5933,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627150": [
+   "Bheemanady",
+   5933,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627116": [
+   "Kuttikole",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627118": [
+   "Bandadka",
+   5630,
+   4,
+   "Clay Loam"
+  ],
+  "627084": [
+   "Sheni",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627143": [
+   "Kallar",
+   5933,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627081": [
+   "Badoor",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627142": [
+   "Kodom",
+   5933,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627057": [
+   "Pavoor",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627119": [
+   "Adoor",
+   5630,
+   4,
+   "Clay Loam"
+  ],
+  "627146": [
+   "Maloth",
+   5933,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627145": [
+   "Balal",
+   5933,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627144": [
+   "Panathady",
+   5933,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627089": [
+   "Nirchal",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627088": [
+   "Badiyadka",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627092": [
+   "Edanad",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627078": [
+   "Paivalike",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627064": [
+   "Meenja",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627066": [
+   "Moodambail",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627085": [
+   "Enmakaje",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627080": [
+   "Bayar",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627058": [
+   "Vorkady",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627061": [
+   "Koliyoor",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627062": [
+   "Kaliyoor",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627069": [
+   "Badaje",
+   5932,
+   4,
+   "Clay Loam"
+  ],
+  "627063": [
+   "Talikala",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627067": [
+   "Kuloor",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627074": [
+   "Kubanoor",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627075": [
+   "Bekoor",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627083": [
+   "Mugu",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627097": [
+   "Arikady",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627098": [
+   "Ichilampady",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627070": [
+   "Mulinja",
+   5932,
+   4,
+   "Clay Loam"
+  ],
+  "627091": [
+   "Puthige",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627059": [
+   "Pathur",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627086": [
+   "Kattukukke",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627120": [
+   "Delampady",
+   5630,
+   4,
+   "Clay Loam"
+  ],
+  "627165": [
+   "Bare CT",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627129": [
+   "Mogral CT",
+   5932,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627170": [
+   "Perole CT",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627167": [
+   "Pallikkara CT",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627166": [
+   "Udma CT",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627132": [
+   "Madhur CT",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627171": [
+   "Pilicode CT",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627169": [
+   "Ajanur CT",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627168": [
+   "Keekan CT",
+   5631,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627131": [
+   "Shiribagilu CT",
+   5630,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627176": [
+   "Cheruvathur",
+   5631,
+   4,
+   "Clay Loam"
+  ],
+  "627124": [
+   "Bangra Manjeshwar CT",
+   5932,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 122,
+ "village_count_sampled": 121
+}

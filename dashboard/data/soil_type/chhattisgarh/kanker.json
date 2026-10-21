@@ -1,0 +1,6530 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Chhattisgarh",
+  "district": "Kanker",
+  "district_lgd": 381,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (1101/1103 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Sandy Clay": 30,
+   "Clay Loam": 67289,
+   "Sandy Clay Loam": 51578,
+   "Loam": 3962
+  },
+  "n_pixels": 122861
+ },
+ "villages": {
+  "999999": [
+   "Reserved Forest",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448397": [
+   "Chhote Pakhanjur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448394": [
+   "Benur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447789": [
+   "Malaldobri",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448288": [
+   "Vanshri",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448467": [
+   "Kuli",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "447927": [
+   "Bansagar",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448174": [
+   "Padkalbenda",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "447660": [
+   "Haipurkasa",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447792": [
+   "Dhanelikanhar",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447587": [
+   "Bhondiya",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447553": [
+   "Jalhur",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447479": [
+   "Surawand",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447439": [
+   "Raghotola",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447867": [
+   "Viyas Kongera",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447880": [
+   "Singarbhat",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447915": [
+   "Charbhata",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447803": [
+   "Siltara",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447856": [
+   "Devkongera",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447861": [
+   "Gobardhan",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447953": [
+   "Bhiraud",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447636": [
+   "Kalagaon",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448489": [
+   "Paralkot",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448266": [
+   "Odapar",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448248": [
+   "Badejhar Katta",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448399": [
+   "Durgapur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448374": [
+   "Tarunnagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448368": [
+   "Tokajabelee",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448365": [
+   "Irpanar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448373": [
+   "Manipur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448371": [
+   "Shankar Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448370": [
+   "Shakti Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448372": [
+   "Gopalpur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448367": [
+   "Kanhargaon",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448364": [
+   "Deepnagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448366": [
+   "Orchha",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448360": [
+   "Pindkasa",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448362": [
+   "Kurenar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448363": [
+   "Ashutosh Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448356": [
+   "Tiralgarh",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448355": [
+   "Padenga",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448359": [
+   "Gattapalli",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448335": [
+   "Raghunathpur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448379": [
+   "Vishnupur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448383": [
+   "Daya Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448382": [
+   "Panawar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448380": [
+   "Mausamtola",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448398": [
+   "Uliya",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448381": [
+   "Goutampur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448378": [
+   "Jairam Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448348": [
+   "Sawer",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448375": [
+   "Hawalbaras",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448352": [
+   "Shankar Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448358": [
+   "Netaji Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448347": [
+   "Govindpur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448361": [
+   "Karshak Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448369": [
+   "Vikaspalli",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448357": [
+   "Ghotanbeda",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448350": [
+   "Markanar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448353": [
+   "Radhapur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448343": [
+   "Haridaspur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448351": [
+   "Mekawahi",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448354": [
+   "Karkonda",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448341": [
+   "Shantipur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448342": [
+   "Palnadi",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448339": [
+   "Janakpur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448344": [
+   "Bande",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448202": [
+   "Radha Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448345": [
+   "Vijaipur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448346": [
+   "Bande Colony",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448337": [
+   "Maroda",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448340": [
+   "Kirshan Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448300": [
+   "Jagannathpur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448303": [
+   "Lakhanpur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448336": [
+   "Bhavanipur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448294": [
+   "Penkodo",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448210": [
+   "Kalyanpur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448212": [
+   "Mayapur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448205": [
+   "Hardaipur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448301": [
+   "Durgapur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448203": [
+   "Avadhpur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448213": [
+   "Ramkrishanpur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448208": [
+   "Bramhapur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448209": [
+   "Ravindra Nagar",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448201": [
+   "Gondahoor",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448304": [
+   "Rup Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448211": [
+   "Murjhar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448485": [
+   "Kodhur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448487": [
+   "Musfarsi",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448480": [
+   "Pitechur",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448486": [
+   "Tikameta",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448404": [
+   "Sawan Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448406": [
+   "Morkhandi",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448400": [
+   "Tadwaili",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448403": [
+   "Ashok Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448405": [
+   "Burgi",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448402": [
+   "Jonawar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448396": [
+   "Marbeda",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448389": [
+   "Sitram",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448401": [
+   "Rengawahi",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448483": [
+   "Alldand",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448327": [
+   "Belgal",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448377": [
+   "Todhur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448330": [
+   "Badebethiya",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448331": [
+   "Chitranjan Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448332": [
+   "Khandi",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448385": [
+   "Dharampur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448388": [
+   "Bango Ghodiya",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448387": [
+   "Kandadi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448334": [
+   "Nagaldand",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448376": [
+   "Hanuman Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448333": [
+   "Vivek Nagar",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448395": [
+   "Pakurkal",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448391": [
+   "Ghodaghat",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448390": [
+   "Aakmeta",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448393": [
+   "Beloda",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448386": [
+   "Bechaghat",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448384": [
+   "Chhote Bethiya",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448317": [
+   "Mehda",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448323": [
+   "Manjhukutni",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448322": [
+   "Kalarkutni",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448319": [
+   "Machpalli",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448324": [
+   "Jurhanmehda",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448318": [
+   "Burka",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448315": [
+   "Tekamata",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448316": [
+   "Sahdongri",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448279": [
+   "Karekatta",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448392": [
+   "Sirpur",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448481": [
+   "Hidur",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448484": [
+   "Kheiripahar",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448321": [
+   "Achin Nagar",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448326": [
+   "Brehbeda",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448488": [
+   "Kanchangundi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448482": [
+   "Ogar",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448491": [
+   "Kotulbeda",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448492": [
+   "Huchakot",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448422": [
+   "Hatadkasa",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448424": [
+   "Gundul",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448421": [
+   "Panedobir",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448419": [
+   "Aalparas",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448418": [
+   "Kurusper",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448414": [
+   "Kehlabeda",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448423": [
+   "Aalpar",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448416": [
+   "Kagbaras",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448420": [
+   "Jungda",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448415": [
+   "Kesekodi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448417": [
+   "Chilparas",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448311": [
+   "Aadapharsi",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448329": [
+   "Jabelee",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448308": [
+   "Anjadi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448325": [
+   "Bhurbhusi",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448281": [
+   "Indrapuri",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448328": [
+   "Balligarh",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448314": [
+   "Nirde",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448313": [
+   "Laxmipur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448338": [
+   "Gaurishankar Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448309": [
+   "Murdonda",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448349": [
+   "Brajpur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448307": [
+   "Ghodagaon",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448302": [
+   "Baikunthpur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448252": [
+   "Murawandi",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448299": [
+   "Chetanyapur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448297": [
+   "Indraprasth",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448293": [
+   "Nawagondahoor",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448312": [
+   "Phurphundi",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448289": [
+   "Yogendra Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448305": [
+   "Purshotam Nagar",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448298": [
+   "Udaiopur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448286": [
+   "Sham Nagar",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448310": [
+   "Janki Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448296": [
+   "Anupur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448287": [
+   "Jaishri Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448306": [
+   "Dotometa",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448263": [
+   "Warkot",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448320": [
+   "Sawrup Nagar",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448280": [
+   "Shripur",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448264": [
+   "Pariyahoor",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448265": [
+   "Khedegaon",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448479": [
+   "Musarghat",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448459": [
+   "Mahla",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448478": [
+   "Berkot",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448477": [
+   "Nedgaon",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448275": [
+   "Avinash Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448261": [
+   "Budhandand",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448278": [
+   "Hari Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448277": [
+   "Chandanpur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448273": [
+   "Thakur Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448274": [
+   "Bhingidar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448276": [
+   "Shanti Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448262": [
+   "Partapur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448236": [
+   "Badekapsi",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448291": [
+   "Hariharpur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448206": [
+   "Nawanareki",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448204": [
+   "Chandipur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "253146": [
+   "Pakhajur",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448290": [
+   "Matoli",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448284": [
+   "Yesebeda",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448283": [
+   "Vidhya Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448285": [
+   "Govindpur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448215": [
+   "Ratanpur",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448221": [
+   "Chanakyapuri",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448223": [
+   "Krishna Nagar",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448222": [
+   "Satyanand Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448282": [
+   "Subhash Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448292": [
+   "Sohgaon",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448219": [
+   "Harangarh",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448198": [
+   "Jaipur",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448207": [
+   "Hanker",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448234": [
+   "Vishrampur",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448229": [
+   "Devpur",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448220": [
+   "Bharatpur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448214": [
+   "Pitobhodiya",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448232": [
+   "Koyegaon",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448231": [
+   "Vivekanand Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448230": [
+   "Sharda Nagar",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448235": [
+   "Aalor",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448233": [
+   "Kamalpur",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448464": [
+   "Boganmodiya",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448227": [
+   "Ram Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448224": [
+   "Udumgaon",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448228": [
+   "Khairkatta Colony",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448267": [
+   "Barda",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448243": [
+   "Yashwant Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448268": [
+   "Balrampur",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448272": [
+   "Devipur",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448271": [
+   "Rajendra Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448269": [
+   "Satya Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448242": [
+   "Dwarkapuri",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448241": [
+   "Kali Nagar",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448240": [
+   "Bapu Nagar",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448270": [
+   "Deoda",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448217": [
+   "Shri Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448216": [
+   "Chhotekapsi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448218": [
+   "Donde",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448239": [
+   "Nendgaon",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448476": [
+   "Tumda",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448474": [
+   "Urpanjur",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448475": [
+   "Devipara",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448249": [
+   "Madle",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448260": [
+   "Chhotejharkatta",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448472": [
+   "Tadhoor",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448473": [
+   "Metamadhale",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448237": [
+   "Prem Nagar",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "447724": [
+   "Pachangi",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447723": [
+   "Dodadekadar",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447722": [
+   "Chikhli",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447725": [
+   "Hadfad",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "448247": [
+   "Pipli",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448246": [
+   "Masoor",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448245": [
+   "Badgaon",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448251": [
+   "Ghotiya",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448250": [
+   "Mandagaon",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448238": [
+   "Nahgeeda",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448256": [
+   "Kamteda",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448255": [
+   "Kringalmuspi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448254": [
+   "Katgaon",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448443": [
+   "Wala",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448438": [
+   "Kotodi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448440": [
+   "Pulunjsalebhat",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448257": [
+   "Jamdi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448253": [
+   "Katabans",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448258": [
+   "Mindi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448437": [
+   "Kadame",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448434": [
+   "Kheirkatta",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448444": [
+   "Udanpur",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448442": [
+   "Kodosalebhat",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448441": [
+   "Manegaon",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448439": [
+   "Dadbisalebhat",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448431": [
+   "Kastura",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448446": [
+   "Jiramtarai",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448445": [
+   "Murnar",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448430": [
+   "Khutgaon",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448409": [
+   "Tursani",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448412": [
+   "Gudabeda",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448407": [
+   "Gutakachhar",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448411": [
+   "Markanar",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448413": [
+   "Gattakal",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448408": [
+   "Koyali Beda",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448226": [
+   "Khairkatta",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448259": [
+   "Sambalpur",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448433": [
+   "Sulangi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448460": [
+   "Mendra",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448465": [
+   "Nadichua",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448457": [
+   "Kataru Kurushabodi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448493": [
+   "Hetale",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448494": [
+   "Lohare",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448495": [
+   "Enahura",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448496": [
+   "Nironda",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "447732": [
+   "Saraghughamre",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "448468": [
+   "Rampur",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448471": [
+   "Pittegudum",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448466": [
+   "Mudla",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448469": [
+   "Karramarka",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448470": [
+   "Markachua",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "447737": [
+   "Latmarka",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447735": [
+   "Dondkaanhur",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447734": [
+   "Nirondadih",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447743": [
+   "Newarkheda",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447742": [
+   "Kawachikatel",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "448295": [
+   "Murawandi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "447733": [
+   "Metaghamre",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447736": [
+   "Juee",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "448456": [
+   "Gotaj",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448455": [
+   "Nawgel",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448452": [
+   "Aalkanhar",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448447": [
+   "Manhakal",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448450": [
+   "Kurush Bodi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448454": [
+   "Chargaon",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448453": [
+   "Balaikachhar",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448425": [
+   "Sargikot",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448451": [
+   "Metabodeli",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448007": [
+   "Surewahi",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "447744": [
+   "Sandtarai",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "448448": [
+   "Chhotebodeli",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448490": [
+   "Hitoolbad",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "447740": [
+   "Vatintola",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447745": [
+   "Kopakatel",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447739": [
+   "Kodapakha",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447741": [
+   "Paurkheda",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447738": [
+   "Bangachar",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "448018": [
+   "Nelsod",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448020": [
+   "Nawagarh",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448449": [
+   "Porondi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448193": [
+   "Chindabhata",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448185": [
+   "Irakadand",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448181": [
+   "Sawalibaras",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448166": [
+   "Bheisgaon",
+   3353,
+   7,
+   "Loam"
+  ],
+  "448167": [
+   "Aturbeda",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448180": [
+   "Madpa",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448165": [
+   "Totin Dangra",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448186": [
+   "Patebeda",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448182": [
+   "Pallakasa",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448164": [
+   "Padhargaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448183": [
+   "Chapanhur",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448184": [
+   "Anjarel",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448081": [
+   "Dangara",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448078": [
+   "Baihasalebhat",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448079": [
+   "Chhotejaitpuri",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448080": [
+   "Phulpad",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448072": [
+   "Kumhari",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448157": [
+   "Kotkursai",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448189": [
+   "Ghotiya",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448188": [
+   "Nibra",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448187": [
+   "Kongali",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448192": [
+   "Kohka",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448194": [
+   "Dadampar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448145": [
+   "Karmari",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448148": [
+   "Kongera",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448146": [
+   "Mechanar",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448141": [
+   "Bertanar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448140": [
+   "Paladmeta",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448142": [
+   "Telanga",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448144": [
+   "Mulle",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448138": [
+   "Halainar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448139": [
+   "Budhakhursai",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448147": [
+   "Kudhurpal",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448151": [
+   "Raye",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448155": [
+   "Gawadi",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448156": [
+   "Huchadi",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448152": [
+   "Deogaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448153": [
+   "Pipra",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448039": [
+   "Garda",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448149": [
+   "Kiskodo",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448150": [
+   "Bandapal",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448158": [
+   "Krohobeda",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448154": [
+   "Chapai",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448128": [
+   "Matla A",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448143": [
+   "Garda",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448190": [
+   "Rekabhat",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448173": [
+   "Tekapani",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448410": [
+   "Kandadi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448429": [
+   "Kotul",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448435": [
+   "Badrengi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448436": [
+   "Marda",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448427": [
+   "Kasadand",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448428": [
+   "Pusawahi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448075": [
+   "Satighat",
+   3353,
+   7,
+   "Loam"
+  ],
+  "448074": [
+   "Kosronda",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448066": [
+   "Tumapal",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448056": [
+   "Kursel",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448073": [
+   "Hurtarai",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448191": [
+   "Kandari",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448076": [
+   "Kolar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448077": [
+   "Talabeda",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448091": [
+   "Murpal",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448071": [
+   "Mangtasalebhat",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448070": [
+   "Padbeda",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448067": [
+   "Tadokee",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448069": [
+   "Kachwar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448087": [
+   "Sarandi",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448088": [
+   "Mahurpat",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448163": [
+   "Barche",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448090": [
+   "Malmeta",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448089": [
+   "Edanar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448085": [
+   "Dhaunsakalan",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448065": [
+   "Hoyechur",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448068": [
+   "Gunjnar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448061": [
+   "Kaleparas",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448059": [
+   "Sirsangi",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448060": [
+   "Amakada",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448063": [
+   "Bondanar",
+   3353,
+   7,
+   "Loam"
+  ],
+  "448064": [
+   "Ghotulbeda",
+   3353,
+   7,
+   "Loam"
+  ],
+  "448083": [
+   "Chipondi",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448062": [
+   "Chingnar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448082": [
+   "Aamagaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448084": [
+   "Murnarkhurd",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448086": [
+   "Dhaunsa Chhote",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448172": [
+   "Behekatta",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448022": [
+   "Mandagaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448011": [
+   "Sode",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448003": [
+   "Kodagaon",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448005": [
+   "Temrupani",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448004": [
+   "Yetewalka",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448032": [
+   "Bulawand",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448035": [
+   "Kodokhasgaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448034": [
+   "Gawadekhasgaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448028": [
+   "Masbaras",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448025": [
+   "Pungaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448024": [
+   "Parali",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448033": [
+   "Lampuri",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448043": [
+   "Kuhche",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448009": [
+   "Nawagabdegaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448006": [
+   "Bhainsasur",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448017": [
+   "Karregaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448426": [
+   "Baweli",
+   3354,
+   7,
+   "Loam"
+  ],
+  "448432": [
+   "Siksod",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448023": [
+   "Siksod",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448048": [
+   "Hindubinapal",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448008": [
+   "Ghumar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448002": [
+   "Konechur",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448010": [
+   "Khodpani",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448458": [
+   "Juna Gabadegaon",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448021": [
+   "Kanagaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "253248": [
+   "Antagarh",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448160": [
+   "Hurrapijodi",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448168": [
+   "Madam",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448161": [
+   "Badepijodi",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448159": [
+   "Upar Kamta",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448036": [
+   "Imlipadar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448195": [
+   "Reka Beda",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448037": [
+   "Deharitopal",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448030": [
+   "Badetopal",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448040": [
+   "Tahkal",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448038": [
+   "Khadgaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448041": [
+   "Himoda",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448042": [
+   "Kadhahikhodra",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448045": [
+   "Nawagaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448044": [
+   "Kalgaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448047": [
+   "Kotankhod",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448046": [
+   "Pewari",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448031": [
+   "Lamkanhar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448055": [
+   "Gondbinapal",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448054": [
+   "Taralkatta",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448050": [
+   "Godri",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448058": [
+   "Badejaitpuri",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448053": [
+   "Ghunsimunda",
+   3353,
+   7,
+   "Loam"
+  ],
+  "448051": [
+   "Kamta",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448052": [
+   "Sureli",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448049": [
+   "Jaitanawagaon",
+   3353,
+   7,
+   "Loam"
+  ],
+  "448057": [
+   "Muramer",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448176": [
+   "Baragenar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448177": [
+   "Maspur",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448131": [
+   "Kokwar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448179": [
+   "Kilenar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448175": [
+   "Mankot",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448178": [
+   "Medanar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448136": [
+   "Alanar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448135": [
+   "Kotkodo",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448129": [
+   "Tuskal",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448133": [
+   "Aarra",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448132": [
+   "Koranhur",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448134": [
+   "Tamorra",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448130": [
+   "Darrokhalari",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448169": [
+   "Hiranpar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448170": [
+   "Joodand",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448171": [
+   "Bagjhar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448120": [
+   "Kotkud",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448117": [
+   "Nagarbeda",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448122": [
+   "Kurutola",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448121": [
+   "Badeteoda",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448118": [
+   "Amabeda",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448126": [
+   "Koliyari",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448125": [
+   "Gedgaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448112": [
+   "Phuphgaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448123": [
+   "Sode",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448127": [
+   "Kesurbeda",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448124": [
+   "Bharritola",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448137": [
+   "Matla B",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448162": [
+   "Semargaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448119": [
+   "Kohchur",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448093": [
+   "Padhargaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448109": [
+   "Neeljhar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448094": [
+   "Tahkantola",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448092": [
+   "Bodagaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "447628": [
+   "Khasgaon",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "448107": [
+   "Belondi",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448108": [
+   "Chichgaon",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448110": [
+   "Lohtar",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448111": [
+   "Suklapal",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448114": [
+   "Sendurmeta",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448106": [
+   "Chikhli",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448095": [
+   "Pusagaon",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448102": [
+   "Pusaghati",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448101": [
+   "Adenga",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448104": [
+   "Rajpur",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448103": [
+   "Dubal",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448105": [
+   "Tumasnar",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448113": [
+   "Yetegaon",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448115": [
+   "Timnar",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448116": [
+   "Changodi",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448199": [
+   "Kurusbodi",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448196": [
+   "Anand Nagar",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448461": [
+   "Hanfarsi",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448200": [
+   "Sitapur",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448197": [
+   "Dhorkatta",
+   3354,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448462": [
+   "Behbeda",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448463": [
+   "Ujala",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "448225": [
+   "Irakbutta",
+   3354,
+   4,
+   "Clay Loam"
+  ],
+  "447705": [
+   "Godpal",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447716": [
+   "Naretitola",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447714": [
+   "Manghur",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447715": [
+   "Khedegaon",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447719": [
+   "Kosparali",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447721": [
+   "Sonpal",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447726": [
+   "Gurwandi",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447713": [
+   "Anhur",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447712": [
+   "Michewada",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447718": [
+   "Palvi",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447710": [
+   "Karkapal",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447711": [
+   "Paliyar",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447709": [
+   "Kodekurse",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447720": [
+   "Hamatwahi",
+   3350,
+   7,
+   "Loam"
+  ],
+  "447703": [
+   "Karaki",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447704": [
+   "Uikatola",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447729": [
+   "Dargarh",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "448244": [
+   "Chhindpal",
+   3354,
+   7,
+   "Loam"
+  ],
+  "447717": [
+   "Parali",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447707": [
+   "Chaurgaon",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447706": [
+   "Guddatola",
+   3350,
+   7,
+   "Loam"
+  ],
+  "447708": [
+   "Nelchang",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447701": [
+   "Bhurke",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447702": [
+   "Otekatta",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447776": [
+   "Murkagudoom",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447774": [
+   "Gumadi Chuwa",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447777": [
+   "Karkajhar",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447727": [
+   "Gumdidih",
+   3350,
+   7,
+   "Loam"
+  ],
+  "447760": [
+   "Padgal",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447728": [
+   "Khedegaon",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447731": [
+   "Hulghat",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447730": [
+   "Kondo",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447759": [
+   "Bhuski",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447757": [
+   "Pudomichgaon",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447699": [
+   "Kondruj",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447698": [
+   "Gudum",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447755": [
+   "Kodogaon",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447756": [
+   "Surungdah",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447758": [
+   "Sadhumichgaon",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447762": [
+   "Andhabeda",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447753": [
+   "Odahur",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447778": [
+   "Gopaltola",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447761": [
+   "Hahaldi",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447775": [
+   "Halmaledi",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447754": [
+   "Garda",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "448016": [
+   "Amodi",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448019": [
+   "Jethegaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "447750": [
+   "Medo",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447749": [
+   "Newari",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447747": [
+   "Chahachad",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "448012": [
+   "Dhutapipli",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "447752": [
+   "Michesukhi",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447751": [
+   "Sukhai",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447768": [
+   "Diyagaon",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447748": [
+   "Marrampani",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447746": [
+   "Sihari",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447769": [
+   "Madle",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447685": [
+   "Bodeli",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447684": [
+   "Mindoda",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447686": [
+   "Bhandardigi",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447682": [
+   "Hanpattari",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447766": [
+   "Palachur",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447767": [
+   "Durgkondal",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447765": [
+   "Karramad",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447764": [
+   "Khutgaon",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447763": [
+   "Dodade",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447525": [
+   "Bikramganj",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447521": [
+   "Jepra",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447522": [
+   "Jatawada",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447523": [
+   "Kokde",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447519": [
+   "Uttamar",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447683": [
+   "Dangra",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447772": [
+   "Sonjhariyapara",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447690": [
+   "Dandaikheda",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447691": [
+   "Bhelwapani",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447696": [
+   "Bhejhar",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447700": [
+   "Tumarisur",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447688": [
+   "Parbheli",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447692": [
+   "Jodekhurse",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447697": [
+   "Dhanwa Phulchur",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447695": [
+   "Meregaon",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447680": [
+   "Adgud",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447689": [
+   "Sitalpur",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447693": [
+   "Beldo",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447674": [
+   "Chemal",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447670": [
+   "Kanapal",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447676": [
+   "Padgal",
+   3350,
+   7,
+   "Loam"
+  ],
+  "447669": [
+   "Eragaon",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447687": [
+   "Gumdi",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447694": [
+   "Pitefulchur",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447773": [
+   "Suparpani",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447664": [
+   "Sonadai",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447655": [
+   "Mohgaon",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447665": [
+   "Pidchod",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447771": [
+   "Nayagaon",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447658": [
+   "Silpat",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447661": [
+   "Lohattar",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447657": [
+   "Hilchur",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447770": [
+   "Nalkasa",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447663": [
+   "Jharripara",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447659": [
+   "Kodakhurri",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447575": [
+   "Binayakpur",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447576": [
+   "Jholin",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447579": [
+   "Jamdi",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447565": [
+   "Karmoti",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447570": [
+   "Chabela",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447645": [
+   "Bargaon",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447675": [
+   "Raurwahi",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447668": [
+   "Amakada",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447678": [
+   "Amagarh",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447672": [
+   "Mahendrapur",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447649": [
+   "Chhindgaon",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447653": [
+   "Damkasa",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447571": [
+   "Tudge",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447681": [
+   "Hinganpuri",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447679": [
+   "Nawagaon",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447677": [
+   "Sateli",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447673": [
+   "Gulalbodi",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447666": [
+   "Barheli",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447651": [
+   "Tarhul",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447652": [
+   "Bhursa Tarandul",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447667": [
+   "Pedawari",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447654": [
+   "Mokha",
+   3350,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447671": [
+   "Chihro",
+   3350,
+   7,
+   "Loam"
+  ],
+  "447662": [
+   "Amaguhan",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447648": [
+   "Seoni",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447650": [
+   "Duwa",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447637": [
+   "Hinganjhar",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447640": [
+   "Vainar",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447644": [
+   "Hatkondal",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447642": [
+   "Jhitkatola",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447639": [
+   "Tamoda",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447647": [
+   "Goyanda",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447630": [
+   "Kalwar",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447634": [
+   "Kalangpuri",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447646": [
+   "Ghotulmunda",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447633": [
+   "Pujari Para",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447656": [
+   "Gudphel",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447631": [
+   "Nedgaon",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447635": [
+   "Taraighotia",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447632": [
+   "Naghur",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447629": [
+   "Rasuli",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447552": [
+   "Parwi",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447536": [
+   "Janakpur",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447537": [
+   "Kewati",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447538": [
+   "Harharpani",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447539": [
+   "Faraskot",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447541": [
+   "Asulkhar",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447545": [
+   "Chichmarra",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447535": [
+   "Birkondal",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447562": [
+   "Ghodabatar",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447529": [
+   "Bhiragaon",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447527": [
+   "Puttarwahi",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447531": [
+   "Pandripani",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447532": [
+   "Sonekanhar",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447543": [
+   "Kanakpur",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447534": [
+   "Alawarkhurd",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447533": [
+   "Alawarkalan",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447528": [
+   "Ghotia",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447530": [
+   "Tumarikuhi",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447524": [
+   "Bagwahi",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "448027": [
+   "Barrebeda",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448026": [
+   "Hirrabodi",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448015": [
+   "Laman",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "448014": [
+   "Aamakot",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "447526": [
+   "Botechang",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "448013": [
+   "Umki",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "447520": [
+   "Junwani",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447546": [
+   "Kinari",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447542": [
+   "Kuwapani",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447544": [
+   "Pewari",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "448029": [
+   "Pondgaon",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "447626": [
+   "Silibahar",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447627": [
+   "Dhaneli",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447556": [
+   "Bhurka",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447540": [
+   "Shahkatta",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447554": [
+   "Hafarra",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447555": [
+   "Khadaka",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447549": [
+   "Bheja",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447621": [
+   "Niche Tonka",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447625": [
+   "Katholi",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447623": [
+   "Uper Tonka",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447620": [
+   "Baskuhud",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447618": [
+   "Telamma",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447602": [
+   "Selegondi",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447604": [
+   "Baijanpuri",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447607": [
+   "Ghodda",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447605": [
+   "Jampara",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447609": [
+   "Kurri",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447596": [
+   "Bayanar",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447599": [
+   "Kanechur",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447598": [
+   "Uchpani",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447600": [
+   "Dongarkatta",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447589": [
+   "Bhanbeda",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447588": [
+   "Jalinkasa",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447591": [
+   "Budeli",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447592": [
+   "Mungwal",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447611": [
+   "Chargaon",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447614": [
+   "Barbaspur",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447615": [
+   "Barvi",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447583": [
+   "Iragaon",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447585": [
+   "Dabkatta",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447584": [
+   "Mardel",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447590": [
+   "Chichgaon",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447547": [
+   "Ranidongri",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447573": [
+   "Bhaisakanhar",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447586": [
+   "Pichechkatta",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447574": [
+   "Bhaismundi",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447578": [
+   "Bogar",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447577": [
+   "Tedhaikondal",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447563": [
+   "Chogel",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447564": [
+   "Mulla",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447567": [
+   "Karathi",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "253145": [
+   "Bhanupratappur",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447560": [
+   "Kanhargaon",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447558": [
+   "Narayanpur",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447561": [
+   "Mohgaon",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447559": [
+   "Kulhadkatta",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447551": [
+   "Ghota",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447557": [
+   "Ranwahi",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447566": [
+   "Dhangudra",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447568": [
+   "Sambalpur",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447569": [
+   "Pandarpuri",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447572": [
+   "Basla",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447550": [
+   "Khora",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447548": [
+   "Kudal",
+   3349,
+   7,
+   "Loam"
+  ],
+  "447820": [
+   "Pidhapal",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447819": [
+   "Kanagaon",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447826": [
+   "Mujalgondi",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447827": [
+   "Budhiyarmari",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447818": [
+   "Murragaon",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447817": [
+   "Bhaisgaon",
+   3351,
+   4,
+   "Clay Loam"
+  ],
+  "447816": [
+   "Kumkakudum",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447814": [
+   "Kotgaon Uper",
+   3351,
+   4,
+   "Clay Loam"
+  ],
+  "447815": [
+   "Pusajhar",
+   3351,
+   4,
+   "Clay Loam"
+  ],
+  "447813": [
+   "Kotgaon Niche",
+   3351,
+   4,
+   "Clay Loam"
+  ],
+  "447812": [
+   "Domaharra",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447811": [
+   "Koliyari",
+   3351,
+   4,
+   "Clay Loam"
+  ],
+  "447832": [
+   "Barchegondi",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447833": [
+   "Mode",
+   3351,
+   4,
+   "Clay Loam"
+  ],
+  "447619": [
+   "Hatkara",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447616": [
+   "Tueguhan",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447622": [
+   "Banoli",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "448099": [
+   "Marmakonadi",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448096": [
+   "Useli",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448097": [
+   "Khadkagaon",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447624": [
+   "Tarandul",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "448098": [
+   "Nilegondi",
+   3353,
+   4,
+   "Clay Loam"
+  ],
+  "447825": [
+   "Tultuli",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447829": [
+   "Malajkudum",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447828": [
+   "Kalmuchche",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447822": [
+   "Ghothiya",
+   3351,
+   4,
+   "Clay Loam"
+  ],
+  "448100": [
+   "Gumjhir",
+   3353,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447862": [
+   "Iradah",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447858": [
+   "Mardapoti",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447824": [
+   "Marrapi",
+   3351,
+   4,
+   "Clay Loam"
+  ],
+  "447863": [
+   "Jiwalamari",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447851": [
+   "Nawagaon Bhavgir",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447852": [
+   "Ichchhapur",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447847": [
+   "Kodajunga",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447834": [
+   "Mandri",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447821": [
+   "Kirgapati",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447835": [
+   "Salhebhat",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447823": [
+   "Dhantulsi",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447843": [
+   "Chiwranj",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447853": [
+   "Amajhola",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447796": [
+   "Awrabhat",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447475": [
+   "Hinganjhar",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447469": [
+   "Padampur",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447470": [
+   "Kishanpuri",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447474": [
+   "Chandeli",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447478": [
+   "Telgara",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447477": [
+   "Udkuda",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447476": [
+   "Bagdongari",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447468": [
+   "Parsoda",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447473": [
+   "Guttitola",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447780": [
+   "Salhebhat Makdi",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447842": [
+   "Malgaon",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447791": [
+   "Makri Singrai",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447844": [
+   "Arjuni",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447790": [
+   "Makrikhuna",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447836": [
+   "Matwada Lal",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447784": [
+   "Kokadi",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447786": [
+   "Nawagaon Nathiya",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447787": [
+   "Pandarwahi",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447785": [
+   "Gaurgaon",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447480": [
+   "Mainpur",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447788": [
+   "Petoli",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447794": [
+   "Kirgoli",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447837": [
+   "Muddongari",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447839": [
+   "Kokpur",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447841": [
+   "Khamdhodangi",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447795": [
+   "Deori Bar",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447793": [
+   "Kanharpuri",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447830": [
+   "Rode",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447840": [
+   "Kurishtikur",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447809": [
+   "Sureli",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447810": [
+   "Koretha",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447806": [
+   "Telawat",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447808": [
+   "Bhairadih",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447807": [
+   "Kapsi",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447831": [
+   "Albeda",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447801": [
+   "Kokanpur",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447802": [
+   "Talakurra",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447805": [
+   "Markatola Fatechand",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447804": [
+   "Dabena Babu",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447797": [
+   "Kondagaon",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447799": [
+   "Andi",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447798": [
+   "Potgaon",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447800": [
+   "Kewatintola",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447838": [
+   "Nadanmara",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447603": [
+   "Selegaon",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447606": [
+   "Chilhati",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447608": [
+   "Korar",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447610": [
+   "Dongargaon",
+   3349,
+   7,
+   "Loam"
+  ],
+  "447612": [
+   "Radwahi",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447613": [
+   "Astara",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447617": [
+   "Hetarkasa",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447779": [
+   "Mudpar Subhiya",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447883": [
+   "Thelkabode",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447882": [
+   "Govindpur",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447458": [
+   "Mainkheda",
+   3348,
+   4,
+   "Clay Loam"
+  ],
+  "447459": [
+   "Rampur",
+   3348,
+   4,
+   "Clay Loam"
+  ],
+  "447457": [
+   "Kashipur",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447594": [
+   "Bhaisakanhar",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447595": [
+   "Narsinghpur",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447597": [
+   "Dumarkot",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447593": [
+   "Hawarkondal",
+   3349,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447580": [
+   "Kachche",
+   3349,
+   7,
+   "Loam"
+  ],
+  "447581": [
+   "Salhe",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447582": [
+   "Tekadodha",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447641": [
+   "Parrekodo",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447638": [
+   "Hirange",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447643": [
+   "Bhirawahi",
+   3350,
+   4,
+   "Clay Loam"
+  ],
+  "447510": [
+   "Bhaisa Katta",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447482": [
+   "Khairkheda",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447495": [
+   "Tuaguhan",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447434": [
+   "Pandaripani",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447433": [
+   "Junwani",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447429": [
+   "Pradhandongari",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447426": [
+   "Mahud",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447427": [
+   "Bharritola",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447442": [
+   "Bargari",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447489": [
+   "Nawagaon Saradhui",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447453": [
+   "Tirkadand",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447494": [
+   "Basanwahi",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447437": [
+   "Telguda",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447447": [
+   "Dhedkohka",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447428": [
+   "Mudkhusara",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447432": [
+   "Bhelai",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447472": [
+   "Jambahara",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447464": [
+   "Mayana",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447436": [
+   "Bhiraund",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447440": [
+   "Charbhatha",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447451": [
+   "Ukari",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447488": [
+   "Gadagauri",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447483": [
+   "Kana Pod",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447516": [
+   "Pipraud",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447496": [
+   "Haradula",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447497": [
+   "Kilepar",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447450": [
+   "Salhetola",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447424": [
+   "Dokala",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447422": [
+   "Damkasa",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447455": [
+   "Kahadgondi",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447481": [
+   "Babu Kohaka",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447492": [
+   "Khartha",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447490": [
+   "Ratesara",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447466": [
+   "Katagaon",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447467": [
+   "Jawartara",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447518": [
+   "Tarasgaon",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "253144": [
+   "Charama",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447430": [
+   "Kandel",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447445": [
+   "Awari",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447460": [
+   "Bhotha",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447515": [
+   "Chinauri",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447463": [
+   "Lilejhar",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447465": [
+   "Khairwahi",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447423": [
+   "Kasawahi",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447431": [
+   "Tansi",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447435": [
+   "Karaiha",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447446": [
+   "Chuchrungpur",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447444": [
+   "Karrajaisa",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447508": [
+   "Araud",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447461": [
+   "Markatola",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447509": [
+   "Kotela",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447449": [
+   "Kurrutola",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447448": [
+   "Gidhali",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447498": [
+   "Jepra",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447462": [
+   "Barkachhar",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447456": [
+   "Puri",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447491": [
+   "Golkumhada",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447493": [
+   "Bhuigaon",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447507": [
+   "Tahkapar",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447441": [
+   "Dallidih",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447452": [
+   "Ratedih",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447443": [
+   "Dargahan",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447425": [
+   "Machandur",
+   3348,
+   4,
+   "Clay Loam"
+  ],
+  "447484": [
+   "Lakhanpuri",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447517": [
+   "Bodeli Ponka",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447485": [
+   "Chawadi",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447506": [
+   "Kurubhat",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447454": [
+   "Chapeli",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447486": [
+   "Sirsida",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447471": [
+   "Kottara",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447511": [
+   "Badatola",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447487": [
+   "Badegauri",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447438": [
+   "Girhola",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447601": [
+   "Haranpuri",
+   3349,
+   4,
+   "Clay Loam"
+  ],
+  "447865": [
+   "Pusawand",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447866": [
+   "Puswada",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447857": [
+   "Borgaon",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447859": [
+   "Komalpur",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447860": [
+   "Lulegondi",
+   3351,
+   4,
+   "Clay Loam"
+  ],
+  "447854": [
+   "Kulgaon",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447855": [
+   "Aturgaon",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447849": [
+   "Patharri",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447850": [
+   "Gad Pichhawadi",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447848": [
+   "Mankeshri",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447864": [
+   "Mohpur",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447978": [
+   "Choriya",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447989": [
+   "Thema",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447988": [
+   "Khalari",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447974": [
+   "Salhebhat",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447990": [
+   "Banspattar",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447987": [
+   "Lendara",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447986": [
+   "Jhulnatendu",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447984": [
+   "Saranda",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447985": [
+   "Kumhankhar",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447994": [
+   "Amapani",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447992": [
+   "Rawas",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447996": [
+   "Tiriyarpani",
+   3352,
+   4,
+   "Clay Loam"
+  ],
+  "447993": [
+   "Parredora",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447991": [
+   "Nishanharra",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447995": [
+   "Chindkhadak",
+   3352,
+   4,
+   "Clay Loam"
+  ],
+  "447948": [
+   "Singarwahi",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447954": [
+   "Kapaspoti",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447952": [
+   "Abhanpur",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447951": [
+   "Pendrawan",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447950": [
+   "Bhainsmundi",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447949": [
+   "Dhanesara",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447946": [
+   "Deoribalaji",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447942": [
+   "Jhaliamari",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447943": [
+   "Manikpur",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447945": [
+   "Budeli",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447944": [
+   "Kanhanpuri",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447941": [
+   "Sonpur",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447939": [
+   "Bagod",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447938": [
+   "Salhe Tola Babu",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447940": [
+   "Markatola Largaon",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447936": [
+   "Mujal Gondi",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447937": [
+   "Chanar",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447933": [
+   "Rampur",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447931": [
+   "Dhekuna",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447930": [
+   "Kurana",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447934": [
+   "Junwani",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447932": [
+   "Chawad",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447935": [
+   "Korrampara",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447977": [
+   "Barkai",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447976": [
+   "Malgaon Rugan",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447975": [
+   "Daldali",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447973": [
+   "Sarona",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447980": [
+   "Karap",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447982": [
+   "Mudpar Dakhani",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447983": [
+   "Singanpur",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447981": [
+   "Dawarkhar",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447979": [
+   "Puriyara",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447781": [
+   "Nara",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447782": [
+   "Hatkongera",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447873": [
+   "Gotpur",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447875": [
+   "Sarangpal",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447876": [
+   "Dashpur",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447877": [
+   "Matwada Modi",
+   3351,
+   3,
+   "Sandy Clay"
+  ],
+  "447868": [
+   "Bevarti",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447869": [
+   "Satlor",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447870": [
+   "Patoud",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447871": [
+   "Anjani",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "250663": [
+   "Kanker",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447878": [
+   "Tondamarka",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447874": [
+   "Dumali",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447872": [
+   "Sidesar",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447846": [
+   "Bhirawahi",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447845": [
+   "Turakhar",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447783": [
+   "Bagodar",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447956": [
+   "Maheshpur",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447963": [
+   "Gahrinbandha",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447957": [
+   "Ghotiyawahi",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447958": [
+   "Dabbipani",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447960": [
+   "Deodongar",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447961": [
+   "Dheklawan",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447962": [
+   "Khajrawan",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447966": [
+   "Dudhawa",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447967": [
+   "Bihawa",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447972": [
+   "Musurputa",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447970": [
+   "Gattagudum",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447969": [
+   "Anchhidongri",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447998": [
+   "Mandabharri",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447997": [
+   "Mawalipara",
+   3352,
+   4,
+   "Clay Loam"
+  ],
+  "448001": [
+   "Basanwahi",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "448000": [
+   "Sainmunda",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447955": [
+   "Mandradarha",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447959": [
+   "Shamtara",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447965": [
+   "Dhanora",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447964": [
+   "Sarwandi",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447968": [
+   "Nayapara",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447971": [
+   "Bhimadih",
+   3352,
+   4,
+   "Clay Loam"
+  ],
+  "447999": [
+   "Bangabari",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447891": [
+   "Butbani",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447514": [
+   "Shahawada",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447501": [
+   "Halba",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447499": [
+   "Durgatola",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447512": [
+   "Palewa",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447503": [
+   "Bhanpuri",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447505": [
+   "Ranidongri",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447513": [
+   "Dodakawahi",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447504": [
+   "Tikrapara",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447502": [
+   "Maddhoba",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447500": [
+   "Gitpahar",
+   3348,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447904": [
+   "Dhourabhat",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447903": [
+   "Uraiya",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447914": [
+   "Kuralthemli",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447911": [
+   "Barethinbahra",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447905": [
+   "Badal",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447910": [
+   "Pathrinara",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447913": [
+   "Dudumbahara",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447916": [
+   "Dabena",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447928": [
+   "Charbhathi",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447929": [
+   "Pandripani",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447924": [
+   "Shriguhan",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447926": [
+   "Umaradah",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447920": [
+   "Amoda",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447923": [
+   "Siharinara",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447921": [
+   "Bhaismudi",
+   3352,
+   4,
+   "Clay Loam"
+  ],
+  "447922": [
+   "Deogaon",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447919": [
+   "Risewada",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447925": [
+   "Lilwapahar",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447894": [
+   "Hatkacharama",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447895": [
+   "Naudabari",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447893": [
+   "Thanabodi",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447897": [
+   "Kishanpuri Pando",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447900": [
+   "Ankhiharra",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447901": [
+   "Kochwahi",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447907": [
+   "Masulpani",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447908": [
+   "Rajpur",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447906": [
+   "Dhodrapahar",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447902": [
+   "Surahi",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "253249": [
+   "Narharpur",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447899": [
+   "Bahnapani",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447896": [
+   "Kosumpani",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447892": [
+   "Dumarpani",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447884": [
+   "Devinawagaon",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447887": [
+   "Biranpur",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447886": [
+   "Bagdongari",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447898": [
+   "Marrampani",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447890": [
+   "Maradeo",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447888": [
+   "Kariyapahar",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447885": [
+   "Murumtara",
+   3352,
+   7,
+   "Loam"
+  ],
+  "447909": [
+   "Khadarwahi",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447889": [
+   "Marwadi",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447879": [
+   "Kodabhat",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447881": [
+   "Pandripani",
+   3351,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447912": [
+   "Bhansuli",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447918": [
+   "Jamgaon",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "447917": [
+   "Dompadar",
+   3352,
+   6,
+   "Sandy Clay Loam"
+  ]
+ },
+ "village_count_total": 1103,
+ "village_count_sampled": 1101
+}

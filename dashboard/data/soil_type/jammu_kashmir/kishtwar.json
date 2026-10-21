@@ -1,0 +1,998 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Jammu & Kashmir",
+  "district": "Kishtwar",
+  "district_lgd": 620,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "full"
+ },
+ "district": {
+  "dominant_class_id": 7,
+  "dominant_class": "Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 1,
+   "Sandy Clay Loam": 18,
+   "Loam": 85233,
+   "Sandy Loam": 49690
+  },
+  "n_pixels": 134943
+ },
+ "villages": {
+  "999999": [
+   "Forest Block",
+   68,
+   7,
+   "Loam"
+  ],
+  "4711": [
+   "Nali",
+   6770,
+   7,
+   "Loam"
+  ],
+  "4764": [
+   "Udil Gujran",
+   6764,
+   7,
+   "Loam"
+  ],
+  "4712": [
+   "Jirwar",
+   6770,
+   7,
+   "Loam"
+  ],
+  "4793": [
+   "Ishtyari",
+   71,
+   7,
+   "Loam"
+  ],
+  "4795": [
+   "Chittoh",
+   71,
+   7,
+   "Loam"
+  ],
+  "4794": [
+   "Tiyari",
+   71,
+   7,
+   "Loam"
+  ],
+  "4737": [
+   "Brayan",
+   6766,
+   9,
+   "Sandy Loam"
+  ],
+  "4709": [
+   "Tatani",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4788": [
+   "Ongai",
+   71,
+   7,
+   "Loam"
+  ],
+  "4787": [
+   "Kabban",
+   71,
+   7,
+   "Loam"
+  ],
+  "4763": [
+   "Mulchiter",
+   6764,
+   7,
+   "Loam"
+  ],
+  "4796": [
+   "Sohal",
+   71,
+   9,
+   "Sandy Loam"
+  ],
+  "4786": [
+   "Laddar",
+   71,
+   9,
+   "Sandy Loam"
+  ],
+  "4799": [
+   "Atholi",
+   71,
+   7,
+   "Loam"
+  ],
+  "4757": [
+   "Bhata",
+   6764,
+   7,
+   "Loam"
+  ],
+  "4768": [
+   "Horna",
+   6764,
+   7,
+   "Loam"
+  ],
+  "4762": [
+   "Sigdi",
+   6764,
+   7,
+   "Loam"
+  ],
+  "4753": [
+   "Janakpur",
+   6765,
+   7,
+   "Loam"
+  ],
+  "4740": [
+   "Nowgam",
+   69,
+   9,
+   "Sandy Loam"
+  ],
+  "4741": [
+   "Dehrai",
+   69,
+   7,
+   "Loam"
+  ],
+  "4743": [
+   "Yourdoo",
+   69,
+   7,
+   "Loam"
+  ],
+  "4745": [
+   "Renai",
+   69,
+   7,
+   "Loam"
+  ],
+  "4744": [
+   "Pethgam",
+   69,
+   7,
+   "Loam"
+  ],
+  "4785": [
+   "Masoo",
+   71,
+   7,
+   "Loam"
+  ],
+  "4784": [
+   "Gulabgarh",
+   71,
+   9,
+   "Sandy Loam"
+  ],
+  "4800": [
+   "Jaar",
+   71,
+   7,
+   "Loam"
+  ],
+  "4774": [
+   "Ligri",
+   71,
+   7,
+   "Loam"
+  ],
+  "4771": [
+   "Laas",
+   71,
+   7,
+   "Loam"
+  ],
+  "4772": [
+   "Kadail",
+   71,
+   7,
+   "Loam"
+  ],
+  "4798": [
+   "Afani",
+   71,
+   7,
+   "Loam"
+  ],
+  "4773": [
+   "Matti",
+   71,
+   7,
+   "Loam"
+  ],
+  "4775": [
+   "Pander",
+   71,
+   7,
+   "Loam"
+  ],
+  "4797": [
+   "Hamori",
+   6767,
+   9,
+   "Sandy Loam"
+  ],
+  "4776": [
+   "Kundal",
+   71,
+   9,
+   "Sandy Loam"
+  ],
+  "4777": [
+   "Palali",
+   71,
+   7,
+   "Loam"
+  ],
+  "4782": [
+   "Gadh",
+   71,
+   9,
+   "Sandy Loam"
+  ],
+  "4778": [
+   "Chasoti",
+   6767,
+   7,
+   "Loam"
+  ],
+  "4779": [
+   "Hango",
+   6767,
+   9,
+   "Sandy Loam"
+  ],
+  "4781": [
+   "Losain",
+   6767,
+   7,
+   "Loam"
+  ],
+  "4770": [
+   "Sazar",
+   71,
+   7,
+   "Loam"
+  ],
+  "4783": [
+   "Loondi",
+   71,
+   9,
+   "Sandy Loam"
+  ],
+  "4672": [
+   "Keshwan",
+   68,
+   7,
+   "Loam"
+  ],
+  "4742": [
+   "Nowapachi",
+   69,
+   9,
+   "Sandy Loam"
+  ],
+  "4746": [
+   "Qaderna",
+   69,
+   7,
+   "Loam"
+  ],
+  "4747": [
+   "Changer",
+   69,
+   7,
+   "Loam"
+  ],
+  "4748": [
+   "Teller",
+   69,
+   7,
+   "Loam"
+  ],
+  "4801": [
+   "Kidroo",
+   71,
+   7,
+   "Loam"
+  ],
+  "4663": [
+   "Dimji",
+   6768,
+   7,
+   "Loam"
+  ],
+  "4678": [
+   "Trigam",
+   68,
+   7,
+   "Loam"
+  ],
+  "4749": [
+   "Hanzal",
+   69,
+   9,
+   "Sandy Loam"
+  ],
+  "4675": [
+   "Ohli",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4676": [
+   "Hidyal",
+   68,
+   7,
+   "Loam"
+  ],
+  "4673": [
+   "Hadar",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4677": [
+   "Bathkoot",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4674": [
+   "Brashila",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4691": [
+   "Bhandera",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4692": [
+   "Kutal",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4671": [
+   "Sarawan",
+   68,
+   7,
+   "Loam"
+  ],
+  "4759": [
+   "Inderwal",
+   70,
+   9,
+   "Sandy Loam"
+  ],
+  "4760": [
+   "Chhatroo",
+   70,
+   9,
+   "Sandy Loam"
+  ],
+  "4758": [
+   "Chingam",
+   70,
+   7,
+   "Loam"
+  ],
+  "4765": [
+   "Kuchhal",
+   6764,
+   7,
+   "Loam"
+  ],
+  "4767": [
+   "Drubeel",
+   6764,
+   9,
+   "Sandy Loam"
+  ],
+  "4766": [
+   "Rahalthal",
+   6764,
+   7,
+   "Loam"
+  ],
+  "4645": [
+   "Palmar",
+   68,
+   7,
+   "Loam"
+  ],
+  "4646": [
+   "Bhandarkoot",
+   68,
+   7,
+   "Loam"
+  ],
+  "4647": [
+   "Feller",
+   68,
+   7,
+   "Loam"
+  ],
+  "4648": [
+   "Pakalan",
+   68,
+   7,
+   "Loam"
+  ],
+  "4670": [
+   "Sirgwari",
+   68,
+   7,
+   "Loam"
+  ],
+  "4686": [
+   "Nagbathna",
+   6769,
+   9,
+   "Sandy Loam"
+  ],
+  "4689": [
+   "Sangna",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4695": [
+   "Chandali",
+   68,
+   7,
+   "Loam"
+  ],
+  "4699": [
+   "Londri",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4650": [
+   "Pochhal",
+   68,
+   7,
+   "Loam"
+  ],
+  "4652": [
+   "Kwartanji",
+   68,
+   7,
+   "Loam"
+  ],
+  "4739": [
+   "Mulwarwan",
+   6766,
+   7,
+   "Loam"
+  ],
+  "4729": [
+   "Sukhnai",
+   6766,
+   9,
+   "Sandy Loam"
+  ],
+  "4730": [
+   "Rekenwas",
+   6766,
+   7,
+   "Loam"
+  ],
+  "4731": [
+   "Gumri",
+   6766,
+   7,
+   "Loam"
+  ],
+  "4733": [
+   "Basmina",
+   6766,
+   7,
+   "Loam"
+  ],
+  "4732": [
+   "Margi",
+   6766,
+   7,
+   "Loam"
+  ],
+  "4734": [
+   "Afti",
+   6766,
+   9,
+   "Sandy Loam"
+  ],
+  "4736": [
+   "Mungli",
+   6766,
+   7,
+   "Loam"
+  ],
+  "4735": [
+   "Choidraman",
+   6766,
+   7,
+   "Loam"
+  ],
+  "4738": [
+   "Inshan",
+   6766,
+   7,
+   "Loam"
+  ],
+  "4698": [
+   "Sharoti",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4708": [
+   "Kewa",
+   6769,
+   9,
+   "Sandy Loam"
+  ],
+  "4715": [
+   "Kukerwas",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4701": [
+   "Bharoti",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4717": [
+   "Gadh",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4716": [
+   "Mandir",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4668": [
+   "Matta",
+   68,
+   7,
+   "Loam"
+  ],
+  "4649": [
+   "Dharbadan",
+   68,
+   7,
+   "Loam"
+  ],
+  "4669": [
+   "Anjole",
+   68,
+   7,
+   "Loam"
+  ],
+  "4667": [
+   "Lach Khazana",
+   68,
+   7,
+   "Loam"
+  ],
+  "4750": [
+   "Deharna",
+   69,
+   9,
+   "Sandy Loam"
+  ],
+  "4755": [
+   "Lopara",
+   6765,
+   7,
+   "Loam"
+  ],
+  "4660": [
+   "Chingnana",
+   6768,
+   7,
+   "Loam"
+  ],
+  "4751": [
+   "Chicha",
+   6765,
+   9,
+   "Sandy Loam"
+  ],
+  "4752": [
+   "Loharna",
+   6765,
+   7,
+   "Loam"
+  ],
+  "4657": [
+   "Ajna",
+   6768,
+   7,
+   "Loam"
+  ],
+  "4754": [
+   "Sounder",
+   6765,
+   7,
+   "Loam"
+  ],
+  "4653": [
+   "Cherji",
+   68,
+   7,
+   "Loam"
+  ],
+  "4688": [
+   "Haloor",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4662": [
+   "Dichla",
+   6768,
+   9,
+   "Sandy Loam"
+  ],
+  "4658": [
+   "Chicha",
+   6768,
+   7,
+   "Loam"
+  ],
+  "4659": [
+   "Galhar Bhata",
+   6768,
+   7,
+   "Loam"
+  ],
+  "4727": [
+   "Kither",
+   6770,
+   7,
+   "Loam"
+  ],
+  "4685": [
+   "Shandri",
+   6769,
+   9,
+   "Sandy Loam"
+  ],
+  "4684": [
+   "Akarhing",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4683": [
+   "Drab",
+   68,
+   7,
+   "Loam"
+  ],
+  "4679": [
+   "Janwas",
+   68,
+   7,
+   "Loam"
+  ],
+  "4682": [
+   "Agral",
+   68,
+   9,
+   "Sandy Loam"
+  ],
+  "4681": [
+   "Lava",
+   68,
+   9,
+   "Sandy Loam"
+  ],
+  "4696": [
+   "Pora",
+   68,
+   9,
+   "Sandy Loam"
+  ],
+  "4680": [
+   "Ghan",
+   68,
+   7,
+   "Loam"
+  ],
+  "4687": [
+   "Malai",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4690": [
+   "Prashmoola",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4703": [
+   "Bathna",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4720": [
+   "Lass",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4706": [
+   "Khori",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4693": [
+   "Karool",
+   68,
+   7,
+   "Loam"
+  ],
+  "4694": [
+   "Bugrana",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4719": [
+   "Dhar",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4718": [
+   "Dugga",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4704": [
+   "Joshana",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4705": [
+   "Badhat",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4702": [
+   "Salana",
+   6769,
+   9,
+   "Sandy Loam"
+  ],
+  "4700": [
+   "Chalasoo",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4707": [
+   "Kalchanda",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4722": [
+   "Balgran",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4697": [
+   "Dharbhangar",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4721": [
+   "Chamoti",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4723": [
+   "Mori",
+   6770,
+   7,
+   "Loam"
+  ],
+  "4724": [
+   "Tipri",
+   6770,
+   7,
+   "Loam"
+  ],
+  "4725": [
+   "Binoon",
+   6770,
+   7,
+   "Loam"
+  ],
+  "4710": [
+   "Niju",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4714": [
+   "Kawarthara",
+   6769,
+   7,
+   "Loam"
+  ],
+  "4726": [
+   "Patnazi",
+   6770,
+   7,
+   "Loam"
+  ],
+  "4713": [
+   "Jawalapur",
+   6770,
+   7,
+   "Loam"
+  ],
+  "4792": [
+   "Batwas",
+   71,
+   7,
+   "Loam"
+  ],
+  "4789": [
+   "Tun",
+   71,
+   7,
+   "Loam"
+  ],
+  "4791": [
+   "Chag",
+   71,
+   7,
+   "Loam"
+  ],
+  "4790": [
+   "Muthal",
+   71,
+   7,
+   "Loam"
+  ],
+  "4780": [
+   "Machail",
+   6767,
+   9,
+   "Sandy Loam"
+  ],
+  "4756": [
+   "Tagood",
+   6764,
+   7,
+   "Loam"
+  ],
+  "4654": [
+   "Dool",
+   68,
+   7,
+   "Loam"
+  ],
+  "4651": [
+   "Lach Dayaram",
+   68,
+   7,
+   "Loam"
+  ],
+  "4655": [
+   "Bhagna",
+   6768,
+   7,
+   "Loam"
+  ],
+  "4656": [
+   "Semna Bhata",
+   6768,
+   7,
+   "Loam"
+  ],
+  "4665": [
+   "Chandna",
+   6768,
+   7,
+   "Loam"
+  ],
+  "4664": [
+   "Bhatan",
+   6768,
+   9,
+   "Sandy Loam"
+  ],
+  "4661": [
+   "Piyas",
+   6768,
+   9,
+   "Sandy Loam"
+  ],
+  "248041": [
+   "Municipal Council Kishtwar",
+   68,
+   7,
+   "Loam"
+  ],
+  "4666": [
+   "Kishtwar",
+   68,
+   7,
+   "Loam"
+  ],
+  "4728": [
+   "Forest Block",
+   6768,
+   9,
+   "Sandy Loam"
+  ],
+  "4761": [
+   "Dichhad",
+   70,
+   9,
+   "Sandy Loam"
+  ],
+  "4769": [
+   "Dhar Saroor",
+   6764,
+   7,
+   "Loam"
+  ]
+ },
+ "village_count_total": 163,
+ "village_count_sampled": 163
+}

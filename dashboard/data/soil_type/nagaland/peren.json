@@ -1,0 +1,733 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Nagaland",
+  "district": "Peren",
+  "district_lgd": 613,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "full"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 25583,
+   "Sandy Clay Loam": 168,
+   "Loam": 4889
+  },
+  "n_pixels": 30641
+ },
+ "villages": {
+  "999999": [
+   "Data Partially Available",
+   1851,
+   7,
+   "Loam"
+  ],
+  "268335": [
+   "Vongkithem B Ur",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268371": [
+   "Nzauna",
+   1855,
+   4,
+   "Clay Loam"
+  ],
+  "268370": [
+   "Lalong",
+   1855,
+   4,
+   "Clay Loam"
+  ],
+  "268368": [
+   "Nsong Vill",
+   1855,
+   4,
+   "Clay Loam"
+  ],
+  "268363": [
+   "New Ngaolong",
+   1854,
+   4,
+   "Clay Loam"
+  ],
+  "268369": [
+   "Ngam",
+   1855,
+   4,
+   "Clay Loam"
+  ],
+  "268365": [
+   "Nsong Hq",
+   1855,
+   4,
+   "Clay Loam"
+  ],
+  "268367": [
+   "Old Ngaulong",
+   1855,
+   4,
+   "Clay Loam"
+  ],
+  "268366": [
+   "Nchan",
+   1855,
+   7,
+   "Loam"
+  ],
+  "268364": [
+   "Bamsiakelu",
+   1855,
+   4,
+   "Clay Loam"
+  ],
+  "268346": [
+   "Bunglen Ur",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268382": [
+   "Nkio Old",
+   1856,
+   4,
+   "Clay Loam"
+  ],
+  "268376": [
+   "Upper Sinjol",
+   1856,
+   7,
+   "Loam"
+  ],
+  "268372": [
+   "Heiranglwa",
+   1856,
+   7,
+   "Loam"
+  ],
+  "268362": [
+   "Nkio B",
+   1854,
+   4,
+   "Clay Loam"
+  ],
+  "268361": [
+   "Phaikolum",
+   1854,
+   4,
+   "Clay Loam"
+  ],
+  "268360": [
+   "Nkio New",
+   1854,
+   4,
+   "Clay Loam"
+  ],
+  "268359": [
+   "Sailhem",
+   1854,
+   4,
+   "Clay Loam"
+  ],
+  "268358": [
+   "Khelma",
+   1854,
+   4,
+   "Clay Loam"
+  ],
+  "268356": [
+   "Nsenlwa",
+   1854,
+   4,
+   "Clay Loam"
+  ],
+  "268355": [
+   "Ikeisingram",
+   1854,
+   7,
+   "Loam"
+  ],
+  "268354": [
+   "Beisumpuilwo Ur",
+   1854,
+   4,
+   "Clay Loam"
+  ],
+  "268353": [
+   "New Soget",
+   1854,
+   4,
+   "Clay Loam"
+  ],
+  "268352": [
+   "Songngou",
+   1854,
+   4,
+   "Clay Loam"
+  ],
+  "268348": [
+   "Gopibung Ur",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268357": [
+   "Old Soget",
+   1854,
+   4,
+   "Clay Loam"
+  ],
+  "268351": [
+   "Lower Sinjol",
+   1854,
+   4,
+   "Clay Loam"
+  ],
+  "268345": [
+   "Bongkolong",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268344": [
+   "New Beisumpui",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268336": [
+   "Pellhang B Ur",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268343": [
+   "Athibung",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268349": [
+   "Songsang",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268350": [
+   "Old Beisumpui",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268339": [
+   "Pellhang",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268347": [
+   "Mouicham Ur",
+   1853,
+   7,
+   "Loam"
+  ],
+  "268337": [
+   "Gellhang Ur",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268387": [
+   "Tepun",
+   1856,
+   4,
+   "Clay Loam"
+  ],
+  "268389": [
+   "Nzau Namsan",
+   1856,
+   4,
+   "Clay Loam"
+  ],
+  "268388": [
+   "Nzau Old",
+   1856,
+   4,
+   "Clay Loam"
+  ],
+  "268386": [
+   "Tening Namsan Ur",
+   1856,
+   4,
+   "Clay Loam"
+  ],
+  "268385": [
+   "Tening Old",
+   1856,
+   4,
+   "Clay Loam"
+  ],
+  "268390": [
+   "Ntu",
+   1856,
+   4,
+   "Clay Loam"
+  ],
+  "268325": [
+   "Dzukwaram",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268395": [
+   "Ndunglwa",
+   1857,
+   4,
+   "Clay Loam"
+  ],
+  "268394": [
+   "Peletkie",
+   1857,
+   4,
+   "Clay Loam"
+  ],
+  "268399": [
+   "Old Puilwa",
+   1857,
+   4,
+   "Clay Loam"
+  ],
+  "268398": [
+   "New Puilwa",
+   1857,
+   4,
+   "Clay Loam"
+  ],
+  "268397": [
+   "Peren Old",
+   1857,
+   4,
+   "Clay Loam"
+  ],
+  "268396": [
+   "Peren Namdi Ur",
+   1857,
+   4,
+   "Clay Loam"
+  ],
+  "253204": [
+   "Peren Town Council",
+   1857,
+   4,
+   "Clay Loam"
+  ],
+  "268378": [
+   "Azailong",
+   1856,
+   4,
+   "Clay Loam"
+  ],
+  "268377": [
+   "Nkialwa",
+   1856,
+   4,
+   "Clay Loam"
+  ],
+  "268375": [
+   "Mbaulwa",
+   1856,
+   4,
+   "Clay Loam"
+  ],
+  "268374": [
+   "Old Tesen",
+   1856,
+   4,
+   "Clay Loam"
+  ],
+  "268373": [
+   "New Tesen",
+   1856,
+   4,
+   "Clay Loam"
+  ],
+  "268401": [
+   "Kendung",
+   1857,
+   4,
+   "Clay Loam"
+  ],
+  "268380": [
+   "Mbaupunchi",
+   1856,
+   7,
+   "Loam"
+  ],
+  "268381": [
+   "Nchangram",
+   1856,
+   4,
+   "Clay Loam"
+  ],
+  "268379": [
+   "Mbaupungwa",
+   1856,
+   4,
+   "Clay Loam"
+  ],
+  "268400": [
+   "Mpai",
+   1857,
+   4,
+   "Clay Loam"
+  ],
+  "268384": [
+   "Tening Christ Vill Ur",
+   1856,
+   4,
+   "Clay Loam"
+  ],
+  "268383": [
+   "Tening Hq",
+   1856,
+   4,
+   "Clay Loam"
+  ],
+  "268342": [
+   "Songlhuh",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268340": [
+   "Inbung",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268341": [
+   "Old Chalkot",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268393": [
+   "Kipeujang Ur",
+   1857,
+   7,
+   "Loam"
+  ],
+  "268392": [
+   "Peren New",
+   1857,
+   4,
+   "Clay Loam"
+  ],
+  "268334": [
+   "Vongkithem",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268324": [
+   "Kejanglwa",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268338": [
+   "New Pellhang Ur",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268303": [
+   "Kelagim Ur",
+   1851,
+   4,
+   "Clay Loam"
+  ],
+  "268301": [
+   "Poilwa Namci",
+   1851,
+   4,
+   "Clay Loam"
+  ],
+  "268300": [
+   "Poilwa",
+   1851,
+   4,
+   "Clay Loam"
+  ],
+  "268299": [
+   "Benreu",
+   1851,
+   7,
+   "Loam"
+  ],
+  "268302": [
+   "Poilwa Namdi Ur",
+   1851,
+   4,
+   "Clay Loam"
+  ],
+  "268304": [
+   "Inavi Hevuto Ur",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268331": [
+   "Newchamcha Ur",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268308": [
+   "Libamphai",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268307": [
+   "Jalukie Zangdi",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268306": [
+   "Jalukiekam",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268309": [
+   "Jalukie S J Sangtam",
+   1852,
+   7,
+   "Loam"
+  ],
+  "268290": [
+   "Heningkunglwa",
+   1851,
+   4,
+   "Clay Loam"
+  ],
+  "268323": [
+   "Mhai",
+   1852,
+   7,
+   "Loam"
+  ],
+  "268311": [
+   "Jalukielo",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268328": [
+   "Lilen B Ur",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268329": [
+   "Phanjang",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268327": [
+   "Lilen",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268333": [
+   "New Chalkot",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268332": [
+   "Phaijol",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268330": [
+   "Saijang",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268318": [
+   "Samzuram",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268310": [
+   "Mhaikam",
+   1852,
+   7,
+   "Loam"
+  ],
+  "268322": [
+   "Dunki",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268317": [
+   "Jalukie Lower Khel Ur",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268316": [
+   "Jalukie B",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268320": [
+   "Jalukie Upper Khel Ur",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "253205": [
+   "Jalukie Town Council",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268315": [
+   "New Jalukie",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268312": [
+   "Nkwareu",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268314": [
+   "Mhainamtsi",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268321": [
+   "Jalukie Old",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268296": [
+   "Hainaikui Ur",
+   1851,
+   4,
+   "Clay Loam"
+  ],
+  "268305": [
+   "Viniho Ur",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268297": [
+   "Pedi",
+   1851,
+   4,
+   "Clay Loam"
+  ],
+  "268295": [
+   "Ngwalwa Vill",
+   1851,
+   7,
+   "Loam"
+  ],
+  "268291": [
+   "Ngwalwa Hq",
+   1851,
+   7,
+   "Loam"
+  ],
+  "268292": [
+   "Gaili",
+   1851,
+   4,
+   "Clay Loam"
+  ],
+  "268293": [
+   "Punglwa B Ur",
+   1851,
+   7,
+   "Loam"
+  ],
+  "268294": [
+   "Punglwa",
+   1851,
+   7,
+   "Loam"
+  ],
+  "268326": [
+   "Beisumpuikam",
+   1853,
+   4,
+   "Clay Loam"
+  ],
+  "268391": [
+   "Canamram Ur",
+   1856,
+   4,
+   "Clay Loam"
+  ],
+  "268319": [
+   "Jalukieram",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268313": [
+   "Jalukie Rongdai Ur",
+   1852,
+   4,
+   "Clay Loam"
+  ],
+  "268298": [
+   "Heunanbe Ur",
+   1851,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 121,
+ "village_count_sampled": 121
+}

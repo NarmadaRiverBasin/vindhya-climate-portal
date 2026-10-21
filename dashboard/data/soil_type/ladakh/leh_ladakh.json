@@ -1,0 +1,694 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Ladakh",
+  "district": "Leh Ladakh",
+  "district_lgd": 9,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (111/119 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 9,
+  "dominant_class": "Sandy Loam",
+  "class_pixel_counts": {
+   "Loamy Sand": 79828,
+   "Sand": 953,
+   "Clay Loam": 158,
+   "Sandy Clay Loam": 21495,
+   "Loam": 288326,
+   "Sandy Loam": 2240346
+  },
+  "n_pixels": 2631108
+ },
+ "villages": {
+  "999999": [
+   "Data Not Available",
+   999,
+   9,
+   "Sandy Loam"
+  ],
+  "910": [
+   "Chuglamsar CT",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "864": [
+   "Chiling Sumda",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "959": [
+   "Lingshet",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "961": [
+   "Youl Chung",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "953": [
+   "Alchi",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "960": [
+   "Fotoksar",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "248177": [
+   "Leh",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "904": [
+   "Koyul",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "903": [
+   "Anlay",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "908": [
+   "Chushul",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "902": [
+   "Mood",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "901": [
+   "Nyoma",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "876": [
+   "Man Pangong",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "875": [
+   "Shachokol",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "900": [
+   "Chumathang",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "897": [
+   "Skitmang",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "896": [
+   "Kerey",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "885": [
+   "Kumgyam",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "884": [
+   "Tukla",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "882": [
+   "Sharnose",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "886": [
+   "Teri",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "887": [
+   "Himya",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "883": [
+   "Liktse",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "878": [
+   "Shara",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "877": [
+   "Phuktse",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "870": [
+   "Langokor",
+   10,
+   7,
+   "Loam"
+  ],
+  "881": [
+   "Igoo",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "888": [
+   "Tarchit",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "890": [
+   "Upshi",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "894": [
+   "Gia",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "889": [
+   "Meroo",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "880": [
+   "Changa",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "893": [
+   "Matselang",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "891": [
+   "Shang",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "867": [
+   "Chuchoot Gongma",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "879": [
+   "Stakna",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "866": [
+   "Chuchot Shama",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "863": [
+   "Chuchat Yakma",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "861": [
+   "Rumbak",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "862": [
+   "Stok",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "868": [
+   "Mathoo",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "892": [
+   "Hamis",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "895": [
+   "Kharnak",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "899": [
+   "Karzok",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "874": [
+   "Tagste",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "873": [
+   "Durbok",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "872": [
+   "Sakti",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "871": [
+   "Chemrey",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "860": [
+   "Rambir Por",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "858": [
+   "Shey",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "869": [
+   "Kharoo",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "857": [
+   "Nang",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "856": [
+   "Saboo",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "851": [
+   "Bazgoo",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "852": [
+   "Nimo",
+   10,
+   7,
+   "Loam"
+  ],
+  "854": [
+   "Phey",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "853": [
+   "Taroo",
+   10,
+   7,
+   "Loam"
+  ],
+  "865": [
+   "Skiumarkha",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "937": [
+   "Khemakhungiu",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "939": [
+   "Dah",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "924": [
+   "Largiab",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "923": [
+   "Skuru",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "922": [
+   "Terchey",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "912": [
+   "Taksi",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "954": [
+   "Wanla",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "957": [
+   "Lamayouro",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "958": [
+   "Kanji",
+   12,
+   7,
+   "Loam"
+  ],
+  "956": [
+   "Tarhipti",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "946": [
+   "Takmachik",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "945": [
+   "Leido",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "940": [
+   "Hanoo",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "943": [
+   "Skur Buchan",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "944": [
+   "Damkhar",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "948": [
+   "Khaltse",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "942": [
+   "Tia",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "941": [
+   "Temisgam",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "949": [
+   "Saspochey",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "950": [
+   "Hemishok Pachan",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "952": [
+   "Suspol",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "951": [
+   "Nurla",
+   12,
+   7,
+   "Loam"
+  ],
+  "848": [
+   "Likir",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "849": [
+   "Ney",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "850": [
+   "Umla",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "855": [
+   "Fiang",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "925": [
+   "Skanpuk",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "926": [
+   "Partap Pore",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "927": [
+   "Hundar Dok",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "911": [
+   "Thanga Chathang",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "913": [
+   "Turtok",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "928": [
+   "Hundar",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "929": [
+   "Diskit",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "915": [
+   "Bogdang",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "934": [
+   "Khalsar",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "935": [
+   "Khardong",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "936": [
+   "Digger",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "933": [
+   "Lakjung",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "932": [
+   "Sumoor",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "918": [
+   "Panamic",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "919": [
+   "Kubed",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "920": [
+   "Hundri",
+   11,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "906": [
+   "Demjok",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "905": [
+   "Manser",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "909": [
+   "Spituk CT",
+   10,
+   9,
+   "Sandy Loam"
+  ],
+  "938": [
+   "Tangyar",
+   11,
+   9,
+   "Sandy Loam"
+  ],
+  "955": [
+   "Giramangu",
+   12,
+   9,
+   "Sandy Loam"
+  ],
+  "947": [
+   "Skinlingyong",
+   12,
+   7,
+   "Loam"
+  ],
+  "931": [
+   "Tiggar",
+   11,
+   9,
+   "Sandy Loam"
+  ]
+ },
+ "village_count_total": 119,
+ "village_count_sampled": 111
+}

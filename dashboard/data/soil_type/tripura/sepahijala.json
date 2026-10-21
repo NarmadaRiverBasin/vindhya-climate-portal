@@ -1,0 +1,751 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Tripura",
+  "district": "Sepahijala",
+  "district_lgd": 653,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (118/119 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 8421,
+   "Sandy Clay Loam": 8158,
+   "Loam": 1613
+  },
+  "n_pixels": 18193
+ },
+ "villages": {
+  "272086": [
+   "Boxanagar",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272085": [
+   "Ashabari",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272072": [
+   "Dakshin Charilam",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272141": [
+   "Nidaya",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272139": [
+   "Himmatpur",
+   6680,
+   7,
+   "Loam"
+  ],
+  "272140": [
+   "Kalikrishnanagar",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272143": [
+   "Bhabanipur",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272137": [
+   "Birendranagar",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272138": [
+   "Manaipathar",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272061": [
+   "Latiachhara",
+   6677,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272029": [
+   "Mohanpur Part",
+   6677,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272028": [
+   "Prabhapur",
+   6677,
+   4,
+   "Clay Loam"
+  ],
+  "272076": [
+   "Barjala",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272054": [
+   "Purathal Rajnagar",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272049": [
+   "Radhanagar",
+   6699,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272047": [
+   "Kamalasagar",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272048": [
+   "Debipur",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272051": [
+   "Madhupur",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272050": [
+   "Konaban",
+   6699,
+   7,
+   "Loam"
+  ],
+  "272052": [
+   "Kaiyadhepa",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272053": [
+   "Nehalchandranagar",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272057": [
+   "Dakshin Champamura",
+   6699,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272059": [
+   "Gopinagar",
+   6699,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272058": [
+   "Laxmibil",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272056": [
+   "Bishalgarh Part",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272062": [
+   "Uttar Charilam",
+   6699,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272074": [
+   "Padmanagar",
+   6699,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272073": [
+   "Baustali",
+   6699,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272071": [
+   "Rangmala",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272070": [
+   "Ramnagar",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272069": [
+   "Dhariathal",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272063": [
+   "Brajapur",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272068": [
+   "Sutamura",
+   6699,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272066": [
+   "Bangshibari",
+   6699,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272067": [
+   "Rangapania",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272064": [
+   "Krishna Kishorenagar",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272065": [
+   "Gajaria",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272055": [
+   "Ghaniamara",
+   6699,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272082": [
+   "Rahimpur",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272097": [
+   "Kulubari",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272096": [
+   "Matinagar",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272095": [
+   "Dhanirampur",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272093": [
+   "Kamalanagar",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272094": [
+   "Bejoynagar",
+   6680,
+   7,
+   "Loam"
+  ],
+  "272091": [
+   "Kalamchaura",
+   6680,
+   7,
+   "Loam"
+  ],
+  "272090": [
+   "Jogatrampur",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272109": [
+   "Aralia Part",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272089": [
+   "Ghilatali",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272087": [
+   "Kalsimura",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272088": [
+   "Manikyanagar",
+   6680,
+   7,
+   "Loam"
+  ],
+  "272084": [
+   "Bhaluarchar",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272083": [
+   "Putia",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272098": [
+   "Taksapara",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272099": [
+   "Choumohani",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272100": [
+   "Paschim Jumerdhepa",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272104": [
+   "Paschim Nalchar",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272114": [
+   "Rudijala",
+   6680,
+   7,
+   "Loam"
+  ],
+  "272105": [
+   "Khaschoumohani",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272106": [
+   "Durlavnarayanpur",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272081": [
+   "Gakulnagar CT",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "801524": [
+   "Bishalgarh Np",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "249787": [
+   "Sonamura Np",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272108": [
+   "Khedabari Part",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272110": [
+   "Nabadwipchandranagar Part",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272111": [
+   "Bejimara Part",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272112": [
+   "Ghrantali",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272119": [
+   "Barpathar",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272113": [
+   "Melaghar",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272121": [
+   "Jharjharia",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272118": [
+   "Telkajla",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272124": [
+   "Dakshin Taibandul",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272120": [
+   "Urmai",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272129": [
+   "Manarchak",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272122": [
+   "Khedarbari",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272127": [
+   "Sobhapur Part",
+   6680,
+   7,
+   "Loam"
+  ],
+  "272128": [
+   "Kalapania",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272130": [
+   "Dhanpur",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272131": [
+   "Paharpur",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272132": [
+   "Birampur",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272134": [
+   "Maheshpur",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272135": [
+   "Kathalia",
+   6680,
+   7,
+   "Loam"
+  ],
+  "272101": [
+   "Purba Jumerdhepa",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272102": [
+   "Bagabasa",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272103": [
+   "Purba Nalchar",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272115": [
+   "Mohanbhug",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272116": [
+   "Kamarangatali",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272117": [
+   "Chandul",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272123": [
+   "Uttar Taibandul",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272125": [
+   "Gamaichhara",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272136": [
+   "Jagatrampur",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272038": [
+   "Killabari",
+   6677,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272031": [
+   "Ratanpur",
+   6677,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272037": [
+   "Barmabari",
+   6677,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272036": [
+   "Sangkumabari",
+   6677,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272039": [
+   "Kalaibari",
+   6677,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272040": [
+   "Jampuijala",
+   6677,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272041": [
+   "Kandraichhara",
+   6677,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272046": [
+   "Ujan Pathalia",
+   6677,
+   4,
+   "Clay Loam"
+  ],
+  "272042": [
+   "Ujan Ghaniamara",
+   6677,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272045": [
+   "Amarendranagar",
+   6677,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272044": [
+   "Hirapur",
+   6677,
+   4,
+   "Clay Loam"
+  ],
+  "272043": [
+   "Madhya Ghaniamara",
+   6677,
+   4,
+   "Clay Loam"
+  ],
+  "272142": [
+   "Durlavpur",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272030": [
+   "Pekuarjala",
+   6677,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272032": [
+   "Bamnichhara",
+   6677,
+   4,
+   "Clay Loam"
+  ],
+  "272033": [
+   "Shyamnagar",
+   6677,
+   4,
+   "Clay Loam"
+  ],
+  "272034": [
+   "Paschim Takarjala",
+   6677,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272078": [
+   "Pathaliaghat",
+   6677,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272079": [
+   "Madhya Pathalia",
+   6677,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272075": [
+   "Amtali",
+   6699,
+   4,
+   "Clay Loam"
+  ],
+  "272077": [
+   "Promodenagar",
+   6677,
+   7,
+   "Loam"
+  ],
+  "272060": [
+   "Golaghati",
+   6699,
+   7,
+   "Loam"
+  ],
+  "272035": [
+   "Purba Takarjala",
+   6677,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272126": [
+   "Chandigarh CT",
+   6680,
+   4,
+   "Clay Loam"
+  ],
+  "272133": [
+   "Nirbhoypur",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272080": [
+   "Mohanpur Part",
+   6699,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272144": [
+   "Bejimara Part",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "272092": [
+   "Anandapur",
+   6680,
+   6,
+   "Sandy Clay Loam"
+  ]
+ },
+ "village_count_total": 119,
+ "village_count_sampled": 118
+}

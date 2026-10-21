@@ -1,0 +1,5389 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Uttar Pradesh",
+  "district": "Mathura",
+  "district_lgd": 167,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (891/901 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 6,
+  "dominant_class": "Sandy Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 9607,
+   "Sandy Clay Loam": 720,
+   "Loam": 49694
+  },
+  "n_pixels": 60022
+ },
+ "villages": {
+  "123632": [
+   "Shakurganj Khadar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "124386": [
+   "Balrai Khadar",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124459": [
+   "Ranchi Bangar CT",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "123774": [
+   "Basai Bujurg Khadar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123792": [
+   "Faridampur Khadar",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123814": [
+   "Awa Khera",
+   762,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "123881": [
+   "Imlak Sawad Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123869": [
+   "Sotipura Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "124299": [
+   "Rajpur Naobaramad",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "123887": [
+   "Firozpur Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123895": [
+   "Dedna Khader",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123645": [
+   "Khairal 7",
+   761,
+   7,
+   "Loam"
+  ],
+  "124306": [
+   "Jaisinghpura Bangar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124443": [
+   "Mirzapur Nagla",
+   764,
+   7,
+   "Loam"
+  ],
+  "123880": [
+   "Imlak Sawad Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123970": [
+   "Nagla Himaun",
+   762,
+   7,
+   "Loam"
+  ],
+  "124284": [
+   "Muhal Sakraya Bangar",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "123870": [
+   "Sotipura Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "124452": [
+   "Shehzadpur Pauri",
+   764,
+   7,
+   "Loam"
+  ],
+  "124414": [
+   "Dhana Khema",
+   764,
+   7,
+   "Loam"
+  ],
+  "124180": [
+   "Lahrauli Khadar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124427": [
+   "Nagla Abua",
+   764,
+   7,
+   "Loam"
+  ],
+  "124379": [
+   "Pilua Sadiqpur",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124425": [
+   "Dhana Jiwna",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124419": [
+   "Hasanpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124267": [
+   "Gopalpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124376": [
+   "Sersa",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124435": [
+   "Birona",
+   764,
+   7,
+   "Loam"
+  ],
+  "124433": [
+   "Kirarai",
+   764,
+   7,
+   "Loam"
+  ],
+  "124418": [
+   "Ikdanta",
+   764,
+   7,
+   "Loam"
+  ],
+  "124270": [
+   "Pura",
+   764,
+   7,
+   "Loam"
+  ],
+  "124271": [
+   "Jhapara",
+   764,
+   7,
+   "Loam"
+  ],
+  "124430": [
+   "Chokipur Kalan",
+   764,
+   7,
+   "Loam"
+  ],
+  "124428": [
+   "Muiuddinpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124266": [
+   "Rasulpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124432": [
+   "Bhaderua",
+   764,
+   7,
+   "Loam"
+  ],
+  "124431": [
+   "Luhara",
+   764,
+   7,
+   "Loam"
+  ],
+  "124424": [
+   "Garhi Rambal",
+   764,
+   7,
+   "Loam"
+  ],
+  "124429": [
+   "Ol",
+   764,
+   7,
+   "Loam"
+  ],
+  "124269": [
+   "Sonoth Janubi",
+   764,
+   7,
+   "Loam"
+  ],
+  "124426": [
+   "Sarurpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124134": [
+   "Mazahidpur",
+   763,
+   7,
+   "Loam"
+  ],
+  "123872": [
+   "Toli Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "124404": [
+   "Bisu",
+   764,
+   7,
+   "Loam"
+  ],
+  "124402": [
+   "Rahimpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124442": [
+   "Begampur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124400": [
+   "Hathaoli",
+   764,
+   7,
+   "Loam"
+  ],
+  "124392": [
+   "Dhana Shamsabad",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124454": [
+   "Piprauth Murshidpur",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124391": [
+   "Bhahai",
+   764,
+   7,
+   "Loam"
+  ],
+  "124184": [
+   "Madaura",
+   763,
+   7,
+   "Loam"
+  ],
+  "124417": [
+   "Karanpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124444": [
+   "Gokulpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124416": [
+   "Pingari",
+   764,
+   7,
+   "Loam"
+  ],
+  "124436": [
+   "Jafar Nagar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124450": [
+   "Bhadaya",
+   764,
+   7,
+   "Loam"
+  ],
+  "124453": [
+   "Raipura Jat",
+   764,
+   7,
+   "Loam"
+  ],
+  "249058": [
+   "Farah",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124420": [
+   "Dharmpura",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124448": [
+   "Chokipur Khurd",
+   764,
+   7,
+   "Loam"
+  ],
+  "124423": [
+   "Jiroli",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124409": [
+   "Jamalpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124407": [
+   "Salempur Farah",
+   764,
+   7,
+   "Loam"
+  ],
+  "124415": [
+   "Nagla Hirday Nurullapur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124178": [
+   "Barha Bangar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124446": [
+   "Koh",
+   764,
+   7,
+   "Loam"
+  ],
+  "124182": [
+   "Tatrauta Bangar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124412": [
+   "Parkham",
+   764,
+   7,
+   "Loam"
+  ],
+  "124176": [
+   "Daulatpur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124194": [
+   "Barauli",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "124421": [
+   "Mirzapur Brahmnan",
+   764,
+   7,
+   "Loam"
+  ],
+  "124434": [
+   "Shahzoopur Gujar",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124380": [
+   "Bamoli",
+   764,
+   7,
+   "Loam"
+  ],
+  "124197": [
+   "Kanjaulighat Khadar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124395": [
+   "Kherat",
+   764,
+   7,
+   "Loam"
+  ],
+  "124396": [
+   "Shahpur Farah",
+   764,
+   7,
+   "Loam"
+  ],
+  "124200": [
+   "Nagla Akos Bangar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124390": [
+   "Kurkanda",
+   764,
+   7,
+   "Loam"
+  ],
+  "124447": [
+   "Meghpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124179": [
+   "Lahrauli Bangar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124406": [
+   "Rosu",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124183": [
+   "Shahjadpur Indrawali",
+   763,
+   7,
+   "Loam"
+  ],
+  "124196": [
+   "Kanjaulighat Bangar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124401": [
+   "Daulatpur Farah",
+   764,
+   7,
+   "Loam"
+  ],
+  "124195": [
+   "Akos Bangar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124451": [
+   "Pauri",
+   764,
+   7,
+   "Loam"
+  ],
+  "124403": [
+   "Chandrabhan",
+   764,
+   7,
+   "Loam"
+  ],
+  "124398": [
+   "Fateha",
+   764,
+   7,
+   "Loam"
+  ],
+  "124397": [
+   "Mahuan",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124388": [
+   "Jhandipur Bangar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124193": [
+   "Garhsauli",
+   763,
+   7,
+   "Loam"
+  ],
+  "124439": [
+   "Kawaila",
+   764,
+   7,
+   "Loam"
+  ],
+  "124445": [
+   "Jodhpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124438": [
+   "Malikpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124437": [
+   "Jhurawai",
+   764,
+   7,
+   "Loam"
+  ],
+  "124441": [
+   "Barauda Mashrakpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124185": [
+   "Bhudha",
+   763,
+   7,
+   "Loam"
+  ],
+  "124440": [
+   "Baqalpur Farah",
+   764,
+   7,
+   "Loam"
+  ],
+  "124378": [
+   "Khediya",
+   764,
+   7,
+   "Loam"
+  ],
+  "124405": [
+   "Jalal",
+   764,
+   7,
+   "Loam"
+  ],
+  "124413": [
+   "Mirpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124449": [
+   "Churmura",
+   764,
+   7,
+   "Loam"
+  ],
+  "124410": [
+   "Thirawali",
+   764,
+   7,
+   "Loam"
+  ],
+  "124422": [
+   "Ganjoli",
+   764,
+   7,
+   "Loam"
+  ],
+  "124408": [
+   "Sanaura",
+   764,
+   7,
+   "Loam"
+  ],
+  "124399": [
+   "Makhdum",
+   764,
+   7,
+   "Loam"
+  ],
+  "124177": [
+   "Barha Khadar",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "124181": [
+   "Tatrauta Khadar",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "124411": [
+   "Mustafabad",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124199": [
+   "Nagla Akos Khadar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124381": [
+   "Beri",
+   764,
+   7,
+   "Loam"
+  ],
+  "124147": [
+   "Shahpur Khadar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124164": [
+   "Jatora",
+   763,
+   7,
+   "Loam"
+  ],
+  "124349": [
+   "Aurangabad Khadar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124352": [
+   "Ronchi Khadar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124127": [
+   "Jogipur Bangar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124124": [
+   "Gokul Khadar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124212": [
+   "Sehat Bangar",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "124210": [
+   "Mohpai Bangar",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "124213": [
+   "Sehat Khadar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124201": [
+   "Kanora Bangar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124206": [
+   "Sarai Salbahan",
+   763,
+   7,
+   "Loam"
+  ],
+  "124202": [
+   "Murshidabad Bangar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124211": [
+   "Mohpai Khadar",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "124208": [
+   "Madaur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124204": [
+   "Kanora Khadar",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "124209": [
+   "Nera Khadar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124203": [
+   "Murshidabad Khadar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124205": [
+   "Nagla Gukhrauli",
+   763,
+   7,
+   "Loam"
+  ],
+  "124207": [
+   "Nera Bangar",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "124049": [
+   "Bil Aliabad",
+   762,
+   7,
+   "Loam"
+  ],
+  "124086": [
+   "Nagla Karan",
+   763,
+   7,
+   "Loam"
+  ],
+  "123658": [
+   "Rampur Khadar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123843": [
+   "Saeo Patti Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123649": [
+   "Khairal 3",
+   761,
+   7,
+   "Loam"
+  ],
+  "123620": [
+   "Khor",
+   761,
+   7,
+   "Loam"
+  ],
+  "124037": [
+   "Thokgyan",
+   762,
+   7,
+   "Loam"
+  ],
+  "124078": [
+   "Abdul Nabipur Khader",
+   763,
+   7,
+   "Loam"
+  ],
+  "123893": [
+   "Chhinparai Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "124112": [
+   "Mubarikpur Bangar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124166": [
+   "Ridha Baldeo Dehat",
+   763,
+   7,
+   "Loam"
+  ],
+  "123613": [
+   "Lodhauli",
+   761,
+   7,
+   "Loam"
+  ],
+  "124220": [
+   "Daulatpur Mathura",
+   764,
+   7,
+   "Loam"
+  ],
+  "124219": [
+   "Mudseras",
+   764,
+   7,
+   "Loam"
+  ],
+  "124221": [
+   "Devseras",
+   764,
+   7,
+   "Loam"
+  ],
+  "124226": [
+   "Jatipura",
+   764,
+   7,
+   "Loam"
+  ],
+  "124216": [
+   "Palson",
+   764,
+   7,
+   "Loam"
+  ],
+  "124223": [
+   "Malsarai",
+   764,
+   7,
+   "Loam"
+  ],
+  "124224": [
+   "Tond",
+   764,
+   7,
+   "Loam"
+  ],
+  "123707": [
+   "Jalalpur",
+   761,
+   7,
+   "Loam"
+  ],
+  "124233": [
+   "Sakarwa",
+   764,
+   7,
+   "Loam"
+  ],
+  "124232": [
+   "Bhagosa",
+   764,
+   7,
+   "Loam"
+  ],
+  "124222": [
+   "Madaura",
+   764,
+   7,
+   "Loam"
+  ],
+  "123610": [
+   "Loharwari",
+   761,
+   7,
+   "Loam"
+  ],
+  "124217": [
+   "Mahroli",
+   764,
+   7,
+   "Loam"
+  ],
+  "124225": [
+   "Gantholi",
+   764,
+   7,
+   "Loam"
+  ],
+  "123605": [
+   "Khitwita",
+   761,
+   7,
+   "Loam"
+  ],
+  "124218": [
+   "Janu",
+   764,
+   7,
+   "Loam"
+  ],
+  "124245": [
+   "Kothara",
+   764,
+   7,
+   "Loam"
+  ],
+  "249042": [
+   "Nandgaon",
+   761,
+   7,
+   "Loam"
+  ],
+  "123612": [
+   "Bijwari",
+   761,
+   7,
+   "Loam"
+  ],
+  "123627": [
+   "Hathiya",
+   761,
+   7,
+   "Loam"
+  ],
+  "123618": [
+   "Gajipur",
+   761,
+   7,
+   "Loam"
+  ],
+  "123586": [
+   "Puthari",
+   761,
+   7,
+   "Loam"
+  ],
+  "123713": [
+   "Karahala",
+   761,
+   7,
+   "Loam"
+  ],
+  "123622": [
+   "Chiksoli",
+   761,
+   7,
+   "Loam"
+  ],
+  "123711": [
+   "Khaira",
+   761,
+   7,
+   "Loam"
+  ],
+  "123580": [
+   "Hulwana",
+   761,
+   7,
+   "Loam"
+  ],
+  "123609": [
+   "Badangarh",
+   761,
+   7,
+   "Loam"
+  ],
+  "123720": [
+   "Madoi",
+   761,
+   7,
+   "Loam"
+  ],
+  "123581": [
+   "Kadauna",
+   761,
+   7,
+   "Loam"
+  ],
+  "123628": [
+   "Kamai",
+   761,
+   7,
+   "Loam"
+  ],
+  "123585": [
+   "Pakharpur",
+   761,
+   7,
+   "Loam"
+  ],
+  "123606": [
+   "Gidoh",
+   761,
+   7,
+   "Loam"
+  ],
+  "123623": [
+   "Roopnagar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123584": [
+   "Ledari",
+   761,
+   7,
+   "Loam"
+  ],
+  "123709": [
+   "Piloli",
+   761,
+   7,
+   "Loam"
+  ],
+  "123587": [
+   "Ruthari",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123624": [
+   "Dabhala",
+   761,
+   7,
+   "Loam"
+  ],
+  "123607": [
+   "Bhadokhar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123600": [
+   "Surwari",
+   761,
+   7,
+   "Loam"
+  ],
+  "123614": [
+   "Kamal Pur",
+   761,
+   7,
+   "Loam"
+  ],
+  "123582": [
+   "Sirthala",
+   761,
+   7,
+   "Loam"
+  ],
+  "249043": [
+   "Barsana",
+   761,
+   7,
+   "Loam"
+  ],
+  "123615": [
+   "Sanket",
+   761,
+   7,
+   "Loam"
+  ],
+  "123603": [
+   "Mahnaki",
+   761,
+   7,
+   "Loam"
+  ],
+  "124215": [
+   "Seeh",
+   764,
+   7,
+   "Loam"
+  ],
+  "123714": [
+   "Ajnokh",
+   761,
+   7,
+   "Loam"
+  ],
+  "123621": [
+   "Manpur",
+   761,
+   7,
+   "Loam"
+  ],
+  "123598": [
+   "Bathain Khurd",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123725": [
+   "Dahrauli",
+   761,
+   7,
+   "Loam"
+  ],
+  "123625": [
+   "Rankoli",
+   761,
+   7,
+   "Loam"
+  ],
+  "123616": [
+   "Rithaura",
+   761,
+   7,
+   "Loam"
+  ],
+  "123617": [
+   "Unchagaon",
+   761,
+   7,
+   "Loam"
+  ],
+  "123708": [
+   "Jao",
+   761,
+   7,
+   "Loam"
+  ],
+  "123599": [
+   "Bathain Kalan",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123608": [
+   "Mahrana",
+   761,
+   7,
+   "Loam"
+  ],
+  "123626": [
+   "Nahra",
+   761,
+   7,
+   "Loam"
+  ],
+  "123604": [
+   "Sanchauli",
+   761,
+   7,
+   "Loam"
+  ],
+  "123597": [
+   "Kosikalan Rural",
+   761,
+   7,
+   "Loam"
+  ],
+  "123619": [
+   "Barsana Rural",
+   761,
+   7,
+   "Loam"
+  ],
+  "123611": [
+   "Nandgaon Rural",
+   761,
+   7,
+   "Loam"
+  ],
+  "123601": [
+   "Barhana",
+   761,
+   7,
+   "Loam"
+  ],
+  "123593": [
+   "Hatana",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "249041": [
+   "Kosi Kalan",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123596": [
+   "Hasanpur Nagla",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123591": [
+   "Kotban",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123583": [
+   "Garhi Barwari",
+   761,
+   7,
+   "Loam"
+  ],
+  "123592": [
+   "Nabipur",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123589": [
+   "Dahgaon",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123588": [
+   "Lalpur",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123578": [
+   "Mandora",
+   761,
+   7,
+   "Loam"
+  ],
+  "123590": [
+   "Umrala",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123783": [
+   "Parsadi Ka Nagla OG",
+   761,
+   7,
+   "Loam"
+  ],
+  "123784": [
+   "Barhana OG",
+   761,
+   7,
+   "Loam"
+  ],
+  "124192": [
+   "Jadaupur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124311": [
+   "Sakana",
+   764,
+   7,
+   "Loam"
+  ],
+  "124322": [
+   "Nagla Kasi",
+   764,
+   7,
+   "Loam"
+  ],
+  "124295": [
+   "Tahra",
+   764,
+   7,
+   "Loam"
+  ],
+  "123728": [
+   "Pali",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "124318": [
+   "Govindpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124319": [
+   "Keshonpur Manoharpur Dehat",
+   764,
+   7,
+   "Loam"
+  ],
+  "124326": [
+   "Nagla Mana",
+   764,
+   7,
+   "Loam"
+  ],
+  "249050": [
+   "Govardhan",
+   764,
+   7,
+   "Loam"
+  ],
+  "124144": [
+   "Sherpur Bangar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124153": [
+   "Salemabad",
+   763,
+   7,
+   "Loam"
+  ],
+  "124321": [
+   "Satoha Asgarpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124236": [
+   "Goverdhan Gorwan",
+   764,
+   7,
+   "Loam"
+  ],
+  "124334": [
+   "Nabipur",
+   764,
+   7,
+   "Loam"
+  ],
+  "249051": [
+   "Saunkh",
+   764,
+   7,
+   "Loam"
+  ],
+  "124329": [
+   "Basai",
+   764,
+   7,
+   "Loam"
+  ],
+  "124279": [
+   "Maghera",
+   764,
+   7,
+   "Loam"
+  ],
+  "124367": [
+   "Mudesi",
+   764,
+   7,
+   "Loam"
+  ],
+  "124258": [
+   "Lalpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124264": [
+   "Kosi Khurd",
+   764,
+   7,
+   "Loam"
+  ],
+  "124308": [
+   "Bajna",
+   764,
+   7,
+   "Loam"
+  ],
+  "124231": [
+   "Neemgaon",
+   764,
+   7,
+   "Loam"
+  ],
+  "124335": [
+   "Navganva",
+   764,
+   7,
+   "Loam"
+  ],
+  "249049": [
+   "Radhakund",
+   764,
+   7,
+   "Loam"
+  ],
+  "124260": [
+   "Palidungara",
+   764,
+   7,
+   "Loam"
+  ],
+  "124248": [
+   "Nainupatti",
+   764,
+   7,
+   "Loam"
+  ],
+  "124333": [
+   "Unchagaon",
+   764,
+   7,
+   "Loam"
+  ],
+  "124312": [
+   "Mora",
+   764,
+   7,
+   "Loam"
+  ],
+  "124283": [
+   "Mukhrai",
+   764,
+   7,
+   "Loam"
+  ],
+  "124242": [
+   "Sonsa",
+   764,
+   7,
+   "Loam"
+  ],
+  "124304": [
+   "Chharaura",
+   764,
+   7,
+   "Loam"
+  ],
+  "124315": [
+   "Datiya",
+   764,
+   7,
+   "Loam"
+  ],
+  "124255": [
+   "Bhadar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124371": [
+   "Samaspur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124345": [
+   "Murshidpur Bangar",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124307": [
+   "Kota",
+   764,
+   7,
+   "Loam"
+  ],
+  "124230": [
+   "Radhakund Rural",
+   764,
+   7,
+   "Loam"
+  ],
+  "124368": [
+   "Tarsi",
+   764,
+   7,
+   "Loam"
+  ],
+  "124280": [
+   "Tos",
+   764,
+   7,
+   "Loam"
+  ],
+  "124261": [
+   "Phondar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124237": [
+   "Pali Brahmnan",
+   764,
+   7,
+   "Loam"
+  ],
+  "124330": [
+   "Shahpur Chainpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124372": [
+   "Bhuarsu",
+   764,
+   7,
+   "Loam"
+  ],
+  "124313": [
+   "Jachonda",
+   764,
+   7,
+   "Loam"
+  ],
+  "124365": [
+   "Umari",
+   764,
+   7,
+   "Loam"
+  ],
+  "124249": [
+   "Borpa",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124316": [
+   "Nagla Sadola",
+   764,
+   7,
+   "Loam"
+  ],
+  "124268": [
+   "Sonoth Shumali",
+   764,
+   7,
+   "Loam"
+  ],
+  "124257": [
+   "Chak Sawant",
+   764,
+   7,
+   "Loam"
+  ],
+  "124373": [
+   "Dhana Lalchand",
+   764,
+   7,
+   "Loam"
+  ],
+  "124336": [
+   "Mathura Bangar",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124374": [
+   "Dhana Viran",
+   764,
+   7,
+   "Loam"
+  ],
+  "124229": [
+   "Kunjera",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124364": [
+   "Nagari",
+   764,
+   7,
+   "Loam"
+  ],
+  "124247": [
+   "Sonkh Dehat",
+   764,
+   7,
+   "Loam"
+  ],
+  "124149": [
+   "Gulsana Bad",
+   763,
+   7,
+   "Loam"
+  ],
+  "124337": [
+   "Maholi",
+   764,
+   7,
+   "Loam"
+  ],
+  "124238": [
+   "Jamunavata",
+   764,
+   7,
+   "Loam"
+  ],
+  "124263": [
+   "Senha",
+   764,
+   7,
+   "Loam"
+  ],
+  "124265": [
+   "Magorra",
+   764,
+   7,
+   "Loam"
+  ],
+  "124262": [
+   "Dhakpura",
+   764,
+   7,
+   "Loam"
+  ],
+  "124332": [
+   "Shahpur Jaran",
+   764,
+   7,
+   "Loam"
+  ],
+  "124282": [
+   "Basonti",
+   764,
+   7,
+   "Loam"
+  ],
+  "124292": [
+   "Sunrakh Bangar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124241": [
+   "Madhuri Kund",
+   764,
+   7,
+   "Loam"
+  ],
+  "124331": [
+   "Beruka",
+   764,
+   7,
+   "Loam"
+  ],
+  "124375": [
+   "Mal",
+   764,
+   7,
+   "Loam"
+  ],
+  "124244": [
+   "Pentha",
+   764,
+   7,
+   "Loam"
+  ],
+  "124294": [
+   "Chhatikara",
+   764,
+   7,
+   "Loam"
+  ],
+  "124277": [
+   "Junhaidi",
+   764,
+   7,
+   "Loam"
+  ],
+  "124259": [
+   "Son",
+   764,
+   7,
+   "Loam"
+  ],
+  "124366": [
+   "Rampur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124310": [
+   "Phenchari",
+   764,
+   7,
+   "Loam"
+  ],
+  "124252": [
+   "Ahmal",
+   764,
+   7,
+   "Loam"
+  ],
+  "124243": [
+   "Mahmadpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124309": [
+   "Arhera",
+   764,
+   7,
+   "Loam"
+  ],
+  "124369": [
+   "Dhangaon",
+   764,
+   7,
+   "Loam"
+  ],
+  "124239": [
+   "Bhavanpura",
+   764,
+   7,
+   "Loam"
+  ],
+  "124228": [
+   "Padal",
+   764,
+   7,
+   "Loam"
+  ],
+  "124227": [
+   "Anore",
+   764,
+   7,
+   "Loam"
+  ],
+  "124253": [
+   "Singa Patti",
+   764,
+   7,
+   "Loam"
+  ],
+  "124320": [
+   "Girdharpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124274": [
+   "Bhadal Sundar",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124276": [
+   "Konai",
+   764,
+   7,
+   "Loam"
+  ],
+  "124323": [
+   "Nagla Bohra",
+   764,
+   7,
+   "Loam"
+  ],
+  "124235": [
+   "Goverdhan Brahmnan",
+   764,
+   7,
+   "Loam"
+  ],
+  "124382": [
+   "Dhana Teja",
+   764,
+   7,
+   "Loam"
+  ],
+  "124281": [
+   "Jikhangaon",
+   764,
+   7,
+   "Loam"
+  ],
+  "124234": [
+   "Sakitara",
+   764,
+   7,
+   "Loam"
+  ],
+  "124303": [
+   "Allhepur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124338": [
+   "Salempur Mathura",
+   764,
+   7,
+   "Loam"
+  ],
+  "124246": [
+   "Bachhgaon",
+   764,
+   7,
+   "Loam"
+  ],
+  "124254": [
+   "Loriha Patti",
+   764,
+   7,
+   "Loam"
+  ],
+  "124328": [
+   "Nagla Gaju",
+   764,
+   7,
+   "Loam"
+  ],
+  "124250": [
+   "Nagla Chhinga",
+   764,
+   7,
+   "Loam"
+  ],
+  "124324": [
+   "Junsuti",
+   764,
+   7,
+   "Loam"
+  ],
+  "124240": [
+   "Aring",
+   764,
+   7,
+   "Loam"
+  ],
+  "124325": [
+   "Hakimpur",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124327": [
+   "Uspar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124278": [
+   "Ral",
+   764,
+   7,
+   "Loam"
+  ],
+  "124251": [
+   "Malhu",
+   764,
+   7,
+   "Loam"
+  ],
+  "124314": [
+   "Khamini",
+   764,
+   7,
+   "Loam"
+  ],
+  "124339": [
+   "Mukandpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124340": [
+   "Masum Nagar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124275": [
+   "Bhadal Ichchha",
+   764,
+   7,
+   "Loam"
+  ],
+  "124175": [
+   "Nagla Bali",
+   763,
+   7,
+   "Loam"
+  ],
+  "124302": [
+   "Bati",
+   764,
+   7,
+   "Loam"
+  ],
+  "124317": [
+   "Ganesara",
+   764,
+   7,
+   "Loam"
+  ],
+  "124256": [
+   "Nagla Sawant",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124120": [
+   "Jakariapur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124125": [
+   "Mahaban Bangar Dehat",
+   763,
+   7,
+   "Loam"
+  ],
+  "124362": [
+   "Anganpura",
+   764,
+   7,
+   "Loam"
+  ],
+  "124358": [
+   "Karnawal Bangar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124347": [
+   "Mai Mirzapur Bangar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124359": [
+   "Ladpur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124383": [
+   "Barari",
+   764,
+   7,
+   "Loam"
+  ],
+  "124145": [
+   "Sherpur Khadar",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "124169": [
+   "Kilauni",
+   763,
+   7,
+   "Loam"
+  ],
+  "124351": [
+   "Aduki",
+   764,
+   7,
+   "Loam"
+  ],
+  "124354": [
+   "Koila Alipur Bangar",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124167": [
+   "Chhabirau",
+   763,
+   7,
+   "Loam"
+  ],
+  "249056": [
+   "Mahaban",
+   763,
+   7,
+   "Loam"
+  ],
+  "124165": [
+   "Banarsipur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124170": [
+   "Angai",
+   763,
+   7,
+   "Loam"
+  ],
+  "124141": [
+   "Habibpur Bangar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124116": [
+   "Kheria",
+   763,
+   7,
+   "Loam"
+  ],
+  "124122": [
+   "Sarai Alikhan",
+   763,
+   7,
+   "Loam"
+  ],
+  "124191": [
+   "Selkhera",
+   763,
+   7,
+   "Loam"
+  ],
+  "249057": [
+   "Baldeo",
+   763,
+   7,
+   "Loam"
+  ],
+  "124119": [
+   "Manoharpur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124142": [
+   "Nabipur Bangar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124173": [
+   "Nagla Ajam Bangar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124162": [
+   "Jharautha",
+   763,
+   7,
+   "Loam"
+  ],
+  "124174": [
+   "Saidpur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124118": [
+   "Khanpur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124370": [
+   "Bhainsa",
+   764,
+   7,
+   "Loam"
+  ],
+  "124363": [
+   "Baburi Garbi",
+   764,
+   7,
+   "Loam"
+  ],
+  "124160": [
+   "Awerni",
+   763,
+   7,
+   "Loam"
+  ],
+  "124384": [
+   "Anwla Sultanpur Bangar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124140": [
+   "Shahaupur Bangar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124161": [
+   "Artauni",
+   763,
+   7,
+   "Loam"
+  ],
+  "124121": [
+   "Islampur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124168": [
+   "Hatkoli",
+   763,
+   7,
+   "Loam"
+  ],
+  "124117": [
+   "Kishanpur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124350": [
+   "Azampur",
+   764,
+   7,
+   "Loam"
+  ],
+  "124150": [
+   "Pachawar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124126": [
+   "Mahaban Khadar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124385": [
+   "Anwla Sultanpur Khadar",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124346": [
+   "Mai Mirzapur Khadar",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124146": [
+   "Habibpur Khadar",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "124389": [
+   "Balrai Bangar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124348": [
+   "Tartura",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124133": [
+   "Muzaffarpur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124394": [
+   "Garhaya Latifpur Bangar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124130": [
+   "Jagdishpur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124131": [
+   "Bandi",
+   763,
+   7,
+   "Loam"
+  ],
+  "124138": [
+   "Narhauli Junnardar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124377": [
+   "Chharhgaon",
+   764,
+   7,
+   "Loam"
+  ],
+  "124356": [
+   "Madanpura Bangar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124157": [
+   "Hasanpur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124159": [
+   "Mohanpur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124139": [
+   "Balrampur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124136": [
+   "Amirpur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124123": [
+   "Gokul Bangar Dehat 1",
+   763,
+   7,
+   "Loam"
+  ],
+  "123803": [
+   "Abhaipura Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "124128": [
+   "Jogipur Khadar",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "124132": [
+   "Chholi",
+   763,
+   7,
+   "Loam"
+  ],
+  "124163": [
+   "Birona",
+   763,
+   7,
+   "Loam"
+  ],
+  "124135": [
+   "Ibrahimpur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124152": [
+   "Sarkand Khera",
+   763,
+   7,
+   "Loam"
+  ],
+  "124171": [
+   "Nagla Girdhar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124360": [
+   "Nagla Maniram",
+   764,
+   7,
+   "Loam"
+  ],
+  "124148": [
+   "Khadera",
+   763,
+   7,
+   "Loam"
+  ],
+  "124342": [
+   "Navada",
+   764,
+   7,
+   "Loam"
+  ],
+  "124129": [
+   "Noorpur",
+   763,
+   7,
+   "Loam"
+  ],
+  "249055": [
+   "Gokul",
+   763,
+   7,
+   "Loam"
+  ],
+  "124137": [
+   "Hataura",
+   763,
+   7,
+   "Loam"
+  ],
+  "124151": [
+   "Jugsana",
+   763,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "124158": [
+   "Gotha",
+   763,
+   7,
+   "Loam"
+  ],
+  "124341": [
+   "Narholi",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124143": [
+   "Nabipur Khadar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124186": [
+   "Patlauni",
+   763,
+   7,
+   "Loam"
+  ],
+  "124361": [
+   "Baburi Sharqi",
+   764,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "124089": [
+   "Sonkh Khera",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "277270": [
+   "Mathura",
+   764,
+   7,
+   "Loam"
+  ],
+  "124387": [
+   "Jhandipur Khadar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124355": [
+   "Madanpura Khadar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124357": [
+   "Karnawal Khadar",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124393": [
+   "Garhaya Latifpur Khadar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124055": [
+   "Bansai",
+   763,
+   7,
+   "Loam"
+  ],
+  "124074": [
+   "Milik Bitthalnath",
+   763,
+   7,
+   "Loam"
+  ],
+  "124298": [
+   "Vrindaban Khadar",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124080": [
+   "Raipur Mai Khader",
+   763,
+   7,
+   "Loam"
+  ],
+  "124099": [
+   "Nunera",
+   763,
+   7,
+   "Loam"
+  ],
+  "124073": [
+   "Shahpur Gausana",
+   763,
+   7,
+   "Loam"
+  ],
+  "124036": [
+   "Birbal",
+   762,
+   7,
+   "Loam"
+  ],
+  "124065": [
+   "Siyara",
+   763,
+   7,
+   "Loam"
+  ],
+  "124090": [
+   "Nagla Hari",
+   763,
+   7,
+   "Loam"
+  ],
+  "249047": [
+   "Raya",
+   762,
+   7,
+   "Loam"
+  ],
+  "124094": [
+   "Nagla Heera",
+   763,
+   7,
+   "Loam"
+  ],
+  "124081": [
+   "Sihora",
+   763,
+   7,
+   "Loam"
+  ],
+  "124297": [
+   "Rajpur Khadar",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124057": [
+   "Chhikara",
+   763,
+   7,
+   "Loam"
+  ],
+  "124046": [
+   "Thok Kamal",
+   762,
+   7,
+   "Loam"
+  ],
+  "124000": [
+   "Kalyanpur",
+   762,
+   7,
+   "Loam"
+  ],
+  "124062": [
+   "Padrari",
+   763,
+   7,
+   "Loam"
+  ],
+  "124007": [
+   "Choorahansi",
+   762,
+   7,
+   "Loam"
+  ],
+  "124067": [
+   "Achru Ladhora",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "124084": [
+   "Nagla Tulsi",
+   763,
+   7,
+   "Loam"
+  ],
+  "124050": [
+   "Chauhari",
+   762,
+   7,
+   "Loam"
+  ],
+  "124069": [
+   "Khirari",
+   763,
+   7,
+   "Loam"
+  ],
+  "124059": [
+   "Bhojua",
+   763,
+   7,
+   "Loam"
+  ],
+  "124003": [
+   "Kinarai Bangar",
+   762,
+   7,
+   "Loam"
+  ],
+  "124068": [
+   "Itauli",
+   763,
+   7,
+   "Loam"
+  ],
+  "249052": [
+   "Mathura Vrindavan",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124053": [
+   "Nauranga",
+   763,
+   7,
+   "Loam"
+  ],
+  "124035": [
+   "Bisavli",
+   762,
+   7,
+   "Loam"
+  ],
+  "124009": [
+   "Kharwa",
+   762,
+   7,
+   "Loam"
+  ],
+  "123999": [
+   "Diwana",
+   762,
+   7,
+   "Loam"
+  ],
+  "124013": [
+   "Thana Amarsingh",
+   762,
+   7,
+   "Loam"
+  ],
+  "124300": [
+   "Dhorera Khadar",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "124054": [
+   "Pavesara",
+   763,
+   7,
+   "Loam"
+  ],
+  "124075": [
+   "Lohaban",
+   763,
+   7,
+   "Loam"
+  ],
+  "124114": [
+   "Hayatpur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124088": [
+   "Nagla Arjun",
+   763,
+   7,
+   "Loam"
+  ],
+  "124105": [
+   "Bharau Garh",
+   763,
+   7,
+   "Loam"
+  ],
+  "124064": [
+   "Bana",
+   763,
+   7,
+   "Loam"
+  ],
+  "124061": [
+   "Malhai",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "124102": [
+   "Bhit Bahari",
+   763,
+   7,
+   "Loam"
+  ],
+  "124011": [
+   "Tirwaya",
+   762,
+   7,
+   "Loam"
+  ],
+  "124101": [
+   "Basar Bhakandi",
+   763,
+   7,
+   "Loam"
+  ],
+  "124010": [
+   "Koyal",
+   762,
+   7,
+   "Loam"
+  ],
+  "123998": [
+   "Suraj",
+   762,
+   7,
+   "Loam"
+  ],
+  "124034": [
+   "Birhana",
+   762,
+   7,
+   "Loam"
+  ],
+  "124093": [
+   "Tal Garhi",
+   763,
+   7,
+   "Loam"
+  ],
+  "124301": [
+   "Dhorera Bangar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124072": [
+   "Milik Krishna Chaube",
+   763,
+   7,
+   "Loam"
+  ],
+  "124047": [
+   "Khadiya",
+   762,
+   7,
+   "Loam"
+  ],
+  "124005": [
+   "Daharuwa",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "124048": [
+   "Arazi Milik Qanungoyan",
+   762,
+   7,
+   "Loam"
+  ],
+  "124033": [
+   "Shivli",
+   762,
+   7,
+   "Loam"
+  ],
+  "123995": [
+   "Panigaon Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "124305": [
+   "Ahilya Ganj Bangar",
+   764,
+   7,
+   "Loam"
+  ],
+  "124070": [
+   "Isapur Khadar",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "124076": [
+   "Shahjadpur Tappa Sonai",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "124106": [
+   "Nagla Bharau",
+   763,
+   7,
+   "Loam"
+  ],
+  "124096": [
+   "Bhanda Sujanpur",
+   763,
+   7,
+   "Loam"
+  ],
+  "123996": [
+   "Panigaon Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "124015": [
+   "Gonga",
+   762,
+   7,
+   "Loam"
+  ],
+  "124016": [
+   "Dhaku",
+   762,
+   7,
+   "Loam"
+  ],
+  "124109": [
+   "Rawal Bangar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124100": [
+   "Nagaura",
+   763,
+   7,
+   "Loam"
+  ],
+  "124457": [
+   "Pali Khera CT",
+   764,
+   7,
+   "Loam"
+  ],
+  "124456": [
+   "Bakalpur Mathura CT",
+   764,
+   7,
+   "Loam"
+  ],
+  "124077": [
+   "Abdul Nabipur Banger",
+   763,
+   7,
+   "Loam"
+  ],
+  "124461": [
+   "Bad CT",
+   764,
+   7,
+   "Loam"
+  ],
+  "124458": [
+   "Birjapur CT",
+   764,
+   7,
+   "Loam"
+  ],
+  "124460": [
+   "Aurangabad Bangar CT",
+   764,
+   7,
+   "Loam"
+  ],
+  "124455": [
+   "Rajpur Bangar CT",
+   764,
+   7,
+   "Loam"
+  ],
+  "124108": [
+   "Nagla Qazi",
+   763,
+   7,
+   "Loam"
+  ],
+  "124012": [
+   "Bheema",
+   762,
+   7,
+   "Loam"
+  ],
+  "124071": [
+   "Taiyabpur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124110": [
+   "Rawal Khadar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124115": [
+   "Alipur",
+   763,
+   7,
+   "Loam"
+  ],
+  "124092": [
+   "Nagla Thana",
+   763,
+   7,
+   "Loam"
+  ],
+  "124002": [
+   "Maoli Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "124091": [
+   "Nagla Dhanoua",
+   763,
+   7,
+   "Loam"
+  ],
+  "124085": [
+   "Mursenia",
+   763,
+   7,
+   "Loam"
+  ],
+  "124001": [
+   "Maoli Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "124113": [
+   "Nagla Mirbulaki",
+   763,
+   7,
+   "Loam"
+  ],
+  "124098": [
+   "Gudera",
+   763,
+   7,
+   "Loam"
+  ],
+  "124079": [
+   "Raipur Mai Banger",
+   763,
+   7,
+   "Loam"
+  ],
+  "124052": [
+   "Rausinga",
+   763,
+   7,
+   "Loam"
+  ],
+  "124023": [
+   "Pirsuwa",
+   762,
+   7,
+   "Loam"
+  ],
+  "124344": [
+   "Madhopur Khadar",
+   764,
+   7,
+   "Loam"
+  ],
+  "123997": [
+   "Pokher Hirde",
+   762,
+   7,
+   "Loam"
+  ],
+  "124014": [
+   "Nagal",
+   762,
+   7,
+   "Loam"
+  ],
+  "124056": [
+   "Khajuri",
+   763,
+   7,
+   "Loam"
+  ],
+  "124082": [
+   "Bahadurpur",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "124083": [
+   "Karab",
+   763,
+   7,
+   "Loam"
+  ],
+  "124004": [
+   "Kinarai Khader",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "124060": [
+   "Bichpuri Poluwa",
+   763,
+   7,
+   "Loam"
+  ],
+  "124008": [
+   "Narbehansi",
+   762,
+   7,
+   "Loam"
+  ],
+  "124051": [
+   "Tehra Mahaban",
+   762,
+   7,
+   "Loam"
+  ],
+  "124111": [
+   "Mubarikpur Khadar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124058": [
+   "Jagatiya",
+   763,
+   7,
+   "Loam"
+  ],
+  "124343": [
+   "Murshidpur Khadar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124087": [
+   "Nagla Todar",
+   763,
+   7,
+   "Loam"
+  ],
+  "124066": [
+   "Bhainsara",
+   763,
+   7,
+   "Loam"
+  ],
+  "124095": [
+   "Ochhta",
+   763,
+   7,
+   "Loam"
+  ],
+  "124063": [
+   "Saras",
+   763,
+   7,
+   "Loam"
+  ],
+  "124097": [
+   "Khalaua",
+   763,
+   7,
+   "Loam"
+  ],
+  "123741": [
+   "Jamalpur",
+   761,
+   7,
+   "Loam"
+  ],
+  "124293": [
+   "Jait",
+   764,
+   7,
+   "Loam"
+  ],
+  "123763": [
+   "Barahara Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "249045": [
+   "Chaumuha",
+   761,
+   7,
+   "Loam"
+  ],
+  "123735": [
+   "Akbarpur",
+   761,
+   7,
+   "Loam"
+  ],
+  "123719": [
+   "Sankhi",
+   761,
+   7,
+   "Loam"
+  ],
+  "123730": [
+   "Pelkhu",
+   761,
+   7,
+   "Loam"
+  ],
+  "123729": [
+   "Bharna Khurd",
+   761,
+   7,
+   "Loam"
+  ],
+  "123734": [
+   "Konkera",
+   761,
+   7,
+   "Loam"
+  ],
+  "123726": [
+   "Dirawali",
+   761,
+   7,
+   "Loam"
+  ],
+  "124273": [
+   "Nagla Neta",
+   764,
+   7,
+   "Loam"
+  ],
+  "123777": [
+   "Ajhai Khurd",
+   761,
+   7,
+   "Loam"
+  ],
+  "123747": [
+   "Pasoli",
+   761,
+   7,
+   "Loam"
+  ],
+  "124288": [
+   "Atas Bangar",
+   764,
+   7,
+   "Loam"
+  ],
+  "123742": [
+   "Pilhora",
+   761,
+   7,
+   "Loam"
+  ],
+  "123737": [
+   "Baroli",
+   761,
+   7,
+   "Loam"
+  ],
+  "123782": [
+   "Bajana",
+   761,
+   7,
+   "Loam"
+  ],
+  "123746": [
+   "Mangrauli",
+   761,
+   7,
+   "Loam"
+  ],
+  "123832": [
+   "Kaneka",
+   762,
+   7,
+   "Loam"
+  ],
+  "123733": [
+   "Sihana",
+   761,
+   7,
+   "Loam"
+  ],
+  "123721": [
+   "Rahera",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123780": [
+   "Bhartiya",
+   761,
+   7,
+   "Loam"
+  ],
+  "123778": [
+   "Ajhai Kalan",
+   761,
+   7,
+   "Loam"
+  ],
+  "123743": [
+   "Tarauli Janubi",
+   761,
+   7,
+   "Loam"
+  ],
+  "123762": [
+   "Sei Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123744": [
+   "Tarauli Shumali",
+   761,
+   7,
+   "Loam"
+  ],
+  "123739": [
+   "Bilothi",
+   761,
+   7,
+   "Loam"
+  ],
+  "124290": [
+   "Atas Khadar",
+   764,
+   7,
+   "Loam"
+  ],
+  "123722": [
+   "Sahar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123732": [
+   "Bajhera",
+   761,
+   7,
+   "Loam"
+  ],
+  "123727": [
+   "Bharnakalan",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123764": [
+   "Sei Khadar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123781": [
+   "Parkham",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "124287": [
+   "Jonai",
+   764,
+   7,
+   "Loam"
+  ],
+  "123724": [
+   "Deopura",
+   761,
+   7,
+   "Loam"
+  ],
+  "123717": [
+   "Umraya",
+   761,
+   7,
+   "Loam"
+  ],
+  "123718": [
+   "Alwai",
+   761,
+   7,
+   "Loam"
+  ],
+  "123808": [
+   "Abhaipura Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123740": [
+   "Nari",
+   761,
+   7,
+   "Loam"
+  ],
+  "123712": [
+   "Pisawa",
+   761,
+   7,
+   "Loam"
+  ],
+  "123738": [
+   "Semri",
+   761,
+   7,
+   "Loam"
+  ],
+  "123745": [
+   "Ahuri",
+   761,
+   7,
+   "Loam"
+  ],
+  "123723": [
+   "Tatarpur",
+   761,
+   7,
+   "Loam"
+  ],
+  "123731": [
+   "Shiwal",
+   761,
+   7,
+   "Loam"
+  ],
+  "123807": [
+   "Ramgarhi Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "124272": [
+   "Badhauta",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "123779": [
+   "Chaumuhan Rural",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123776": [
+   "Barahara Khadar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123678": [
+   "Shergarh Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "249044": [
+   "Chhata",
+   761,
+   7,
+   "Loam"
+  ],
+  "123693": [
+   "Paigaon",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123821": [
+   "Baghai Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123702": [
+   "Chandauri",
+   761,
+   7,
+   "Loam"
+  ],
+  "123749": [
+   "Sainwa",
+   761,
+   7,
+   "Loam"
+  ],
+  "123761": [
+   "Mai Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123695": [
+   "Peengari",
+   761,
+   7,
+   "Loam"
+  ],
+  "123751": [
+   "Agaryala",
+   761,
+   7,
+   "Loam"
+  ],
+  "123686": [
+   "Ajnothi",
+   761,
+   7,
+   "Loam"
+  ],
+  "123694": [
+   "Karahari",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123684": [
+   "Kajraut Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123663": [
+   "Basai Shergarh Bangar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123687": [
+   "Ladpur",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123703": [
+   "Tumaula",
+   761,
+   7,
+   "Loam"
+  ],
+  "123689": [
+   "Ranhera",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123700": [
+   "Guheta 10 Biswa",
+   761,
+   7,
+   "Loam"
+  ],
+  "123750": [
+   "Astauli",
+   761,
+   7,
+   "Loam"
+  ],
+  "123716": [
+   "Ranwari",
+   761,
+   7,
+   "Loam"
+  ],
+  "123676": [
+   "Oba Bangar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123755": [
+   "Jawali",
+   761,
+   7,
+   "Loam"
+  ],
+  "123706": [
+   "Nagariya",
+   761,
+   7,
+   "Loam"
+  ],
+  "123701": [
+   "Dautana",
+   761,
+   7,
+   "Loam"
+  ],
+  "123705": [
+   "Dham Singha",
+   761,
+   7,
+   "Loam"
+  ],
+  "123754": [
+   "Saidpur",
+   761,
+   7,
+   "Loam"
+  ],
+  "123752": [
+   "Bilonda",
+   761,
+   7,
+   "Loam"
+  ],
+  "123602": [
+   "Ajijpur",
+   761,
+   7,
+   "Loam"
+  ],
+  "123767": [
+   "Loharari",
+   761,
+   7,
+   "Loam"
+  ],
+  "123696": [
+   "Baharawali",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123698": [
+   "Guheta 7 Biswa",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123661": [
+   "Husaini",
+   761,
+   7,
+   "Loam"
+  ],
+  "123690": [
+   "Khursi",
+   761,
+   7,
+   "Loam"
+  ],
+  "123688": [
+   "Undi",
+   761,
+   7,
+   "Loam"
+  ],
+  "123665": [
+   "Khandwai",
+   761,
+   7,
+   "Loam"
+  ],
+  "123704": [
+   "Gauhari",
+   761,
+   7,
+   "Loam"
+  ],
+  "123736": [
+   "Bidawali",
+   761,
+   7,
+   "Loam"
+  ],
+  "123710": [
+   "Bhadawal",
+   761,
+   7,
+   "Loam"
+  ],
+  "123715": [
+   "Khanpur",
+   761,
+   7,
+   "Loam"
+  ],
+  "123680": [
+   "Garhi Bheema",
+   761,
+   7,
+   "Loam"
+  ],
+  "123753": [
+   "Naugaona",
+   761,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "123748": [
+   "Gora",
+   761,
+   7,
+   "Loam"
+  ],
+  "123760": [
+   "Dalota",
+   761,
+   7,
+   "Loam"
+  ],
+  "123662": [
+   "Jatwari",
+   761,
+   7,
+   "Loam"
+  ],
+  "123677": [
+   "Peerpur Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123679": [
+   "Adampur",
+   761,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "123967": [
+   "Bahadin",
+   762,
+   7,
+   "Loam"
+  ],
+  "123685": [
+   "Chhata Rural",
+   761,
+   7,
+   "Loam"
+  ],
+  "123666": [
+   "Shergarh Khadar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123974": [
+   "Poluwa Kalan",
+   762,
+   7,
+   "Loam"
+  ],
+  "124006": [
+   "Saur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123806": [
+   "Noorpur Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123980": [
+   "Mat Mula Bangar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123982": [
+   "Mat Raja Bangar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123773": [
+   "Jaitpur",
+   761,
+   7,
+   "Loam"
+  ],
+  "123968": [
+   "Nagla Deh",
+   762,
+   7,
+   "Loam"
+  ],
+  "124031": [
+   "Amera",
+   762,
+   7,
+   "Loam"
+  ],
+  "124019": [
+   "Kakrari",
+   762,
+   7,
+   "Loam"
+  ],
+  "124020": [
+   "Barhaun",
+   762,
+   7,
+   "Loam"
+  ],
+  "123993": [
+   "Jahangirpur Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123956": [
+   "Kurhvara",
+   762,
+   7,
+   "Loam"
+  ],
+  "124028": [
+   "Lalpur Mahavan",
+   762,
+   7,
+   "Loam"
+  ],
+  "124030": [
+   "Gaju",
+   762,
+   7,
+   "Loam"
+  ],
+  "123961": [
+   "Piri",
+   762,
+   7,
+   "Loam"
+  ],
+  "123977": [
+   "Dunetiya",
+   762,
+   7,
+   "Loam"
+  ],
+  "123964": [
+   "Udhar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123958": [
+   "Jaiswan",
+   762,
+   7,
+   "Loam"
+  ],
+  "123976": [
+   "Kheria",
+   762,
+   7,
+   "Loam"
+  ],
+  "124025": [
+   "Manina Balu",
+   762,
+   7,
+   "Loam"
+  ],
+  "123992": [
+   "Begampur Khader",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "124018": [
+   "Nagla Mahru",
+   762,
+   7,
+   "Loam"
+  ],
+  "123963": [
+   "Bindu Bulaki",
+   762,
+   7,
+   "Loam"
+  ],
+  "124021": [
+   "Surja",
+   762,
+   7,
+   "Loam"
+  ],
+  "123971": [
+   "Milik Kalan",
+   762,
+   7,
+   "Loam"
+  ],
+  "123954": [
+   "Bijoli Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "124296": [
+   "Vrindaban Bangar",
+   764,
+   7,
+   "Loam"
+  ],
+  "123949": [
+   "Girtana",
+   762,
+   7,
+   "Loam"
+  ],
+  "124291": [
+   "Sunrakh Khadar",
+   764,
+   7,
+   "Loam"
+  ],
+  "123973": [
+   "Poluwa Khurd",
+   762,
+   7,
+   "Loam"
+  ],
+  "124289": [
+   "Sakraya Khadar",
+   764,
+   7,
+   "Loam"
+  ],
+  "123978": [
+   "Sir Badam Singh",
+   762,
+   7,
+   "Loam"
+  ],
+  "123986": [
+   "Bheem Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123984": [
+   "Jahangirpur Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123966": [
+   "Javara",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "124027": [
+   "Bhooda Sani",
+   762,
+   7,
+   "Loam"
+  ],
+  "123981": [
+   "Arruwa Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123975": [
+   "Patipura",
+   762,
+   7,
+   "Loam"
+  ],
+  "124029": [
+   "Bhankerpur Basela",
+   762,
+   7,
+   "Loam"
+  ],
+  "124017": [
+   "Surraka",
+   762,
+   7,
+   "Loam"
+  ],
+  "123989": [
+   "Piproli Bangar",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123991": [
+   "Dangoli Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123962": [
+   "Biballi",
+   762,
+   7,
+   "Loam"
+  ],
+  "123969": [
+   "Nagla Dani",
+   762,
+   7,
+   "Loam"
+  ],
+  "123987": [
+   "Bheem Bangar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123988": [
+   "Arruwa Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "124032": [
+   "Mishri",
+   762,
+   7,
+   "Loam"
+  ],
+  "123957": [
+   "Naseeti",
+   762,
+   7,
+   "Loam"
+  ],
+  "124026": [
+   "Sampat Jogi",
+   762,
+   7,
+   "Loam"
+  ],
+  "124038": [
+   "Nagla Bari",
+   762,
+   7,
+   "Loam"
+  ],
+  "124286": [
+   "Sakraya Bangar",
+   764,
+   7,
+   "Loam"
+  ],
+  "123959": [
+   "Bakla",
+   762,
+   7,
+   "Loam"
+  ],
+  "124024": [
+   "Sherni",
+   762,
+   7,
+   "Loam"
+  ],
+  "123985": [
+   "Dangoli Bangar",
+   762,
+   7,
+   "Loam"
+  ],
+  "124022": [
+   "Gaiyara",
+   762,
+   7,
+   "Loam"
+  ],
+  "123990": [
+   "Piproli Khader",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123960": [
+   "Neem Gaon",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123765": [
+   "Mai Khadar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123953": [
+   "Bijoli Khadar",
+   762,
+   7,
+   "Loam"
+  ],
+  "124285": [
+   "Muhal Sakrayakhadar",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "123972": [
+   "Milik Khurd",
+   762,
+   7,
+   "Loam"
+  ],
+  "123979": [
+   "Mat Mula Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123775": [
+   "Hazara",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123965": [
+   "Nagla Himana",
+   762,
+   7,
+   "Loam"
+  ],
+  "123769": [
+   "Basai Khurd Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123770": [
+   "Basai Khurd Khadar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123922": [
+   "Surir Vijaru Khadar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123919": [
+   "Surirkalan Khadar",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123923": [
+   "Surir Vijaru Bangar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123948": [
+   "Hernol",
+   762,
+   7,
+   "Loam"
+  ],
+  "123772": [
+   "Bhaugaon Khadar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123771": [
+   "Bhaugaon Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123921": [
+   "Sihavan Bangar",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123944": [
+   "Sirrela",
+   762,
+   7,
+   "Loam"
+  ],
+  "123930": [
+   "Samauli Bangaar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123759": [
+   "Gangroli Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123939": [
+   "Akbarpur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123943": [
+   "Irolizunnardar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123951": [
+   "Bhadavan Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123942": [
+   "Pabbipur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123925": [
+   "Bhidauni Bangar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123916": [
+   "Badanpur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123947": [
+   "Nagla Birbala",
+   762,
+   7,
+   "Loam"
+  ],
+  "123955": [
+   "Lal Garhi",
+   762,
+   7,
+   "Loam"
+  ],
+  "123768": [
+   "Hazipur",
+   761,
+   7,
+   "Loam"
+  ],
+  "123756": [
+   "Siyaraha Bangar",
+   761,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "123924": [
+   "Surirkalan Bagar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123929": [
+   "Baikunthpur",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123918": [
+   "Bhalai",
+   762,
+   7,
+   "Loam"
+  ],
+  "123682": [
+   "Bahata Khadar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123952": [
+   "Bhadavan Khadar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123757": [
+   "Siyaraha Khadar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123920": [
+   "Sihavan Khadar",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123928": [
+   "Auhawa Bangar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123946": [
+   "Iroli Gujar Bangar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123681": [
+   "Bahata Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123917": [
+   "Lohai",
+   762,
+   7,
+   "Loam"
+  ],
+  "123941": [
+   "Karahari",
+   762,
+   7,
+   "Loam"
+  ],
+  "123766": [
+   "Basai Bujurg Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123937": [
+   "Bhadanwara",
+   762,
+   7,
+   "Loam"
+  ],
+  "123950": [
+   "Bilandpur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123683": [
+   "Kajraut Khadar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123940": [
+   "Dadisara",
+   762,
+   7,
+   "Loam"
+  ],
+  "123938": [
+   "Khawal",
+   762,
+   7,
+   "Loam"
+  ],
+  "123927": [
+   "Auhawa Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123926": [
+   "Bhidauni Khadar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123758": [
+   "Gangroli Khadar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123931": [
+   "Samauli Khadar",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "124187": [
+   "Bhartiya",
+   763,
+   7,
+   "Loam"
+  ],
+  "124189": [
+   "Fatehpura",
+   763,
+   7,
+   "Loam"
+  ],
+  "124155": [
+   "Sarai Daud",
+   763,
+   7,
+   "Loam"
+  ],
+  "124188": [
+   "Karnau",
+   763,
+   7,
+   "Loam"
+  ],
+  "124154": [
+   "Dagheta",
+   763,
+   7,
+   "Loam"
+  ],
+  "124156": [
+   "Radoi",
+   763,
+   7,
+   "Loam"
+  ],
+  "124190": [
+   "Kachnau",
+   763,
+   7,
+   "Loam"
+  ],
+  "124103": [
+   "Anorha",
+   763,
+   7,
+   "Loam"
+  ],
+  "124044": [
+   "Nagla Jangali",
+   762,
+   7,
+   "Loam"
+  ],
+  "124045": [
+   "Thok Saru",
+   762,
+   7,
+   "Loam"
+  ],
+  "124107": [
+   "Baltikari",
+   763,
+   7,
+   "Loam"
+  ],
+  "124104": [
+   "Byohai",
+   763,
+   7,
+   "Loam"
+  ],
+  "124043": [
+   "Arazi Milik Bikanushah",
+   762,
+   7,
+   "Loam"
+  ],
+  "123909": [
+   "Lamtauri",
+   762,
+   7,
+   "Loam"
+  ],
+  "124214": [
+   "Isapur Banger CT",
+   763,
+   4,
+   "Clay Loam"
+  ],
+  "800795": [
+   "Vrindavan Npp",
+   764,
+   4,
+   "Clay Loam"
+  ],
+  "123825": [
+   "Jafarpur Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123795": [
+   "Musmana Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "124041": [
+   "Thok Bindavani",
+   762,
+   7,
+   "Loam"
+  ],
+  "124040": [
+   "Arazi Milik Gangabasi",
+   762,
+   7,
+   "Loam"
+  ],
+  "124042": [
+   "Bhudri",
+   762,
+   7,
+   "Loam"
+  ],
+  "124039": [
+   "Thok Sumera",
+   762,
+   7,
+   "Loam"
+  ],
+  "123876": [
+   "Lana Makhdoompur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123864": [
+   "Lanakolana",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123798": [
+   "Bhagat Bhakrelia Khadar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123794": [
+   "Mani Garhi Khadar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123873": [
+   "Lana Kasba",
+   762,
+   7,
+   "Loam"
+  ],
+  "123797": [
+   "Lana Musmana",
+   762,
+   7,
+   "Loam"
+  ],
+  "123823": [
+   "Kolana Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123883": [
+   "Marhalamukha Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123884": [
+   "Dedna Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123699": [
+   "Guheta 3 Biswa",
+   761,
+   7,
+   "Loam"
+  ],
+  "123594": [
+   "Kharauth",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123697": [
+   "Phalain",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123885": [
+   "Makhdumpur Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123822": [
+   "Baghai Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123891": [
+   "Daulatpur Banger",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123691": [
+   "Mahrauli",
+   761,
+   7,
+   "Loam"
+  ],
+  "123799": [
+   "Bhairai Banger",
+   762,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "123660": [
+   "Ujhani Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123639": [
+   "Dhanauta Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123871": [
+   "Nauhjheel Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123890": [
+   "Basau Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123643": [
+   "Roopnagar Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123874": [
+   "Firozpur Banger",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123638": [
+   "Baraka",
+   761,
+   7,
+   "Loam"
+  ],
+  "123650": [
+   "Khairal 7",
+   761,
+   7,
+   "Loam"
+  ],
+  "123791": [
+   "Nanakpur Khadar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123652": [
+   "Majhoi Khadar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123824": [
+   "Kolana Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123668": [
+   "Oba Khadar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123879": [
+   "Toli Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123653": [
+   "Shahazidpur Khadar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123886": [
+   "Inayatgarh Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123648": [
+   "Shernagar Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123875": [
+   "Mangal Khoh Banger",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123595": [
+   "Barchawali",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123654": [
+   "Shahzadpur Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123878": [
+   "Inayatgarh Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123637": [
+   "Chauki Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123888": [
+   "Daulatpur Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123651": [
+   "Majhoi Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123892": [
+   "Chhinparai Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123655": [
+   "Barha Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123796": [
+   "Bhagat Bhakrelia Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123800": [
+   "Bhairai Khadar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123657": [
+   "Rampur Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123642": [
+   "Sujawali",
+   761,
+   7,
+   "Loam"
+  ],
+  "123692": [
+   "Bishambhara",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123641": [
+   "Bukharari",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123812": [
+   "Maduakar Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123646": [
+   "Khairal 3",
+   761,
+   7,
+   "Loam"
+  ],
+  "123865": [
+   "Naujhal Khader",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123640": [
+   "Dhanauta Khadar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123659": [
+   "Ujhani Khadar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123826": [
+   "Jafarpur Khader",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123867": [
+   "Arazi Kasht Sultan Patti",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123667": [
+   "Peerpur Khadar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123664": [
+   "Basai Shergarh Khadar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123866": [
+   "Arazi Kashtdilu Patti",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123793": [
+   "Musmana Khadar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123644": [
+   "Roopnagar Khadar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123811": [
+   "Sigoni Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123894": [
+   "Makhdumpur Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123636": [
+   "Chauki Khaadar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123868": [
+   "Arazi Kasht Parsoli",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123656": [
+   "Barha Khadar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123889": [
+   "Basau Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123669": [
+   "Bazidpur Khadar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123804": [
+   "Ramgarhi Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123629": [
+   "Ainch",
+   761,
+   7,
+   "Loam"
+  ],
+  "123809": [
+   "Maduakar Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123788": [
+   "Tilak Garhi",
+   762,
+   7,
+   "Loam"
+  ],
+  "123818": [
+   "Sadarpur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123789": [
+   "Mani Garhi Bangar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123801": [
+   "Khajpur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123786": [
+   "Raipur Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123810": [
+   "Sigoni Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123830": [
+   "Mithauli",
+   762,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "123790": [
+   "Nanakpur Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123828": [
+   "Chaukra",
+   762,
+   7,
+   "Loam"
+  ],
+  "123630": [
+   "Chaundras Bangar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123785": [
+   "Raipur Khadar",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123819": [
+   "Udhanpur Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123813": [
+   "Chandpur Khurd",
+   762,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "123831": [
+   "Bhartiyaka",
+   762,
+   7,
+   "Loam"
+  ],
+  "123631": [
+   "Chaundras Khadar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123634": [
+   "Shahpur Bangar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123805": [
+   "Noorpur Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123787": [
+   "Faridampur Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123633": [
+   "Shakurganj Bangar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123827": [
+   "Birju Garhi",
+   762,
+   7,
+   "Loam"
+  ],
+  "123802": [
+   "Managarhi",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123817": [
+   "Chindauli",
+   762,
+   7,
+   "Loam"
+  ],
+  "123635": [
+   "Shahpur Khadar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123820": [
+   "Ughanpur Khader",
+   762,
+   7,
+   "Loam"
+  ],
+  "123915": [
+   "Amanullapur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123911": [
+   "Moiuddinpur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123897": [
+   "Parsauli",
+   762,
+   7,
+   "Loam"
+  ],
+  "123908": [
+   "Meerpur Bangar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123914": [
+   "Khaira",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123907": [
+   "Bulakpur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123861": [
+   "Ekhu",
+   762,
+   7,
+   "Loam"
+  ],
+  "123903": [
+   "Said Garhi",
+   762,
+   7,
+   "Loam"
+  ],
+  "123862": [
+   "Nausherpur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123906": [
+   "Thainua",
+   762,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "123899": [
+   "Baroth Khadar",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123902": [
+   "Pal Kherha",
+   762,
+   7,
+   "Loam"
+  ],
+  "123675": [
+   "Dhimari Bangar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123898": [
+   "Baroth Bangar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123849": [
+   "Saddikpur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123841": [
+   "Bajna Dehat",
+   762,
+   7,
+   "Loam"
+  ],
+  "123857": [
+   "Salaka",
+   762,
+   7,
+   "Loam"
+  ],
+  "123674": [
+   "Gulalpur Bangar",
+   761,
+   7,
+   "Loam"
+  ],
+  "123863": [
+   "Mubarikpur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123900": [
+   "Pithora Bangar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123856": [
+   "Suhagpur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123934": [
+   "Tehramat",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123935": [
+   "Sikanderpur",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123913": [
+   "Asfabad",
+   762,
+   7,
+   "Loam"
+  ],
+  "123670": [
+   "Bazidpur Bangar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123852": [
+   "Balipur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123858": [
+   "Ram Nagla",
+   762,
+   7,
+   "Loam"
+  ],
+  "123846": [
+   "Jatpura",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123860": [
+   "Bhureka",
+   762,
+   7,
+   "Loam"
+  ],
+  "123848": [
+   "Sultan Patti",
+   762,
+   7,
+   "Loam"
+  ],
+  "123671": [
+   "Dhimari Khadar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123912": [
+   "Bera",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123853": [
+   "Shall",
+   762,
+   7,
+   "Loam"
+  ],
+  "123855": [
+   "Chandpur Kalan",
+   762,
+   7,
+   "Loam"
+  ],
+  "123854": [
+   "Lalpur Mat",
+   762,
+   7,
+   "Loam"
+  ],
+  "123932": [
+   "Sultanpur Bangar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123882": [
+   "Badhari",
+   762,
+   7,
+   "Loam"
+  ],
+  "123672": [
+   "Chamer Garhi",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123842": [
+   "Saeo Patti Banger",
+   762,
+   7,
+   "Loam"
+  ],
+  "123673": [
+   "Gulalpur Khadar",
+   761,
+   4,
+   "Clay Loam"
+  ],
+  "123936": [
+   "Jarara",
+   762,
+   7,
+   "Loam"
+  ],
+  "123859": [
+   "Nawali",
+   762,
+   7,
+   "Loam"
+  ],
+  "123910": [
+   "Kurawli",
+   762,
+   7,
+   "Loam"
+  ],
+  "123905": [
+   "Meerpur Khadar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123850": [
+   "Pach Hara",
+   762,
+   7,
+   "Loam"
+  ],
+  "123904": [
+   "Hasanpur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123851": [
+   "Ibrahimpur",
+   762,
+   4,
+   "Clay Loam"
+  ],
+  "123933": [
+   "Sultanpur Khadar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123901": [
+   "Pithora Khadar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123844": [
+   "Garhi Kolaher",
+   762,
+   7,
+   "Loam"
+  ],
+  "123845": [
+   "Kolahar",
+   762,
+   7,
+   "Loam"
+  ],
+  "123839": [
+   "Dilu Patti",
+   762,
+   7,
+   "Loam"
+  ],
+  "123836": [
+   "Inayatpur",
+   762,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "123840": [
+   "Khanpur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123838": [
+   "Shankar Garhi",
+   762,
+   7,
+   "Loam"
+  ],
+  "123833": [
+   "Mandaira",
+   762,
+   7,
+   "Loam"
+  ],
+  "123834": [
+   "Badoth",
+   762,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "123837": [
+   "Ahamadpur",
+   762,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "249046": [
+   "Bajna",
+   762,
+   7,
+   "Loam"
+  ],
+  "123829": [
+   "Sakatpur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123835": [
+   "Kankar Garhi",
+   762,
+   7,
+   "Loam"
+  ],
+  "123816": [
+   "Hamazapur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123815": [
+   "Nabipur",
+   762,
+   7,
+   "Loam"
+  ],
+  "123847": [
+   "Chinta Garhi",
+   762,
+   7,
+   "Loam"
+  ]
+ },
+ "village_count_total": 901,
+ "village_count_sampled": 891
+}

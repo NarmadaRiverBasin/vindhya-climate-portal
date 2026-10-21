@@ -1,0 +1,5013 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Tamil Nadu",
+  "district": "Thanjavur",
+  "district_lgd": 586,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (828/839 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay": 12,
+   "Clay Loam": 31203,
+   "Sandy Clay Loam": 16086,
+   "Loam": 7122,
+   "Sandy Loam": 19
+  },
+  "n_pixels": 54444
+ },
+ "villages": {
+  "639049": [
+   "Eduthanivayal",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639090": [
+   "Naduvikurichi",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638526": [
+   "Darasuram",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "639023": [
+   "Soundaranayagipuram",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639187": [
+   "Sethubavachatram",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639207": [
+   "Tiruvathevan",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639206": [
+   "Avidayanikottai",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639208": [
+   "Kuppathevan",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639029": [
+   "Edayathi South",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639033": [
+   "Seruvaviduthi Thenpathi",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639028": [
+   "Edayathi North",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639026": [
+   "Vattathikkottai Kollukkadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639024": [
+   "Poovalur",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639027": [
+   "Vattathikkottai U Bimapuram",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639025": [
+   "Valuthalaivattam",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639031": [
+   "Seruvaviduthi Vadapathi",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639037": [
+   "Punavasal East",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639035": [
+   "Thuravikkadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639034": [
+   "Madathikkadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639036": [
+   "Punavasal West",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639085": [
+   "Tiruchitrambalam West",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639086": [
+   "Tiruchitrambalam East",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639032": [
+   "Krishnapuram",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639133": [
+   "Periyanayagipuram",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639087": [
+   "Kalathur West",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639138": [
+   "Kalluranikkadu",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639135": [
+   "Arasalamkarambai",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639088": [
+   "Kalathur East",
+   5816,
+   7,
+   "Loam"
+  ],
+  "639159": [
+   "Paingal Ukkadai",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639139": [
+   "Kalagam Ii",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639152": [
+   "Ammayandi",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639156": [
+   "Avanam",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639136": [
+   "Palayanagaram",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639137": [
+   "Thonthupullikkadu",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639153": [
+   "Panchanathipuram",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639151": [
+   "Ranganayakipuram",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639150": [
+   "Thennankudi",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639148": [
+   "Mavadukurichi East",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639149": [
+   "Maduvakurichi West",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639161": [
+   "Sengamangalam",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "252841": [
+   "Peravurani Tp",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639163": [
+   "Poonaikuthikkadu",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639162": [
+   "Reghunathapuram",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639160": [
+   "Sanakkarai",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639170": [
+   "Chittathikadu",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639171": [
+   "Andakottai",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639169": [
+   "Kalanivasal",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639176": [
+   "Pinnavasal",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639172": [
+   "Padappanarvayal",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639177": [
+   "Nelliyadikadu",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639181": [
+   "Periakathikottai",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639173": [
+   "Sornakkadu",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639175": [
+   "Valabramankadu",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639174": [
+   "Pannancheri",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639179": [
+   "Korathur",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639178": [
+   "Rettaivayal",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639180": [
+   "Korathur Ukkadai",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639194": [
+   "Rettaivayal Ukkadai",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639193": [
+   "Ruthirachinthamani",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639197": [
+   "Poolankollai",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639198": [
+   "Kulakkudi",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "252842": [
+   "Perumagalur Tp",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639199": [
+   "Panangulam",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639200": [
+   "Mudukadu",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639205": [
+   "Solaikkadu",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639030": [
+   "Sooriyanarayanapuram",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639158": [
+   "Enandhikarambai",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639196": [
+   "Manakkadu",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639195": [
+   "Veerakudi",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639134": [
+   "Chettivayal",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639155": [
+   "Chinnarasalamkarambai",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639154": [
+   "Pulichankadu",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639157": [
+   "Lakshminarasimapuram",
+   5817,
+   7,
+   "Loam"
+  ],
+  "638954": [
+   "Pandipalamanaikadu",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638991": [
+   "Anandagopalapuram Vadapathi",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638998": [
+   "Palamuthi",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638992": [
+   "Anandagopalapuram Thenpathi",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638932": [
+   "Krishnapuram",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638933": [
+   "Chinna Ammankudi",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638938": [
+   "Unjividuthy",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638935": [
+   "Illupaividuthy",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638965": [
+   "Thippanvidudhi",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638937": [
+   "Thoppuviduthy",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638940": [
+   "Surimurthypuram Akkaravattam",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638934": [
+   "Periaammankudi",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638939": [
+   "Akkarai Vattam",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638958": [
+   "Kavalipatti",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638936": [
+   "Ammankudi",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638953": [
+   "Thaligaividuthi",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638957": [
+   "Pannikondaviduthy",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638955": [
+   "Ooranipuram",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638959": [
+   "Kaduvettividuthy",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638956": [
+   "Vettuvakottai I",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638990": [
+   "Kollukkadu",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638993": [
+   "Padirankottai Thenpathi",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638960": [
+   "Senniaviduthy",
+   5815,
+   7,
+   "Loam"
+  ],
+  "638961": [
+   "Neivelivadapathy",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638964": [
+   "Periyakottaikadu",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638966": [
+   "Vengarai",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638962": [
+   "Neiveli Tenpathy",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638963": [
+   "Krishnapuram",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639057": [
+   "Ponnavarayankottai",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638843": [
+   "Kurungulam Keelpathi",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638888": [
+   "Cholapuram",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638865": [
+   "Alivoikkal",
+   5815,
+   7,
+   "Loam"
+  ],
+  "638882": [
+   "Eachankottai",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638880": [
+   "Thennamanadunorth",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638887": [
+   "Vadakkur South",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638890": [
+   "Ayangudi",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638884": [
+   "Poyyunddarkottai I",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638883": [
+   "Samipatti",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638881": [
+   "Thennamanadu South",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638886": [
+   "Vadakkur North",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638891": [
+   "Mandalakkottai",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638889": [
+   "Vadukkukottai",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638912": [
+   "Pachiyur",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638885": [
+   "Palankandakudikadu",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638909": [
+   "Kakkarakottai",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638910": [
+   "Thekkur",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638911": [
+   "Adanakottai",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638908": [
+   "Pinnayur West",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639069": [
+   "Karappankadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638913": [
+   "Sillathur",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638914": [
+   "Pugal Sillathur",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "639109": [
+   "Pudukkottagam",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639072": [
+   "Palayeeagraharam",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639100": [
+   "Palanjur",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639095": [
+   "Mahilankottai",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "252839": [
+   "Pattukkottai M",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639022": [
+   "Kayavoor",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639059": [
+   "Vendakkottai",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639041": [
+   "Alivalam",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639058": [
+   "Ponnavarayankottai Ukkadai",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639042": [
+   "Kondikulam",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639040": [
+   "Ananteswarapuram",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639045": [
+   "Kalugapulikkadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639056": [
+   "Anaikkadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639044": [
+   "Thuvaramadai",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639051": [
+   "Paingattuvayal",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639039": [
+   "Neivaviduthi",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639043": [
+   "Manavayal",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639038": [
+   "Kurichi",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639055": [
+   "Mudalcheri",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639054": [
+   "Nainankulam",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639046": [
+   "Pillankuli",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639050": [
+   "Pannaivayal",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639053": [
+   "Karagavayal",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639048": [
+   "Ennaivayal",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639047": [
+   "Palathali",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639078": [
+   "Pallikondan",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639098": [
+   "Pudukkottai Ullur",
+   5816,
+   7,
+   "Loam"
+  ],
+  "639079": [
+   "Sendakkottai",
+   5816,
+   7,
+   "Loam"
+  ],
+  "639083": [
+   "Madampattavur",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639081": [
+   "Poovanam",
+   5816,
+   7,
+   "Loam"
+  ],
+  "639082": [
+   "Kattayankadu Ukkadai",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639099": [
+   "Adirampattinam",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639084": [
+   "Ottankadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639089": [
+   "Ottankadu Ukkadai",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639080": [
+   "Chokkanathapuram",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639091": [
+   "Kattaiyankadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639121": [
+   "Aladikkadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639097": [
+   "Thokkalikkadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639096": [
+   "Chatramthokkalikadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639093": [
+   "Pallathur",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639092": [
+   "Pukkarambai",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639140": [
+   "Kalagam I",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639094": [
+   "Chinna Avadayar Koil",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639113": [
+   "Rajamadam",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639142": [
+   "Gangadharapuram",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639143": [
+   "Seruvalakkadu",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639141": [
+   "Kottaikadu",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639117": [
+   "Pudupattinam",
+   5816,
+   7,
+   "Loam"
+  ],
+  "639114": [
+   "Marudangavayal",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639120": [
+   "Udayamudaiyan",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639145": [
+   "Kuruvikarambai Ii",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639122": [
+   "Alaginayagipuram",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639124": [
+   "Karisavayal",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639118": [
+   "Andikkadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639115": [
+   "Kullukkadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639061": [
+   "Regunathapuram",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639147": [
+   "Kuruvikarambai I",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639146": [
+   "Palacherikkadu",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639144": [
+   "Karambakkadu",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639123": [
+   "Eralivayal",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639128": [
+   "Rendampulikadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639116": [
+   "Velivayal",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639129": [
+   "Alamathikkadu",
+   5816,
+   7,
+   "Loam"
+  ],
+  "639130": [
+   "Maravanvayal",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639125": [
+   "Thandamaraikadu",
+   5816,
+   7,
+   "Loam"
+  ],
+  "639126": [
+   "Palliodiaivayal",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639164": [
+   "Vathalaikadu",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639127": [
+   "Pudurivayal",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639166": [
+   "Nadiam",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639165": [
+   "Sandampettai",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639131": [
+   "Kallivayal",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639168": [
+   "Viriankottai",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639167": [
+   "Murungapallam",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639132": [
+   "Sarabendrarajanpattinam",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639185": [
+   "Nayagathivayal",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639183": [
+   "Kaivinivayal",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639184": [
+   "Regunayagipuram",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639188": [
+   "Marakkavalasai",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639186": [
+   "Thuraiyur",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639182": [
+   "Umathanadu",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639189": [
+   "Kodivayal",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639192": [
+   "Pethanachivayal",
+   5817,
+   7,
+   "Loam"
+  ],
+  "639191": [
+   "Maravanvayal",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639201": [
+   "Vilangulam",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639203": [
+   "Villunivayal",
+   5817,
+   4,
+   "Clay Loam"
+  ],
+  "639202": [
+   "Adaikkathevan",
+   5817,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639107": [
+   "Sundaram",
+   5816,
+   7,
+   "Loam"
+  ],
+  "639073": [
+   "Kalyanaodai",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639074": [
+   "Palaverikadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639104": [
+   "Krishnapuram",
+   5816,
+   7,
+   "Loam"
+  ],
+  "639105": [
+   "Thambikottai Melakkadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639102": [
+   "Thamarankottai South",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639103": [
+   "Parakakalakottai",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639110": [
+   "Soundaranayakipuram",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639101": [
+   "Thamarankottai North",
+   5816,
+   7,
+   "Loam"
+  ],
+  "639075": [
+   "Mannankadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639076": [
+   "Thuvarankurichi North",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639077": [
+   "Thuvarankurichi South",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639111": [
+   "Narasingapuram",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638928": [
+   "Avidanalla Vijayapuram",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638967": [
+   "Nemmeli",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638920": [
+   "Kannugudi West Chief",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638968": [
+   "Keelakurichi West",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638969": [
+   "Keelakurichi East",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638931": [
+   "Vadakkukottai",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638929": [
+   "Nemilithippiakudi",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638930": [
+   "Sankaranar Kudi Kadu",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638919": [
+   "Thondarampet East",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638925": [
+   "Paravathur",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638926": [
+   "Kannugudi East",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638927": [
+   "Vedavijayapuram",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638977": [
+   "Andami",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638942": [
+   "Cholagankudikadu",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638944": [
+   "Ambalapattu North",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638975": [
+   "Olayakunnam",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638941": [
+   "Therkukottai",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638978": [
+   "Karuppur",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638943": [
+   "Vedanayagipuram",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638971": [
+   "Bavajikkottai",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639008": [
+   "Gopalasamudram",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638952": [
+   "Yoganayagipuram",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638951": [
+   "Kilamangalam",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638945": [
+   "Ambalapattu South",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638948": [
+   "Gopalapuram",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638946": [
+   "Ambalapattu South Sivakollai",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638947": [
+   "Mullurpattikadu",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638979": [
+   "Pulavanji",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638950": [
+   "Medayakottai",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638976": [
+   "Mohur",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638949": [
+   "Ramapuram",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638986": [
+   "Karambayam",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638989": [
+   "Nambivayal",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638983": [
+   "Vadugankuthagai",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639007": [
+   "Madukkur",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638987": [
+   "Veppankkadu Ukkadai",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638982": [
+   "Alathur",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638981": [
+   "Musiri",
+   5816,
+   7,
+   "Loam"
+  ],
+  "638988": [
+   "Veppankkadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638984": [
+   "Sembalur",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639005": [
+   "Alanpallam",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638985": [
+   "Ettupulikkadu",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638974": [
+   "Kaniyakurichi",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639001": [
+   "Veerakurichi",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639003": [
+   "Thittakudi",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638994": [
+   "Padirankottai Vadapathi",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639002": [
+   "Sendankadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638997": [
+   "Enathi",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639000": [
+   "Sukkiranpatti",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638995": [
+   "Adambai North",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639004": [
+   "Talikkottai",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639019": [
+   "Soorapallam",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638996": [
+   "Adambai South",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639018": [
+   "Athikkottai",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638999": [
+   "Aladikkumulai",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639017": [
+   "Nattuchalai",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638972": [
+   "Balajireguramasamudram",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639020": [
+   "Santhankadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639021": [
+   "Naduvikkottai",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639013": [
+   "Madurabashanipuram",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639012": [
+   "Kadathankudi",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639067": [
+   "Elangadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639065": [
+   "Athivetti East",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639066": [
+   "Ponkundu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "252838": [
+   "Madukkur Tp",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639009": [
+   "Periyakkottai",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639014": [
+   "Vikkiramam",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639015": [
+   "Vadiakkadu",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639064": [
+   "Athivetti West",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639016": [
+   "Moothakurichi",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639062": [
+   "Vattakudi Ukkadai",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639060": [
+   "Kasangadu",
+   5816,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "639006": [
+   "Veppankulam",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639068": [
+   "Parasuramanendal",
+   5816,
+   7,
+   "Loam"
+  ],
+  "638878": [
+   "Kannathangudi West Addl",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638877": [
+   "Kannathangudi East Addl",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638875": [
+   "Samayamkudikadu",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638874": [
+   "Okkanadumelayur Part",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638873": [
+   "Okkanadukeelayur Addl",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638876": [
+   "Kannathangudi East",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638879": [
+   "Kannathangudi West Urachi",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638871": [
+   "Kavarapattu",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638895": [
+   "Kakkarai",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "252837": [
+   "Orathanadu Mukthambalpuram Tp",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638896": [
+   "Poovathur",
+   5815,
+   7,
+   "Loam"
+  ],
+  "638872": [
+   "Okkanadukeelayur Chief",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638898": [
+   "Kelavannipet",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638893": [
+   "Pudur",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638923": [
+   "Vadaseri North",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638892": [
+   "Kovilur",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638894": [
+   "Palampudur",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638899": [
+   "Arumulai",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638902": [
+   "Tirumangalakottai Melaiyur",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638907": [
+   "Pinnayur East",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638906": [
+   "Thelungan Kudikadu",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638900": [
+   "Tirumangalakottai Keelaiyur",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638897": [
+   "Pudunagar",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638904": [
+   "Peikarambankottai",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638905": [
+   "Pulavankadu",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638903": [
+   "Tirumangalakottai Melaiyur Colony",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638916": [
+   "Poyyundarkudikadu",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638915": [
+   "Tirunallur",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638901": [
+   "Tirumangalakottai Keelaiyur Colony",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638917": [
+   "Vellur",
+   5815,
+   7,
+   "Loam"
+  ],
+  "638918": [
+   "Thondarampet West",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638970": [
+   "Avaikkottai",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638924": [
+   "Vadaseri South",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638921": [
+   "Kannugudi West Addl",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638922": [
+   "Kodiyalam",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "639010": [
+   "Chokkanavur",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639011": [
+   "Puliyakudi",
+   5816,
+   7,
+   "Loam"
+  ],
+  "639070": [
+   "Siramelkudi",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638973": [
+   "Kalichankkottai",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "639071": [
+   "Reguramasamudram",
+   5816,
+   4,
+   "Clay Loam"
+  ],
+  "638642": [
+   "Utharamangalam Kottam",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638707": [
+   "Pavanamangalam",
+   5813,
+   7,
+   "Loam"
+  ],
+  "638810": [
+   "Nandavanapatti",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638813": [
+   "Surakudipatti",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638809": [
+   "Avarampatti",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638808": [
+   "Veeranarasanpettai",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638812": [
+   "Vendayampatti",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638766": [
+   "Kotrapatti",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638807": [
+   "Sellappanpettai",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638814": [
+   "Rayamundanpatti",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638811": [
+   "Muthuveerakandiampatti",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638819": [
+   "Marudakkudi",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638818": [
+   "Pudupatti",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638815": [
+   "Pudukudi North",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638817": [
+   "Sanoorapatti",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638816": [
+   "Manaiyeripatti",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638836": [
+   "Sengipatti",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638839": [
+   "Pudukudi S",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638838": [
+   "Palaiyapatti Vadakkusethi",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638837": [
+   "Palaiyapatti Therkkusethi",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638840": [
+   "Achampatti",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638701": [
+   "Sathanur",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638704": [
+   "Vanarangudi",
+   5813,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638706": [
+   "Vitalapuram",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638709": [
+   "Vishnampettai",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638703": [
+   "Maharajapuram",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638708": [
+   "Alamelupuram",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638705": [
+   "Koothur",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638702": [
+   "Valappakudi",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638710": [
+   "Tiruchinampoondi",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638725": [
+   "Eswarankoilpathu",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638724": [
+   "Mannarsamudram",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638718": [
+   "Ranganathapuram",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638722": [
+   "Maikkelpatti",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638721": [
+   "Onbathuveli",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638720": [
+   "Palamaneri",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638711": [
+   "Koviladi",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638719": [
+   "Nemam",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638717": [
+   "Rajagiri",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638713": [
+   "Padirakudi",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638716": [
+   "Agarapettai",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638742": [
+   "Varagur",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638714": [
+   "Mahadevapuram",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638780": [
+   "Palliyeri",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638743": [
+   "Venkatesamudram Ii Sethi",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638723": [
+   "Kandamangalam",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638744": [
+   "Deekshasamudram",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638715": [
+   "Katchamangalam",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638712": [
+   "Thogur",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638753": [
+   "Ammayagaram",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638745": [
+   "Unjini",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638746": [
+   "Megalathur",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638761": [
+   "Indalur",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638762": [
+   "Kadambangudi",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638749": [
+   "Arcadu",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638752": [
+   "Adanjur",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638748": [
+   "Nathamangalam",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638751": [
+   "Vinnamangalam",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638747": [
+   "Orathur",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638764": [
+   "Maraneri",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638750": [
+   "Budarayanallur",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638763": [
+   "Sholagampatti",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638681": [
+   "Senbugapuram",
+   5812,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638768": [
+   "Budalur",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638765": [
+   "Kangeyampatti",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638767": [
+   "Thondarayampadi",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638769": [
+   "Kovilpathu",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638799": [
+   "Pulianthoppu",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638668": [
+   "Arulmolipet",
+   5812,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638773": [
+   "Kalvirayampettai",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638672": [
+   "Raramuthirakkottai",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638804": [
+   "Vannarapettai Addl",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638738": [
+   "Avikkarai",
+   5813,
+   7,
+   "Loam"
+  ],
+  "638770": [
+   "Chitrakudi Addl",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638806": [
+   "Alakudi Chief",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638803": [
+   "Vannarapettai Chief",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638669": [
+   "Dalavaipalayam",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638671": [
+   "Kathirinatham",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638823": [
+   "Soorakkottai",
+   5814,
+   7,
+   "Loam"
+  ],
+  "638820": [
+   "Kuruvadipatti",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "252836": [
+   "Vallam Tp",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638821": [
+   "Pillaiyarpatti",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638825": [
+   "Valamirankottai",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638822": [
+   "Kandithampattu",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638835": [
+   "Thirumalai Samudram",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638784": [
+   "Thiruvedhikudi",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638834": [
+   "Vallam Pudursethi",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638826": [
+   "Kattur",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638667": [
+   "Bhavaniyambalpuram",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638831": [
+   "Inathukanpatti",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638828": [
+   "Pudur",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638850": [
+   "Vandayarriruppu",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638829": [
+   "Kullangarai",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638833": [
+   "Thirukanurpatti",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638827": [
+   "Madigai",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638830": [
+   "Kollangarai Vallundanpattu",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638832": [
+   "Nanjikottai Vallundanpattu",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638861": [
+   "Kattukuruchi",
+   5815,
+   7,
+   "Loam"
+  ],
+  "638841": [
+   "Sennampatti",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638860": [
+   "Ulur West",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638842": [
+   "Kurungulam Melpathi",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638844": [
+   "Marungulam",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638862": [
+   "Nadur",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638864": [
+   "Panjanathikottai",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638684": [
+   "Kaduveli",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638863": [
+   "Karukkakottai",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638670": [
+   "Pugalkulithapattu",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638824": [
+   "Kulichapattu",
+   5814,
+   7,
+   "Loam"
+  ],
+  "638608": [
+   "Valathur",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638693": [
+   "Thiruppayanam",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "252340": [
+   "Ayyampettai Tp",
+   5812,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638694": [
+   "Karkudi",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638695": [
+   "Rayampettai",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "252830": [
+   "Thiruvaiyaru Tp",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638621": [
+   "Pasupathikoil Ii",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638735": [
+   "Uppukachipettai",
+   5813,
+   7,
+   "Loam"
+  ],
+  "638696": [
+   "Perumpuliyur",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638787": [
+   "Mathur",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638619": [
+   "Serumakkanallur",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638697": [
+   "Vaidyanathanpettai",
+   5813,
+   7,
+   "Loam"
+  ],
+  "638620": [
+   "Soolamangalam I Sethi",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638700": [
+   "Marur",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638736": [
+   "Tiruchotruthurai",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638698": [
+   "Achanur",
+   5813,
+   7,
+   "Loam"
+  ],
+  "638699": [
+   "Vadugakudi",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638625": [
+   "Vembukudi",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638734": [
+   "Kalayanapuram I Sethi",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638626": [
+   "Agaramangudi",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638622": [
+   "Vaiyacheri",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638788": [
+   "Nallicheri",
+   5814,
+   7,
+   "Loam"
+  ],
+  "638786": [
+   "Thandangorai",
+   5814,
+   7,
+   "Loam"
+  ],
+  "638729": [
+   "Nadukkavery East and West",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638731": [
+   "Tiruvalampozhil",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638732": [
+   "Keelathirupanthuruthi",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638733": [
+   "Kalayanapuram",
+   5813,
+   7,
+   "Loam"
+  ],
+  "252832": [
+   "Melathiruppanthuruthi Tp",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638737": [
+   "Kalyanapuram Ii Sethi",
+   5813,
+   7,
+   "Loam"
+  ],
+  "638727": [
+   "Karuppur",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638624": [
+   "Perumakkanallur",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638623": [
+   "Porakkudi",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638726": [
+   "Konerirajapuram",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638785": [
+   "Manangorai",
+   5814,
+   7,
+   "Loam"
+  ],
+  "638739": [
+   "Kandiyur",
+   5813,
+   7,
+   "Loam"
+  ],
+  "638631": [
+   "Kavalur",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638790": [
+   "Kondavattanthidal",
+   5814,
+   7,
+   "Loam"
+  ],
+  "638730": [
+   "Kulimathur",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638759": [
+   "Rajandram",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638740": [
+   "Vellamperambur East and West",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638789": [
+   "Thottakadu",
+   5814,
+   7,
+   "Loam"
+  ],
+  "638758": [
+   "Karur",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638634": [
+   "Kattukuruchi",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638632": [
+   "Neithalur",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638741": [
+   "Ambathumelagaram",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638791": [
+   "Ramapuram",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638783": [
+   "Narasanayagipuram",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638633": [
+   "Annappanpettai",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638792": [
+   "Thittai",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638757": [
+   "Nagathi",
+   5813,
+   7,
+   "Loam"
+  ],
+  "638755": [
+   "Allur",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638760": [
+   "Manakkarambai",
+   5813,
+   7,
+   "Loam"
+  ],
+  "638782": [
+   "Palliagraharam",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638756": [
+   "Thenperambur",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638793": [
+   "Kudalur",
+   5814,
+   7,
+   "Loam"
+  ],
+  "638638": [
+   "Kothangudi",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638754": [
+   "Kalumangalam",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638779": [
+   "Sakkarasamandam",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638794": [
+   "Kurungalur",
+   5814,
+   7,
+   "Loam"
+  ],
+  "638781": [
+   "Velur",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "252833": [
+   "Thanjavur M",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638774": [
+   "Perumbur Iind Sethi",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638778": [
+   "Vennalodai",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638640": [
+   "Edakkudi",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638643": [
+   "Athur Thottam",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638776": [
+   "Pillaiyarnatham",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638641": [
+   "Utharamangalam",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638777": [
+   "Siralur",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638775": [
+   "Perumbur I St Sethi",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638639": [
+   "Vennugudithottam",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638663": [
+   "Nellithope",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638644": [
+   "Melakalakudi",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638728": [
+   "Thulajendra Maharajapuram",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638772": [
+   "Rayanthur",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638801": [
+   "Ramanathapuram Chief",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638798": [
+   "Pinnai Nallur",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638665": [
+   "Alangudi",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638795": [
+   "Avusahibthottam",
+   5814,
+   7,
+   "Loam"
+  ],
+  "638797": [
+   "Melachittakadu",
+   5814,
+   7,
+   "Loam"
+  ],
+  "638800": [
+   "Melavelithottam",
+   5814,
+   7,
+   "Loam"
+  ],
+  "638664": [
+   "Pulavarnatham",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638771": [
+   "Chitrakudi Chief",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638802": [
+   "Ramanathapuram Addl",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638666": [
+   "Alangudi Bit",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638805": [
+   "Alakudi Addl",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638796": [
+   "Kadakadappai",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "252831": [
+   "Thirukkattupalli Tp",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638845": [
+   "Pudupattinam CT",
+   5814,
+   4,
+   "Clay Loam"
+  ],
+  "638847": [
+   "Neelagiri CT",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638846": [
+   "Nanjikottai CT",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638848": [
+   "Vilar CT",
+   5814,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638683": [
+   "Chakkarapalli CT",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638688": [
+   "Thennancheri",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638598": [
+   "Govindanallucheri",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638603": [
+   "Veeramangudi",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638689": [
+   "Okkakudi",
+   5813,
+   7,
+   "Loam"
+  ],
+  "638601": [
+   "Ganapathiagraharam Ii",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638687": [
+   "Vilangudi Chief Addl",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638685": [
+   "Melapunavasal",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638690": [
+   "Semmangudi",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638686": [
+   "Punavasal",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638602": [
+   "Ganapathiagraharam I",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638609": [
+   "Ragunathapuram",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638604": [
+   "Eachankudi",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638691": [
+   "Peramur",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638605": [
+   "Illuppakkorai",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638607": [
+   "Sarapojirajapuram",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638606": [
+   "Illuppakkorai Bit",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638692": [
+   "Swayambachanallur",
+   5813,
+   4,
+   "Clay Loam"
+  ],
+  "638600": [
+   "Perumalkoil",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638599": [
+   "Ullikkadai",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638657": [
+   "Vadapathy",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638661": [
+   "Poondi I",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638680": [
+   "Jambugambalpuram I",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638673": [
+   "Nallavanniyankudikadu",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638674": [
+   "Thirubuvanam",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638675": [
+   "Sooliyakottai Kambayanatham",
+   5812,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638676": [
+   "Arundavapuram I",
+   5812,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638852": [
+   "Sadaiyarkoil",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638679": [
+   "Kambayanatham",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638677": [
+   "Puliyakudi Ii",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638678": [
+   "Arundavapuram Ii",
+   5812,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638682": [
+   "Jambugambalpuram Ii",
+   5812,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638849": [
+   "Karaimeendarkottai",
+   5815,
+   7,
+   "Loam"
+  ],
+  "638855": [
+   "Arasapattu",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638853": [
+   "Moorthiambalpuram",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638856": [
+   "Neivasal South",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638851": [
+   "Raghavambalpuram Part",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638854": [
+   "Panayakottai",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638859": [
+   "Keelulur",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638857": [
+   "Ponnappur East I",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638858": [
+   "Ponnappur East Ii",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638869": [
+   "Thalayamangalam",
+   5815,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638870": [
+   "Kulamangalam",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638868": [
+   "Ponnappur West",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638866": [
+   "Paruthikottai",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638867": [
+   "Paruthiapparkovil",
+   5815,
+   4,
+   "Clay Loam"
+  ],
+  "638656": [
+   "Puliyakudi I",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638613": [
+   "Thiruvaiyathukudi",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638614": [
+   "Devaryampettai",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638569": [
+   "Visalur",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638615": [
+   "Pulimangalam",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638618": [
+   "Vadakkumangudi",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638646": [
+   "Kandhavanam",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638616": [
+   "Melasemmangudi",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638617": [
+   "Ponmeindanallur",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638628": [
+   "Ombathuveli",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638627": [
+   "Soraikkayur",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638629": [
+   "Thirukkarugavur",
+   5812,
+   7,
+   "Loam"
+  ],
+  "252828": [
+   "Melattur Tp",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638630": [
+   "Edaiyiruppu",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638635": [
+   "Viluthiyur",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638636": [
+   "Milattur V Sethi",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638637": [
+   "Milatturi V Sethi",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638650": [
+   "Deepambalpuram",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638648": [
+   "Palliyur",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638651": [
+   "Mahimalai",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638645": [
+   "Edavakkudi",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638655": [
+   "Ukkadai",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638566": [
+   "Vanduvancheri",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638662": [
+   "Kumilakudi",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638652": [
+   "Neduvasal",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638647": [
+   "Kalancheri",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638658": [
+   "Keelakoil Pathu",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638659": [
+   "Saliyamangalam",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638660": [
+   "Poondi Ii",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "252533": [
+   "Ammapettai Tp",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638571": [
+   "Injikollai",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638570": [
+   "Thirucherai",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638567": [
+   "Andalur",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638568": [
+   "Nagarasampettai",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638564": [
+   "Varvankarai Semmangudi",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638558": [
+   "Thandalam",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638654": [
+   "Karumudukku Thattimal Padugai",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638556": [
+   "Thillaiyambur",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638649": [
+   "Neikunnam",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638653": [
+   "Mahimalai Bit",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638561": [
+   "Perappadi",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638572": [
+   "Paruthicheri",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638563": [
+   "Semmangudi",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638562": [
+   "Keeranur",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638565": [
+   "Velangudi",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638522": [
+   "Villiyavarambal",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "252815": [
+   "Veppathur Tp",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638477": [
+   "Kothangudi",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638479": [
+   "Thirunallur",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638507": [
+   "Ammathottam",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638460": [
+   "Thiruvisanallur",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638481": [
+   "Kallapuliyur",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638577": [
+   "Nadupadugai",
+   5812,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638486": [
+   "Thiruppurambiyam",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638487": [
+   "Innambur",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638485": [
+   "Valapuram",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638484": [
+   "Kadichambadi",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "252867": [
+   "Thirupuvanam Tp",
+   5810,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "252817": [
+   "Thiruvidaimarudur Tp",
+   5810,
+   7,
+   "Loam"
+  ],
+  "638482": [
+   "Koranattu Karuppur I",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638583": [
+   "Olaipadi",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638578": [
+   "Thiruvaigavur",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638490": [
+   "Asur",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638462": [
+   "Thepperumanallur",
+   5810,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638483": [
+   "Agarathur",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638488": [
+   "Mukasa Innambur Thenpathi",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638582": [
+   "Adhanur",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638580": [
+   "Thurumbur",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638489": [
+   "Eraharam",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638550": [
+   "Thirunariyur",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "252825": [
+   "Dharasuram Tp",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638591": [
+   "Sathiyamangalam",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638590": [
+   "Thirumandagudi",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638498": [
+   "Bapurasapuram",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638499": [
+   "Madhavapuram",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638587": [
+   "Narasimmapuram",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638500": [
+   "Thimmakudi",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638588": [
+   "Koonancheri",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "252823": [
+   "Kumbakonam M",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638593": [
+   "Kabisthalam",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638596": [
+   "Karuppurpadugai",
+   5812,
+   7,
+   "Loam"
+  ],
+  "252822": [
+   "Swamimalai Tp",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638502": [
+   "Valaiyapettai",
+   5811,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638589": [
+   "Umayalpuram",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638592": [
+   "Ramanujapuram",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638586": [
+   "Thiyagasumuthiram",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638527": [
+   "Thiruvalanjuli",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638533": [
+   "Vellalapillayampettai",
+   5811,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638597": [
+   "Sarukkai",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638528": [
+   "Sundaraperumalkoil Thenpathi",
+   5811,
+   7,
+   "Loam"
+  ],
+  "252826": [
+   "Papanasam Tp",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638509": [
+   "Srinivasanallur",
+   5811,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638532": [
+   "Thenampadugai Thattimal",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638535": [
+   "Patteeswaram",
+   5811,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638611": [
+   "Rajagiri",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638610": [
+   "Pandaravadai",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638531": [
+   "Andakudi Thottam",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638612": [
+   "Gopurajapuram",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638530": [
+   "Patteeswaram Padugai",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "252824": [
+   "Thirunageswaram Tp",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638534": [
+   "Thiruvalanjuli Thattimal",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638463": [
+   "Thiruvidaimarudur",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638459": [
+   "Thiruvisanallurpandarvadai",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638495": [
+   "Ammachatram",
+   5811,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638461": [
+   "Umamahesharapuram",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638520": [
+   "Poundarigapuram",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638521": [
+   "Thandanthottam",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638549": [
+   "Thiruppandurai",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638559": [
+   "Mathur",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638510": [
+   "Pangal",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638551": [
+   "Enanallur",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638544": [
+   "Sembiavarambal",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638478": [
+   "Kothangudithattimal",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638492": [
+   "Koranattu Karuppur Ii",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638505": [
+   "Miruthiyanchapadaiveedu",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638552": [
+   "Marudanallur",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638524": [
+   "Krishnapuram",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638523": [
+   "Sivapuram",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638506": [
+   "Nachiarthottam",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638504": [
+   "Seerannakattalai",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638503": [
+   "Palavathankattalai",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638543": [
+   "Karuppur",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638542": [
+   "Sakkottai",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638541": [
+   "Palaiyanallur",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638540": [
+   "Keelakorukkai",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638539": [
+   "Melakorukkai",
+   5811,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638557": [
+   "Thippirajapuram",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638553": [
+   "Seshambadi",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638555": [
+   "Udaiyalur",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638525": [
+   "Malayappanallur",
+   5811,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638537": [
+   "Sholamaligai",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638554": [
+   "Thenampadugai",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638538": [
+   "Ariyapadaiveedu",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638494": [
+   "Marutadi",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638493": [
+   "Sarangapanipettai",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638536": [
+   "Vaniyakarambai",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638585": [
+   "Alavandipuram",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638529": [
+   "Sundaraperumalkoil Vadapathi",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638501": [
+   "Nagagudi",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638496": [
+   "Muppakoil",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638497": [
+   "Melakaveri",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638491": [
+   "Inam Asur",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638579": [
+   "Konthagai",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638584": [
+   "Maruthuvakkudi",
+   5812,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638581": [
+   "Arumanallur",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638595": [
+   "Umbalapadi",
+   5812,
+   7,
+   "Loam"
+  ],
+  "638594": [
+   "Melakabisthalam",
+   5812,
+   4,
+   "Clay Loam"
+  ],
+  "638508": [
+   "Malaiappanallur",
+   5811,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638573": [
+   "Perumandi CT",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638576": [
+   "Natchiarkoil CT",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638574": [
+   "Ullur CT",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638575": [
+   "Annalagraharam CT",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638435": [
+   "Veerakkan",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638408": [
+   "Ukkarai",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638437": [
+   "Manambadi",
+   5810,
+   7,
+   "Loam"
+  ],
+  "638409": [
+   "Chidambaranathapuram",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638422": [
+   "Mavuthiruppu",
+   5810,
+   7,
+   "Loam"
+  ],
+  "638436": [
+   "Maharajapuram",
+   5810,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638438": [
+   "Puthur",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638470": [
+   "Athiyur",
+   5811,
+   7,
+   "Loam"
+  ],
+  "252819": [
+   "Cholapuram Tp",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638476": [
+   "Neerathanallur",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638471": [
+   "Vilandakandam",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638473": [
+   "Kumarankudi",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638458": [
+   "Anakudi",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638441": [
+   "Thiruvalliangudi",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638457": [
+   "Parithikudi",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638472": [
+   "Kovilacheri",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638475": [
+   "Devanancheri",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638480": [
+   "Kallur",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638442": [
+   "Sathanur",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638439": [
+   "Senganur",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638440": [
+   "Narikudi",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "252814": [
+   "Thiruppanandal Tp",
+   5810,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638434": [
+   "Kattanagaram",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638474": [
+   "Uthamadani",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638513": [
+   "Elandurai",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638511": [
+   "Mangudi",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638467": [
+   "Sathanur",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "252818": [
+   "Aduthurai Alias Maruthuvakudi Tp",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638469": [
+   "S Pudur",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638517": [
+   "Ammangudi",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638468": [
+   "Melaiyur",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638464": [
+   "Mahadanapuram",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638454": [
+   "Govindapuram",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638546": [
+   "Kumaramangalam",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638466": [
+   "Manjamalli",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638515": [
+   "Katchukattu",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638514": [
+   "Mallapuram",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638516": [
+   "Vilangudi",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638512": [
+   "Vittalur",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638519": [
+   "Irandankattalai",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638518": [
+   "Puthagaram",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638545": [
+   "Thukkatchi",
+   5811,
+   7,
+   "Loam"
+  ],
+  "638548": [
+   "Kovanur",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638547": [
+   "Kothangudi",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638560": [
+   "Kattur Koohur",
+   5811,
+   4,
+   "Clay Loam"
+  ],
+  "638455": [
+   "Govindapuram",
+   5810,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638456": [
+   "Govindapuram",
+   5810,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638465": [
+   "Thiruneelakudi",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638403": [
+   "Pandanallur",
+   5810,
+   7,
+   "Loam"
+  ],
+  "638402": [
+   "Neikuppai",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638412": [
+   "Koilramapuram",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638414": [
+   "Kavanur",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638400": [
+   "Thirumangaicheri",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638452": [
+   "Sooriyanarkoil",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638411": [
+   "Melakattur",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638416": [
+   "Karuppur",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638410": [
+   "Kurichi",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638413": [
+   "Athipakkam",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638415": [
+   "Kilamandur",
+   5810,
+   7,
+   "Loam"
+  ],
+  "638417": [
+   "Velur",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638419": [
+   "Serugudi",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638420": [
+   "Kondasamudram",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638418": [
+   "Aralur",
+   5810,
+   7,
+   "Loam"
+  ],
+  "638421": [
+   "Sikkalanayakkanpettai",
+   5810,
+   7,
+   "Loam"
+  ],
+  "638443": [
+   "Thirumandurai",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638424": [
+   "Keelamanakudi",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638423": [
+   "Kannarakudi",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638427": [
+   "Kunathalapadi",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638426": [
+   "Mullukudi",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638453": [
+   "Thirumangalagudi",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638449": [
+   "Narasingampettai",
+   5810,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638444": [
+   "Sooriyamoolai",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638451": [
+   "Manalur",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638450": [
+   "Kanjanur",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638445": [
+   "Kottur",
+   5810,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638447": [
+   "Maharajapuram",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638448": [
+   "Baskararajapuram",
+   5810,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "638446": [
+   "Thugili",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638430": [
+   "Keelasooriyamoolai",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638425": [
+   "Koothanur",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638428": [
+   "Kadiramangalam",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638429": [
+   "Thirukodikaval",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638431": [
+   "Sivapurani",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638433": [
+   "Manikudi",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638432": [
+   "Thirulogi",
+   5810,
+   7,
+   "Loam"
+  ],
+  "638398": [
+   "Vannikudi",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638396": [
+   "Sarabojirajapuram",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638395": [
+   "Kulasekaranallur",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638397": [
+   "Marathurai",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638406": [
+   "Mullangudi",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638405": [
+   "Thittacheri",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638404": [
+   "Irumoolai",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638401": [
+   "Sayanapuram",
+   5810,
+   4,
+   "Clay Loam"
+  ],
+  "638399": [
+   "Neivasal",
+   5810,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 839,
+ "village_count_sampled": 828
+}

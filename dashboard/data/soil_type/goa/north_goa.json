@@ -1,0 +1,1515 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Goa",
+  "district": "North Goa",
+  "district_lgd": 551,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (245/249 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 6,
+  "dominant_class": "Sandy Clay Loam",
+  "class_pixel_counts": {
+   "Clay": 1,
+   "Clay Loam": 9376,
+   "Sandy Clay Loam": 10549,
+   "Loam": 7329,
+   "Sandy Loam": 1
+  },
+  "n_pixels": 27257
+ },
+ "villages": {
+  "626654": [
+   "Virnora",
+   5609,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626736": [
+   "Panelim OG",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626815": [
+   "Cudcem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626725": [
+   "Neura O Pequeno",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626831": [
+   "Damocem",
+   5613,
+   7,
+   "Loam"
+  ],
+  "626838": [
+   "Malpona",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626707": [
+   "Caraim",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626754": [
+   "Aturli",
+   5612,
+   7,
+   "Loam"
+  ],
+  "626679": [
+   "Paliem",
+   5610,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626830": [
+   "Birondem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626839": [
+   "Ambeli",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626688": [
+   "Sangolda",
+   5610,
+   4,
+   "Clay Loam"
+  ],
+  "626655": [
+   "Tuem",
+   5609,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626673": [
+   "Arpora",
+   5610,
+   4,
+   "Clay Loam"
+  ],
+  "626653": [
+   "Dargalim",
+   5609,
+   7,
+   "Loam"
+  ],
+  "252061": [
+   "Mapusa M Cl",
+   5610,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626674": [
+   "Nagoa",
+   5610,
+   4,
+   "Clay Loam"
+  ],
+  "626672": [
+   "Assagao",
+   5610,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626835": [
+   "Sirsodem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "252071": [
+   "Murda CT",
+   5611,
+   4,
+   "Clay Loam"
+  ],
+  "626689": [
+   "Marra",
+   5610,
+   7,
+   "Loam"
+  ],
+  "626671": [
+   "Marna",
+   5610,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626675": [
+   "Parra",
+   5610,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626657": [
+   "Agarvado",
+   5609,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626663": [
+   "Camurlim",
+   5610,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626681": [
+   "Ucassaim",
+   5610,
+   7,
+   "Loam"
+  ],
+  "626662": [
+   "Oxel",
+   5610,
+   7,
+   "Loam"
+  ],
+  "626676": [
+   "Verla",
+   5610,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626656": [
+   "Chopdem",
+   5609,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626678": [
+   "Bastora",
+   5610,
+   4,
+   "Clay Loam"
+  ],
+  "626680": [
+   "Punola",
+   5610,
+   4,
+   "Clay Loam"
+  ],
+  "626677": [
+   "Canca",
+   5610,
+   7,
+   "Loam"
+  ],
+  "626642": [
+   "Varconda",
+   5609,
+   4,
+   "Clay Loam"
+  ],
+  "626637": [
+   "Paliem",
+   5609,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626635": [
+   "Tiracol",
+   5609,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626639": [
+   "Pernem",
+   5609,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626638": [
+   "Corgao",
+   5609,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626640": [
+   "Poroscodem",
+   5609,
+   7,
+   "Loam"
+  ],
+  "626644": [
+   "Uguem",
+   5609,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626645": [
+   "Tamboxem",
+   5609,
+   4,
+   "Clay Loam"
+  ],
+  "626643": [
+   "Amberem",
+   5609,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626641": [
+   "Casnem",
+   5609,
+   7,
+   "Loam"
+  ],
+  "252057": [
+   "Pernem M Cl",
+   5609,
+   7,
+   "Loam"
+  ],
+  "626834": [
+   "Siranguli",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626832": [
+   "Cotorem",
+   5613,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626800": [
+   "Ustem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626827": [
+   "Vantem",
+   5613,
+   7,
+   "Loam"
+  ],
+  "626833": [
+   "Xelopo Curdo",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626826": [
+   "Ponocem",
+   5613,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626793": [
+   "Carambolim Brama",
+   5613,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626787": [
+   "Saleli",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626822": [
+   "Velguem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626806": [
+   "Mauzi",
+   5613,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626789": [
+   "Dabem",
+   5613,
+   7,
+   "Loam"
+  ],
+  "626803": [
+   "Ambedem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626819": [
+   "Pendral",
+   5613,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626799": [
+   "Zarani",
+   5613,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626775": [
+   "Ivrem Curdo",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626773": [
+   "Choraundem",
+   5613,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626776": [
+   "Golauli",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626798": [
+   "Vainguinim",
+   5613,
+   7,
+   "Loam"
+  ],
+  "626794": [
+   "Xelopo Buzruco",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626780": [
+   "Codal",
+   5613,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626820": [
+   "Caranzol",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626863": [
+   "Siroda",
+   5614,
+   7,
+   "Loam"
+  ],
+  "626862": [
+   "Conxem",
+   5614,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626858": [
+   "Vadi",
+   5614,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626857": [
+   "Telaulim",
+   5614,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626859": [
+   "Betora",
+   5614,
+   4,
+   "Clay Loam"
+  ],
+  "626860": [
+   "Codar",
+   5614,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626854": [
+   "Velinga",
+   5614,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626853": [
+   "Candepar",
+   5614,
+   7,
+   "Loam"
+  ],
+  "626726": [
+   "Neura O Grande",
+   5611,
+   4,
+   "Clay Loam"
+  ],
+  "626724": [
+   "Siridao",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626720": [
+   "Mandur",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626721": [
+   "Gancim",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626723": [
+   "Curca",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626855": [
+   "Cundaim",
+   5614,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "252082": [
+   "Ponda M Cl",
+   5614,
+   7,
+   "Loam"
+  ],
+  "626856": [
+   "Durbhat",
+   5614,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626722": [
+   "Batim",
+   5611,
+   7,
+   "Loam"
+  ],
+  "626818": [
+   "Codvol",
+   5613,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626804": [
+   "Nagargao",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626812": [
+   "Codiem",
+   5613,
+   7,
+   "Loam"
+  ],
+  "626864": [
+   "Ponchavadi",
+   5614,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626808": [
+   "Cumarconda",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626841": [
+   "Conquirem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626781": [
+   "Rivem",
+   5613,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626708": [
+   "Capao",
+   5611,
+   4,
+   "Clay Loam"
+  ],
+  "626825": [
+   "Advoi",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626840": [
+   "Melauli",
+   5613,
+   7,
+   "Loam"
+  ],
+  "626823": [
+   "Codqui",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626861": [
+   "Nirancal",
+   5614,
+   7,
+   "Loam"
+  ],
+  "626852": [
+   "Gangem",
+   5614,
+   4,
+   "Clay Loam"
+  ],
+  "626716": [
+   "Talaulim",
+   5611,
+   7,
+   "Loam"
+  ],
+  "626845": [
+   "Volvoi",
+   5614,
+   4,
+   "Clay Loam"
+  ],
+  "626851": [
+   "Vagurbem",
+   5614,
+   4,
+   "Clay Loam"
+  ],
+  "626824": [
+   "Sanvorcem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626719": [
+   "Azossim",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626849": [
+   "Cuncoliem",
+   5614,
+   4,
+   "Clay Loam"
+  ],
+  "626717": [
+   "Goalim Moula",
+   5611,
+   7,
+   "Loam"
+  ],
+  "626847": [
+   "Adcolna",
+   5614,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626718": [
+   "Carambolim",
+   5611,
+   4,
+   "Clay Loam"
+  ],
+  "626760": [
+   "Cotombi",
+   5612,
+   7,
+   "Loam"
+  ],
+  "626850": [
+   "Querim",
+   5614,
+   7,
+   "Loam"
+  ],
+  "626774": [
+   "Ivrem Buzruco",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626755": [
+   "Naroa",
+   5612,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626756": [
+   "Piligao",
+   5612,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626753": [
+   "Vainguinim",
+   5612,
+   7,
+   "Loam"
+  ],
+  "626757": [
+   "Cudnem",
+   5612,
+   4,
+   "Clay Loam"
+  ],
+  "626821": [
+   "Carambolim Bozruco",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626761": [
+   "Surla",
+   5612,
+   7,
+   "Loam"
+  ],
+  "626811": [
+   "Vaguriem",
+   5613,
+   7,
+   "Loam"
+  ],
+  "626759": [
+   "Navelim",
+   5612,
+   4,
+   "Clay Loam"
+  ],
+  "626685": [
+   "Calvim",
+   5610,
+   7,
+   "Loam"
+  ],
+  "626686": [
+   "Olaulim",
+   5610,
+   7,
+   "Loam"
+  ],
+  "626709": [
+   "Navelim",
+   5611,
+   7,
+   "Loam"
+  ],
+  "626844": [
+   "Betqui",
+   5614,
+   7,
+   "Loam"
+  ],
+  "626715": [
+   "Bainguinim",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626795": [
+   "Sigonem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626762": [
+   "Velguem",
+   5612,
+   7,
+   "Loam"
+  ],
+  "626714": [
+   "Ella",
+   5611,
+   4,
+   "Clay Loam"
+  ],
+  "626843": [
+   "Tivrem",
+   5614,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626810": [
+   "Sonus Vonvoliem",
+   5613,
+   7,
+   "Loam"
+  ],
+  "626809": [
+   "Pissurlem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626711": [
+   "Malar",
+   5611,
+   7,
+   "Loam"
+  ],
+  "626758": [
+   "Amone",
+   5612,
+   7,
+   "Loam"
+  ],
+  "626710": [
+   "Goltim",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626687": [
+   "Pomburpa",
+   5610,
+   7,
+   "Loam"
+  ],
+  "626846": [
+   "Savoi Verem",
+   5614,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626706": [
+   "Chorao",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626684": [
+   "Ponolem",
+   5610,
+   7,
+   "Loam"
+  ],
+  "626705": [
+   "Ambarim",
+   5611,
+   7,
+   "Loam"
+  ],
+  "626713": [
+   "Gandaulim",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "252077": [
+   "Sanquelim M Cl",
+   5612,
+   7,
+   "Loam"
+  ],
+  "626848": [
+   "Boma",
+   5614,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626742": [
+   "Dumacem",
+   5612,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626743": [
+   "Salem",
+   5612,
+   7,
+   "Loam"
+  ],
+  "626748": [
+   "Ona",
+   5612,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626769": [
+   "Siroli",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626765": [
+   "Podocem",
+   5613,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626751": [
+   "Sarvona",
+   5612,
+   4,
+   "Clay Loam"
+  ],
+  "626741": [
+   "Mencurem",
+   5612,
+   7,
+   "Loam"
+  ],
+  "626682": [
+   "Nachinola",
+   5610,
+   4,
+   "Clay Loam"
+  ],
+  "626766": [
+   "Poriem",
+   5613,
+   7,
+   "Loam"
+  ],
+  "626747": [
+   "Mulgao",
+   5612,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626669": [
+   "Sircaim",
+   5610,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626745": [
+   "Adwalpale",
+   5612,
+   7,
+   "Loam"
+  ],
+  "626665": [
+   "Nadora",
+   5610,
+   7,
+   "Loam"
+  ],
+  "252075": [
+   "Bicholim M Cl",
+   5612,
+   7,
+   "Loam"
+  ],
+  "626668": [
+   "Assonora",
+   5610,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626666": [
+   "Pirna",
+   5610,
+   7,
+   "Loam"
+  ],
+  "626752": [
+   "Maem",
+   5612,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626786": [
+   "Morlem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626768": [
+   "Gonteli",
+   5613,
+   7,
+   "Loam"
+  ],
+  "626683": [
+   "Corjuem",
+   5610,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626767": [
+   "Ravona",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626670": [
+   "Tivim",
+   5610,
+   4,
+   "Clay Loam"
+  ],
+  "626744": [
+   "Latambarcem",
+   5612,
+   7,
+   "Loam"
+  ],
+  "626750": [
+   "Curchirem",
+   5612,
+   7,
+   "Loam"
+  ],
+  "626749": [
+   "Maulinguem North",
+   5612,
+   4,
+   "Clay Loam"
+  ],
+  "626652": [
+   "Ozorim",
+   5609,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626813": [
+   "Naguem",
+   5613,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626802": [
+   "Bombedem",
+   5613,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "645599": [
+   "Durgawadi OG Part",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626732": [
+   "Calapor CT",
+   5611,
+   4,
+   "Clay Loam"
+  ],
+  "626660": [
+   "Parcem CT",
+   5609,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626659": [
+   "Mandrem CT",
+   5609,
+   7,
+   "Loam"
+  ],
+  "626807": [
+   "Buimpal",
+   5613,
+   7,
+   "Loam"
+  ],
+  "626696": [
+   "Saligao CT",
+   5610,
+   7,
+   "Loam"
+  ],
+  "626658": [
+   "Arambol CT",
+   5609,
+   7,
+   "Loam"
+  ],
+  "626693": [
+   "Guirim CT",
+   5610,
+   4,
+   "Clay Loam"
+  ],
+  "626692": [
+   "Moira CT",
+   5610,
+   7,
+   "Loam"
+  ],
+  "626691": [
+   "Colvale CT",
+   5610,
+   7,
+   "Loam"
+  ],
+  "626816": [
+   "Sanvordem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626690": [
+   "Siolim CT",
+   5610,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626702": [
+   "Salvador Do Mundo CT",
+   5610,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626698": [
+   "Nerul CT",
+   5610,
+   4,
+   "Clay Loam"
+  ],
+  "626701": [
+   "Penha De Franca CT",
+   5610,
+   7,
+   "Loam"
+  ],
+  "626697": [
+   "Candolim CT",
+   5610,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626817": [
+   "Sonal",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626700": [
+   "Pilerne CT",
+   5610,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626695": [
+   "Calangute CT",
+   5610,
+   7,
+   "Loam"
+  ],
+  "626694": [
+   "Anjuna CT",
+   5610,
+   7,
+   "Loam"
+  ],
+  "626661": [
+   "Morjim CT",
+   5609,
+   7,
+   "Loam"
+  ],
+  "626703": [
+   "Socorro CT",
+   5610,
+   4,
+   "Clay Loam"
+  ],
+  "626699": [
+   "Reis Magos CT",
+   5610,
+   4,
+   "Clay Loam"
+  ],
+  "626739": [
+   "Morambi O Pequeno Merces OG",
+   5611,
+   4,
+   "Clay Loam"
+  ],
+  "645598": [
+   "Taleigao OG Part",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626779": [
+   "Derodem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626788": [
+   "Zormen",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626801": [
+   "Davem",
+   5613,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626872": [
+   "Borim CT",
+   5614,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626805": [
+   "Satorem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626797": [
+   "Nanorem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626735": [
+   "Mercurim CT",
+   5611,
+   4,
+   "Clay Loam"
+  ],
+  "626867": [
+   "Marcaim CT",
+   5614,
+   4,
+   "Clay Loam"
+  ],
+  "626868": [
+   "Priol CT",
+   5614,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626734": [
+   "Goa Velha CT",
+   5611,
+   4,
+   "Clay Loam"
+  ],
+  "626869": [
+   "Bandora CT",
+   5614,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626870": [
+   "Curti CT",
+   5614,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626871": [
+   "Quela CT",
+   5614,
+   7,
+   "Loam"
+  ],
+  "626778": [
+   "Satrem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626873": [
+   "Usgao CT",
+   5614,
+   7,
+   "Loam"
+  ],
+  "626731": [
+   "Murda CT",
+   5611,
+   4,
+   "Clay Loam"
+  ],
+  "626740": [
+   "Cujira OG",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626790": [
+   "Compordem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626764": [
+   "Pale CT",
+   5612,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626727": [
+   "Jua CT",
+   5611,
+   4,
+   "Clay Loam"
+  ],
+  "626814": [
+   "Ansolem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626730": [
+   "Chimbel CT",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626729": [
+   "Corlim CT",
+   5611,
+   4,
+   "Clay Loam"
+  ],
+  "626738": [
+   "Renovadi OG",
+   5611,
+   7,
+   "Loam"
+  ],
+  "626796": [
+   "Maloli",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626737": [
+   "Morambi O Grande Merces OG",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626728": [
+   "Cumbarjua CT",
+   5611,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626865": [
+   "Candola CT",
+   5614,
+   7,
+   "Loam"
+  ],
+  "626842": [
+   "Onda CT",
+   5613,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "252079": [
+   "Valpoi",
+   5613,
+   7,
+   "Loam"
+  ],
+  "626791": [
+   "Edorem",
+   5613,
+   7,
+   "Loam"
+  ],
+  "626763": [
+   "Carapur CT",
+   5612,
+   4,
+   "Clay Loam"
+  ],
+  "626866": [
+   "Orgao CT",
+   5614,
+   7,
+   "Loam"
+  ],
+  "626704": [
+   "Aldona CT",
+   5610,
+   7,
+   "Loam"
+  ],
+  "626664": [
+   "Revora",
+   5610,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626667": [
+   "Moitem",
+   5610,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626746": [
+   "Sirigao",
+   5612,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626829": [
+   "Padeli",
+   5613,
+   7,
+   "Loam"
+  ],
+  "626837": [
+   "Govanem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626836": [
+   "Assodem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626828": [
+   "Guleli",
+   5613,
+   7,
+   "Loam"
+  ],
+  "626785": [
+   "Querim",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626783": [
+   "Pale",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626777": [
+   "Surla",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626771": [
+   "Quelaudem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626792": [
+   "Naneli",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626782": [
+   "Dongurli",
+   5613,
+   7,
+   "Loam"
+  ],
+  "626784": [
+   "Gululem",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626772": [
+   "Ponsuli",
+   5613,
+   4,
+   "Clay Loam"
+  ],
+  "626650": [
+   "Ibrampur",
+   5609,
+   7,
+   "Loam"
+  ],
+  "626651": [
+   "Cansarvornem",
+   5609,
+   7,
+   "Loam"
+  ],
+  "626647": [
+   "Mopa",
+   5609,
+   7,
+   "Loam"
+  ],
+  "626649": [
+   "Alorna",
+   5609,
+   4,
+   "Clay Loam"
+  ],
+  "626648": [
+   "Chandel",
+   5609,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "626646": [
+   "Torxem",
+   5609,
+   4,
+   "Clay Loam"
+  ],
+  "626636": [
+   "Querim",
+   5609,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 249,
+ "village_count_sampled": 245
+}

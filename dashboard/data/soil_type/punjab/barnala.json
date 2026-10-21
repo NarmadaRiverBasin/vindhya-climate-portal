@@ -1,0 +1,840 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Punjab",
+  "district": "Barnala",
+  "district_lgd": 605,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "full"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 20767,
+   "Loam": 5744
+  },
+  "n_pixels": 26512
+ },
+ "villages": {
+  "39962": [
+   "Pandher",
+   275,
+   7,
+   "Loam"
+  ],
+  "39963": [
+   "Rajia",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40056": [
+   "Daraj",
+   276,
+   7,
+   "Loam"
+  ],
+  "40039": [
+   "Rura Khurd",
+   276,
+   7,
+   "Loam"
+  ],
+  "40049": [
+   "Ghunas",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40041": [
+   "Tajoke",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40052": [
+   "Dhilwan",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "248380": [
+   "Tapa",
+   276,
+   7,
+   "Loam"
+  ],
+  "40057": [
+   "Jaimal Singhwala",
+   276,
+   7,
+   "Loam"
+  ],
+  "40058": [
+   "Mauran",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40055": [
+   "Draka",
+   276,
+   7,
+   "Loam"
+  ],
+  "40051": [
+   "Dhilwan",
+   276,
+   7,
+   "Loam"
+  ],
+  "40054": [
+   "Tappa",
+   276,
+   7,
+   "Loam"
+  ],
+  "40053": [
+   "Patti Khatar",
+   276,
+   7,
+   "Loam"
+  ],
+  "40048": [
+   "Mehta",
+   276,
+   7,
+   "Loam"
+  ],
+  "39981": [
+   "Dhanaula Khurd",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39969": [
+   "Attargarh",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39978": [
+   "Rajgarh",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39976": [
+   "Dangarh",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39983": [
+   "Fatehgarh Chhanna",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39975": [
+   "Kattu",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39965": [
+   "Aspal Khurd",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40046": [
+   "Kahneke",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "39968": [
+   "Kuba",
+   275,
+   7,
+   "Loam"
+  ],
+  "39985": [
+   "Khudi Kalan",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "248378": [
+   "Barnala",
+   275,
+   7,
+   "Loam"
+  ],
+  "39977": [
+   "Uppali",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39961": [
+   "Kot Duna",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39964": [
+   "Aspal Kalan",
+   275,
+   7,
+   "Loam"
+  ],
+  "40050": [
+   "Khudi Khurd",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40047": [
+   "Dhaula",
+   276,
+   7,
+   "Loam"
+  ],
+  "39990": [
+   "Harbanspura",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39974": [
+   "Bhathlan",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40040": [
+   "Pakho",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "39982": [
+   "Bhaini Jassa",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39966": [
+   "Kaleke",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39979": [
+   "Pharwahi",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "248379": [
+   "Handiaya",
+   275,
+   7,
+   "Loam"
+  ],
+  "39970": [
+   "Bhura",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40042": [
+   "Rura Kalan",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40044": [
+   "Badra",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "39967": [
+   "Dhanaula",
+   275,
+   7,
+   "Loam"
+  ],
+  "39971": [
+   "Harigarh",
+   275,
+   7,
+   "Loam"
+  ],
+  "40043": [
+   "Dhurkot",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40045": [
+   "Bhaini Fatta",
+   276,
+   7,
+   "Loam"
+  ],
+  "248381": [
+   "Dhanaula",
+   275,
+   7,
+   "Loam"
+  ],
+  "39980": [
+   "Rasulpur",
+   275,
+   7,
+   "Loam"
+  ],
+  "40069": [
+   "Badhata",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40060": [
+   "Sandhu Kalan",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40065": [
+   "Kharak Singhwala",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40068": [
+   "Deepgarh",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40076": [
+   "Chung",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40061": [
+   "Nainewala",
+   276,
+   7,
+   "Loam"
+  ],
+  "40071": [
+   "Burj Fatehgarh",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40078": [
+   "Ramgarh",
+   276,
+   7,
+   "Loam"
+  ],
+  "40088": [
+   "Patti Mohar Singh",
+   276,
+   7,
+   "Loam"
+  ],
+  "40067": [
+   "Majuke",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40064": [
+   "Alkran",
+   276,
+   7,
+   "Loam"
+  ],
+  "40062": [
+   "Chhana Gulabsingh",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40059": [
+   "Baloke",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40063": [
+   "Jangiana",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40082": [
+   "Diwana",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40072": [
+   "Patti Draka",
+   276,
+   7,
+   "Loam"
+  ],
+  "40070": [
+   "Sehna",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40073": [
+   "Mauran",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40066": [
+   "Talwandi",
+   276,
+   7,
+   "Loam"
+  ],
+  "40086": [
+   "Patti Bir Singh",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40087": [
+   "Patti Deep Singh",
+   276,
+   7,
+   "Loam"
+  ],
+  "248377": [
+   "Bhadaur",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40001": [
+   "Cheema",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40084": [
+   "Sadowal",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40033": [
+   "Nihaluwala",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39997": [
+   "Bhadalwad",
+   275,
+   7,
+   "Loam"
+  ],
+  "40079": [
+   "Bhila",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40034": [
+   "Bahmania",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40000": [
+   "Kaire",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40006": [
+   "Chiniwal Kalan",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40011": [
+   "Kalala",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40081": [
+   "Naraingarh Sohian",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "39989": [
+   "Sanghera",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40017": [
+   "Hamidi",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40031": [
+   "Mahal Khurd",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40030": [
+   "Gangohar",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40007": [
+   "Chakrohi",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40010": [
+   "Raisar",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40026": [
+   "Mahal Kalan",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40003": [
+   "Malian",
+   275,
+   7,
+   "Loam"
+  ],
+  "40080": [
+   "Gehal",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40028": [
+   "Kalal Majra",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39998": [
+   "Thikriwala",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40014": [
+   "Chuhanke Kalan",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40083": [
+   "Chhiniwal Khurd",
+   276,
+   7,
+   "Loam"
+  ],
+  "39988": [
+   "Barnala",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39987": [
+   "Patti Sekhwan",
+   275,
+   7,
+   "Loam"
+  ],
+  "40075": [
+   "Bhotna",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40029": [
+   "Kirpal Singhwala",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40009": [
+   "Raisar",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40008": [
+   "Chananwal",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40035": [
+   "Kutba",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40004": [
+   "Bakhatgarh",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40077": [
+   "Talewal",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "39999": [
+   "Naiwala",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40025": [
+   "Sahore",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40020": [
+   "Thuliwal",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39995": [
+   "Karamgarh",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39984": [
+   "Jodhpur",
+   275,
+   7,
+   "Loam"
+  ],
+  "39986": [
+   "Patti Sohlan",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40027": [
+   "Dhaner",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40015": [
+   "Bazidke Kalan",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40012": [
+   "Chuhanke Khurd",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40002": [
+   "Pakhoke",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40032": [
+   "Pandori",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40074": [
+   "Ugoke",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "40016": [
+   "Bazidke Khurd",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39996": [
+   "Amla Singhwala",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40013": [
+   "Sehjra",
+   275,
+   7,
+   "Loam"
+  ],
+  "40005": [
+   "Moom",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40018": [
+   "Gurm",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40024": [
+   "Khiali",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40085": [
+   "Gagewal",
+   276,
+   4,
+   "Clay Loam"
+  ],
+  "39973": [
+   "Bhaini Mehraj",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39972": [
+   "Badbar",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39991": [
+   "Shekha",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39992": [
+   "Jhaloor",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40023": [
+   "Kurar",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40019": [
+   "Gumti",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40036": [
+   "Hardaspura",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40037": [
+   "Chhapa",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40022": [
+   "Mangewal",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40021": [
+   "Manal",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "39994": [
+   "Nangal",
+   275,
+   7,
+   "Loam"
+  ],
+  "39993": [
+   "Thulewal",
+   275,
+   4,
+   "Clay Loam"
+  ],
+  "40038": [
+   "Lohgarh",
+   275,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 133,
+ "village_count_sampled": 133
+}

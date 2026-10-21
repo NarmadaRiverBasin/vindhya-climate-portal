@@ -1,0 +1,2120 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "West Bengal",
+  "district": "Alipurduar",
+  "district_lgd": 664,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (346/348 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 6,
+  "dominant_class": "Sandy Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 4559,
+   "Sandy Clay Loam": 702,
+   "Loam": 44924,
+   "Sandy Loam": 3
+  },
+  "n_pixels": 50190
+ },
+ "villages": {
+  "307233": [
+   "Dakshin Sonapur",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307234": [
+   "Pachkal Guri",
+   2173,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "307260": [
+   "Chaprarpar",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307259": [
+   "Chengpara",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307268": [
+   "Chalnipak",
+   2174,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "307167": [
+   "Telipara",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307275": [
+   "Karipara",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307168": [
+   "Paschim Chak Chaka",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307270": [
+   "Purba Barachouki",
+   2174,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "307164": [
+   "Dakhin Narathali",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307292": [
+   "Saudpara",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307300": [
+   "Thanupara",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307274": [
+   "Bindipara",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307333": [
+   "Madhya Parokata",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307301": [
+   "Paschim Khalishamari",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307334": [
+   "Purba Khalishamari",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307273": [
+   "Karjjipara",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307267": [
+   "Chandijhar",
+   2174,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "307293": [
+   "Uttar Bhatibari",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307165": [
+   "Madhya Kamakhyaguri",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307269": [
+   "Paschim Barachouki",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307335": [
+   "Dakshin Parokata",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307299": [
+   "Uttar Chikliguri",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307166": [
+   "Dakhin Kamakhyaguri",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307295": [
+   "Kumarijan",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307298": [
+   "Purba Chikliguri",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307294": [
+   "Chilurghat",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307336": [
+   "Brajerkuthi",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307272": [
+   "Bhatibari",
+   2174,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "307296": [
+   "Paschim Chikliguri",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307297": [
+   "Chikliguri",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307271": [
+   "Boragari",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307200": [
+   "Bhalka",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307199": [
+   "Purbba Chakchaka",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307202": [
+   "Baruipara",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307203": [
+   "Majher Dabri",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307338": [
+   "Sobhaganj CT",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307206": [
+   "Uttar Kamakhyaguri CT",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307205": [
+   "Dakhin Rampur CT",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307352": [
+   "Pramode Nagar",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307062": [
+   "Dimdima Tea Garden",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307339": [
+   "Narasingpur",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307344": [
+   "Dalmoney Tea Garden",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307340": [
+   "Mechhua Dhurabala Bathan",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307342": [
+   "Ethelbari Tea Garden",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307343": [
+   "Chengmaritari",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307341": [
+   "Deomali",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307346": [
+   "Sishabari Sarugaon",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307348": [
+   "Dhanirampur",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307347": [
+   "Khagenhat",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307350": [
+   "Sarugaon Tea Garden",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307351": [
+   "Malsagaon",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307349": [
+   "Ghatpar Sarugram",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307061": [
+   "Dangapara",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307057": [
+   "Riti Forest",
+   2170,
+   4,
+   "Clay Loam"
+  ],
+  "307058": [
+   "Dheklapara Tea Garden",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307059": [
+   "Sarugaon",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307060": [
+   "Rahimpur Tea Garden",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307056": [
+   "Nepania",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307065": [
+   "Jaybirpara Tea Garden",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307142": [
+   "Atiabari Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307073": [
+   "Ramjhora Tea Garden",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307399": [
+   "Jagijhora Barabak CT",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307104": [
+   "Sisha Jumrha CT",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307219": [
+   "Sidhabari",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307207": [
+   "Torsa Forest",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307362": [
+   "Guabar Nagar",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307391": [
+   "Lachhmandabri",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307382": [
+   "Satpukuria",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307379": [
+   "Nabanagar",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307361": [
+   "Kathalbari",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307383": [
+   "Mairadanga",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307378": [
+   "Beltali Bhandani",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307213": [
+   "Salkumarhat",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307360": [
+   "Dalimpur",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307380": [
+   "Harinathpur",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307381": [
+   "Jogendrapur",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307212": [
+   "Kalaberia",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307220": [
+   "Suripara",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307392": [
+   "Kunjanagar",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307221": [
+   "Salkumar Forest",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307353": [
+   "Gokulnagar",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307359": [
+   "Kshirarkot",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307183": [
+   "Sankos Tea Garden",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307211": [
+   "Jogendranagar",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307358": [
+   "Baganbari",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307354": [
+   "Balasundar",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307393": [
+   "Chuakhola",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307395": [
+   "Kadambini Tea Garden",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307222": [
+   "Sirubari",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307355": [
+   "Jaychandpur",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307356": [
+   "Bhutnir Ghat",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307396": [
+   "Bangshidharpur",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307394": [
+   "Dakshin Parangarpar",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307398": [
+   "Kalipur",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307209": [
+   "Mejbil",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307210": [
+   "Paschim Khatalbari",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307223": [
+   "Purba Kathalbari",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307357": [
+   "Baradoba",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307397": [
+   "Raichenga",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307208": [
+   "Parpatla Khawa",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307369": [
+   "Karaibari",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307076": [
+   "Uttar Sisubari",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307368": [
+   "Dalgaon",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307367": [
+   "Dalgaon Tea Garden",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307216": [
+   "Jaldapara",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307370": [
+   "Uttar Deogaon",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307345": [
+   "Dalgaon Forest",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307371": [
+   "Purbba Deogaon",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307366": [
+   "Tasti Tea Garden",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307094": [
+   "Uttar Rangali Baznar",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307374": [
+   "Dhulagaon",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307386": [
+   "Paschim Salkumar",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307387": [
+   "Umacharanpur",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307373": [
+   "Madhya Deogaon",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307077": [
+   "Dakshin Sisubari",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307388": [
+   "Khauchandpara",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307365": [
+   "Bengkandi",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307143": [
+   "Rajabhat Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307372": [
+   "Dakshin Deogaon",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307375": [
+   "Paschim Deogaon",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307095": [
+   "Pashchim Khayerbari",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307217": [
+   "Nutanpara",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307363": [
+   "Hedayet Nagar",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307364": [
+   "Alinagar",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307376": [
+   "Jhar Beltali",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307385": [
+   "Chhota Salkumar",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307215": [
+   "Prodhanpara",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307390": [
+   "Sibnathpur",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307377": [
+   "Purbba Jhar Beltali",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307100": [
+   "Madhya Madarihat",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307384": [
+   "Talukertari",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307214": [
+   "Munshipara",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307098": [
+   "Madhya Chhekamari",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307101": [
+   "Paschim Madarihat",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307096": [
+   "Islamabad",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307097": [
+   "Khairbari Forest",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307102": [
+   "Dakshin Madarihat",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307103": [
+   "Purba Madarihat",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307080": [
+   "Madhya Rangali Bazar",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307079": [
+   "Dakshin Khairbari",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307078": [
+   "Dakshin Rangali Baznar",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307081": [
+   "Chapaguri",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307389": [
+   "Badaitari",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307144": [
+   "Buxa Forest Raja Bhatkhawa",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307138": [
+   "Kalchini Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307112": [
+   "Satali Mandalpara",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307110": [
+   "Madhya Satali",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307139": [
+   "Gangutia Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307140": [
+   "Dima Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307130": [
+   "Purba Satali",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307111": [
+   "Paschim Satali",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307218": [
+   "Dakshin Barajhar Forest",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307141": [
+   "Bhatkhawa Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307123": [
+   "Dakshin Satali",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307124": [
+   "Satali Nakadala",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307129": [
+   "Dakshin Latabari",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307125": [
+   "Uttar Mandabari",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307128": [
+   "Nimti Domohani",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307262": [
+   "Purbba Majherdabri Tea Garden",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307126": [
+   "Dakshin Mandabari",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307127": [
+   "Nimtijhora Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307153": [
+   "Chunia Jhora Tea Garden",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307244": [
+   "Uttar Paitkapara",
+   2173,
+   4,
+   "Clay Loam"
+  ],
+  "307242": [
+   "Uttar Chakoakheti",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307245": [
+   "Paitkapara Tea Garden",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307246": [
+   "Foskadanga",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307252": [
+   "Bariguri",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307247": [
+   "Satkodali",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307243": [
+   "Madhya Paitkapara",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307230": [
+   "Kumarpara",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307229": [
+   "Uttar Simlabari",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307253": [
+   "Paschim Majherdabri Tea Garden",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307231": [
+   "Mathura Tea Garden",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307241": [
+   "Naothoartari",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307239": [
+   "Dakshin Paitkapara",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307248": [
+   "Banchukamari",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307227": [
+   "Purba Simlabari",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307119": [
+   "Tosra Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307224": [
+   "Patlakhawa",
+   2173,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "307249": [
+   "Chapatali",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307236": [
+   "Uttar Kansingram",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307226": [
+   "Dakshin Chakoakheti",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307251": [
+   "Ghagra P",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307240": [
+   "Paschim Salbari",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307238": [
+   "Pukuritola",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307132": [
+   "Bhutri Forest",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307250": [
+   "Pararpar",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307225": [
+   "Silbarihat",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307232": [
+   "Uttar Sonapur",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307261": [
+   "Dakshin Majherdabri",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307090": [
+   "Purba Khairbari",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307237": [
+   "Taparikhata",
+   2173,
+   7,
+   "Loam"
+  ],
+  "249958": [
+   "Alipurduar",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307235": [
+   "Dakshin Kansingram",
+   2173,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "307106": [
+   "Uttar Barajhar Forest",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307120": [
+   "Gopimohan Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307122": [
+   "Gabaur Bachhra Forest",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307131": [
+   "Rangamati Tea Garden",
+   2171,
+   4,
+   "Clay Loam"
+  ],
+  "307121": [
+   "Chhota Jaygaon",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307145": [
+   "Buxa Hill Forest",
+   2171,
+   4,
+   "Clay Loam"
+  ],
+  "307118": [
+   "Dalsingpara Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307116": [
+   "Beech Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307133": [
+   "Radharani Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307117": [
+   "Bharnobari Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307134": [
+   "Chuapara Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307115": [
+   "Malangi Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307135": [
+   "Chuapara",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307136": [
+   "Mechpara Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307114": [
+   "Satali Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307113": [
+   "Madhu Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307107": [
+   "Parmalangi",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307137": [
+   "Bhatpara Tea Garden",
+   2171,
+   4,
+   "Clay Loam"
+  ],
+  "307084": [
+   "Hantupara Tea Garden",
+   2170,
+   4,
+   "Clay Loam"
+  ],
+  "307109": [
+   "Saudamini Tea Garden",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307108": [
+   "Nilpara Forest",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307087": [
+   "Totopara",
+   2170,
+   4,
+   "Clay Loam"
+  ],
+  "307086": [
+   "Titi Forest",
+   2170,
+   4,
+   "Clay Loam"
+  ],
+  "307089": [
+   "Holapara Forest",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307088": [
+   "Ballalguri",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307093": [
+   "Mujnai Tea Garden",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307091": [
+   "Uttar Khairbari",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307092": [
+   "Madhya Khairbari",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307085": [
+   "Garganda Tea Garden",
+   2170,
+   4,
+   "Clay Loam"
+  ],
+  "307099": [
+   "Uttar Chhekamari",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307083": [
+   "Dumchipara Tea Garden",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307082": [
+   "Dumchi Forest",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307071": [
+   "Gopalpur Tea Garden",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307072": [
+   "Dumchi Tea Garden",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307067": [
+   "Garochera Bandapani",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307074": [
+   "Lankapara Tea Garden",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307068": [
+   "Makrapara Tea Garden",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307075": [
+   "Lankapara Hat",
+   2170,
+   4,
+   "Clay Loam"
+  ],
+  "307066": [
+   "Bandapani Tea Garden",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307069": [
+   "Dalmore Tea Garden",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307070": [
+   "Hoasinbad Tea Garden",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307064": [
+   "Nangdala Tea Garden",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307063": [
+   "Birpara Tea Garden",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307284": [
+   "Uttar Shibkata",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307304": [
+   "Kadampur",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307312": [
+   "Dangi",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307310": [
+   "Sambalpur",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307309": [
+   "Purba Jitpur",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307159": [
+   "Tuturi Tea Garden",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307307": [
+   "Baniadabri",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307308": [
+   "Jaypur",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307306": [
+   "Baniagaon",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307285": [
+   "Shrinathpur Tea Garden",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307283": [
+   "Uttar Dhalkar",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307263": [
+   "Uttar Panialguri",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307281": [
+   "Dakshin Dhalkar",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307282": [
+   "Dakshin Shibkata",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307286": [
+   "Madhya Shibkata",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307287": [
+   "Pukhuria",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307264": [
+   "Dakshin Panialguri",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307280": [
+   "Bhasadabri",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307288": [
+   "Jashodanga",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307303": [
+   "Taleswarguri",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307265": [
+   "Uttar Majherdabri",
+   2174,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "307279": [
+   "Putimari",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307290": [
+   "Uttar Majid Khana",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307302": [
+   "Paschim Chepani",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307276": [
+   "Khatpara",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307289": [
+   "Tatpara",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307278": [
+   "Kayakhata",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307277": [
+   "Salsalabari",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307266": [
+   "Bhelukdabri",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307291": [
+   "Dakshin Majid Khana",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307311": [
+   "Garokhuta",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307323": [
+   "Kohinur Tea Garden",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307321": [
+   "Dhaola Jhora Tea Garden",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307174": [
+   "Narakhata",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307322": [
+   "Uttar Chakirbas",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307324": [
+   "Mahakalguri",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307173": [
+   "Uttar Narathali",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307325": [
+   "Dakshin Mahakalguri",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307154": [
+   "Kartika Tea Garden",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307326": [
+   "Bara Chakibas",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307172": [
+   "Narathali",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307305": [
+   "Patotola",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307171": [
+   "Chuota Daldali",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307327": [
+   "Chhota Chakirbas",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307329": [
+   "Bakla",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307162": [
+   "Madhya Narathali",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307169": [
+   "Purbba Narathali",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307328": [
+   "Chhipra",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307330": [
+   "Chepani",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307332": [
+   "Uttar Parokata",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307161": [
+   "Raydak Forest",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307156": [
+   "Jayanti Tea Garden",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307331": [
+   "Purba Chepani",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307163": [
+   "Paschim Narathali",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307157": [
+   "Turturi Khanda",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307152": [
+   "Phaskhawa Tea Garden",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307158": [
+   "Jayanti Tea Garden Ii",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307155": [
+   "Rahimabad Tea Garden",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307316": [
+   "Nurpur",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307160": [
+   "Raydak Tea Garden",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307317": [
+   "Turturi",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307318": [
+   "Dhalajhora",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307315": [
+   "Damsibad",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307182": [
+   "Kumargram Tea Garden",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307313": [
+   "Panbari",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307314": [
+   "Simlabari",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307319": [
+   "Uttar Rampur",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307320": [
+   "Loknathpur",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307181": [
+   "Dhumpara Forest",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307180": [
+   "New Lands Tea Garden",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307185": [
+   "Pukharigaon",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307179": [
+   "Amarpur",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307178": [
+   "Jaydedpur",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307186": [
+   "Kumargram",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307187": [
+   "Madhya Haldibari",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307177": [
+   "Dhantali",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307196": [
+   "Bhalka Forest",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307176": [
+   "Lalchandpur",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307188": [
+   "Dakshin Haldibari",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307189": [
+   "Paglarhat",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307190": [
+   "Chengmari",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307175": [
+   "Paschim Chengmari",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307191": [
+   "Dakshin Chengmari",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307192": [
+   "Hemaguri",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307170": [
+   "Gachaimari",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307193": [
+   "Bara Daldal",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307194": [
+   "Ghaksapara",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307195": [
+   "Radhanagar",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307197": [
+   "Purbba Salbari",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307198": [
+   "Barabisa",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307402": [
+   "Falakata CT",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307151": [
+   "Sachapho Forest",
+   2172,
+   4,
+   "Clay Loam"
+  ],
+  "307401": [
+   "Parangarpar CT",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307400": [
+   "Jateshwar CT",
+   2175,
+   7,
+   "Loam"
+  ],
+  "307105": [
+   "Uttar Madarihat CT",
+   2170,
+   7,
+   "Loam"
+  ],
+  "307150": [
+   "Uttar Latabari CT",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307254": [
+   "Paschim Jitpur CT",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307255": [
+   "Chechakhata CT",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307256": [
+   "Alipurduar Rly Jnc CT",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307257": [
+   "Bholar Dabri CT",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307258": [
+   "Birpara CT",
+   2173,
+   7,
+   "Loam"
+  ],
+  "307147": [
+   "Jaygaon CT",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307148": [
+   "Mechiabasti CT",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307149": [
+   "Uttar Satali CT",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307337": [
+   "Samuktola CT",
+   2174,
+   7,
+   "Loam"
+  ],
+  "307204": [
+   "Laskarpara CT",
+   2172,
+   7,
+   "Loam"
+  ],
+  "307146": [
+   "Buxa Forest Panbari Khanda",
+   2171,
+   7,
+   "Loam"
+  ],
+  "307184": [
+   "Uttar Haldibari",
+   2172,
+   7,
+   "Loam"
+  ]
+ },
+ "village_count_total": 348,
+ "village_count_sampled": 346
+}

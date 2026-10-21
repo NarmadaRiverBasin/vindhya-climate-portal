@@ -1,0 +1,806 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Kerala",
+  "district": "Malappuram",
+  "district_lgd": 562,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (127/128 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 5,
+  "dominant_class": "Silty Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 19099,
+   "Sandy Clay Loam": 34841,
+   "Loam": 3635,
+   "Sandy Loam": 21
+  },
+  "n_pixels": 57597
+ },
+ "villages": {
+  "627537": [
+   "Kuttippuram CT",
+   5644,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627528": [
+   "Perumanna CT",
+   5644,
+   4,
+   "Clay Loam"
+  ],
+  "627473": [
+   "Chungathara",
+   5642,
+   4,
+   "Clay Loam"
+  ],
+  "627504": [
+   "Anamangad",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627447": [
+   "Areekode",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627513": [
+   "Ozhur",
+   5644,
+   4,
+   "Clay Loam"
+  ],
+  "627521": [
+   "Athavanad",
+   5644,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627540": [
+   "Parappanangadi",
+   5645,
+   4,
+   "Clay Loam"
+  ],
+  "627519": [
+   "Melmuri",
+   5644,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627523": [
+   "Ananthavoor",
+   5644,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627525": [
+   "Purathur",
+   5644,
+   4,
+   "Clay Loam"
+  ],
+  "627457": [
+   "Pookkottur",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627524": [
+   "Vettom",
+   5644,
+   4,
+   "Clay Loam"
+  ],
+  "252173": [
+   "Ponnani",
+   5646,
+   4,
+   "Clay Loam"
+  ],
+  "627559": [
+   "Veliyankode",
+   5646,
+   4,
+   "Clay Loam"
+  ],
+  "627558": [
+   "Vattamkulam",
+   5646,
+   4,
+   "Clay Loam"
+  ],
+  "627557": [
+   "Tavanur",
+   5646,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627526": [
+   "Mangalam",
+   5644,
+   4,
+   "Clay Loam"
+  ],
+  "627560": [
+   "Perumpadappa",
+   5646,
+   4,
+   "Clay Loam"
+  ],
+  "252172": [
+   "Tirur",
+   5644,
+   4,
+   "Clay Loam"
+  ],
+  "627522": [
+   "Kurumbathur",
+   5644,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627515": [
+   "Valavannur",
+   5644,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627516": [
+   "Kalpakancheri",
+   5644,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627517": [
+   "Marakkara",
+   5644,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627536": [
+   "Naduvattom CT",
+   5644,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627533": [
+   "Talakkad CT",
+   5644,
+   4,
+   "Clay Loam"
+  ],
+  "627532": [
+   "Kattipparuthi CT",
+   5644,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627565": [
+   "Marancheri CT",
+   5646,
+   4,
+   "Clay Loam"
+  ],
+  "627563": [
+   "Edappal CT",
+   5646,
+   4,
+   "Clay Loam"
+  ],
+  "627562": [
+   "Kalady CT",
+   5646,
+   4,
+   "Clay Loam"
+  ],
+  "627534": [
+   "Triprangode CT",
+   5644,
+   4,
+   "Clay Loam"
+  ],
+  "627535": [
+   "Thirunavaya CT",
+   5644,
+   4,
+   "Clay Loam"
+  ],
+  "627564": [
+   "Alamcode CT",
+   5646,
+   4,
+   "Clay Loam"
+  ],
+  "627555": [
+   "Nannambra CT",
+   5645,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627556": [
+   "Thennala CT",
+   5645,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627550": [
+   "Parappur CT",
+   5645,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627545": [
+   "Moonniyur CT",
+   5645,
+   7,
+   "Loam"
+  ],
+  "627518": [
+   "Ponmala",
+   5644,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627554": [
+   "Neduva CT",
+   5645,
+   4,
+   "Clay Loam"
+  ],
+  "627551": [
+   "Vengara CT",
+   5645,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627531": [
+   "Cheriyamundam CT",
+   5644,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627529": [
+   "Ponmundam CT",
+   5644,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627455": [
+   "Nediyiruppu",
+   5941,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627510": [
+   "Kodur CT",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627553": [
+   "Tirurangadi CT",
+   5645,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627547": [
+   "Kannamangalam CT",
+   5645,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627543": [
+   "Thenhippalam CT",
+   5645,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627546": [
+   "Peruvallur CT",
+   5645,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627539": [
+   "Vallikkunnu",
+   5645,
+   4,
+   "Clay Loam"
+  ],
+  "627456": [
+   "Morayur",
+   5941,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627520": [
+   "Edayoor",
+   5644,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "252170": [
+   "Malappuram",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627512": [
+   "Tanur",
+   5644,
+   4,
+   "Clay Loam"
+  ],
+  "627511": [
+   "Pariyapuram",
+   5644,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627514": [
+   "Niramaruthur",
+   5644,
+   4,
+   "Clay Loam"
+  ],
+  "627490": [
+   "Melattur",
+   5643,
+   4,
+   "Clay Loam"
+  ],
+  "627505": [
+   "Elamkulam",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627464": [
+   "Pandikkad",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627492": [
+   "Nenmini",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627498": [
+   "Angadippuram",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "252171": [
+   "Perinthalmanna",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627461": [
+   "Pandalur",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627496": [
+   "Puzhakkattiri",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627497": [
+   "Valambur",
+   5643,
+   4,
+   "Clay Loam"
+  ],
+  "627500": [
+   "Vettathur",
+   5643,
+   4,
+   "Clay Loam"
+  ],
+  "627493": [
+   "Mankada",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627491": [
+   "Keezhattur",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627502": [
+   "Thazhekode",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627495": [
+   "Kuruva",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627494": [
+   "Vadakkangara",
+   5643,
+   4,
+   "Clay Loam"
+  ],
+  "252169": [
+   "Manjeri",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627462": [
+   "Vettikkattiri",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627463": [
+   "Chembrasseri",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627485": [
+   "Thuvvur",
+   5642,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627489": [
+   "Edappatta",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627503": [
+   "Aliparamba",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627506": [
+   "Pulamanthole",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627507": [
+   "Kuruvambalam",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627508": [
+   "Moorkkanad",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627499": [
+   "Kariavattom",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627501": [
+   "Arakkuparamba",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627487": [
+   "Karuvarakundu",
+   5642,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627468": [
+   "Kondotty CT",
+   5941,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627452": [
+   "Kavanoor",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627445": [
+   "Pulikkal",
+   5941,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627458": [
+   "Pulpatta",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627446": [
+   "Cheekkode",
+   5941,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627453": [
+   "Kuzhimanna",
+   5941,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627454": [
+   "Muthuvallur",
+   5941,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627444": [
+   "Vazhakkad",
+   5941,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627448": [
+   "Urangattiri",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627449": [
+   "Perakamanna",
+   5641,
+   7,
+   "Loam"
+  ],
+  "627459": [
+   "Trikkalangode",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627450": [
+   "Edavanna",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627479": [
+   "Thiruvali",
+   5642,
+   7,
+   "Loam"
+  ],
+  "627481": [
+   "Wandoor",
+   5642,
+   4,
+   "Clay Loam"
+  ],
+  "627460": [
+   "Elankur",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627451": [
+   "Karakunnu",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627483": [
+   "Kalikavu",
+   5642,
+   4,
+   "Clay Loam"
+  ],
+  "627484": [
+   "Vellayur",
+   5642,
+   4,
+   "Clay Loam"
+  ],
+  "627478": [
+   "Mambad",
+   5642,
+   4,
+   "Clay Loam"
+  ],
+  "627480": [
+   "Porur",
+   5642,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627470": [
+   "Pullipadam",
+   5642,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627477": [
+   "Karulai",
+   5642,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627471": [
+   "Akampadam",
+   5642,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627474": [
+   "Edakkara",
+   5642,
+   4,
+   "Clay Loam"
+  ],
+  "627482": [
+   "Chokkad",
+   5642,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627486": [
+   "Kerala Estate",
+   5642,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627476": [
+   "Amarambalam",
+   5642,
+   4,
+   "Clay Loam"
+  ],
+  "627443": [
+   "Vettilappara",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627475": [
+   "Vazhikkadavu",
+   5642,
+   4,
+   "Clay Loam"
+  ],
+  "627472": [
+   "Kurumbilangode",
+   5642,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627530": [
+   "Tanalur CT",
+   5644,
+   4,
+   "Clay Loam"
+  ],
+  "627549": [
+   "Othukkungal CT",
+   5645,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627548": [
+   "Urakam CT",
+   5645,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627527": [
+   "Kottakkal CT",
+   5644,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627542": [
+   "Pallikal CT",
+   5941,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627552": [
+   "Abdu Rahiman Nagar CT",
+   5645,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627544": [
+   "Ariyallur CT",
+   5645,
+   4,
+   "Clay Loam"
+  ],
+  "627538": [
+   "Irimbiliyam CT",
+   5644,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627509": [
+   "Koottilangadi CT",
+   5643,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627469": [
+   "Anakkayam",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627466": [
+   "Vazhayur CT",
+   5941,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627465": [
+   "Kizhuparamba CT",
+   5641,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627467": [
+   "Cherukavu CT",
+   5941,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627541": [
+   "Chelambra CT",
+   5941,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "627488": [
+   "Nilambur CT",
+   5642,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 128,
+ "village_count_sampled": 127
+}

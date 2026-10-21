@@ -1,0 +1,721 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Nagaland",
+  "district": "Mokokchung",
+  "district_lgd": 246,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "full"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 23688,
+   "Sandy Clay Loam": 318,
+   "Loam": 4779
+  },
+  "n_pixels": 28786
+ },
+ "villages": {
+  "267200": [
+   "Longkhum",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "267201": [
+   "Alichen Ur",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "267199": [
+   "Mangmetong",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "267198": [
+   "Kupza",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "267192": [
+   "Mekuli",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "267191": [
+   "Kinunger",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "267190": [
+   "Aliba",
+   1766,
+   7,
+   "Loam"
+  ],
+  "267189": [
+   "Longjongkong New Camp Ur",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "267193": [
+   "Khensa",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "267202": [
+   "Settsu",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "267188": [
+   "Chungtia",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "267177": [
+   "Changki",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267176": [
+   "Merakiong",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267174": [
+   "Longnak",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267171": [
+   "Chungliyimsen",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267170": [
+   "Atuphumi",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267172": [
+   "Shihaphumi",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267173": [
+   "Puneboto Comp",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267164": [
+   "Khar",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267175": [
+   "Chungliyimsen Comp",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267204": [
+   "Moalenden",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "267206": [
+   "Longsa",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "267205": [
+   "Meyilong",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "999999": [
+   "Data Partially Available",
+   1761,
+   4,
+   "Clay Loam"
+  ],
+  "267203": [
+   "Ungma",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "267196": [
+   "Chuchuyimpang",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "267195": [
+   "Chubayimkum",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "267197": [
+   "Longmisa",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "267194": [
+   "Mokokchung Vill",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "249717": [
+   "Mokokchung",
+   1766,
+   4,
+   "Clay Loam"
+  ],
+  "267162": [
+   "Alongchen Comp",
+   1763,
+   4,
+   "Clay Loam"
+  ],
+  "267160": [
+   "Sungratsu",
+   1763,
+   4,
+   "Clay Loam"
+  ],
+  "267161": [
+   "Impur Comp",
+   1763,
+   4,
+   "Clay Loam"
+  ],
+  "267159": [
+   "Mopungchukit",
+   1763,
+   4,
+   "Clay Loam"
+  ],
+  "267158": [
+   "Chami",
+   1763,
+   4,
+   "Clay Loam"
+  ],
+  "267157": [
+   "Kubolong Hq",
+   1763,
+   4,
+   "Clay Loam"
+  ],
+  "267156": [
+   "Longpa",
+   1763,
+   4,
+   "Clay Loam"
+  ],
+  "267155": [
+   "Longjang",
+   1763,
+   4,
+   "Clay Loam"
+  ],
+  "267154": [
+   "Khanimu",
+   1763,
+   4,
+   "Clay Loam"
+  ],
+  "267152": [
+   "Longkong",
+   1762,
+   4,
+   "Clay Loam"
+  ],
+  "267153": [
+   "Chakpa",
+   1762,
+   4,
+   "Clay Loam"
+  ],
+  "267148": [
+   "Yaongyimti New",
+   1762,
+   4,
+   "Clay Loam"
+  ],
+  "267147": [
+   "Phangsang Comp",
+   1762,
+   4,
+   "Clay Loam"
+  ],
+  "267146": [
+   "Yaongyimti Old",
+   1762,
+   4,
+   "Clay Loam"
+  ],
+  "267145": [
+   "Salulemang",
+   1762,
+   4,
+   "Clay Loam"
+  ],
+  "267143": [
+   "Chuchuyimlang Vill",
+   1762,
+   4,
+   "Clay Loam"
+  ],
+  "267144": [
+   "Chuchuyimlang",
+   1762,
+   4,
+   "Clay Loam"
+  ],
+  "267149": [
+   "Mongsenyimti",
+   1762,
+   4,
+   "Clay Loam"
+  ],
+  "267150": [
+   "Mongsenyimti Comp Ur",
+   1762,
+   7,
+   "Loam"
+  ],
+  "267151": [
+   "Yisemyong Comp",
+   1762,
+   4,
+   "Clay Loam"
+  ],
+  "267168": [
+   "Longtho",
+   1764,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "267165": [
+   "Japu",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267166": [
+   "Longsemdang",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267167": [
+   "Mangkolemba Hq",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267123": [
+   "Mongchen",
+   1759,
+   4,
+   "Clay Loam"
+  ],
+  "267122": [
+   "Dibuia",
+   1759,
+   4,
+   "Clay Loam"
+  ],
+  "267113": [
+   "Alongtaki Comp Ur",
+   1758,
+   4,
+   "Clay Loam"
+  ],
+  "267112": [
+   "Lakhuni",
+   1758,
+   7,
+   "Loam"
+  ],
+  "267110": [
+   "Changdang",
+   1758,
+   4,
+   "Clay Loam"
+  ],
+  "267109": [
+   "Nokpu",
+   1758,
+   4,
+   "Clay Loam"
+  ],
+  "267104": [
+   "Akumen",
+   1758,
+   4,
+   "Clay Loam"
+  ],
+  "267105": [
+   "Tsurmen",
+   1758,
+   7,
+   "Loam"
+  ],
+  "267106": [
+   "Aonokpuyimsen Ur",
+   1758,
+   7,
+   "Loam"
+  ],
+  "267103": [
+   "Saring",
+   1758,
+   7,
+   "Loam"
+  ],
+  "267179": [
+   "Aosungkum",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267180": [
+   "Aokum",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267182": [
+   "Aosenden",
+   1764,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "267186": [
+   "Moayimti",
+   1764,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "267187": [
+   "Medemyim",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267183": [
+   "Chungtiayimsen",
+   1764,
+   7,
+   "Loam"
+  ],
+  "267184": [
+   "Longphayimsen",
+   1764,
+   7,
+   "Loam"
+  ],
+  "267185": [
+   "Watiyim",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267142": [
+   "Unger",
+   1761,
+   4,
+   "Clay Loam"
+  ],
+  "267141": [
+   "Akhoia",
+   1761,
+   4,
+   "Clay Loam"
+  ],
+  "267140": [
+   "Kilingmen",
+   1761,
+   4,
+   "Clay Loam"
+  ],
+  "253207": [
+   "Changtongya Town",
+   1761,
+   4,
+   "Clay Loam"
+  ],
+  "267139": [
+   "Changtongya New",
+   1761,
+   4,
+   "Clay Loam"
+  ],
+  "267138": [
+   "Changtongya Old",
+   1761,
+   4,
+   "Clay Loam"
+  ],
+  "267137": [
+   "Yaongyimsen",
+   1761,
+   4,
+   "Clay Loam"
+  ],
+  "267136": [
+   "Yaongyimsen Comp",
+   1761,
+   4,
+   "Clay Loam"
+  ],
+  "267134": [
+   "Asangma",
+   1760,
+   4,
+   "Clay Loam"
+  ],
+  "267133": [
+   "Merangkong Comp",
+   1760,
+   4,
+   "Clay Loam"
+  ],
+  "267132": [
+   "Merangkong",
+   1760,
+   4,
+   "Clay Loam"
+  ],
+  "253206": [
+   "Tuli Town",
+   1760,
+   7,
+   "Loam"
+  ],
+  "267131": [
+   "Aopenzu",
+   1760,
+   4,
+   "Clay Loam"
+  ],
+  "267121": [
+   "Dibuia Comp",
+   1759,
+   4,
+   "Clay Loam"
+  ],
+  "267120": [
+   "Alongkima Hq",
+   1759,
+   7,
+   "Loam"
+  ],
+  "267119": [
+   "Waromong Comp",
+   1759,
+   4,
+   "Clay Loam"
+  ],
+  "267118": [
+   "Waromong",
+   1759,
+   4,
+   "Clay Loam"
+  ],
+  "267117": [
+   "Yimjenkimong",
+   1759,
+   4,
+   "Clay Loam"
+  ],
+  "267116": [
+   "Molungkimong",
+   1759,
+   4,
+   "Clay Loam"
+  ],
+  "267114": [
+   "Molungyimsen",
+   1759,
+   4,
+   "Clay Loam"
+  ],
+  "267115": [
+   "Molungyimsen B Luyong",
+   1759,
+   4,
+   "Clay Loam"
+  ],
+  "267108": [
+   "Longchem Comp",
+   1758,
+   4,
+   "Clay Loam"
+  ],
+  "267107": [
+   "Aonokpu",
+   1758,
+   4,
+   "Clay Loam"
+  ],
+  "267102": [
+   "Lirmen",
+   1758,
+   4,
+   "Clay Loam"
+  ],
+  "267100": [
+   "Yajang A",
+   1758,
+   4,
+   "Clay Loam"
+  ],
+  "267099": [
+   "Yajang Model Vill Ur",
+   1758,
+   4,
+   "Clay Loam"
+  ],
+  "267098": [
+   "Yajang B",
+   1758,
+   4,
+   "Clay Loam"
+  ],
+  "267129": [
+   "Wamaken",
+   1760,
+   4,
+   "Clay Loam"
+  ],
+  "267130": [
+   "Kangtsung",
+   1760,
+   4,
+   "Clay Loam"
+  ],
+  "267126": [
+   "Kangtsung Yimsen Ur",
+   1760,
+   4,
+   "Clay Loam"
+  ],
+  "267125": [
+   "Anakiyimsen",
+   1760,
+   4,
+   "Clay Loam"
+  ],
+  "267101": [
+   "Yajang C",
+   1758,
+   4,
+   "Clay Loam"
+  ],
+  "267124": [
+   "Anaki C",
+   1760,
+   7,
+   "Loam"
+  ],
+  "267127": [
+   "Anaki",
+   1760,
+   4,
+   "Clay Loam"
+  ],
+  "267135": [
+   "Tsudikong 13Th Mile Tuli Paper Mill CT",
+   1760,
+   4,
+   "Clay Loam"
+  ],
+  "267169": [
+   "Satsukba",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267163": [
+   "Yimchalu",
+   1763,
+   4,
+   "Clay Loam"
+  ],
+  "267111": [
+   "Lizo Model Vill Ur",
+   1758,
+   4,
+   "Clay Loam"
+  ],
+  "267178": [
+   "Tsutapela Ur",
+   1764,
+   4,
+   "Clay Loam"
+  ],
+  "267181": [
+   "Vikuto Ur",
+   1764,
+   7,
+   "Loam"
+  ],
+  "267128": [
+   "Wamakenyimsen Ur",
+   1760,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 120,
+ "village_count_sampled": 120
+}

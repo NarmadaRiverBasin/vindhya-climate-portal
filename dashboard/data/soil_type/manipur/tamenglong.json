@@ -1,0 +1,763 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Manipur",
+  "district": "Tamenglong",
+  "district_lgd": 258,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "full"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 41068,
+   "Sandy Clay Loam": 1157,
+   "Loam": 11728
+  },
+  "n_pixels": 53954
+ },
+ "villages": {
+  "269203": [
+   "Tharon",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "999999": [
+   "Data Partially Available",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269116": [
+   "Maokot",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269137": [
+   "T Motbung",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269135": [
+   "Thingchamphai",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269142": [
+   "Pangkotphai",
+   1864,
+   7,
+   "Loam"
+  ],
+  "269122": [
+   "Khedarga Khasi",
+   1864,
+   7,
+   "Loam"
+  ],
+  "269139": [
+   "Lhangnom",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269140": [
+   "Kolbung",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269129": [
+   "Kaimai",
+   1864,
+   7,
+   "Loam"
+  ],
+  "269136": [
+   "Tolen",
+   1864,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "269141": [
+   "Tongtao",
+   1864,
+   7,
+   "Loam"
+  ],
+  "269138": [
+   "Thingtatbung",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269121": [
+   "Ngahmunphai",
+   1864,
+   7,
+   "Loam"
+  ],
+  "269123": [
+   "Karamkha Khasi",
+   1864,
+   7,
+   "Loam"
+  ],
+  "269132": [
+   "Tatbung",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269130": [
+   "Muktokhal",
+   1864,
+   7,
+   "Loam"
+  ],
+  "269131": [
+   "Vangaichungpao",
+   1864,
+   7,
+   "Loam"
+  ],
+  "269128": [
+   "Sibilong",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269133": [
+   "Old Kaiphundai",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269119": [
+   "Oinamlong",
+   1864,
+   7,
+   "Loam"
+  ],
+  "269134": [
+   "Phaitol",
+   1864,
+   7,
+   "Loam"
+  ],
+  "269126": [
+   "Nungkao",
+   1864,
+   7,
+   "Loam"
+  ],
+  "269125": [
+   "Kaiphundai",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269118": [
+   "Longjon",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269109": [
+   "Ningning",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269111": [
+   "Chingkhonglong",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269112": [
+   "Jeilatjang",
+   1864,
+   7,
+   "Loam"
+  ],
+  "269113": [
+   "Atengba",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269110": [
+   "Chingkao",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269127": [
+   "Rangkekilong",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269117": [
+   "Vanchengphai",
+   1864,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "269115": [
+   "J Pabram",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269183": [
+   "Taobam",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269184": [
+   "Awangkhul",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269182": [
+   "Sempang",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269185": [
+   "Langkhong",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269186": [
+   "Lukhambi",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269181": [
+   "Keikao",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269180": [
+   "Sanglungpang",
+   1866,
+   7,
+   "Loam"
+  ],
+  "269187": [
+   "Nagaching",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269205": [
+   "Ramlalong",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269179": [
+   "Tabanglong",
+   1866,
+   7,
+   "Loam"
+  ],
+  "269176": [
+   "Akhui",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269194": [
+   "Kabui Khullen",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269124": [
+   "Khedraga Mikir",
+   1864,
+   7,
+   "Loam"
+  ],
+  "269114": [
+   "Thiulon",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269098": [
+   "Longchai",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269120": [
+   "Aben",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269092": [
+   "Pumram",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269091": [
+   "Kandihang",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269093": [
+   "Njungkok",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269090": [
+   "Mandu",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269107": [
+   "Saramba",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269106": [
+   "Azuram",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269105": [
+   "Namtiram",
+   1864,
+   7,
+   "Loam"
+  ],
+  "269104": [
+   "Phelong",
+   1864,
+   7,
+   "Loam"
+  ],
+  "269108": [
+   "Taningjam",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269148": [
+   "Pallong",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269147": [
+   "Taipram",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269146": [
+   "Langpram",
+   1865,
+   7,
+   "Loam"
+  ],
+  "269151": [
+   "Piulong",
+   1865,
+   7,
+   "Loam"
+  ],
+  "269178": [
+   "Bamgaijang",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269198": [
+   "Punglam",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269175": [
+   "Khongjaron Khunkha",
+   1866,
+   7,
+   "Loam"
+  ],
+  "269197": [
+   "Khebuching",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269199": [
+   "Wairangba",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269201": [
+   "Dailong",
+   1866,
+   7,
+   "Loam"
+  ],
+  "269200": [
+   "Bhalok",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269202": [
+   "Sonpram",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269204": [
+   "L Pabram",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269177": [
+   "Kahulong",
+   1866,
+   7,
+   "Loam"
+  ],
+  "269174": [
+   "Khongjaron Khunthak",
+   1866,
+   7,
+   "Loam"
+  ],
+  "269173": [
+   "Duigailong",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269089": [
+   "Tousem",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269094": [
+   "Phoklong",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269102": [
+   "Inem",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269101": [
+   "Impa",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269095": [
+   "Togoram",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269099": [
+   "Magulong",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269103": [
+   "New Magulong",
+   1864,
+   7,
+   "Loam"
+  ],
+  "269097": [
+   "Katangam",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269100": [
+   "Katang",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269096": [
+   "Katiang",
+   1864,
+   4,
+   "Clay Loam"
+  ],
+  "269207": [
+   "Tamenglong CT",
+   1866,
+   7,
+   "Loam"
+  ],
+  "269188": [
+   "Nungtek",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269189": [
+   "Maranging",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269191": [
+   "Pungmon",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269190": [
+   "Ejeirong",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269192": [
+   "Haochong",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269206": [
+   "Bakua",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269171": [
+   "Khundong Khunkhaiba",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269170": [
+   "Nurathen",
+   1865,
+   7,
+   "Loam"
+  ],
+  "269169": [
+   "Atangkhullen",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269166": [
+   "Lasan",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269149": [
+   "Lamlaba",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269168": [
+   "Atangkhunou",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269150": [
+   "Kabonram",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269172": [
+   "S Songpibung",
+   1865,
+   7,
+   "Loam"
+  ],
+  "269152": [
+   "Langmei",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269153": [
+   "Tamei",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269167": [
+   "Old Thenjang",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269193": [
+   "Oktan",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269195": [
+   "Thingra",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269196": [
+   "Kajinglong",
+   1866,
+   4,
+   "Clay Loam"
+  ],
+  "269145": [
+   "Dikiuram",
+   1865,
+   7,
+   "Loam"
+  ],
+  "269155": [
+   "Tamah",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269154": [
+   "Kawalong",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269144": [
+   "Konphung",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269156": [
+   "Old Takou",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269157": [
+   "New Kadi",
+   1865,
+   7,
+   "Loam"
+  ],
+  "269159": [
+   "Elleng",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269165": [
+   "Old Kadi",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269158": [
+   "Chaton I",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269160": [
+   "Dunong",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269164": [
+   "Kuilong I",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269161": [
+   "Makuinong",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269143": [
+   "Lenglong",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269163": [
+   "Old Lemta",
+   1865,
+   4,
+   "Clay Loam"
+  ],
+  "269162": [
+   "Nallong",
+   1865,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 122,
+ "village_count_sampled": 122
+}

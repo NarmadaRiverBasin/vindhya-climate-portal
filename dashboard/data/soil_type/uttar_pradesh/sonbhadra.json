@@ -1,0 +1,8438 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Uttar Pradesh",
+  "district": "Sonbhadra",
+  "district_lgd": 184,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (1411/1464 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 92291,
+   "Sandy Clay Loam": 17554,
+   "Loam": 2622,
+   "Sandy Loam": 1
+  },
+  "n_pixels": 112469
+ },
+ "villages": {
+  "214315": [
+   "Chak Lambi",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "213693": [
+   "Barawan",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214157": [
+   "Adhavra",
+   1006,
+   7,
+   "Loam"
+  ],
+  "214158": [
+   "Sirsoti",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214111": [
+   "Ranibari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214107": [
+   "Paraswara Raja",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214097": [
+   "Basi",
+   1006,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214092": [
+   "Auri",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214093": [
+   "Nakati",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214112": [
+   "Chil Kapand",
+   1006,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214103": [
+   "Mishra",
+   1006,
+   7,
+   "Loam"
+  ],
+  "214105": [
+   "Jogi Chaura",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214104": [
+   "Bhairwa",
+   1006,
+   7,
+   "Loam"
+  ],
+  "214156": [
+   "Khairi",
+   1006,
+   7,
+   "Loam"
+  ],
+  "213268": [
+   "Bhainshi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "214025": [
+   "Nadhra",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214026": [
+   "Nadhri",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213257": [
+   "Hinauta",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214024": [
+   "Kanhra",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214027": [
+   "Bairpur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214089": [
+   "Jogendra",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "213274": [
+   "Manhwa",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "214091": [
+   "Ranahor",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "213279": [
+   "Deogarha",
+   1004,
+   9,
+   "Sandy Loam"
+  ],
+  "213236": [
+   "Chigori",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213275": [
+   "Khajuari",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214015": [
+   "Bharari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213252": [
+   "Koharatha",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213271": [
+   "Dulahatha",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213238": [
+   "Lilwahi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213235": [
+   "Dhura Kund",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213250": [
+   "Bhagahi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213270": [
+   "Harankhuri",
+   1004,
+   7,
+   "Loam"
+  ],
+  "213263": [
+   "Amadhi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213266": [
+   "Satdwari",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213278": [
+   "Bantara",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213272": [
+   "Lohada",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213239": [
+   "Chandi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213273": [
+   "Meejhun",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213267": [
+   "Gawnkunda",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213269": [
+   "Sonhati",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213281": [
+   "Korat",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213251": [
+   "Bharkana",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213237": [
+   "Koladiha",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213258": [
+   "Parwania",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213265": [
+   "Bar",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213214": [
+   "Jurauli Kolani",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213290": [
+   "Newari",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213256": [
+   "Bauradih",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213276": [
+   "Rumma",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213264": [
+   "Baijanath",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213231": [
+   "Domakhri",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212984": [
+   "Tenduhar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "214382": [
+   "Anpara CT",
+   1006,
+   7,
+   "Loam"
+  ],
+  "213280": [
+   "Silapi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213261": [
+   "Seegra",
+   1004,
+   7,
+   "Loam"
+  ],
+  "213291": [
+   "Maham",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213277": [
+   "Bardiya",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213289": [
+   "Kundari",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "214386": [
+   "Bijpur CT",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214383": [
+   "Jamshila CT",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214384": [
+   "Khadiya",
+   1006,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214381": [
+   "Parasi CT",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214380": [
+   "Kakari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214385": [
+   "Kota CT",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "212967": [
+   "Semera Khurd",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212989": [
+   "Parsauna Khurd",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212969": [
+   "Kanhari",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212951": [
+   "Amli Pokhar",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212966": [
+   "Semera Kala",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212968": [
+   "Majurahi",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212950": [
+   "Dholo",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212965": [
+   "Babhani",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212953": [
+   "Murtiya",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212952": [
+   "Marni",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213243": [
+   "Kon",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213241": [
+   "Beheri",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212996": [
+   "Uchdih",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212983": [
+   "Parsauna",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213244": [
+   "Beerkhurd",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212956": [
+   "Karry",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212994": [
+   "Majhagawan",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212988": [
+   "Junia",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212999": [
+   "Lakshimanpur",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212981": [
+   "Ghuwas",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213031": [
+   "Mahvarioa",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212972": [
+   "Amilia",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213260": [
+   "Manjhiganwa Mishra",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213018": [
+   "Satohan",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212977": [
+   "Madhaka",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213013": [
+   "Dewerikatha",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213004": [
+   "Jaimohara",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212961": [
+   "Mahokhar",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212957": [
+   "Rahi",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213262": [
+   "Shivdwar",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213215": [
+   "Khagia",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213242": [
+   "Baraudhi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213217": [
+   "Mandha",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213014": [
+   "Peroh",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213255": [
+   "Baidawar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213030": [
+   "Kewalimay Devali",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212963": [
+   "Barbaspur",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212980": [
+   "Basahi",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213001": [
+   "Naugai",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212991": [
+   "Khakh",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213041": [
+   "Amilia",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212979": [
+   "Mukkha",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213247": [
+   "Dorihar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212997": [
+   "Naugawan Nandlal",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212985": [
+   "Bhawana",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213240": [
+   "Majhgawan Chauhan",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213254": [
+   "Jamua",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "249546": [
+   "Ghorawal",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212964": [
+   "Lahas",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212995": [
+   "Bisrekhi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212958": [
+   "Purana",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212970": [
+   "Ghoria",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213020": [
+   "Newari",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212959": [
+   "Pathartal",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212987": [
+   "Dewerikhurd",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212971": [
+   "Tendua",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212986": [
+   "Halwai",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213011": [
+   "Thiwan",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213000": [
+   "Raikara",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213009": [
+   "Silwar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212955": [
+   "Ubha",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212982": [
+   "Lali",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213012": [
+   "Guretha",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212962": [
+   "Sirsain",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212960": [
+   "Samerwar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212954": [
+   "Sapahi",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212990": [
+   "Khutaha",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213245": [
+   "Khardeur",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212976": [
+   "Fulwary",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213259": [
+   "Mohani",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213249": [
+   "Sonabarsa",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213005": [
+   "Dumaribharaulia",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213248": [
+   "Snihawal",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213216": [
+   "Beerkala",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213002": [
+   "Dhadhi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213006": [
+   "Bharauli",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212975": [
+   "Karsoata",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212974": [
+   "Karia",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213003": [
+   "Dharsara",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212993": [
+   "Sirsai",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212973": [
+   "Amilaudha",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213007": [
+   "Dumaria Mithailal",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213253": [
+   "Janar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213017": [
+   "Visundhary",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213246": [
+   "Musha",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213008": [
+   "Marasara",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213010": [
+   "Piparwar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "212992": [
+   "Keweta",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213019": [
+   "Nakawai",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "212998": [
+   "Chain",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213016": [
+   "Bhainswar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213015": [
+   "Dhorkary",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213040": [
+   "Bagpokhar",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213696": [
+   "Garh",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213716": [
+   "Amilia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213502": [
+   "Bhaluhairaja",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213850": [
+   "Maukhurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213161": [
+   "Mushrdhara",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213665": [
+   "Churk",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213831": [
+   "Baraulli",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213613": [
+   "Karauli",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213616": [
+   "Mahuar Khurd",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213781": [
+   "Belaury Pashchim Patti",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213523": [
+   "Meuri Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213158": [
+   "Majhali",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213630": [
+   "Gangti",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213490": [
+   "Shakari Pur",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213029": [
+   "Hinauti",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213672": [
+   "Bar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213171": [
+   "Adraura",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214328": [
+   "Karam Ghati",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214168": [
+   "Rajamilan",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214331": [
+   "Semariya",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214323": [
+   "Majeth",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214160": [
+   "Nemana",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214326": [
+   "Tekuwari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214324": [
+   "Jiganahawa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214164": [
+   "Dharati Dandd",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214330": [
+   "Shishtola",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214348": [
+   "Nawatola",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214166": [
+   "Liladewa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214349": [
+   "Barawatola",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214327": [
+   "Nawatoli",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214161": [
+   "Jaraha",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214320": [
+   "Bhawar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "213335": [
+   "Khatauli",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214322": [
+   "Bhal Pahari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214167": [
+   "Mahuli",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214329": [
+   "Bichhiyari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214334": [
+   "Sawara",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214344": [
+   "Deorihawa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214325": [
+   "Majhauli",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214162": [
+   "Pindari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214332": [
+   "Dumarahar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214316": [
+   "Hathiyar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214333": [
+   "Duba",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214347": [
+   "Adhoura",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214317": [
+   "Chak Chapki",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214371": [
+   "Baina",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214319": [
+   "Barawa Tola",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214165": [
+   "Sendur",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214346": [
+   "Satabahani",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214179": [
+   "Nadhira",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214318": [
+   "Chapaki",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "213632": [
+   "Belcupp",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214321": [
+   "Araghat",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214178": [
+   "Jhapar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214335": [
+   "Ashanahar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214345": [
+   "Bawara",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214177": [
+   "Piparahara",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214159": [
+   "Dorahar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214163": [
+   "Anjani",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214180": [
+   "Rajasari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214358": [
+   "Chipiya",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214337": [
+   "Pokhara",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214204": [
+   "Ahir Burawa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214360": [
+   "Karacha Tola",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214343": [
+   "Ghaghara",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214350": [
+   "Kanawa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214342": [
+   "Barawe",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214339": [
+   "Nawa Tola",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214336": [
+   "Babhani",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "213200": [
+   "Barauli",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "214377": [
+   "Sangsoti",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214364": [
+   "Munagadih",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214357": [
+   "Ikadari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214341": [
+   "Khara Dih",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214376": [
+   "Machbandhawa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214374": [
+   "Dhanawar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214361": [
+   "Gaya Dah",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214338": [
+   "Parasa Tola",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214365": [
+   "Chak Bagdari Sani",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214372": [
+   "Tendual",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214369": [
+   "Konga",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214373": [
+   "Karam Tola",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214363": [
+   "Chak Bagadari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214370": [
+   "Bahera Dol",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214356": [
+   "Bajiya",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "213528": [
+   "Petrahi",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214200": [
+   "Paripan",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214366": [
+   "Chouna",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214352": [
+   "Salenag",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "213176": [
+   "Umarikhurd",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "214201": [
+   "Sago Bandh",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214351": [
+   "Seoritola",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214362": [
+   "Jogedah",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214175": [
+   "Patkhirana",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214375": [
+   "Chan Pur",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214359": [
+   "Asandih",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214340": [
+   "Ghaghari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214355": [
+   "Karkachhi",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214367": [
+   "Jura",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214354": [
+   "Khoto Mahuwa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214378": [
+   "Jhanak Pur",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214353": [
+   "Jourahi",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214130": [
+   "Gambhirpur",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214379": [
+   "Ranadah Tola",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214154": [
+   "Khamhariya",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214153": [
+   "Maharikala",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214138": [
+   "Harhori",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214181": [
+   "Babhan Diha",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "249553": [
+   "Pipri",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214172": [
+   "Kirwil",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214155": [
+   "Mitihini",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214169": [
+   "Banamahari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214174": [
+   "Shishawa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214149": [
+   "Parari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214176": [
+   "Jalawa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214133": [
+   "Aurahawa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "213760": [
+   "Gaurawan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214152": [
+   "Jhilo",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214135": [
+   "Soroho",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214137": [
+   "Karakori",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214173": [
+   "Karahiya",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214140": [
+   "Kundadih",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "249552": [
+   "Renukoot",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214136": [
+   "Gariya",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214139": [
+   "Parani",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214147": [
+   "Kota",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214170": [
+   "Kachan",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214116": [
+   "Labhari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "213754": [
+   "Kharuyee",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214117": [
+   "Makara",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214134": [
+   "Darihara",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214122": [
+   "Jokahi",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214141": [
+   "Mewarpur",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214121": [
+   "Tharpathar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214191": [
+   "Ajangira",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214209": [
+   "Hathawani",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214240": [
+   "Lilasi Khurd",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214228": [
+   "Karri",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214235": [
+   "Rannu",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214193": [
+   "Kharatiya Tola",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214264": [
+   "Koragi",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214131": [
+   "Kushmaha",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214247": [
+   "Khajuri",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "249551": [
+   "Dudhi",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214312": [
+   "Gangahar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214218": [
+   "Katolli",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214299": [
+   "Humel Dohar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214225": [
+   "Jharo Khurd",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214144": [
+   "Nawatola",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214227": [
+   "Gulal Jhariya",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214190": [
+   "Kudari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214246": [
+   "Maldewa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214230": [
+   "Mahuariya",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214226": [
+   "Dumar Diha",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214224": [
+   "Kadal",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214222": [
+   "Jharo Kala",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214182": [
+   "Supachuwa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214223": [
+   "Majhouli",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214128": [
+   "Khairahi",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214249": [
+   "Japala",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214187": [
+   "Lilasi Kala",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214183": [
+   "Jamapani",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214185": [
+   "Fata Pakhana",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214203": [
+   "Kurpan",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214248": [
+   "Dhanaura",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214305": [
+   "Chak Bairkhar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214125": [
+   "Murdhowa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214368": [
+   "Dhankhor",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214192": [
+   "Deohar Pashchim",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "213526": [
+   "Ghurma",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214215": [
+   "Vidar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214234": [
+   "Gaur Singha",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214216": [
+   "Rajakhar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214313": [
+   "Gohara",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214236": [
+   "Bagharu",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214241": [
+   "Baraidar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214194": [
+   "Madhuban",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214219": [
+   "Kataudhi",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214311": [
+   "Randah Tola",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214132": [
+   "Raspahari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214244": [
+   "Shah Pur",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214171": [
+   "Dewari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "213180": [
+   "Kolakari",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "214142": [
+   "Baliyari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214221": [
+   "Karamdand",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214127": [
+   "Kirawani",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214231": [
+   "Saradiha",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214245": [
+   "Jabar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214250": [
+   "Dighul",
+   1006,
+   7,
+   "Loam"
+  ],
+  "214195": [
+   "Bodara Tola",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "213482": [
+   "Kusahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214129": [
+   "Govindpur",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214124": [
+   "Kharpathar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214229": [
+   "Sayal",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214217": [
+   "Dumhan",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214232": [
+   "Murata",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214188": [
+   "Chari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "213157": [
+   "Domahar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "214145": [
+   "Baghmandwa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214189": [
+   "Chanaga",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214251": [
+   "Deo Pura",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214260": [
+   "Jorkahoo",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214199": [
+   "Deohar Purab",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214143": [
+   "Bhaluhi",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214233": [
+   "Turridih",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214184": [
+   "Lavband",
+   1006,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214198": [
+   "Naudiha",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214243": [
+   "Pipar Dih",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214252": [
+   "Nimiya Dih",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214206": [
+   "Dala Pipar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214220": [
+   "Manabasa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214126": [
+   "Rantola",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214196": [
+   "Barah Pan",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214186": [
+   "Arangpani",
+   1006,
+   7,
+   "Loam"
+  ],
+  "214202": [
+   "Bishram Pur",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214293": [
+   "Baghamandawa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214197": [
+   "Karach Tola",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214205": [
+   "Manaru Tola",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214288": [
+   "Rampur",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214301": [
+   "Chhatarpur",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214307": [
+   "Barkhohara",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214276": [
+   "Hirachak",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214295": [
+   "Jata Juwa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214266": [
+   "Dumara",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214304": [
+   "Bairkhar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214286": [
+   "Kewal",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214273": [
+   "Paras Pani",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214290": [
+   "Sukhara",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214275": [
+   "Patariha",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214314": [
+   "Lambi",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214287": [
+   "Medini Khar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214291": [
+   "Jam Pani",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214292": [
+   "Dhuriya",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214306": [
+   "Kudari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214255": [
+   "Dharanawa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214298": [
+   "Pakari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214238": [
+   "Amawar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214281": [
+   "Muri Semar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214296": [
+   "Kalingar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214310": [
+   "Korachi",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214289": [
+   "Dhuma",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214297": [
+   "Bom",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214285": [
+   "Kolin Diba",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214277": [
+   "Polawa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214253": [
+   "Teraha",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214308": [
+   "Bhisur",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214303": [
+   "Harpura",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214294": [
+   "Dewarhi",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214239": [
+   "Sugawamad",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214300": [
+   "Dhorpa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214272": [
+   "Joru Khar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214237": [
+   "Nagawa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214284": [
+   "Ghiwahi",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214302": [
+   "Goitha",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214274": [
+   "Mahuli",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214309": [
+   "Sundari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214267": [
+   "Chak Fulwar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214212": [
+   "Baheradol",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214210": [
+   "Garadarawa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214045": [
+   "Harra",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214259": [
+   "Bodhadih",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214028": [
+   "Parshoi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214120": [
+   "Asanhar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214258": [
+   "Karahiya",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214261": [
+   "Basin",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214123": [
+   "Belhatthi",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214211": [
+   "Chak Garadarawa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214254": [
+   "Auradandi",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214047": [
+   "Naudiha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214257": [
+   "Gulariya",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "249550": [
+   "Obra",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214090": [
+   "Kuldomari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214207": [
+   "Navgai",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214213": [
+   "Khokha",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214044": [
+   "Padarach",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214046": [
+   "Negae",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214030": [
+   "Panari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "249549": [
+   "Chopan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213996": [
+   "Sashnai",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213198": [
+   "Sahuar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "214118": [
+   "Pati",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214208": [
+   "Sau Dih",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214214": [
+   "Pagdewa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "213294": [
+   "Chatarwar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213631": [
+   "Baghanar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213621": [
+   "Chihurali",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213615": [
+   "Mahuar Kalna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213286": [
+   "Kurachha",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "214013": [
+   "Guradah",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213177": [
+   "Marachhi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213625": [
+   "Bandhwa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213154": [
+   "Mahuna Gosani",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213534": [
+   "Bhandar Khurd",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213404": [
+   "Majhi Ganwa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213604": [
+   "Rajpur",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214035": [
+   "Shendhuriya",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213224": [
+   "Karaundia",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214020": [
+   "Khewatha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214032": [
+   "Ghatita",
+   1005,
+   7,
+   "Loam"
+  ],
+  "213164": [
+   "Tendui",
+   1004,
+   7,
+   "Loam"
+  ],
+  "213562": [
+   "Baraila",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213159": [
+   "Khajaraul",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213227": [
+   "Bhairawa",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214029": [
+   "Gosari",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213153": [
+   "Kunda",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214021": [
+   "Tapoo",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213637": [
+   "Rajdhan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213633": [
+   "Mhowon Kalna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214019": [
+   "Chandauli",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213287": [
+   "Ghoriya",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213639": [
+   "Patharaha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214038": [
+   "Adalganj",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213155": [
+   "Kusinisph",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213627": [
+   "Kurhul",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213565": [
+   "Nipraj",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213563": [
+   "Jamgane",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214014": [
+   "Kargara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213232": [
+   "Bandha",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213222": [
+   "Dhanawal",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213634": [
+   "Baluee",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213644": [
+   "Salkhan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213212": [
+   "Shikari",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213283": [
+   "Kadara",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213331": [
+   "Bharganw",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213211": [
+   "Jamaganwa",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213213": [
+   "Bherawal",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213202": [
+   "Shathi",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213618": [
+   "Patehra",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213606": [
+   "Barak",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213229": [
+   "Garama",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213333": [
+   "Raiwari",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213337": [
+   "Bhunari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213205": [
+   "Bhabhuwar",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213611": [
+   "Muther",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213332": [
+   "Bajotara",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214011": [
+   "Barganwa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213165": [
+   "Obaradih",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213292": [
+   "Bhargon",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213564": [
+   "Kaithi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213605": [
+   "Raipura",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213175": [
+   "Kohargarh",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213282": [
+   "Rijool",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213624": [
+   "Maitapur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213609": [
+   "Bashuari",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214022": [
+   "Gaeghat",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213288": [
+   "Shemiya",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213537": [
+   "Tilauli",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213636": [
+   "Mhowoh Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213622": [
+   "Karki",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213640": [
+   "Kewata",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213620": [
+   "Baghari",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213567": [
+   "Beohari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213638": [
+   "Paika",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213160": [
+   "Garwa",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213617": [
+   "Papi",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213614": [
+   "Gordiha",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213608": [
+   "Shenduri",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213206": [
+   "Juriya",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213228": [
+   "Divar",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213203": [
+   "Dugaulia",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213178": [
+   "Bichhwar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213151": [
+   "Chorat",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213163": [
+   "Kewata",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "214012": [
+   "Aluar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213336": [
+   "Amahti",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213524": [
+   "Kamarhi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213226": [
+   "Panti",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213334": [
+   "Beechhiya",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213162": [
+   "Atarauli Kalan",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "214023": [
+   "Kharara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214016": [
+   "Jogaeal",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213201": [
+   "Eran",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213234": [
+   "Gurwal",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213607": [
+   "Marhra",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213610": [
+   "Bahuar",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213635": [
+   "Kamharia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213284": [
+   "Patehra",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "999999": [
+   "Forest Area",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214389": [
+   "Khadpathar OG",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214387": [
+   "Murdhawa OG",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214036": [
+   "Bhgawa",
+   1005,
+   7,
+   "Loam"
+  ],
+  "213653": [
+   "Kharharee",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213208": [
+   "Baraganwa",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213223": [
+   "Belwania",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214088": [
+   "Villimar Kundi CT",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213619": [
+   "Amauli",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213626": [
+   "Redia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214037": [
+   "Chopan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213628": [
+   "Baghnaree",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213156": [
+   "Mhunyw Pandy",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213207": [
+   "Judauri Pardhan",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213530": [
+   "Bhandra Kalan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214033": [
+   "Mahrpur",
+   1005,
+   7,
+   "Loam"
+  ],
+  "213535": [
+   "Shemara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213225": [
+   "Rampur",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213629": [
+   "Belaha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213293": [
+   "Jamuai",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213330": [
+   "Raghunathpur",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213204": [
+   "Baldih",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213166": [
+   "Selahata",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214018": [
+   "Agori Khas",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213566": [
+   "Kamojee",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213179": [
+   "Renua",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213529": [
+   "Shindhora",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213210": [
+   "Gobariya",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213645": [
+   "Belach",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213623": [
+   "Bhbhaech",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213230": [
+   "Khirahata",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213536": [
+   "Lori",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213233": [
+   "Barauli",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214043": [
+   "Kota",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213643": [
+   "Awayee",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214042": [
+   "Kandhaura",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214041": [
+   "Pakari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213867": [
+   "Karaundiya",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213993": [
+   "Kodai",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213982": [
+   "Laua",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213990": [
+   "Baghama",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213987": [
+   "Maunukalna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213989": [
+   "Cherue",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213981": [
+   "Pokhraund",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213752": [
+   "Babhangawa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213997": [
+   "Jhariya",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213994": [
+   "Magardaha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213988": [
+   "Muraila",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214040": [
+   "Kanach",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213998": [
+   "Barhmauri",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213992": [
+   "Palhari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214039": [
+   "Patwdh",
+   1005,
+   7,
+   "Loam"
+  ],
+  "213999": [
+   "Chakariya",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213646": [
+   "Rudawali",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213808": [
+   "Shonari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213991": [
+   "Markuri",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213995": [
+   "Garwan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213513": [
+   "Amauli",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213836": [
+   "Nishogi",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213984": [
+   "Bahera",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214000": [
+   "Kumharwar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213500": [
+   "Shemar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213778": [
+   "Majhi Gaon",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213715": [
+   "Belwai",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213492": [
+   "Orgai",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213738": [
+   "Vishmbhar Pur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213497": [
+   "Parsidhi",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213652": [
+   "Dhobahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213475": [
+   "Shuhali",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213788": [
+   "Bhaluahi Pandey",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213710": [
+   "Sandi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213713": [
+   "Sanda",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213650": [
+   "Teyara Nayak",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213531": [
+   "Ormaura",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213511": [
+   "Majhigaon Mishra",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213712": [
+   "Nipania",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213823": [
+   "Shivapur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213488": [
+   "Mahewa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213481": [
+   "Markari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213519": [
+   "Meuri Kalan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213514": [
+   "Lashra",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213673": [
+   "Chapaka",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213520": [
+   "Pushuli",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213515": [
+   "Pali",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213824": [
+   "Majhidar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213657": [
+   "Kusamha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213495": [
+   "Belkhuri",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213810": [
+   "Chatra",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213756": [
+   "Vikrampur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213663": [
+   "Musahee",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213793": [
+   "Karawndia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213835": [
+   "Khairahi Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213493": [
+   "Kotash",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "249547": [
+   "Robertsganj",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213775": [
+   "Pachokhar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213825": [
+   "Partappur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213659": [
+   "Bijary Patkhan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213865": [
+   "Patana",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213757": [
+   "Bihata",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213739": [
+   "Gurouty Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213979": [
+   "Viran Chuna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213494": [
+   "Chhaura",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213780": [
+   "Kasary",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213491": [
+   "Purana",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213496": [
+   "Koran",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213796": [
+   "Dugaulia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213837": [
+   "Pararikhurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213720": [
+   "Thuniakalan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213779": [
+   "Ramgarh",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213814": [
+   "Purnahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213677": [
+   "Arauly",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213721": [
+   "Khoril",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213666": [
+   "Sidhi Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213839": [
+   "Chaidania",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213820": [
+   "Jalkhori Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213461": [
+   "Parshauti",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213782": [
+   "Paraupur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213656": [
+   "Atarauli Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213771": [
+   "Purana Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213847": [
+   "Shonarikalna",
+   1005,
+   7,
+   "Loam"
+  ],
+  "213821": [
+   "Patharaha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213755": [
+   "Gurautykalan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213833": [
+   "Virval",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213983": [
+   "Nandna",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213819": [
+   "Jalkhorikalna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213838": [
+   "Baburi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213822": [
+   "Uchi Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213512": [
+   "Shirpalpur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213462": [
+   "Kabari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213709": [
+   "Parasdiha",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213516": [
+   "Beejauli",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213742": [
+   "Magarhtha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213675": [
+   "Parsonakalna",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213740": [
+   "Ahar Aura",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213486": [
+   "Kuratha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213655": [
+   "Lakhanwar Kalna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213818": [
+   "Shubha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213777": [
+   "Pannuganj Urf Shahganj",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213647": [
+   "Shahijan Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213483": [
+   "Karmohara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213707": [
+   "Telathi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213792": [
+   "Lilari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213719": [
+   "Babhani",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213786": [
+   "Chaturbhujpur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213832": [
+   "Tekar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213769": [
+   "Sonwat",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213815": [
+   "Rashwal",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213706": [
+   "Shahpur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213507": [
+   "Ghuashkurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213717": [
+   "Mhowly",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213651": [
+   "Akachor",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213753": [
+   "Sendhuari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213664": [
+   "Harhuna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213487": [
+   "Mishraulia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213789": [
+   "Majhigawan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213813": [
+   "Virathi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213714": [
+   "Haran Khury",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213856": [
+   "Shivgar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213676": [
+   "Bhadohi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213785": [
+   "Chapail",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213711": [
+   "Pithoury",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213501": [
+   "Nae",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "249548": [
+   "Chukradhumra",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213854": [
+   "Larua",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213668": [
+   "Mangurahee",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213787": [
+   "Tiyara Kalan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213774": [
+   "Aheyee Purab Patti",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213649": [
+   "Peetha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213667": [
+   "Sidhi Kalna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213737": [
+   "Bakawer",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213807": [
+   "Kushmha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213527": [
+   "Gorari",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213795": [
+   "Kolhua",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213532": [
+   "Bichapai",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213816": [
+   "Ailkar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213479": [
+   "Pipara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213489": [
+   "Khaira",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213811": [
+   "Harnahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213708": [
+   "Bharsahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213480": [
+   "Shemara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213772": [
+   "Kichar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213499": [
+   "Belahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213478": [
+   "Taranwa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213794": [
+   "Raiagosane",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213671": [
+   "Silthary",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213484": [
+   "Bachhudha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213980": [
+   "Makarivari",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213660": [
+   "Bahuarah",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213670": [
+   "Jokahee",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213485": [
+   "Deori",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213853": [
+   "Shoraha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213521": [
+   "Amarati",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213661": [
+   "Kura",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213517": [
+   "Majhigaon Chaubey",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213654": [
+   "Lakhanwar Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213798": [
+   "Alahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213669": [
+   "Bharganwa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213522": [
+   "Barauli",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213776": [
+   "Telari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213642": [
+   "Markundi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213741": [
+   "Bishun Purwa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213809": [
+   "Shehunha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213768": [
+   "Koriyanw",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213518": [
+   "Shajaur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213851": [
+   "Dharmdashpur",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213817": [
+   "Unchikalna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213830": [
+   "Arajinarokhr",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213834": [
+   "Khairahikalna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213773": [
+   "Aheyee Pashchim Patti",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214072": [
+   "Lohabey",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213812": [
+   "Narkoria",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213464": [
+   "Khekhara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213855": [
+   "Pandarkalna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213783": [
+   "Belaury Puraib Patti",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213503": [
+   "Kaithi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213221": [
+   "Ahraura",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213718": [
+   "Manon",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213498": [
+   "Hardar",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213852": [
+   "Bhikampur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213770": [
+   "Shikaria Kalan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213648": [
+   "Shahijan Kalna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213658": [
+   "Bijary Duban",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213662": [
+   "Raunp",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213533": [
+   "Chhapaka",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213784": [
+   "Barayeel",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213032": [
+   "Munghri",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "214265": [
+   "Chak Dumara",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214078": [
+   "Kerava",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214077": [
+   "Mitihiniya",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214087": [
+   "Kuarava",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214269": [
+   "Sui Chattan",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "213596": [
+   "Bagathri Kalna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214062": [
+   "Ragaram",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214060": [
+   "Dena",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214085": [
+   "Kishunpurva",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214068": [
+   "Bahura",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214280": [
+   "Salaiya Dih",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214256": [
+   "Ghichorawa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214053": [
+   "Jharia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214081": [
+   "Karel",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214074": [
+   "Kona",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214279": [
+   "But Berahawa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214271": [
+   "Chakjoru Khar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214282": [
+   "Bairiya Khar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214069": [
+   "Khraundhi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214051": [
+   "Barvadih",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214270": [
+   "Mahuariya",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214070": [
+   "Bagia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214262": [
+   "Nawa Tola Vasin",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214086": [
+   "Piparkhand",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214049": [
+   "Ramagarh",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214066": [
+   "Khetkatva",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214084": [
+   "Kachanarava",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214064": [
+   "Kishuchak",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214083": [
+   "Doomar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214278": [
+   "Dharati Dolawa",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214054": [
+   "Mohiudinpur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214063": [
+   "Devatan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214073": [
+   "Rajkar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214283": [
+   "Harana Kachhar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214071": [
+   "Saemar Khand",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214268": [
+   "Fulawar",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214079": [
+   "Gidhiya",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214067": [
+   "Barawa Khand",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214080": [
+   "Keravadih",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213963": [
+   "Kudhara",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214082": [
+   "Bageshoti",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214061": [
+   "Misari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214075": [
+   "Ghaghiya",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214052": [
+   "Khempur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214263": [
+   "Chakjorkahu",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214059": [
+   "Nakatvar",
+   1005,
+   7,
+   "Loam"
+  ],
+  "213935": [
+   "Gonga",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213888": [
+   "Chakya",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213943": [
+   "Nagwna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214007": [
+   "Sharsha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214002": [
+   "Gurar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213751": [
+   "Parsia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213944": [
+   "Pathrkunwa",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214009": [
+   "Arugur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213954": [
+   "Lorha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213886": [
+   "Deorimai Deora",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213952": [
+   "Naudiha",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214004": [
+   "Pindari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213975": [
+   "Shathari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213976": [
+   "Panaura",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213968": [
+   "Duari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213971": [
+   "Deenari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213969": [
+   "Dhoshra",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214055": [
+   "Chanchikhurd",
+   1005,
+   7,
+   "Loam"
+  ],
+  "213803": [
+   "Chadapura",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213974": [
+   "Palhari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214001": [
+   "Garawa",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213890": [
+   "Vichiya Gausa",
+   1005,
+   7,
+   "Loam"
+  ],
+  "213893": [
+   "Shilhat",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213970": [
+   "Palpal",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213861": [
+   "Shirshi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213750": [
+   "Tiyara Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213889": [
+   "Pipari",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213173": [
+   "Pipari No 2",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213964": [
+   "Kathauta",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214006": [
+   "Bhitari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213933": [
+   "Baradand",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213864": [
+   "Shiltham",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213862": [
+   "Kirhulia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213955": [
+   "Shodag",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213951": [
+   "Deohar",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213866": [
+   "Darama",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213967": [
+   "Gagawa",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213859": [
+   "Nevari",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213978": [
+   "Ramapur",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213797": [
+   "Durgeshar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214057": [
+   "Ashnabandh",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213940": [
+   "Banki",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213939": [
+   "Dhobi",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213802": [
+   "Shaida",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213765": [
+   "Chakrety",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213806": [
+   "Bhusaulia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213966": [
+   "Keotam",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213957": [
+   "Goraha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213956": [
+   "Chhaura",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213941": [
+   "Shiyria",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213759": [
+   "Keshawpur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213764": [
+   "Reti Kalan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213962": [
+   "Chichlik",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213804": [
+   "Barbaspur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213799": [
+   "Karad",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214058": [
+   "Majhigawan",
+   1005,
+   7,
+   "Loam"
+  ],
+  "213767": [
+   "Amahata",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213763": [
+   "Reti Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213857": [
+   "Girma",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214005": [
+   "Ranidih",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213961": [
+   "Khoraila",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213758": [
+   "Puranakalan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213892": [
+   "Panikap Kalana",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213863": [
+   "Charka",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213953": [
+   "Mashue",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213965": [
+   "Karamtar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213762": [
+   "Thunia Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214003": [
+   "Mahuna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213860": [
+   "Kaudiyar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213801": [
+   "Guleedar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213116": [
+   "Maid",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213973": [
+   "Kashi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213766": [
+   "Bhatpurawan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213942": [
+   "Manchi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213949": [
+   "Dareva",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213800": [
+   "Bamanaul",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213749": [
+   "Hardy",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214010": [
+   "Bashuhari",
+   1005,
+   7,
+   "Loam"
+  ],
+  "213945": [
+   "Kuhkuh",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213761": [
+   "Chitbishram",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213748": [
+   "Ketar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213972": [
+   "Baijanath",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213947": [
+   "Kodai",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213977": [
+   "Shoma",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214056": [
+   "Chanchi Kalna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213858": [
+   "Dumariya",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214008": [
+   "Chananee",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213948": [
+   "Varvari",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213946": [
+   "Makari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213891": [
+   "Reati Pandey",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213077": [
+   "Sahpurwa Kalan",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213958": [
+   "Chargara",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213960": [
+   "Vairaila",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213950": [
+   "Madapa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213959": [
+   "Mahuli",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213051": [
+   "Phulawari",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213123": [
+   "Odar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213142": [
+   "Belkuri Murpharkat",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213138": [
+   "Uchakadayi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213046": [
+   "Karrivarai",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213183": [
+   "Khodaichak",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213149": [
+   "Aurahi",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213089": [
+   "Karma",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213025": [
+   "Kamhria",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213074": [
+   "Etwa",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213125": [
+   "Bakuli",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213115": [
+   "Welkhuri",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213132": [
+   "Parari Kurd",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213082": [
+   "Dudhia",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213053": [
+   "Chakahi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213035": [
+   "Dharmauli",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213042": [
+   "Bnardewa",
+   1004,
+   7,
+   "Loam"
+  ],
+  "213127": [
+   "Sotil",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213047": [
+   "Dhoa",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213139": [
+   "Bhruha",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213128": [
+   "Jaimohra",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213186": [
+   "Hinauti",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213136": [
+   "Noni",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213080": [
+   "Bhulahi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213188": [
+   "Dohari",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213073": [
+   "Sirvit",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213036": [
+   "Kanhi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213048": [
+   "Aruna",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213023": [
+   "Ataraila",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213075": [
+   "Salaia",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213169": [
+   "Athauna",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213143": [
+   "Masiha Pathan",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213117": [
+   "Jamaghne",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213131": [
+   "Padri Kalan",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213147": [
+   "Teti",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213146": [
+   "Bisun Pur",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213121": [
+   "Dhuria",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213152": [
+   "Panauli",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213096": [
+   "Asatali",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213118": [
+   "Juri",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213097": [
+   "Chotakapur",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213219": [
+   "Durkhuli",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213026": [
+   "Tilauli Khurd",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213081": [
+   "Pandepokhar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213185": [
+   "Koharaul",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213098": [
+   "Kapura",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213137": [
+   "Rudauli",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213033": [
+   "Khadaha",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213079": [
+   "Geduri",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213022": [
+   "Tilauli Kalana",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213167": [
+   "Jinhora",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213055": [
+   "Tiyarashivdatt",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213148": [
+   "Bhgawas",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213024": [
+   "Velahi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213021": [
+   "Pidaria",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213043": [
+   "Khuthnia",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213135": [
+   "Chakauli",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213050": [
+   "Bahorika",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213054": [
+   "Mukasim",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213124": [
+   "Pateri",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213150": [
+   "Naidiha",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213044": [
+   "Purkhas",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213145": [
+   "Gotauli",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213027": [
+   "Parhi",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213028": [
+   "Samara",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213120": [
+   "Kharera",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213141": [
+   "Sawat",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213066": [
+   "Kathapura",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213126": [
+   "Barsot",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213114": [
+   "Chakari",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213187": [
+   "Belaw",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213172": [
+   "Kushra",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213095": [
+   "Jamagane",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213068": [
+   "Saranga",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213078": [
+   "Sahpurwa Khurd",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213168": [
+   "Sadari",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213119": [
+   "Chausara",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213134": [
+   "Lohdhara",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213076": [
+   "Jorwria",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213122": [
+   "Kusmaha",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213218": [
+   "Lohari",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213052": [
+   "Semari Misra",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213045": [
+   "Vimauri",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213182": [
+   "Orhatha",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213130": [
+   "Morahi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213140": [
+   "Naudiha",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213067": [
+   "Kamhria",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213184": [
+   "Atarwa",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213049": [
+   "Khudia",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213034": [
+   "Kharuaun",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213220": [
+   "Rajin",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213144": [
+   "Masiadinath",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213133": [
+   "Mureladih",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213170": [
+   "Sidhi",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213587": [
+   "Jeewar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213389": [
+   "Birhulia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213323": [
+   "Kairwa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213056": [
+   "Ranitara",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213366": [
+   "Kekarahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213552": [
+   "Guruparasi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213363": [
+   "Dularu",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213324": [
+   "Pipara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213106": [
+   "Kasari",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213568": [
+   "Arangi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213329": [
+   "Bhatulia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213362": [
+   "Papi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213112": [
+   "Masoe",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213386": [
+   "Mahulia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213355": [
+   "Asana",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213338": [
+   "Jawahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213546": [
+   "Alahi Durawan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213387": [
+   "Kathpurwa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213326": [
+   "Padar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213393": [
+   "Nauganwa Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213111": [
+   "Bhurkura",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213584": [
+   "Sihirshahi Parashe Dubey",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213196": [
+   "Barnwa",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213099": [
+   "Khaira",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213369": [
+   "Kucha Marwa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213394": [
+   "Pursotampur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213199": [
+   "Amahar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213365": [
+   "Murala Dih",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213364": [
+   "Basawa Nisph",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213103": [
+   "Barsota",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213109": [
+   "Lasari Khurd",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213572": [
+   "Kurashat",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213592": [
+   "Tiarashiv Datt",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213571": [
+   "Eanam",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213195": [
+   "Tiwar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213057": [
+   "Birmaua",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213579": [
+   "Katawaria",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213353": [
+   "Khairawa No 2",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213190": [
+   "Khajurikhurd",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213574": [
+   "Naraina",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213367": [
+   "Kharahri",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213542": [
+   "Pawar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213395": [
+   "Organai",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213059": [
+   "Barimahewa",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213556": [
+   "Manpur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213391": [
+   "Parsona",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213581": [
+   "Oani Chaubey",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213344": [
+   "Khairahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213582": [
+   "Oanimishra",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213580": [
+   "Petrahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213361": [
+   "Jokahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213347": [
+   "Tulsipur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213600": [
+   "Shajua",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213594": [
+   "Durawal Kalna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213113": [
+   "Lasari Kalan",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213578": [
+   "Kanhara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213370": [
+   "Kushahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213390": [
+   "Kamaharia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213092": [
+   "Majhiganwa",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213360": [
+   "Kasya Kalan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213569": [
+   "Mishra",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213093": [
+   "Sauli",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213110": [
+   "Dabha",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213577": [
+   "Deora",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213392": [
+   "Madar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213590": [
+   "Rajapurawa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213388": [
+   "Gouri Nisph",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213100": [
+   "Khairi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213191": [
+   "Belatand",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213181": [
+   "Onauli",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213101": [
+   "Thauli",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213105": [
+   "Enam",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213343": [
+   "Atarawa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213104": [
+   "Balua",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213586": [
+   "Shirshai",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213602": [
+   "Shonwat",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213597": [
+   "Barahda",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213561": [
+   "Jait",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213570": [
+   "Petrahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213174": [
+   "Sohdaul",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213583": [
+   "Orauli",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213593": [
+   "Shono",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213348": [
+   "Pateri",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213433": [
+   "Burhr Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213434": [
+   "Theru",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213575": [
+   "Gajana",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213544": [
+   "Deori Kalan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213072": [
+   "Pagia",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213194": [
+   "Thuter",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213371": [
+   "Dehari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213325": [
+   "Kushhi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213599": [
+   "Bagauari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213396": [
+   "Baghi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213090": [
+   "Kingari",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213548": [
+   "Majhiganwa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213543": [
+   "Kushai",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213327": [
+   "Sirsia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213589": [
+   "Dahari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213193": [
+   "Usarikalan",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213384": [
+   "Darah",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213197": [
+   "Shahganj",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213372": [
+   "Chakara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213550": [
+   "Unchidih",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213573": [
+   "Umarikalna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213545": [
+   "Deori Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213359": [
+   "Kasya Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213192": [
+   "Ushrikhurd",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213058": [
+   "Uachka",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213694": [
+   "Tiyara Kurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213547": [
+   "Siyriya",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213107": [
+   "Hhrihar Pur",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213540": [
+   "Nauganwa Kalan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213357": [
+   "Bhagauti",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213601": [
+   "Shonauti",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213322": [
+   "Garhwa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213350": [
+   "Rajkhar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213603": [
+   "Mahuali",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213538": [
+   "Karhi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213345": [
+   "Aelahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213352": [
+   "Gheuri",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213682": [
+   "Shikaria Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213554": [
+   "Bauar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213549": [
+   "Khchar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213539": [
+   "Dehra",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213349": [
+   "Patehara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213375": [
+   "Tilya",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213553": [
+   "Parashipandy",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213094": [
+   "Pipri No 1",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213091": [
+   "Chhuta",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213351": [
+   "Khairawa Raja",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213551": [
+   "Aghwar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213368": [
+   "Shirkhora",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213358": [
+   "Bashdewa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213339": [
+   "Bharuha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213108": [
+   "Durawal Khurd",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213541": [
+   "Kalwari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213385": [
+   "Sheokari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213588": [
+   "Bhagwantpur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213555": [
+   "Khairahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213595": [
+   "Bagathari Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213591": [
+   "Chaktiara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213432": [
+   "Kewati",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213086": [
+   "Karanwah",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213346": [
+   "Patela",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213576": [
+   "Jamashokar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213356": [
+   "Machhalawa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213585": [
+   "Mahuresher",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213209": [
+   "Manhawan",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213102": [
+   "Kunan",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213354": [
+   "Karaki",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213189": [
+   "Khajurikala",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213328": [
+   "Bakahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213305": [
+   "Kutulupur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213064": [
+   "Kolariya",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213065": [
+   "Silahta",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213070": [
+   "Tedhwa",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213087": [
+   "Khairwa",
+   1004,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213309": [
+   "Parahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213071": [
+   "Dharura",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213342": [
+   "Baburahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213341": [
+   "Bhadohi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213304": [
+   "Gorahi",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213321": [
+   "Atarauli Raja",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213069": [
+   "Sirsiajethi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213063": [
+   "Sitabahar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213307": [
+   "Majhui",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213038": [
+   "Visahar",
+   1004,
+   7,
+   "Loam"
+  ],
+  "213400": [
+   "Urali",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213039": [
+   "Jogani",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213299": [
+   "Lohra",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213319": [
+   "Sarauli",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213317": [
+   "Bahera",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213306": [
+   "Mubarakpur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213088": [
+   "Bharkwah",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213314": [
+   "Dilahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213060": [
+   "Sahdeapaidar",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213308": [
+   "Bhawanipur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213320": [
+   "Garaegarh",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213315": [
+   "Jurawat",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213083": [
+   "Tekuria",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213084": [
+   "Madainia",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213318": [
+   "Jaderua",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213061": [
+   "Mahuriya",
+   1004,
+   7,
+   "Loam"
+  ],
+  "213303": [
+   "Baghor",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213062": [
+   "Karkoll",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213340": [
+   "Shirsia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213316": [
+   "Sirsiathkurai",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213085": [
+   "Tandi",
+   1004,
+   4,
+   "Clay Loam"
+  ],
+  "213302": [
+   "Bantara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213505": [
+   "Bagadiha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213692": [
+   "Dhotari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213506": [
+   "Pakari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213691": [
+   "Jaimohara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213688": [
+   "Kura Kalan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213459": [
+   "Bharkana",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213442": [
+   "Garawa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213687": [
+   "Bagaura",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213732": [
+   "Nakon",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213698": [
+   "Bagahi",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213470": [
+   "Gordiha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213689": [
+   "Shivpur",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213452": [
+   "Phutharwa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213463": [
+   "Hewati",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213425": [
+   "Kaithi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213377": [
+   "Khekhara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213447": [
+   "Bahera",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213465": [
+   "Deora",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213736": [
+   "Naranga",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213437": [
+   "Beechhi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213383": [
+   "Jori",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213477": [
+   "Upadhi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213701": [
+   "Gojania",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213422": [
+   "Shango",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213411": [
+   "Barwan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213445": [
+   "Palikalna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213457": [
+   "Sodhiya",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213376": [
+   "Tinatali",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213424": [
+   "Kushi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213418": [
+   "Mahuari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213699": [
+   "Dhuria",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213723": [
+   "Khatkhary",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213435": [
+   "Babura",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213686": [
+   "Piparahia",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213453": [
+   "Chingurpur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213683": [
+   "Nagaon",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213705": [
+   "Sarayee",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213725": [
+   "Bhagwantpur",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213431": [
+   "Alahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213398": [
+   "Khewatha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213681": [
+   "Kura Khurd",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213473": [
+   "Pipari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213409": [
+   "Hona",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213401": [
+   "Bhogar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213412": [
+   "Deogarh",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213697": [
+   "Sidha",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213429": [
+   "Parsona",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213476": [
+   "Karari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213397": [
+   "Pashi Kalana",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213451": [
+   "Bargawn",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213380": [
+   "Chandauli",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213466": [
+   "Manur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213379": [
+   "Mahokhar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213704": [
+   "Khujha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213407": [
+   "Hinduhari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213690": [
+   "Ghival",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213454": [
+   "Banaura",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213558": [
+   "Ganguar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213472": [
+   "Darari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213430": [
+   "Jigana",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213448": [
+   "Khrehari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213680": [
+   "Telung",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213440": [
+   "Bhruiya",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213724": [
+   "Naudiha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213427": [
+   "Rampur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213423": [
+   "Shemari Bishunlal",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213525": [
+   "Barkara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213410": [
+   "Hinauti",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213703": [
+   "Chintamanpur",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213504": [
+   "Tirnahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213415": [
+   "Jamaganwa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213509": [
+   "Bithgawn Nishph",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213560": [
+   "Babanauli",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213735": [
+   "Banauly",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213460": [
+   "Shahdeya",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213438": [
+   "Nai Basti",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213420": [
+   "Amokhr",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213559": [
+   "Tipara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213408": [
+   "Dibidiba",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213467": [
+   "Mairaraja",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213405": [
+   "Deora Raja",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213402": [
+   "Babhanauli Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213414": [
+   "Jamuanua",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213684": [
+   "Piraria",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213679": [
+   "Lauari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213381": [
+   "Tendu",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213374": [
+   "Hinauta",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213695": [
+   "Tiyara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213468": [
+   "Koili",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213426": [
+   "Domariya",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213510": [
+   "Bithgon Nishoh",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213378": [
+   "Bahura",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213733": [
+   "Mhowary",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213421": [
+   "Mango",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213450": [
+   "Bishbhrpur",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213416": [
+   "Dhuriya",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213413": [
+   "Mahuaon",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213744": [
+   "Sauli",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213685": [
+   "Ratahara",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213441": [
+   "Goithari",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213678": [
+   "Banjaria",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213557": [
+   "Mamuna",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213471": [
+   "Lakhan Purwa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213449": [
+   "Baheri",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213722": [
+   "Baghila Rampur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213403": [
+   "Babhanauli Kalan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213508": [
+   "Ghuaskalan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213455": [
+   "Panchperia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213731": [
+   "Narotam Pur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213436": [
+   "Burar Kalan",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213734": [
+   "Zendi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213382": [
+   "Mangurahi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213406": [
+   "Durha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213419": [
+   "Tendee",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213469": [
+   "Purainiya",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213700": [
+   "Sathwal",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213458": [
+   "Bhitiya",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213428": [
+   "Pateara",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213399": [
+   "Pashi Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213446": [
+   "Mokarshim",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213702": [
+   "Madhakpur",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213439": [
+   "Ratawal",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213417": [
+   "Kamahar Dih",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213456": [
+   "Bhagwanpur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213444": [
+   "Belwa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213743": [
+   "Sahanpura",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213443": [
+   "Palia Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213296": [
+   "Khane Azampur",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213300": [
+   "Bat",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213311": [
+   "Amdih",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213373": [
+   "Amaulia",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213297": [
+   "Dhotwa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213298": [
+   "Takia Mu Dargah",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213310": [
+   "Khamriha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213301": [
+   "Baghauri",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213313": [
+   "Nagnar Haraia",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213312": [
+   "Madhupur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213295": [
+   "Sukrit",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213868": [
+   "Dhankurri",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213938": [
+   "Shurshot Khurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213881": [
+   "Dubypur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213922": [
+   "Darama",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213905": [
+   "Majhue",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213877": [
+   "Chaukhara",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213932": [
+   "Tenduahi",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213925": [
+   "Venua",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213923": [
+   "Karhi",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213873": [
+   "Bashara",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213874": [
+   "Paunikalana",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213911": [
+   "Naruj",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213908": [
+   "Nipaniya",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213904": [
+   "Vanbahur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213872": [
+   "Shohdal",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213875": [
+   "Paunikhurd",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213907": [
+   "Rathra",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213885": [
+   "Denwa",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213917": [
+   "Raipur",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213909": [
+   "Dulhapur",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213899": [
+   "Nadana",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213926": [
+   "Panikup",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213727": [
+   "Beltha",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213887": [
+   "Kewal",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213901": [
+   "Shikawar",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213902": [
+   "Jhadpi Jhadpa",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213928": [
+   "Bhairampur",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213931": [
+   "Baliyari",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213930": [
+   "Burhivar",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213898": [
+   "Kurawal",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213730": [
+   "Saina",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213920": [
+   "Varawadih",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213937": [
+   "Shurshot Kalna",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213916": [
+   "Shinkhora",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213747": [
+   "Charkonwa",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213924": [
+   "Khaliari",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213884": [
+   "Jharana",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213906": [
+   "Parshiya",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213894": [
+   "Shndshota",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213918": [
+   "Ratua",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213728": [
+   "Pakarahat",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213729": [
+   "Rankee",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213883": [
+   "Koharaul",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213910": [
+   "Nebi",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213897": [
+   "Shariai Gar",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213913": [
+   "Doria",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213915": [
+   "Kamhriya",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213914": [
+   "Karauli",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213869": [
+   "Nagpur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213879": [
+   "Shemaria",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213927": [
+   "Raiya",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213745": [
+   "Jaimohary",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213919": [
+   "Parari Jasauli",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213900": [
+   "Khatkhar",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213746": [
+   "Bajara",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213912": [
+   "Amadih",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213896": [
+   "Gotiband",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213929": [
+   "Amakon",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213870": [
+   "Kanhura",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213871": [
+   "Basahara",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213921": [
+   "Tendua",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213882": [
+   "Bhairopur",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213903": [
+   "Shikarpur",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213895": [
+   "Domaria",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213878": [
+   "Vijawar",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213726": [
+   "Geruuee",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "213876": [
+   "Patbadh",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213880": [
+   "Oani",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213674": [
+   "Muralee",
+   1005,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "214242": [
+   "Bairiya Khari",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "213641": [
+   "Atarwans",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "214388": [
+   "Jokahi OG",
+   1006,
+   4,
+   "Clay Loam"
+  ],
+  "214065": [
+   "Shivapur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213805": [
+   "Mairapandey",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213474": [
+   "Dharnipur",
+   1005,
+   4,
+   "Clay Loam"
+  ],
+  "213598": [
+   "Bagaura",
+   1005,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 1464,
+ "village_count_sampled": 1411
+}

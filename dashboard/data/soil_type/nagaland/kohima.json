@@ -1,0 +1,697 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Nagaland",
+  "district": "Kohima",
+  "district_lgd": 245,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "full"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 20097,
+   "Sandy Clay Loam": 40,
+   "Loam": 3502
+  },
+  "n_pixels": 23640
+ },
+ "villages": {
+  "999999": [
+   "Data Partially Available",
+   1846,
+   4,
+   "Clay Loam"
+  ],
+  "268260": [
+   "Kidima",
+   1847,
+   4,
+   "Clay Loam"
+  ],
+  "268259": [
+   "Kezocha Hq",
+   1847,
+   4,
+   "Clay Loam"
+  ],
+  "268270": [
+   "Khuzama",
+   1848,
+   4,
+   "Clay Loam"
+  ],
+  "268269": [
+   "Viswema",
+   1848,
+   4,
+   "Clay Loam"
+  ],
+  "268268": [
+   "Sweba Viswema",
+   1848,
+   7,
+   "Loam"
+  ],
+  "268267": [
+   "Jakhama Vill",
+   1848,
+   4,
+   "Clay Loam"
+  ],
+  "268289": [
+   "Dzuleke",
+   1850,
+   4,
+   "Clay Loam"
+  ],
+  "268288": [
+   "Khonoma Basa Ur",
+   1850,
+   7,
+   "Loam"
+  ],
+  "268287": [
+   "Khonoma",
+   1850,
+   4,
+   "Clay Loam"
+  ],
+  "268284": [
+   "Mezoma",
+   1850,
+   4,
+   "Clay Loam"
+  ],
+  "268281": [
+   "Mezo Basa",
+   1850,
+   4,
+   "Clay Loam"
+  ],
+  "268280": [
+   "Hydro Project Station",
+   1850,
+   7,
+   "Loam"
+  ],
+  "268283": [
+   "Sechuma",
+   1850,
+   4,
+   "Clay Loam"
+  ],
+  "268277": [
+   "Kiruphema Bawe",
+   1850,
+   4,
+   "Clay Loam"
+  ],
+  "268279": [
+   "Sechu Zubza",
+   1850,
+   4,
+   "Clay Loam"
+  ],
+  "268278": [
+   "Kiruphema Basa",
+   1850,
+   4,
+   "Clay Loam"
+  ],
+  "268275": [
+   "Peducha",
+   1850,
+   7,
+   "Loam"
+  ],
+  "268274": [
+   "Mengujuma",
+   1850,
+   4,
+   "Clay Loam"
+  ],
+  "268276": [
+   "Sirhi Angami",
+   1850,
+   4,
+   "Clay Loam"
+  ],
+  "268282": [
+   "Thekrejuma",
+   1850,
+   7,
+   "Loam"
+  ],
+  "268226": [
+   "Phekerkrie Bawe",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268223": [
+   "Viphoma",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268224": [
+   "Viphoma Basa Ur",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268219": [
+   "Tsosinyu",
+   1844,
+   4,
+   "Clay Loam"
+  ],
+  "268216": [
+   "Longwesunyu",
+   1844,
+   4,
+   "Clay Loam"
+  ],
+  "268218": [
+   "Rengmapani",
+   1844,
+   4,
+   "Clay Loam"
+  ],
+  "268238": [
+   "Meriema",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268239": [
+   "4Th Nap Batt Thiza",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268237": [
+   "Thizama",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268235": [
+   "Tsiese Basa",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268236": [
+   "Tsiese Bawe",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268234": [
+   "Phezha",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268233": [
+   "Nerhema",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268232": [
+   "Nerhe Model",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268240": [
+   "Rusoma",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268229": [
+   "Ciechama",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268231": [
+   "Chiephobozou",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268250": [
+   "Gareiphe Basa",
+   1846,
+   7,
+   "Loam"
+  ],
+  "268258": [
+   "Kezoma",
+   1847,
+   4,
+   "Clay Loam"
+  ],
+  "268257": [
+   "Kezo Basa",
+   1847,
+   4,
+   "Clay Loam"
+  ],
+  "268256": [
+   "Mitelephe",
+   1847,
+   4,
+   "Clay Loam"
+  ],
+  "268255": [
+   "Kezo Town Ur",
+   1847,
+   4,
+   "Clay Loam"
+  ],
+  "268254": [
+   "Sakhabama",
+   1847,
+   4,
+   "Clay Loam"
+  ],
+  "268253": [
+   "Dihoma",
+   1847,
+   4,
+   "Clay Loam"
+  ],
+  "268252": [
+   "Kijumetou Basa",
+   1847,
+   4,
+   "Clay Loam"
+  ],
+  "268251": [
+   "Kijumetouma",
+   1847,
+   4,
+   "Clay Loam"
+  ],
+  "268266": [
+   "Jakhama Hq Ur",
+   1848,
+   7,
+   "Loam"
+  ],
+  "268265": [
+   "Kigwe Town Ur",
+   1848,
+   4,
+   "Clay Loam"
+  ],
+  "268264": [
+   "Kigwema",
+   1848,
+   4,
+   "Clay Loam"
+  ],
+  "268262": [
+   "Phesama",
+   1848,
+   7,
+   "Loam"
+  ],
+  "268261": [
+   "Pfuchama",
+   1848,
+   4,
+   "Clay Loam"
+  ],
+  "268263": [
+   "Mima",
+   1848,
+   4,
+   "Clay Loam"
+  ],
+  "268272": [
+   "Chiedema",
+   1849,
+   4,
+   "Clay Loam"
+  ],
+  "268271": [
+   "Chiede Model Vill",
+   1849,
+   4,
+   "Clay Loam"
+  ],
+  "268285": [
+   "Jotsoma",
+   1850,
+   7,
+   "Loam"
+  ],
+  "268286": [
+   "Phezhu Jotsoma Ur",
+   1850,
+   4,
+   "Clay Loam"
+  ],
+  "249722": [
+   "Kohima",
+   1849,
+   4,
+   "Clay Loam"
+  ],
+  "268184": [
+   "Rumensinyu",
+   1843,
+   7,
+   "Loam"
+  ],
+  "268198": [
+   "Khenyu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268199": [
+   "Phenshunyu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268209": [
+   "Henbenji",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268207": [
+   "Terogunyu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268206": [
+   "Khonibenzun",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268213": [
+   "Phenda Ur",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268212": [
+   "Kashanyishi",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268215": [
+   "New Terogunyu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268210": [
+   "Kashanyu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268205": [
+   "Tseminyu Old Town",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268204": [
+   "Zunpha Mission Centre Ur",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268214": [
+   "Tseminyu South",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268203": [
+   "Zisunyu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268201": [
+   "Ngvuphen",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268200": [
+   "Tseminyu Vill",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "253209": [
+   "Tseminyu Town",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268202": [
+   "Gukhanyu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268195": [
+   "New Tesophenyu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268192": [
+   "Nsunyu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268190": [
+   "Chunlikha",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268185": [
+   "Tsonsa",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268188": [
+   "Kandinu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268187": [
+   "Sishunu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268186": [
+   "K Station",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268196": [
+   "Tesophenyu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268197": [
+   "Ziphenyu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268208": [
+   "Phenwhenyu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268221": [
+   "Sendenyu",
+   1844,
+   4,
+   "Clay Loam"
+  ],
+  "268220": [
+   "New Sendenyu",
+   1844,
+   4,
+   "Clay Loam"
+  ],
+  "268225": [
+   "Phekerkrie Basa",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268230": [
+   "Zhadima",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268227": [
+   "Ziezou",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268228": [
+   "Nachama",
+   1845,
+   4,
+   "Clay Loam"
+  ],
+  "268244": [
+   "Seiyha Phesa",
+   1846,
+   4,
+   "Clay Loam"
+  ],
+  "268243": [
+   "Seiyhama",
+   1846,
+   4,
+   "Clay Loam"
+  ],
+  "268248": [
+   "Teichuma",
+   1846,
+   4,
+   "Clay Loam"
+  ],
+  "268242": [
+   "Tsiemekhuma Bawe",
+   1846,
+   4,
+   "Clay Loam"
+  ],
+  "268241": [
+   "Tsiemekhuma Basa",
+   1846,
+   4,
+   "Clay Loam"
+  ],
+  "268245": [
+   "Botsa",
+   1846,
+   4,
+   "Clay Loam"
+  ],
+  "268246": [
+   "Tuophema",
+   1846,
+   4,
+   "Clay Loam"
+  ],
+  "268247": [
+   "Tuophe Phezou",
+   1846,
+   4,
+   "Clay Loam"
+  ],
+  "268249": [
+   "Gareiphema",
+   1846,
+   4,
+   "Clay Loam"
+  ],
+  "268194": [
+   "Yikhanu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268193": [
+   "Ehunnu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268273": [
+   "Kohima Village CT",
+   1849,
+   4,
+   "Clay Loam"
+  ],
+  "268211": [
+   "Guzinyu Ur",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268189": [
+   "Likhwenchu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268191": [
+   "Sewanu",
+   1843,
+   4,
+   "Clay Loam"
+  ],
+  "268222": [
+   "Thongsunyu",
+   1844,
+   4,
+   "Clay Loam"
+  ],
+  "268217": [
+   "Tsogin Hq",
+   1844,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 116,
+ "village_count_sampled": 116
+}

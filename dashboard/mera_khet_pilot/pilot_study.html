@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mera Khet -- Synthetic Proof-of-Concept Demo -- SIMULATED FIELDS</title>
+<style>
+  :root{
+    --ink:#101a24; --ink-2:#33465a; --dim:#64798e; --line:#dfe6ee;
+    --bg:#eef2f6; --card:#ffffff;
+    --brand:#0d5c63; --brand-2:#12868f; --brand-ink:#083c41;
+    --syn:#8a2f00; --syn-bg:#fff1e6; --syn-line:#e0873f;
+    --ok:#1a6b3c; --ok-bg:#e6f4ec;
+    --shadow:0 1px 2px rgba(16,26,36,.06),0 4px 14px rgba(16,26,36,.06);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:14px;line-height:1.45;}
+  h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.01em;}
+
+  #synBanner{position:sticky;top:0;z-index:10;background:var(--syn-bg);
+    border-bottom:2px solid var(--syn-line);color:var(--syn);
+    padding:7px 16px;font-size:12.5px;font-weight:800;text-align:center;
+    display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;}
+  #synBanner .pill{background:var(--syn);color:#fff;border-radius:20px;padding:2px 10px;font-size:11px;letter-spacing:.04em;}
+
+  header.page{padding:16px 22px 10px;max-width:1300px;margin:0 auto;}
+  header.page .back{font-size:12px;color:var(--brand-ink);text-decoration:none;font-weight:600;}
+  header.page h1{font-size:21px;color:var(--brand-ink);margin:6px 0 4px;}
+  header.page .sub{font-size:13px;color:var(--ink-2);max-width:900px;}
+  .rq{margin-top:9px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--brand-2);
+    border-radius:0 8px 8px 0;padding:9px 13px;font-size:12.5px;color:var(--ink-2);max-width:900px;box-shadow:var(--shadow);}
+  .rq b{color:var(--brand-ink);}
+
+  .wrap{max-width:1300px;margin:0 auto;padding:0 22px 26px;}
+
+  .district-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:9px;margin:14px 0;}
+  .district-strip .card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:9px 11px;box-shadow:var(--shadow);}
+  .district-strip .l{font-size:10.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.04em;font-weight:700;}
+  .district-strip .v{font-size:16px;font-weight:800;color:var(--brand-ink);margin-top:2px;}
+  .district-strip .src{font-size:10px;color:var(--dim);margin-top:2px;}
+
+  .fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:10px;}
+  .field-card{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden;}
+  .field-card .fh{background:var(--brand);color:#fff;padding:9px 13px;display:flex;justify-content:space-between;align-items:baseline;}
+  .field-card .fh .id{font-weight:800;font-size:13px;}
+  .field-card .fh .area{font-size:12px;opacity:.9;}
+  .field-card .sec{padding:9px 13px;border-top:1px dashed var(--line);}
+  .field-card .sec:first-of-type{border-top:none;}
+  .field-card .sec h4{font-size:11.5px;color:var(--brand-2);text-transform:uppercase;letter-spacing:.03em;margin-bottom:5px;}
+  .field-card .row{display:flex;justify-content:space-between;font-size:12.5px;padding:2px 0;}
+  .field-card .row .k{color:var(--dim);}
+  .field-card .row .v{font-weight:700;color:var(--ink);}
+  .field-card .note{font-size:10.5px;color:var(--dim);margin-top:4px;line-height:1.4;}
+  .tag-real{display:inline-block;background:var(--ok-bg);color:var(--ok);border-radius:10px;padding:1px 7px;font-size:9.5px;font-weight:800;letter-spacing:.03em;margin-left:5px;}
+  .loading, .err{padding:30px;text-align:center;color:var(--dim);}
+</style>
+</head>
+<body>
+
+<div id="synBanner">
+  <span class="pill">SYNTHETIC DEMO</span>
+  <span>Field boundaries and farmer labels below are FABRICATED, placed inside a real village, for proof-of-concept only. Every NDVI / cropland / wetness number is a LIVE satellite query -- same as the real Mera Khet feature.</span>
+</div>
+
+<header class="page">
+  <a class="back" href="../index.html">&larr; Back to VINDHYA Climate dashboard</a>
+  <h1>Mera Khet -- Synthetic Proof-of-Concept</h1>
+  <div class="sub">What a farmer would see after drawing their own field. The 12 field polygons here are synthetic (fabricated, placed inside the real Simrol village boundary) -- but every satellite number against them is a real, live Google Earth Engine query through the same Worker a real drawn field would hit.</div>
+  <div class="rq"><b>Why this exists:</b> nobody has drawn a real field yet, so there was nothing to demo. This page proves the Mera Khet pipeline actually works end-to-end on live satellite data -- it is not a substitute for a real farmer's own field.</div>
+</header>
+
+<div class="wrap">
+  <div id="districtStrip" class="district-strip"></div>
+  <div id="fieldsHost" class="fields"><div class="loading">Loading synthetic demo data&hellip;</div></div>
+</div>
+
+<script>
+function fmtNum(v, d) { return (v == null || isNaN(v)) ? '—' : Number(v).toFixed(d == null ? 2 : d); }
+
+function districtCard(label, value, src) {
+  return '<div class="card"><div class="l">' + label + '</div><div class="v">' + value + '</div>'
+    + (src ? '<div class="src">' + src + '</div>' : '') + '</div>';
+}
+
+function renderDistrictStrip(ctx) {
+  var host = document.getElementById('districtStrip');
+  var cards = [];
+  var c = ctx.climate_imd;
+  if (c) {
+    cards.push(districtCard('District heatwave days/yr', fmtNum(c.heat, 1), 'IMD, real -- Indore'));
+    cards.push(districtCard('District drought months', fmtNum(c.drought, 0), 'IMD, real -- Indore'));
+    cards.push(districtCard('District NDVI (baseline)', fmtNum(c.ndvi, 2), 'IMD/DiCRA, real -- Indore'));
+  }
+  var sm = ctx.soil_moisture_smap;
+  if (sm) cards.push(districtCard('District soil moisture', fmtNum(sm.sm_surface_mean, 3) + ' m3/m3', 'NASA SMAP L4, real, ~9 km'));
+  var st = ctx.soil_type_openlandmap;
+  if (st) {
+    cards.push(districtCard('District soil type', st.dominant_class || '—', 'OpenLandMap/ISRIC, real, 250 m'));
+  } else {
+    cards.push(districtCard('District soil type', 'computing…', 'OpenLandMap/ISRIC national run in progress'));
+  }
+  host.innerHTML = cards.join('');
+}
+
+function fieldCard(f) {
+  var z = f.zameen_ka_hisab, h = f.fasal_ki_sehat, w = f.khet_wetness;
+  var available = f.live_analysis_raw && f.live_analysis_raw.available;
+  return '<div class="field-card">'
+    + '<div class="fh"><span class="id">' + f.id + ' <span style="opacity:.8;font-weight:500;">(synthetic)</span></span>'
+    + '<span class="area">' + fmtNum(z.total_area_ha, 2) + ' ha</span></div>'
+
+    + '<div class="sec"><h4>Zameen ka hisab <span class="tag-real">AREA: REAL GEO + LIVE CROPLAND %</span></h4>'
+    + '<div class="row"><span class="k">Kul kshetra (polygon, real geometry)</span><span class="v">' + fmtNum(z.total_area_ha) + ' ha</span></div>'
+    + '<div class="row"><span class="k">Kheti wala hissa (live Dynamic World)</span><span class="v">' + fmtNum(z.cultivated_area_ha) + ' ha</span></div>'
+    + '<div class="row"><span class="k">Baaki (medh/road/banjar)</span><span class="v">' + fmtNum(z.non_crop_area_ha) + ' ha</span></div>'
+    + '</div>'
+
+    + '<div class="sec"><h4>Fasal ki sehat <span class="tag-real">LIVE SATELLITE</span></h4>'
+    + '<div class="row"><span class="k">NDVI abhi (Sentinel-2)</span><span class="v">' + fmtNum(h.ndvi_now, 3) + '</span></div>'
+    + '<div class="note">' + (h.note || '') + '</div>'
+    + '</div>'
+
+    + '<div class="sec"><h4>Khet ki wetness (relative) <span class="tag-real">LIVE SATELLITE</span></h4>'
+    + '<div class="row"><span class="k">Field vs district (Sentinel-1 VV)</span><span class="v">' + fmtNum(w.relative_pct_vs_district, 1) + '%</span></div>'
+    + '<div class="note">' + (w.caveat || '') + '</div>'
+    + '</div>'
+
+    + (available ? '' : '<div class="sec"><div class="note" style="color:var(--syn);font-weight:700;">Live satellite query was unavailable for this field at generation time -- numbers above reflect that honestly, nothing is substituted.</div></div>')
+    + '</div>';
+}
+
+fetch('../data/mera_khet_pilot/synthetic_fields.json')
+  .then(function (r) { return r.json(); })
+  .then(function (d) {
+    renderDistrictStrip(d.district_context || {});
+    var host = document.getElementById('fieldsHost');
+    if (!d.fields || !d.fields.length) {
+      host.innerHTML = '<div class="err">No fields in this demo file.</div>';
+      return;
+    }
+    host.innerHTML = d.fields.map(fieldCard).join('');
+  })
+  .catch(function (e) {
+    document.getElementById('fieldsHost').innerHTML = '<div class="err">Could not load the demo data file.</div>';
+    console.error(e);
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,872 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Manipur",
+  "district": "Imphal West",
+  "district_lgd": 256,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (138/142 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay": 0,
+   "Clay Loam": 7556,
+   "Sandy Clay Loam": 2,
+   "Loam": 43
+  },
+  "n_pixels": 7604
+ },
+ "villages": {
+  "270132": [
+   "Wakching Khullen",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270129": [
+   "Ningombam",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270042": [
+   "Mandop Yumpham",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270037": [
+   "Sekmai Part",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270150": [
+   "Laphupat Tera",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270148": [
+   "Phoubakchao",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270147": [
+   "Thongam",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270146": [
+   "Hangoon",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270145": [
+   "Hayel",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270144": [
+   "Uchiwa",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270151": [
+   "Samushang",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270142": [
+   "Bitra Urokhong",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270143": [
+   "Chongtham Kona",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "801489": [
+   "Mayang Imphal Np",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "801491": [
+   "Wangoi Np",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270098": [
+   "Meisnam Kangmong",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270103": [
+   "Khumbong",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270094": [
+   "Moidangpok Khullen",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270095": [
+   "Moidangpok Khunou",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270101": [
+   "Sajirok",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270100": [
+   "Heigrujam",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270099": [
+   "Awang Jiri",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270075": [
+   "Longa Koireng",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270074": [
+   "Ngairangbam",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270070": [
+   "Maklang",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270069": [
+   "Thangjing Khullen",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270096": [
+   "Maha Koireng",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270097": [
+   "Manamyang",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270076": [
+   "Kabui Anouba",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270085": [
+   "Khongakhul",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270086": [
+   "Polangsoi",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270087": [
+   "Kangdabi",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270088": [
+   "Atom Khuman",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270084": [
+   "Tairenpokpi",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270083": [
+   "Phayeng",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270082": [
+   "Sanjenbam",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270066": [
+   "Kharang Koireng",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270065": [
+   "Kangchup",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270063": [
+   "Lamlongei",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270062": [
+   "Kadangband",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270060": [
+   "Koutruk",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270139": [
+   "Leiphrakpam Leikai",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270127": [
+   "Malom Tuliyaima",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270125": [
+   "Sangaiprou Mamang",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270137": [
+   "Mongsangei",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270138": [
+   "Oinam Leikai",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270135": [
+   "Langthabal Lep",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270140": [
+   "Naral Konjil",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270152": [
+   "Langthabal Mantrikhong",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270134": [
+   "Hiyangthang",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270133": [
+   "Irom Meijrao",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270131": [
+   "Lairenjam",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270130": [
+   "Kodompokpi",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270128": [
+   "Meitram",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270126": [
+   "Malom Tulihal",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270136": [
+   "Langthabal Phuramakhong",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270118": [
+   "Heinoukhongnembi",
+   1881,
+   4,
+   "Clay Loam"
+  ],
+  "270119": [
+   "Maibam Leikai",
+   1881,
+   4,
+   "Clay Loam"
+  ],
+  "270120": [
+   "Ahongsangbam Leikai",
+   1881,
+   4,
+   "Clay Loam"
+  ],
+  "270121": [
+   "Sorokhaibam Leikai",
+   1881,
+   4,
+   "Clay Loam"
+  ],
+  "270107": [
+   "Yarou Bamdiar",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270113": [
+   "Changangei",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270114": [
+   "Ghari",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270115": [
+   "Sangaiprou Maning",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270111": [
+   "Langjing Achouba",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270112": [
+   "Taobungkhok",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270110": [
+   "Patsoi",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270109": [
+   "Yurembam",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270104": [
+   "Lanshonbi",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270105": [
+   "Konthoujam",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270106": [
+   "Top Khabi",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270102": [
+   "Khaidem",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270073": [
+   "Awangkhunou",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270072": [
+   "Salam Keikhu",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270092": [
+   "Tharoijam",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270091": [
+   "Kiyam",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270071": [
+   "Luker",
+   1879,
+   7,
+   "Loam"
+  ],
+  "270108": [
+   "Yarou Meitram",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270093": [
+   "Leingangpokpi",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "801487": [
+   "Imphal Mci Plus Og",
+   1881,
+   4,
+   "Clay Loam"
+  ],
+  "801488": [
+   "Samurou Np",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "270124": [
+   "Takyel Mapal CT",
+   1881,
+   4,
+   "Clay Loam"
+  ],
+  "270123": [
+   "Sagolband Part CT",
+   1881,
+   4,
+   "Clay Loam"
+  ],
+  "270122": [
+   "Naoriya Pakhanglakpa CT",
+   1881,
+   4,
+   "Clay Loam"
+  ],
+  "801469": [
+   "Nambol Mci",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270116": [
+   "Lamjaotongba CT",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "270117": [
+   "Langjing CT",
+   1880,
+   4,
+   "Clay Loam"
+  ],
+  "269936": [
+   "Langthabal Kunja OG",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "269937": [
+   "Naorem Leikai OG",
+   1882,
+   4,
+   "Clay Loam"
+  ],
+  "269935": [
+   "Oinam Thingel OG",
+   1881,
+   4,
+   "Clay Loam"
+  ],
+  "269934": [
+   "Bijoy Govinda OG",
+   1881,
+   4,
+   "Clay Loam"
+  ],
+  "270089": [
+   "Haorang Keirel",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270081": [
+   "Heibongpokpi",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270090": [
+   "Haorang Sabal",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270078": [
+   "Lamshang Part",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270079": [
+   "Akham",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270080": [
+   "Ngariyambam",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270059": [
+   "Kameng",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270057": [
+   "Khamral",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270056": [
+   "Mantri Leikai",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270055": [
+   "Loitang Sandum",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270053": [
+   "Khonghampat",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270054": [
+   "Loitang Khullen",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270052": [
+   "Pheidinga",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270051": [
+   "Loitang Laikinthabi",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270067": [
+   "Kha Leirenkabi",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270068": [
+   "Awang Leirenkabi",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270077": [
+   "Lambal",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270061": [
+   "Lairensajik",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270064": [
+   "Mayang Langjing",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270058": [
+   "Phumlou",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270050": [
+   "Loitang Khunou",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270049": [
+   "Senjam Khunou",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270045": [
+   "Potsangbam Khoiru",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270046": [
+   "Thouriphai",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270047": [
+   "Tendongyan",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270041": [
+   "Maharabi",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270040": [
+   "Khurkhul",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270048": [
+   "Konsakhul",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270036": [
+   "Kanglatongbi",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270044": [
+   "Tingri",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270043": [
+   "Awang Laikinthabi",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270039": [
+   "Kanto",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270038": [
+   "Keingam",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270034": [
+   "Keithelmanbi",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270025": [
+   "Ekpan Khullen",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270027": [
+   "Heinoupokpi",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270024": [
+   "Kuraopokpi",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270026": [
+   "Ekpal Khunou",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270032": [
+   "Malken Halkhothang",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270031": [
+   "Tumuyon Khunou",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270029": [
+   "Thonamba",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270028": [
+   "Tokpa Khul",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "801485": [
+   "Lamsang Np",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "999999": [
+   "Langol Reserved Forest",
+   1881,
+   4,
+   "Clay Loam"
+  ],
+  "801486": [
+   "Sekmai Bazar Np",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270033": [
+   "Tumuyon Khullen",
+   1879,
+   4,
+   "Clay Loam"
+  ],
+  "270030": [
+   "Tumnoupokpi",
+   1879,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 142,
+ "village_count_sampled": 138
+}

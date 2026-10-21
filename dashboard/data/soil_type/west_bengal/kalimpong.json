@@ -1,0 +1,817 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "West Bengal",
+  "district": "Kalimpong",
+  "district_lgd": 702,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "full"
+ },
+ "district": {
+  "dominant_class_id": 7,
+  "dominant_class": "Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 6244,
+   "Sandy Clay Loam": 395,
+   "Loam": 13072
+  },
+  "n_pixels": 19712
+ },
+ "villages": {
+  "306316": [
+   "Chichu Forest",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306265": [
+   "Lish Forest",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306264": [
+   "Mangpong Forest",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306267": [
+   "Churanthi Forest",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306266": [
+   "Chunabhati Bazar D I F",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306254": [
+   "Turzam Forest",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306268": [
+   "Uttar Fulbari Khasmahal",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306256": [
+   "Riayang Railway Station",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306231": [
+   "Mangber Forest",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306319": [
+   "Mo Forest",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306346": [
+   "Lower Fagu Tea Garden",
+   2158,
+   4,
+   "Clay Loam"
+  ],
+  "306253": [
+   "Riyong Forest",
+   2156,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "306255": [
+   "Rambi Bazar D I F",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306257": [
+   "Birik Forest",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306270": [
+   "Suntalay Khasmahal",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306233": [
+   "Mangwa Forest",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306232": [
+   "Tista Bazar D I F",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306251": [
+   "Comesi Forest",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306252": [
+   "Ringking Pong Forest",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306224": [
+   "Kaffir Khasmahal",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306241": [
+   "Lulagaon Forest",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306332": [
+   "Pagrang Bong Khasmahal",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306239": [
+   "Samalbong Khasmahal",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306243": [
+   "Pemling Khasmahal",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306333": [
+   "Noam Forest",
+   2158,
+   4,
+   "Clay Loam"
+  ],
+  "306229": [
+   "Bhalukhop Khasmahal",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306240": [
+   "Lulagaon Khasmahal",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306242": [
+   "Pemling Forest",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306247": [
+   "Samther Forest",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306249": [
+   "Singi Khasmahal",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306258": [
+   "Mazeok Forest",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306222": [
+   "Homes St And Graihms",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306259": [
+   "Suruk Khasmahal",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306248": [
+   "Samether Khasmahal",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306320": [
+   "Thousum Forest",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306244": [
+   "Nimbong Khasmahal",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306300": [
+   "Dalapachan Khasmahal",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306246": [
+   "Paringar Khasmahal",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306250": [
+   "Tunang Forest",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306261": [
+   "Yang Makum Khasmahal",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306334": [
+   "Lehti Forest",
+   2158,
+   4,
+   "Clay Loam"
+  ],
+  "306245": [
+   "Nobgaon Khasmahal",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306263": [
+   "Panbu Forest",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306260": [
+   "Lish Catchment Area Forest",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306262": [
+   "Gulling Forest",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306298": [
+   "Dalapchan Ridge Reserve Forest",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306230": [
+   "Kalimpong Dansong Forest",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306269": [
+   "Ramthi Forest",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306336": [
+   "Turibari Khasmahal",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306299": [
+   "Dalapchan Slip Reserve Forest",
+   2157,
+   4,
+   "Clay Loam"
+  ],
+  "306221": [
+   "Bhalukhop Forest",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306297": [
+   "Sangser Khasmahal",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306228": [
+   "Sindibong Khasmahal",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306226": [
+   "Icha Khasmahal",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "249947": [
+   "Kalimpong",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306227": [
+   "Pudung Khasmahal",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306310": [
+   "Lolay Khasmahal",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306291": [
+   "Mayrong Forest",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306235": [
+   "Kalimpong Khasmahal",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306236": [
+   "Bong Khasmahal",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306237": [
+   "Yokprintam Khasmahal",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306238": [
+   "Slokbhir Khasmahal",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306234": [
+   "Tashiding Forest",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306295": [
+   "Icha Forest",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306296": [
+   "Sangser Forest",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306278": [
+   "Kagey Khasmahal",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306294": [
+   "Algarah Bazer D I F",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306280": [
+   "Ladam Khasmahal",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306279": [
+   "Maria Khasmahal",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306293": [
+   "Paiengaon Forest",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306292": [
+   "Sakiyong Khasmahal",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306301": [
+   "Paiyong Khasmahal",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306289": [
+   "Rissium Forest",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306308": [
+   "Bokhim Khasmahal",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306302": [
+   "Santuk Khasmahal",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306330": [
+   "Pashiting Khasmahal",
+   2158,
+   4,
+   "Clay Loam"
+  ],
+  "306287": [
+   "Lava Forest",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306304": [
+   "Chumang Forest",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306223": [
+   "Kaffir Forest",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306305": [
+   "Git Beong Khasmahal",
+   2157,
+   4,
+   "Clay Loam"
+  ],
+  "306329": [
+   "Samabiyong Tea Garden",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306315": [
+   "Paten Godak Khasmahal",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306306": [
+   "Git Dubling Khasmahal",
+   2157,
+   4,
+   "Clay Loam"
+  ],
+  "306309": [
+   "Palla Khasmahal",
+   2157,
+   4,
+   "Clay Loam"
+  ],
+  "306307": [
+   "Paygang Khasmahal",
+   2157,
+   4,
+   "Clay Loam"
+  ],
+  "306225": [
+   "Kanke Bong Khasmahal",
+   2156,
+   7,
+   "Loam"
+  ],
+  "306290": [
+   "Paktam Forest",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306288": [
+   "Khampong Forest",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306303": [
+   "Saihur Forest",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306275": [
+   "Kashone Khasmahal",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306274": [
+   "Mansong Cinchona Plantation",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306272": [
+   "Rangpo Forest",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306284": [
+   "Raset Forest",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306277": [
+   "Pedong Khasmahal",
+   2157,
+   4,
+   "Clay Loam"
+  ],
+  "306273": [
+   "Mangchu Forest",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306276": [
+   "Pedong Bazar D I F",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306327": [
+   "Westnar Forest",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306281": [
+   "Lingsaykha Khasmahal",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306314": [
+   "Today Tangta Khasmahal",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306285": [
+   "Kolbong Forest",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306317": [
+   "Paren Forest",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306326": [
+   "Pankasari Forest",
+   2158,
+   4,
+   "Clay Loam"
+  ],
+  "306328": [
+   "Pankhasari Khasmahal",
+   2158,
+   4,
+   "Clay Loam"
+  ],
+  "306318": [
+   "Rango Forest",
+   2158,
+   4,
+   "Clay Loam"
+  ],
+  "306311": [
+   "Rechila Chak Khasmahal",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306283": [
+   "Rhenok Forest",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306313": [
+   "Ruka Forest",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306312": [
+   "Rechila Forest",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306321": [
+   "Eastnar Forest",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306340": [
+   "Ambeok Forest",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306323": [
+   "Kumai Khasmahal",
+   2158,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "306331": [
+   "Nim Khasmahal",
+   2158,
+   4,
+   "Clay Loam"
+  ],
+  "306322": [
+   "Samsing Khasmahal",
+   2158,
+   4,
+   "Clay Loam"
+  ],
+  "306325": [
+   "Kumai Forest",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306339": [
+   "Ambeok Tea Garden",
+   2158,
+   4,
+   "Clay Loam"
+  ],
+  "306342": [
+   "Dalingma Khasmahal",
+   2158,
+   4,
+   "Clay Loam"
+  ],
+  "306341": [
+   "Dalingkot Forest",
+   2158,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "306337": [
+   "Pogu Forest",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306348": [
+   "Sakam Forest",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306324": [
+   "Kumai Tea Garden",
+   2158,
+   4,
+   "Clay Loam"
+  ],
+  "306338": [
+   "Upper Fagu Tea Garden",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306343": [
+   "Gorubathan Khasmahal",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306345": [
+   "Mal Forest",
+   2158,
+   4,
+   "Clay Loam"
+  ],
+  "306347": [
+   "Darjiling Hilldoars Tea Garden",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306344": [
+   "Mal Khasmahal",
+   2158,
+   4,
+   "Clay Loam"
+  ],
+  "306271": [
+   "Dungra Khasmahal CT",
+   2156,
+   4,
+   "Clay Loam"
+  ],
+  "306282": [
+   "Lingsay Khasmahal",
+   2157,
+   7,
+   "Loam"
+  ],
+  "306335": [
+   "Manabari Khasmahal",
+   2158,
+   7,
+   "Loam"
+  ],
+  "306286": [
+   "Lava Bazar D I F",
+   2157,
+   7,
+   "Loam"
+  ]
+ },
+ "village_count_total": 129,
+ "village_count_sampled": 129
+}

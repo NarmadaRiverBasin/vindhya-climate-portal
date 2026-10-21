@@ -1,0 +1,5083 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Himachal Pradesh",
+  "district": "Una",
+  "district_lgd": 26,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (840/853 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 6,
+  "dominant_class": "Sandy Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 12859,
+   "Sandy Clay Loam": 208,
+   "Loam": 15354
+  },
+  "n_pixels": 28422
+ },
+ "villages": {
+  "18663": [
+   "Kattal Ii",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18188": [
+   "Jarla Ii",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18187": [
+   "Jarla Pratham",
+   148,
+   7,
+   "Loam"
+  ],
+  "18184": [
+   "Kuthera Jaswala Nichla",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18181": [
+   "Mawa Sindiyan Upperli",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18180": [
+   "Tatera",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18179": [
+   "Oyal",
+   148,
+   7,
+   "Loam"
+  ],
+  "18178": [
+   "Thaplan",
+   148,
+   7,
+   "Loam"
+  ],
+  "18177": [
+   "Pambra",
+   148,
+   7,
+   "Loam"
+  ],
+  "18176": [
+   "Bhathiyan Wala",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18174": [
+   "Shastri Nagar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18173": [
+   "Bumbbalu",
+   148,
+   7,
+   "Loam"
+  ],
+  "248235": [
+   "Santokhgarh",
+   150,
+   7,
+   "Loam"
+  ],
+  "18830": [
+   "Chhatarpur Dhada",
+   150,
+   7,
+   "Loam"
+  ],
+  "18829": [
+   "Chhatarpur",
+   150,
+   7,
+   "Loam"
+  ],
+  "18812": [
+   "Fatehpur",
+   150,
+   7,
+   "Loam"
+  ],
+  "18811": [
+   "Nangran Nichla",
+   150,
+   7,
+   "Loam"
+  ],
+  "18813": [
+   "Nangran Upperla",
+   150,
+   7,
+   "Loam"
+  ],
+  "18797": [
+   "Up Mahal Pekhu Bela",
+   150,
+   7,
+   "Loam"
+  ],
+  "18791": [
+   "Jankaur Har",
+   150,
+   7,
+   "Loam"
+  ],
+  "18792": [
+   "Abada Barana",
+   150,
+   7,
+   "Loam"
+  ],
+  "18796": [
+   "Jankaur Khas",
+   150,
+   7,
+   "Loam"
+  ],
+  "18798": [
+   "Up Mahal Jhorowal",
+   150,
+   7,
+   "Loam"
+  ],
+  "18799": [
+   "Mahal Upperla Badehar",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18800": [
+   "Mahal Badehar Upnam Dehlan",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18810": [
+   "Lamlehra",
+   150,
+   7,
+   "Loam"
+  ],
+  "18808": [
+   "Mahal Mahantan",
+   150,
+   7,
+   "Loam"
+  ],
+  "18814": [
+   "Sasan",
+   150,
+   7,
+   "Loam"
+  ],
+  "18816": [
+   "Udaypur",
+   150,
+   7,
+   "Loam"
+  ],
+  "18815": [
+   "Charatgarh Upperla",
+   150,
+   7,
+   "Loam"
+  ],
+  "18809": [
+   "Mahal Nichla Badehar",
+   150,
+   7,
+   "Loam"
+  ],
+  "18859": [
+   "Jorian",
+   151,
+   7,
+   "Loam"
+  ],
+  "18863": [
+   "Janani",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18864": [
+   "Tibian",
+   151,
+   7,
+   "Loam"
+  ],
+  "18861": [
+   "Polianbeet",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18862": [
+   "Maluwal",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18867": [
+   "Hiran",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18868": [
+   "Dulehr Uparla",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18866": [
+   "Bhadiaran",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18870": [
+   "Goindpur Bula Uparla",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18871": [
+   "Goindpur Tarf Jaichand",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18872": [
+   "Goindpur Jai Chand Nichala",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18869": [
+   "Goindpur Tarf Bula",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18873": [
+   "Singa Urf Sur Kalan",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18874": [
+   "Bitan",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18878": [
+   "Shiampura",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18879": [
+   "Thara",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18877": [
+   "Hiran",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18860": [
+   "Makor Ghar",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18858": [
+   "Kutharbeet",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18876": [
+   "Chhetaran",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18894": [
+   "Bathri",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18895": [
+   "Bela Bathri",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18892": [
+   "Gurpalah",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18893": [
+   "Kelua",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18891": [
+   "Bathu",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18890": [
+   "Bat Khurd",
+   151,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "18889": [
+   "Bat Kalan",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18888": [
+   "Tahaliwal Nichala",
+   151,
+   7,
+   "Loam"
+  ],
+  "18887": [
+   "Tahaliwal Uparla",
+   151,
+   7,
+   "Loam"
+  ],
+  "18886": [
+   "Nangal Jatpur",
+   151,
+   7,
+   "Loam"
+  ],
+  "18885": [
+   "Nangal Kalan",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18883": [
+   "Manuwal",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18884": [
+   "Theh",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18882": [
+   "Nangal Khurd",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18881": [
+   "Lalehri",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18875": [
+   "Kungrat",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18880": [
+   "Chandpur",
+   151,
+   7,
+   "Loam"
+  ],
+  "18853": [
+   "Palakwah Nichala",
+   151,
+   7,
+   "Loam"
+  ],
+  "18856": [
+   "Haleran",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18855": [
+   "Ojale",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18851": [
+   "Thakaran",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18852": [
+   "Karampur",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18849": [
+   "Palakwah",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18850": [
+   "Kante",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18848": [
+   "Bhadauri",
+   151,
+   7,
+   "Loam"
+  ],
+  "18847": [
+   "Haroli Ii Nd",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18846": [
+   "Haroli Ist",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18854": [
+   "Pubowal",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18857": [
+   "Jorian",
+   151,
+   7,
+   "Loam"
+  ],
+  "18842": [
+   "Rora Baliwal",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18845": [
+   "Haroli",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18841": [
+   "Samnal",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18844": [
+   "Panjuana",
+   151,
+   7,
+   "Loam"
+  ],
+  "18865": [
+   "Dulehar",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18828": [
+   "Khanpur",
+   150,
+   7,
+   "Loam"
+  ],
+  "18807": [
+   "Aerian",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18836": [
+   "Sanoli",
+   150,
+   7,
+   "Loam"
+  ],
+  "18835": [
+   "Malukpur",
+   150,
+   7,
+   "Loam"
+  ],
+  "18833": [
+   "Majara",
+   150,
+   7,
+   "Loam"
+  ],
+  "18834": [
+   "Binnewal",
+   150,
+   7,
+   "Loam"
+  ],
+  "18831": [
+   "Ajauli",
+   150,
+   7,
+   "Loam"
+  ],
+  "18832": [
+   "Puna",
+   150,
+   7,
+   "Loam"
+  ],
+  "18817": [
+   "Charatgarh Nichla",
+   150,
+   7,
+   "Loam"
+  ],
+  "18819": [
+   "Raipur Nichla",
+   150,
+   7,
+   "Loam"
+  ],
+  "18823": [
+   "Up Mahal Jarei Mehatpur",
+   150,
+   7,
+   "Loam"
+  ],
+  "18826": [
+   "Up Mahal Kalsehra",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18824": [
+   "Up Mahal Uperli Bhatoli",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18825": [
+   "Up Mahal Nichli Bhatoli",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18827": [
+   "Up Mahal Bhatoli College",
+   150,
+   7,
+   "Loam"
+  ],
+  "18821": [
+   "Ban Garh",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18801": [
+   "Mahal Bans Bonsre",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18820": [
+   "Jakhera",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18818": [
+   "Raipur Upperla",
+   150,
+   7,
+   "Loam"
+  ],
+  "248234": [
+   "Mehatpur Basdehra",
+   150,
+   7,
+   "Loam"
+  ],
+  "18806": [
+   "Mahal Uperli Dehlan",
+   150,
+   7,
+   "Loam"
+  ],
+  "18838": [
+   "Kangar",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18345": [
+   "Up Mahal Dhusara Abal",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18346": [
+   "Up Mahal Dhusara Doem",
+   148,
+   7,
+   "Loam"
+  ],
+  "18341": [
+   "Up Mahal Malkada",
+   148,
+   7,
+   "Loam"
+  ],
+  "18347": [
+   "Saluri",
+   148,
+   7,
+   "Loam"
+  ],
+  "18339": [
+   "Bhaira",
+   148,
+   7,
+   "Loam"
+  ],
+  "18342": [
+   "Up Mahal Satothar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18344": [
+   "Up Mahal Hamboli Nichali",
+   148,
+   7,
+   "Loam"
+  ],
+  "18338": [
+   "Diyara",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18343": [
+   "Up Mahal Hamboli Uperli",
+   148,
+   7,
+   "Loam"
+  ],
+  "18340": [
+   "Seri",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18336": [
+   "Baheri",
+   148,
+   7,
+   "Loam"
+  ],
+  "18335": [
+   "Charuru",
+   148,
+   7,
+   "Loam"
+  ],
+  "18337": [
+   "Dilwan",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18312": [
+   "Nandpur",
+   148,
+   7,
+   "Loam"
+  ],
+  "18334": [
+   "Up Mahal Dhandari",
+   148,
+   7,
+   "Loam"
+  ],
+  "18333": [
+   "Up Mahal Shiv Nagar",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18332": [
+   "Up Mahal Takarla",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18331": [
+   "Bilan Da Thappal",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18311": [
+   "Kathiari",
+   148,
+   7,
+   "Loam"
+  ],
+  "18193": [
+   "Talwal",
+   148,
+   7,
+   "Loam"
+  ],
+  "18194": [
+   "Badaun",
+   148,
+   7,
+   "Loam"
+  ],
+  "18314": [
+   "Up Mahal Thathal",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18313": [
+   "Up Mahal Nakki",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18330": [
+   "Maslana",
+   148,
+   7,
+   "Loam"
+  ],
+  "18329": [
+   "Jaman Kual",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18328": [
+   "Mairi Khas",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18326": [
+   "Behar Jaswan Kansi",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18315": [
+   "Up Mahal Ram Nagar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18327": [
+   "Chak",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18325": [
+   "Behar Bithal",
+   148,
+   7,
+   "Loam"
+  ],
+  "18324": [
+   "Akrot",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18192": [
+   "Piplu",
+   148,
+   7,
+   "Loam"
+  ],
+  "18191": [
+   "Guglehar",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18190": [
+   "Badhera",
+   148,
+   7,
+   "Loam"
+  ],
+  "18189": [
+   "Koharri",
+   148,
+   7,
+   "Loam"
+  ],
+  "18186": [
+   "Loharli Nichli",
+   148,
+   7,
+   "Loam"
+  ],
+  "18185": [
+   "Loharli Upperli",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18183": [
+   "Kuthera Jaswala Upperla",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18182": [
+   "Mawa Sindiyan Nichli",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18323": [
+   "Ghungralan",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18525": [
+   "Samur",
+   149,
+   7,
+   "Loam"
+  ],
+  "18521": [
+   "Baul Uperli",
+   149,
+   7,
+   "Loam"
+  ],
+  "18523": [
+   "Baul",
+   149,
+   7,
+   "Loam"
+  ],
+  "18526": [
+   "Ludher",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18527": [
+   "Mowkhas",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18522": [
+   "Khurwan",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18520": [
+   "Kawari",
+   149,
+   7,
+   "Loam"
+  ],
+  "18533": [
+   "Ghuggan Kakrana",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18518": [
+   "Chakroa",
+   149,
+   7,
+   "Loam"
+  ],
+  "18517": [
+   "Tiyar",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18514": [
+   "Kuhroo",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18516": [
+   "Kathoh",
+   149,
+   7,
+   "Loam"
+  ],
+  "18519": [
+   "Dharun",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18515": [
+   "Amroh",
+   149,
+   7,
+   "Loam"
+  ],
+  "18493": [
+   "Kiarian",
+   149,
+   7,
+   "Loam"
+  ],
+  "18509": [
+   "Kukhera Rajputan",
+   149,
+   7,
+   "Loam"
+  ],
+  "18492": [
+   "Kud",
+   149,
+   7,
+   "Loam"
+  ],
+  "18491": [
+   "Palahta",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18512": [
+   "Kukhera Jatan",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18490": [
+   "Harot",
+   149,
+   7,
+   "Loam"
+  ],
+  "18513": [
+   "Ambhera Dhiraj",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18510": [
+   "Ambhera Ramkishan",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18353": [
+   "Kaint",
+   149,
+   7,
+   "Loam"
+  ],
+  "18351": [
+   "Talap",
+   149,
+   7,
+   "Loam"
+  ],
+  "18349": [
+   "Pallian",
+   149,
+   7,
+   "Loam"
+  ],
+  "18350": [
+   "Panjora",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18352": [
+   "Nagar Chauki",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18354": [
+   "Chauki Khas",
+   149,
+   7,
+   "Loam"
+  ],
+  "18357": [
+   "Umre Di Behar",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18507": [
+   "Atia",
+   149,
+   7,
+   "Loam"
+  ],
+  "18508": [
+   "Meyor",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18506": [
+   "Baghnal",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18358": [
+   "Harsa Jandora",
+   149,
+   7,
+   "Loam"
+  ],
+  "18360": [
+   "Jol",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18359": [
+   "Harsa Lathan",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18348": [
+   "Baruhi",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18368": [
+   "Baslehar",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18364": [
+   "Krishan Nagar",
+   149,
+   7,
+   "Loam"
+  ],
+  "18362": [
+   "Bairian",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18356": [
+   "Bhood",
+   149,
+   7,
+   "Loam"
+  ],
+  "18367": [
+   "Chhatter",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18369": [
+   "Bharmar",
+   149,
+   7,
+   "Loam"
+  ],
+  "18371": [
+   "Ram Nagar",
+   149,
+   7,
+   "Loam"
+  ],
+  "18494": [
+   "D P F Ban Dhanet",
+   149,
+   7,
+   "Loam"
+  ],
+  "18496": [
+   "D P F Charoli",
+   149,
+   7,
+   "Loam"
+  ],
+  "18355": [
+   "D P F Chauki",
+   149,
+   7,
+   "Loam"
+  ],
+  "18511": [
+   "D P F Atia",
+   149,
+   7,
+   "Loam"
+  ],
+  "18361": [
+   "D P F Jol",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18363": [
+   "D P F Bairian",
+   149,
+   7,
+   "Loam"
+  ],
+  "18498": [
+   "D P F Dhayunser Iv",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18502": [
+   "D P F Dhayunser V",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18388": [
+   "Panjardra",
+   149,
+   7,
+   "Loam"
+  ],
+  "18501": [
+   "Ghartholi",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18497": [
+   "Chamboa",
+   149,
+   7,
+   "Loam"
+  ],
+  "18499": [
+   "Sarnoti",
+   149,
+   7,
+   "Loam"
+  ],
+  "18495": [
+   "Charoli",
+   149,
+   7,
+   "Loam"
+  ],
+  "18485": [
+   "Kokra",
+   149,
+   7,
+   "Loam"
+  ],
+  "18488": [
+   "Chaplah Kutlehrian",
+   149,
+   7,
+   "Loam"
+  ],
+  "18489": [
+   "Chaplah Garlan",
+   149,
+   7,
+   "Loam"
+  ],
+  "18444": [
+   "Chaksar",
+   149,
+   7,
+   "Loam"
+  ],
+  "18445": [
+   "D P F Sar",
+   149,
+   7,
+   "Loam"
+  ],
+  "18484": [
+   "Bohana",
+   149,
+   7,
+   "Loam"
+  ],
+  "18698": [
+   "Nagnoli",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18699": [
+   "Nagnuli Har",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18697": [
+   "Lawana Majra",
+   150,
+   7,
+   "Loam"
+  ],
+  "18702": [
+   "Jangal Panjawar",
+   150,
+   7,
+   "Loam"
+  ],
+  "18701": [
+   "Panjawar",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18700": [
+   "Panjawar Nichla",
+   150,
+   7,
+   "Loam"
+  ],
+  "18704": [
+   "Jangal Khad",
+   150,
+   7,
+   "Loam"
+  ],
+  "18703": [
+   "Daulatpur",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18705": [
+   "Khad Khas",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18706": [
+   "Chak Khad",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18709": [
+   "Pandogha Khas",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18708": [
+   "Pandogha Nichla",
+   150,
+   7,
+   "Loam"
+  ],
+  "18711": [
+   "Pandogha Kairian",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18710": [
+   "Pandogha Uparla",
+   150,
+   7,
+   "Loam"
+  ],
+  "18707": [
+   "Bhaini Khad",
+   150,
+   7,
+   "Loam"
+  ],
+  "18726": [
+   "Bhalola",
+   150,
+   7,
+   "Loam"
+  ],
+  "18712": [
+   "Ispur Upperla",
+   150,
+   7,
+   "Loam"
+  ],
+  "18713": [
+   "Ispur Tanda",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18714": [
+   "Ispur",
+   150,
+   7,
+   "Loam"
+  ],
+  "18718": [
+   "Jangal Bhadsali",
+   150,
+   7,
+   "Loam"
+  ],
+  "18721": [
+   "Saloh Uperla",
+   150,
+   7,
+   "Loam"
+  ],
+  "18724": [
+   "Arjunpura",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18723": [
+   "Dhariyan Wala",
+   150,
+   7,
+   "Loam"
+  ],
+  "18722": [
+   "Saloh Nichla",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18725": [
+   "Ghalu Wal",
+   150,
+   7,
+   "Loam"
+  ],
+  "18715": [
+   "Bhadsali Har",
+   150,
+   7,
+   "Loam"
+  ],
+  "18717": [
+   "Bhadsali Bhul Gharh",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18719": [
+   "Bhadsali Tholian",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18716": [
+   "Bhadsali",
+   150,
+   7,
+   "Loam"
+  ],
+  "18728": [
+   "Ghandawal",
+   150,
+   7,
+   "Loam"
+  ],
+  "18729": [
+   "Bhaloh",
+   150,
+   7,
+   "Loam"
+  ],
+  "18730": [
+   "Bareda",
+   150,
+   7,
+   "Loam"
+  ],
+  "18731": [
+   "Satletta",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18732": [
+   "Sanjhot",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18727": [
+   "Batuhi",
+   150,
+   7,
+   "Loam"
+  ],
+  "18736": [
+   "Panoh I",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18737": [
+   "Panoh Ii",
+   150,
+   7,
+   "Loam"
+  ],
+  "18738": [
+   "Tiuri I",
+   150,
+   7,
+   "Loam"
+  ],
+  "18739": [
+   "Tiuri Doam",
+   150,
+   7,
+   "Loam"
+  ],
+  "18763": [
+   "Khadunni",
+   150,
+   7,
+   "Loam"
+  ],
+  "18767": [
+   "Jhalera",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18766": [
+   "Raisari Upperli",
+   150,
+   7,
+   "Loam"
+  ],
+  "18764": [
+   "Galua",
+   150,
+   7,
+   "Loam"
+  ],
+  "18759": [
+   "Sansala Nagar",
+   150,
+   7,
+   "Loam"
+  ],
+  "18762": [
+   "Kasba",
+   150,
+   7,
+   "Loam"
+  ],
+  "18735": [
+   "Badoli",
+   150,
+   7,
+   "Loam"
+  ],
+  "18734": [
+   "Dhatwara",
+   150,
+   7,
+   "Loam"
+  ],
+  "18733": [
+   "Dhamandri",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18740": [
+   "Badsala",
+   150,
+   7,
+   "Loam"
+  ],
+  "18741": [
+   "Salangari",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18742": [
+   "Nangal Ii",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18743": [
+   "Nangal I",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18745": [
+   "Chalola Ii",
+   150,
+   7,
+   "Loam"
+  ],
+  "18744": [
+   "Chalola I",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18746": [
+   "Dhadial",
+   150,
+   7,
+   "Loam"
+  ],
+  "18747": [
+   "Nari Nichli",
+   150,
+   7,
+   "Loam"
+  ],
+  "18748": [
+   "Nari Upperli",
+   150,
+   7,
+   "Loam"
+  ],
+  "18749": [
+   "Lam",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18750": [
+   "Jhambar",
+   150,
+   7,
+   "Loam"
+  ],
+  "18761": [
+   "Thakar Dawara",
+   150,
+   7,
+   "Loam"
+  ],
+  "18760": [
+   "Basal",
+   150,
+   7,
+   "Loam"
+  ],
+  "18751": [
+   "Surjehra",
+   150,
+   7,
+   "Loam"
+  ],
+  "18752": [
+   "Kuriala",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18758": [
+   "Vishna Nagar",
+   150,
+   7,
+   "Loam"
+  ],
+  "18757": [
+   "Ram Nagar",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18756": [
+   "Dangehra",
+   150,
+   7,
+   "Loam"
+  ],
+  "18753": [
+   "Samoor Kalan Awal",
+   150,
+   7,
+   "Loam"
+  ],
+  "18755": [
+   "Samoor Kalan Doam",
+   150,
+   7,
+   "Loam"
+  ],
+  "18765": [
+   "Raisari Nichli",
+   150,
+   7,
+   "Loam"
+  ],
+  "18768": [
+   "Kotla Khurd",
+   150,
+   7,
+   "Loam"
+  ],
+  "18754": [
+   "Barnoh",
+   150,
+   7,
+   "Loam"
+  ],
+  "18774": [
+   "Dangoli",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18773": [
+   "Ajnoli",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18769": [
+   "Lal Singhi",
+   150,
+   7,
+   "Loam"
+  ],
+  "18770": [
+   "Kotla Kalan Nichla",
+   150,
+   7,
+   "Loam"
+  ],
+  "18772": [
+   "Kotla Kalan Upperla",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18788": [
+   "Rampur Bela",
+   150,
+   7,
+   "Loam"
+  ],
+  "18771": [
+   "Arniala",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18778": [
+   "Madan Pur",
+   150,
+   7,
+   "Loam"
+  ],
+  "248233": [
+   "Una",
+   150,
+   7,
+   "Loam"
+  ],
+  "18785": [
+   "Malahat",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18787": [
+   "Rampur",
+   150,
+   7,
+   "Loam"
+  ],
+  "18786": [
+   "Bhrolian Khurd",
+   150,
+   7,
+   "Loam"
+  ],
+  "18790": [
+   "Kuthar Kalan",
+   150,
+   7,
+   "Loam"
+  ],
+  "18789": [
+   "Kuthar Khurd",
+   150,
+   7,
+   "Loam"
+  ],
+  "18784": [
+   "Rakkar Kaloni",
+   150,
+   7,
+   "Loam"
+  ],
+  "18782": [
+   "Jal Graon",
+   150,
+   7,
+   "Loam"
+  ],
+  "18783": [
+   "Tabba",
+   150,
+   7,
+   "Loam"
+  ],
+  "18793": [
+   "Sunehra",
+   150,
+   7,
+   "Loam"
+  ],
+  "18794": [
+   "Barsara",
+   150,
+   7,
+   "Loam"
+  ],
+  "18795": [
+   "Bharolian Kalan",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18837": [
+   "Badehra",
+   151,
+   7,
+   "Loam"
+  ],
+  "18843": [
+   "Rora",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18839": [
+   "Dharampur",
+   151,
+   7,
+   "Loam"
+  ],
+  "18840": [
+   "Saihnsowal",
+   151,
+   4,
+   "Clay Loam"
+  ],
+  "18720": [
+   "Jangal Sloh",
+   150,
+   7,
+   "Loam"
+  ],
+  "18589": [
+   "Chukath",
+   149,
+   7,
+   "Loam"
+  ],
+  "18588": [
+   "Bohru",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18590": [
+   "Lidkot",
+   149,
+   7,
+   "Loam"
+  ],
+  "18605": [
+   "Dobar",
+   149,
+   7,
+   "Loam"
+  ],
+  "18591": [
+   "Chulehri",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18593": [
+   "Kamunn",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18581": [
+   "Bahal Khalsa",
+   149,
+   7,
+   "Loam"
+  ],
+  "18592": [
+   "Changar",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18579": [
+   "Ramgarh",
+   149,
+   7,
+   "Loam"
+  ],
+  "18607": [
+   "Matehati",
+   149,
+   7,
+   "Loam"
+  ],
+  "18604": [
+   "Androli",
+   149,
+   7,
+   "Loam"
+  ],
+  "18606": [
+   "Raipur Uperli",
+   149,
+   7,
+   "Loam"
+  ],
+  "18602": [
+   "Raipur",
+   149,
+   7,
+   "Loam"
+  ],
+  "18584": [
+   "Kolka",
+   149,
+   7,
+   "Loam"
+  ],
+  "18599": [
+   "Proiana Kalan",
+   149,
+   7,
+   "Loam"
+  ],
+  "18603": [
+   "Jawalapur",
+   149,
+   7,
+   "Loam"
+  ],
+  "18608": [
+   "Govind Sagar Jheel",
+   149,
+   7,
+   "Loam"
+  ],
+  "18691": [
+   "Kodra",
+   149,
+   7,
+   "Loam"
+  ],
+  "18687": [
+   "Neri",
+   149,
+   7,
+   "Loam"
+  ],
+  "18690": [
+   "Dehn",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18692": [
+   "Sepra",
+   149,
+   7,
+   "Loam"
+  ],
+  "18689": [
+   "Dharet",
+   149,
+   7,
+   "Loam"
+  ],
+  "18684": [
+   "Dhawera",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18688": [
+   "Kharota",
+   149,
+   7,
+   "Loam"
+  ],
+  "18683": [
+   "Budhan Jhikla",
+   149,
+   7,
+   "Loam"
+  ],
+  "18680": [
+   "Pansai",
+   149,
+   7,
+   "Loam"
+  ],
+  "18675": [
+   "Jadhol",
+   149,
+   7,
+   "Loam"
+  ],
+  "18695": [
+   "D P F Paniala",
+   149,
+   7,
+   "Loam"
+  ],
+  "18673": [
+   "Noloot",
+   149,
+   7,
+   "Loam"
+  ],
+  "18631": [
+   "Rachhoh",
+   149,
+   7,
+   "Loam"
+  ],
+  "18682": [
+   "Budhan Uparla",
+   149,
+   7,
+   "Loam"
+  ],
+  "18681": [
+   "Ghugal",
+   149,
+   7,
+   "Loam"
+  ],
+  "18678": [
+   "Jalgaran",
+   149,
+   7,
+   "Loam"
+  ],
+  "18672": [
+   "Rajli Jatan",
+   149,
+   7,
+   "Loam"
+  ],
+  "18677": [
+   "Aliana",
+   149,
+   7,
+   "Loam"
+  ],
+  "18671": [
+   "Rajli Baniala",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18566": [
+   "Badgar",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18567": [
+   "Dohak",
+   149,
+   7,
+   "Loam"
+  ],
+  "18570": [
+   "Nurghari",
+   149,
+   7,
+   "Loam"
+  ],
+  "18580": [
+   "Makrer",
+   149,
+   7,
+   "Loam"
+  ],
+  "18582": [
+   "Tanda Anokha",
+   149,
+   7,
+   "Loam"
+  ],
+  "18585": [
+   "Ghior",
+   149,
+   7,
+   "Loam"
+  ],
+  "18575": [
+   "Daulehri Brahmna",
+   149,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "18553": [
+   "Daulehri Rajputan",
+   149,
+   7,
+   "Loam"
+  ],
+  "18583": [
+   "Gharbasra",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18569": [
+   "Dain",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18568": [
+   "Natheri",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18571": [
+   "Mandli",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18572": [
+   "Bihru Kalan",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18574": [
+   "Changreri",
+   149,
+   7,
+   "Loam"
+  ],
+  "18573": [
+   "Bihru Khurd",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18552": [
+   "Sasan",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18550": [
+   "Doh",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18576": [
+   "Thana Khurd",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18554": [
+   "Aghlor",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18564": [
+   "Tanda Jhikla",
+   149,
+   7,
+   "Loam"
+  ],
+  "18563": [
+   "Tanda Uperla",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18597": [
+   "D P F Ramgarh Awarla I",
+   149,
+   7,
+   "Loam"
+  ],
+  "18596": [
+   "D P F Ramgarh Parla",
+   149,
+   7,
+   "Loam"
+  ],
+  "18598": [
+   "D P F Ramgarh Awarla Iii",
+   149,
+   7,
+   "Loam"
+  ],
+  "18693": [
+   "Duthan",
+   149,
+   7,
+   "Loam"
+  ],
+  "18694": [
+   "Duthan I",
+   149,
+   7,
+   "Loam"
+  ],
+  "18578": [
+   "D P F Ramgarh Awarla Ii",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18577": [
+   "D P F Ramgarh Awarla I",
+   149,
+   7,
+   "Loam"
+  ],
+  "18587": [
+   "D P F Tanda Anokha Ii",
+   149,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "18586": [
+   "D P F Tanda Anokha I",
+   149,
+   7,
+   "Loam"
+  ],
+  "18565": [
+   "D P F Tanda",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18555": [
+   "D P F Aghlor",
+   149,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "18557": [
+   "D P F Tihra",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18775": [
+   "Lamlehri Upperli",
+   150,
+   7,
+   "Loam"
+  ],
+  "18776": [
+   "Lamlehri Nichli",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18777": [
+   "Basoli Upperli",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18779": [
+   "Basoli Nichli",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18781": [
+   "Chatra Khas",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18780": [
+   "Chatara Upperla",
+   150,
+   7,
+   "Loam"
+  ],
+  "18803": [
+   "Up Mahal Bahdala",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18802": [
+   "Up Mahal Lamian",
+   150,
+   7,
+   "Loam"
+  ],
+  "18804": [
+   "Up Mahal Chaukhyal",
+   150,
+   7,
+   "Loam"
+  ],
+  "18805": [
+   "Up Mahal Majhalian",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18822": [
+   "Fatehwal",
+   150,
+   4,
+   "Clay Loam"
+  ],
+  "18480": [
+   "Tamlet",
+   149,
+   7,
+   "Loam"
+  ],
+  "18679": [
+   "Banjal",
+   149,
+   7,
+   "Loam"
+  ],
+  "18670": [
+   "Rajli Uparli",
+   149,
+   7,
+   "Loam"
+  ],
+  "18666": [
+   "Tyasar",
+   149,
+   7,
+   "Loam"
+  ],
+  "18634": [
+   "Kheri",
+   149,
+   7,
+   "Loam"
+  ],
+  "18633": [
+   "Daroh",
+   149,
+   7,
+   "Loam"
+  ],
+  "18667": [
+   "Lathyani",
+   149,
+   7,
+   "Loam"
+  ],
+  "18668": [
+   "Chehru",
+   149,
+   7,
+   "Loam"
+  ],
+  "18664": [
+   "Karsai",
+   149,
+   7,
+   "Loam"
+  ],
+  "18629": [
+   "Saroh",
+   149,
+   7,
+   "Loam"
+  ],
+  "18630": [
+   "Basatar",
+   149,
+   7,
+   "Loam"
+  ],
+  "18655": [
+   "Sasan",
+   149,
+   7,
+   "Loam"
+  ],
+  "18628": [
+   "Chamyari",
+   149,
+   7,
+   "Loam"
+  ],
+  "18632": [
+   "Suknehra",
+   149,
+   7,
+   "Loam"
+  ],
+  "18617": [
+   "Kott",
+   149,
+   7,
+   "Loam"
+  ],
+  "18618": [
+   "Matoh",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18619": [
+   "Jandana",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18620": [
+   "Sihana",
+   149,
+   7,
+   "Loam"
+  ],
+  "18621": [
+   "Dolu",
+   149,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "18468": [
+   "Bhaleti Pathian",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18622": [
+   "Jarola",
+   149,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "18623": [
+   "Jateheri",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18625": [
+   "Kanehra",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18624": [
+   "Pantehri",
+   149,
+   7,
+   "Loam"
+  ],
+  "18649": [
+   "Malangar Brahmna",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18648": [
+   "Malangar Mian",
+   149,
+   7,
+   "Loam"
+  ],
+  "18650": [
+   "Sarsoli",
+   149,
+   7,
+   "Loam"
+  ],
+  "18660": [
+   "Tareta",
+   149,
+   7,
+   "Loam"
+  ],
+  "18654": [
+   "Tanoh",
+   149,
+   7,
+   "Loam"
+  ],
+  "18659": [
+   "Badher Uparla",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18665": [
+   "Dadyar",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18676": [
+   "Baliara",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18669": [
+   "Heru Khas",
+   149,
+   7,
+   "Loam"
+  ],
+  "18657": [
+   "Kehlwin",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18656": [
+   "Ghatti",
+   149,
+   7,
+   "Loam"
+  ],
+  "18658": [
+   "Dughar",
+   149,
+   7,
+   "Loam"
+  ],
+  "18661": [
+   "Badher Jhikla",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18653": [
+   "Soharla Jhikla",
+   149,
+   7,
+   "Loam"
+  ],
+  "18652": [
+   "Soharla Upperla",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18638": [
+   "Amrera",
+   149,
+   7,
+   "Loam"
+  ],
+  "18641": [
+   "Narahun",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18549": [
+   "Gulehar",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18546": [
+   "Baral",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18556": [
+   "Tihra Khas",
+   149,
+   7,
+   "Loam"
+  ],
+  "18547": [
+   "Patti",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18545": [
+   "Bhadwar",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18541": [
+   "Bahal",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18536": [
+   "Chhaproh Khurd",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18559": [
+   "Karwalian Sanhal",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18561": [
+   "Talehra Sanhal",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18560": [
+   "Malounia Sanhal",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18542": [
+   "Bahal Rehre",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18558": [
+   "Parnoulian Sanhal",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18543": [
+   "Bahal Kholi",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18537": [
+   "Narghota",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18524": [
+   "Ambe Da Behra",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18562": [
+   "Sakohan",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18540": [
+   "Paned",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18535": [
+   "Chhaproh Kalan",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18639": [
+   "Kangru",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18538": [
+   "Bushal",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18529": [
+   "Jharkhar",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18534": [
+   "Hari Nagar",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18651": [
+   "Sohari",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18612": [
+   "Kaswan Ranauttan",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18647": [
+   "Bagg",
+   149,
+   7,
+   "Loam"
+  ],
+  "18642": [
+   "Nanawin",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18615": [
+   "Dhundla",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18640": [
+   "Jamnoti",
+   149,
+   7,
+   "Loam"
+  ],
+  "18646": [
+   "Bahal",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18463": [
+   "Vandhar Solhasingi",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18613": [
+   "Beri",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18616": [
+   "Hatli",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18471": [
+   "Jakhola",
+   149,
+   7,
+   "Loam"
+  ],
+  "18470": [
+   "Amjar",
+   149,
+   7,
+   "Loam"
+  ],
+  "18472": [
+   "Dogh Upperli",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18466": [
+   "Bhugarian Brahmina",
+   149,
+   7,
+   "Loam"
+  ],
+  "18614": [
+   "Dhatol",
+   149,
+   7,
+   "Loam"
+  ],
+  "18531": [
+   "Majher",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18528": [
+   "Rachhol",
+   149,
+   7,
+   "Loam"
+  ],
+  "18611": [
+   "Kaswan Brahmna",
+   149,
+   7,
+   "Loam"
+  ],
+  "18609": [
+   "Kotla Khas",
+   149,
+   7,
+   "Loam"
+  ],
+  "18530": [
+   "Thana Khas",
+   149,
+   7,
+   "Loam"
+  ],
+  "18532": [
+   "Thana Kalan",
+   149,
+   7,
+   "Loam"
+  ],
+  "18475": [
+   "Sirath",
+   149,
+   7,
+   "Loam"
+  ],
+  "18474": [
+   "Nalwari",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18478": [
+   "Kothi",
+   149,
+   7,
+   "Loam"
+  ],
+  "18486": [
+   "Ghaneti",
+   149,
+   7,
+   "Loam"
+  ],
+  "18479": [
+   "Gaihra",
+   149,
+   7,
+   "Loam"
+  ],
+  "18636": [
+   "D P F Basatar",
+   149,
+   7,
+   "Loam"
+  ],
+  "18627": [
+   "D P F Kott",
+   149,
+   7,
+   "Loam"
+  ],
+  "18626": [
+   "D P F Matoh",
+   149,
+   7,
+   "Loam"
+  ],
+  "18637": [
+   "D P F Chamyari",
+   149,
+   7,
+   "Loam"
+  ],
+  "18662": [
+   "Kattal I",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18645": [
+   "Bajwar Kundu Ii",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18544": [
+   "Kattal",
+   149,
+   7,
+   "Loam"
+  ],
+  "18476": [
+   "Van Gharyara",
+   149,
+   7,
+   "Loam"
+  ],
+  "18443": [
+   "Sar Rajputa",
+   149,
+   7,
+   "Loam"
+  ],
+  "18423": [
+   "Pakhalag",
+   149,
+   7,
+   "Loam"
+  ],
+  "18610": [
+   "Surara",
+   149,
+   7,
+   "Loam"
+  ],
+  "18473": [
+   "Dogh Jhikli",
+   149,
+   7,
+   "Loam"
+  ],
+  "18464": [
+   "Marhun",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18465": [
+   "Bhugarian Chamiaran",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18469": [
+   "Bhaleti Padhian",
+   149,
+   7,
+   "Loam"
+  ],
+  "18483": [
+   "Thathun",
+   149,
+   7,
+   "Loam"
+  ],
+  "18481": [
+   "Matyana",
+   149,
+   7,
+   "Loam"
+  ],
+  "18477": [
+   "Dumkhar",
+   149,
+   7,
+   "Loam"
+  ],
+  "18459": [
+   "Muchhali Khas",
+   149,
+   7,
+   "Loam"
+  ],
+  "18452": [
+   "Marhot Brahmana",
+   149,
+   7,
+   "Loam"
+  ],
+  "18448": [
+   "Awahar",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18467": [
+   "Bhaleti Main",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18460": [
+   "Chilly",
+   149,
+   7,
+   "Loam"
+  ],
+  "18461": [
+   "Jhabrani",
+   149,
+   7,
+   "Loam"
+  ],
+  "18482": [
+   "Maryatan",
+   149,
+   7,
+   "Loam"
+  ],
+  "18457": [
+   "Gharoh",
+   149,
+   7,
+   "Loam"
+  ],
+  "18454": [
+   "Naily Upperli",
+   149,
+   7,
+   "Loam"
+  ],
+  "18453": [
+   "Bhalet",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18458": [
+   "Naily Jhikly",
+   149,
+   7,
+   "Loam"
+  ],
+  "18456": [
+   "Bangana",
+   149,
+   7,
+   "Loam"
+  ],
+  "18449": [
+   "Nargroo",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18450": [
+   "Ritt Satrukha",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18462": [
+   "Tamlet",
+   149,
+   7,
+   "Loam"
+  ],
+  "18435": [
+   "Hatli Patialan",
+   149,
+   7,
+   "Loam"
+  ],
+  "18451": [
+   "Tehi",
+   149,
+   7,
+   "Loam"
+  ],
+  "18439": [
+   "Kharooni",
+   149,
+   7,
+   "Loam"
+  ],
+  "18440": [
+   "Jandur",
+   149,
+   7,
+   "Loam"
+  ],
+  "18487": [
+   "Sar",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18394": [
+   "Bahal",
+   149,
+   7,
+   "Loam"
+  ],
+  "18635": [
+   "D P F Kanehra",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18146": [
+   "Amlehar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18058": [
+   "Ban Sarkar",
+   147,
+   7,
+   "Loam"
+  ],
+  "18087": [
+   "Reserve Jangal A",
+   147,
+   7,
+   "Loam"
+  ],
+  "18049": [
+   "Malon Parla",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18301": [
+   "Reserve Jangal Dharui R Iii G",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18050": [
+   "Gindpur",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18051": [
+   "Malon Awarla",
+   147,
+   7,
+   "Loam"
+  ],
+  "18052": [
+   "Kharoh",
+   147,
+   7,
+   "Loam"
+  ],
+  "18054": [
+   "Bhatehr Parli",
+   147,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "18053": [
+   "Bhatehr Jhikli",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18055": [
+   "Baret",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18056": [
+   "Bhatehr Khas",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18057": [
+   "Beharn",
+   147,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "18059": [
+   "Godri Sidh",
+   147,
+   7,
+   "Loam"
+  ],
+  "18060": [
+   "Dharamsal Mahaintan",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18061": [
+   "Dharamsal Mahaintan Jhikli",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18064": [
+   "Badhmana",
+   147,
+   7,
+   "Loam"
+  ],
+  "18063": [
+   "Gugwar",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18065": [
+   "Dalwari",
+   147,
+   7,
+   "Loam"
+  ],
+  "18070": [
+   "Dalwari Dehlwan",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18069": [
+   "Chalaul Behr",
+   147,
+   7,
+   "Loam"
+  ],
+  "18071": [
+   "Jawal",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18206": [
+   "Khareyali",
+   148,
+   7,
+   "Loam"
+  ],
+  "18153": [
+   "Kanshi Pur",
+   148,
+   7,
+   "Loam"
+  ],
+  "18154": [
+   "Shiv Pur",
+   148,
+   7,
+   "Loam"
+  ],
+  "18156": [
+   "Rampur",
+   148,
+   7,
+   "Loam"
+  ],
+  "18155": [
+   "Mubarik Pur",
+   148,
+   7,
+   "Loam"
+  ],
+  "18202": [
+   "Kalruhi",
+   148,
+   7,
+   "Loam"
+  ],
+  "18204": [
+   "Ghavet Baherh",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18175": [
+   "Baroh",
+   148,
+   7,
+   "Loam"
+  ],
+  "18172": [
+   "Kaloh",
+   148,
+   7,
+   "Loam"
+  ],
+  "18169": [
+   "Dev Nagar",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18171": [
+   "Gagret",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18170": [
+   "Ram Nagar",
+   148,
+   7,
+   "Loam"
+  ],
+  "248232": [
+   "Gagret",
+   148,
+   7,
+   "Loam"
+  ],
+  "18167": [
+   "Krishan Nagar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18164": [
+   "Chatehar Buhal",
+   148,
+   7,
+   "Loam"
+  ],
+  "18162": [
+   "Dhawali",
+   148,
+   7,
+   "Loam"
+  ],
+  "18160": [
+   "Kala Panga",
+   148,
+   7,
+   "Loam"
+  ],
+  "18168": [
+   "Indira Nagar",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18165": [
+   "Jindbar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18163": [
+   "Ambota",
+   148,
+   7,
+   "Loam"
+  ],
+  "18166": [
+   "Shiv Bari",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18161": [
+   "Matyalka",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18159": [
+   "Sanghanai",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18158": [
+   "Dhanowal",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18132": [
+   "Deoli Jaswalan",
+   148,
+   7,
+   "Loam"
+  ],
+  "18133": [
+   "Deoli Minahasan",
+   148,
+   7,
+   "Loam"
+  ],
+  "18130": [
+   "Ghanari Dathwalan",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18131": [
+   "Ghanari Brahman Chahgan",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18129": [
+   "Khann Tilla",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18128": [
+   "Mohe Dhariye",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18127": [
+   "Chowki",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18123": [
+   "Lambi",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18126": [
+   "Nangal Jariyalan",
+   148,
+   7,
+   "Loam"
+  ],
+  "18124": [
+   "Amboa",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18125": [
+   "Hatwal",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18121": [
+   "Tarali",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18122": [
+   "Nalauti",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18118": [
+   "Chalet Nichla",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18115": [
+   "Babehar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18101": [
+   "Raipur",
+   148,
+   7,
+   "Loam"
+  ],
+  "18102": [
+   "Marwari",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18100": [
+   "Ganu",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18099": [
+   "Mandwara",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18103": [
+   "Maidan Garh",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18096": [
+   "Sikri",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18104": [
+   "Saloh",
+   148,
+   7,
+   "Loam"
+  ],
+  "18097": [
+   "Joh",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18098": [
+   "Bah",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18105": [
+   "Prithi Pur Khas",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18106": [
+   "Prithi Pur Nichla",
+   148,
+   7,
+   "Loam"
+  ],
+  "18107": [
+   "Prithipur Upperla",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "248231": [
+   "Daulatpur",
+   148,
+   7,
+   "Loam"
+  ],
+  "18114": [
+   "Dangoh Khas",
+   148,
+   7,
+   "Loam"
+  ],
+  "18108": [
+   "Dangoh Khurd",
+   148,
+   7,
+   "Loam"
+  ],
+  "18109": [
+   "Dangoh Upperla",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18117": [
+   "Chalet Upperla",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18119": [
+   "Mawa Kahola Upperli",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18120": [
+   "Mawa Kahola Jhikli",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18113": [
+   "Dangoh Kalan",
+   148,
+   7,
+   "Loam"
+  ],
+  "18111": [
+   "Bhadar Kali",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18110": [
+   "Abhay Pur",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18112": [
+   "Brahm Pur",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18142": [
+   "Fatehpur",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18141": [
+   "Tud Khari",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18136": [
+   "Gondpur Banehra Nichla",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18134": [
+   "Kuneran Nichla",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18137": [
+   "Gondpur Banehra Upperla",
+   148,
+   7,
+   "Loam"
+  ],
+  "18135": [
+   "Kuneran Upperla",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18140": [
+   "Nakroh",
+   148,
+   7,
+   "Loam"
+  ],
+  "18143": [
+   "Kuthera Rampur",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18144": [
+   "Kuthera Haryala",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18139": [
+   "Ram Nagar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18138": [
+   "Kailash Nagar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18152": [
+   "Kad",
+   148,
+   7,
+   "Loam"
+  ],
+  "18151": [
+   "Gokal Nagar",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18150": [
+   "Maira Nagar",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18148": [
+   "Bhanjal",
+   148,
+   7,
+   "Loam"
+  ],
+  "18149": [
+   "Ram Nagar",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18147": [
+   "Shankar Nagar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18157": [
+   "Jitpur Baheri",
+   148,
+   7,
+   "Loam"
+  ],
+  "18116": [
+   "Kuai Devi",
+   148,
+   7,
+   "Loam"
+  ],
+  "18145": [
+   "Kunet Ratiya",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18048": [
+   "Ghangret",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18249": [
+   "Salana",
+   148,
+   7,
+   "Loam"
+  ],
+  "18207": [
+   "Sunhi",
+   148,
+   7,
+   "Loam"
+  ],
+  "18205": [
+   "Sidh Chalet",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18208": [
+   "Mandholi",
+   148,
+   7,
+   "Loam"
+  ],
+  "18220": [
+   "Aghar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18216": [
+   "Muthehar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18218": [
+   "Bhagrah",
+   148,
+   7,
+   "Loam"
+  ],
+  "18217": [
+   "Bringal",
+   148,
+   7,
+   "Loam"
+  ],
+  "18219": [
+   "Jijjar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18236": [
+   "Jawar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18230": [
+   "Langyana",
+   148,
+   7,
+   "Loam"
+  ],
+  "18229": [
+   "Nari",
+   148,
+   7,
+   "Loam"
+  ],
+  "18231": [
+   "Lahad",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18235": [
+   "Padah",
+   148,
+   7,
+   "Loam"
+  ],
+  "18240": [
+   "Naloh",
+   148,
+   7,
+   "Loam"
+  ],
+  "18241": [
+   "Pollian Prohitan",
+   148,
+   7,
+   "Loam"
+  ],
+  "18282": [
+   "Ripoh Muchliyan Doem",
+   148,
+   7,
+   "Loam"
+  ],
+  "18285": [
+   "Sar",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18286": [
+   "Paloh",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18254": [
+   "Nauhan",
+   148,
+   7,
+   "Loam"
+  ],
+  "18237": [
+   "Lamba Sail",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18239": [
+   "Up Mahal Mayod",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18288": [
+   "Suri",
+   148,
+   7,
+   "Loam"
+  ],
+  "18292": [
+   "Rakkar",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18298": [
+   "Baroh",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18297": [
+   "Lander Landiya",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18296": [
+   "Ladiyalsantu",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18295": [
+   "Jandoh",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18287": [
+   "Khawari Pattiyan",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18273": [
+   "Jawehar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18272": [
+   "Gondpur",
+   148,
+   7,
+   "Loam"
+  ],
+  "18293": [
+   "Papehar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18294": [
+   "Jandoh Rakkar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18290": [
+   "Lander Tikkari",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18275": [
+   "Kudet",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18291": [
+   "Manjhar",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18289": [
+   "Danguhi",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18277": [
+   "Jhaker",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18283": [
+   "Larauta",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18284": [
+   "Machlehar",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18278": [
+   "Gantharu",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18270": [
+   "Kadap",
+   148,
+   7,
+   "Loam"
+  ],
+  "18276": [
+   "Sandhari",
+   148,
+   7,
+   "Loam"
+  ],
+  "18280": [
+   "Ripoh Misran",
+   148,
+   7,
+   "Loam"
+  ],
+  "18279": [
+   "Ripoh Kuchha",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18281": [
+   "Ripoh Muchlian Abbal",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18242": [
+   "Ripoh Manmanyari",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18247": [
+   "Sanoh",
+   148,
+   7,
+   "Loam"
+  ],
+  "18246": [
+   "Satharu",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18269": [
+   "Kotla",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18321": [
+   "Basuni",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18299": [
+   "Dhar Gujran",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18300": [
+   "Tiyai",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18320": [
+   "Ladiyal Chuk",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18318": [
+   "Ladoli",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18271": [
+   "Nunyai",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18302": [
+   "Chak Sraye",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18264": [
+   "Gujrehra",
+   148,
+   7,
+   "Loam"
+  ],
+  "18263": [
+   "Nehri Khalsa",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18265": [
+   "Dharu",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18195": [
+   "Andora Nichla",
+   148,
+   7,
+   "Loam"
+  ],
+  "18196": [
+   "Andora Upperla",
+   148,
+   7,
+   "Loam"
+  ],
+  "18201": [
+   "Athwan",
+   148,
+   7,
+   "Loam"
+  ],
+  "18203": [
+   "Tibbi",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18209": [
+   "Bhalehar",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18210": [
+   "Pramb",
+   148,
+   7,
+   "Loam"
+  ],
+  "18213": [
+   "Alehar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18212": [
+   "Polian Jaswan",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18198": [
+   "Amb",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18197": [
+   "Pratap Nagar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18211": [
+   "Manso Tikkri",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18199": [
+   "Heera Nagar",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18200": [
+   "Adarsh Nagar",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18309": [
+   "Kathauhar Khurd",
+   148,
+   7,
+   "Loam"
+  ],
+  "18316": [
+   "Panjoa Kalan",
+   148,
+   7,
+   "Loam"
+  ],
+  "18310": [
+   "Bijapur",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18308": [
+   "Katauhar Kalan",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18307": [
+   "Khariala",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18317": [
+   "Panjoa Khurd",
+   148,
+   7,
+   "Loam"
+  ],
+  "18322": [
+   "Chatehar Behar",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18319": [
+   "Girgir",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18305": [
+   "Bharwan Urf Kangruhi",
+   148,
+   7,
+   "Loam"
+  ],
+  "18262": [
+   "Duhki",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18306": [
+   "Kuthera",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18261": [
+   "Jhot",
+   148,
+   7,
+   "Loam"
+  ],
+  "18215": [
+   "Saloi",
+   148,
+   7,
+   "Loam"
+  ],
+  "18256": [
+   "Sapori",
+   148,
+   7,
+   "Loam"
+  ],
+  "18255": [
+   "Mughal",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18238": [
+   "Patehad",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18260": [
+   "Mukho",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18259": [
+   "Santu Tilla",
+   148,
+   7,
+   "Loam"
+  ],
+  "18267": [
+   "Nahari Nauranga",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18266": [
+   "Dharui",
+   148,
+   7,
+   "Loam"
+  ],
+  "18258": [
+   "Karar Behar",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18245": [
+   "Rajpur Jaswan",
+   148,
+   7,
+   "Loam"
+  ],
+  "18248": [
+   "Gawalsar",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18257": [
+   "Bagga Barota",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18268": [
+   "Januhi",
+   148,
+   7,
+   "Loam"
+  ],
+  "18251": [
+   "Dulehan",
+   148,
+   7,
+   "Loam"
+  ],
+  "18253": [
+   "Aado",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18232": [
+   "Pangloo",
+   148,
+   7,
+   "Loam"
+  ],
+  "18250": [
+   "Guliyar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18365": [
+   "Tokrian",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18372": [
+   "Nandgran",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18370": [
+   "Baruha",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18381": [
+   "Takoli",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18500": [
+   "Khairian",
+   149,
+   7,
+   "Loam"
+  ],
+  "18380": [
+   "Chauli",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18374": [
+   "Sohari",
+   149,
+   7,
+   "Loam"
+  ],
+  "18376": [
+   "Dagrah",
+   149,
+   7,
+   "Loam"
+  ],
+  "18375": [
+   "Bhindla",
+   149,
+   7,
+   "Loam"
+  ],
+  "18373": [
+   "Barerah",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18234": [
+   "Reserve Jangal Dharui R Iii A",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18233": [
+   "Reserve Jangal Dharui R Iii E",
+   148,
+   7,
+   "Loam"
+  ],
+  "18243": [
+   "Reserve Jangal Dharui D",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18274": [
+   "Reserve Jangal R Iii Dharui G",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18303": [
+   "Reserve Jangal R Iii Dharui B",
+   148,
+   7,
+   "Loam"
+  ],
+  "18304": [
+   "Reserve Jangal R Iii Dharui F",
+   148,
+   7,
+   "Loam"
+  ],
+  "18244": [
+   "Palahad",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18252": [
+   "Reserve Jangal Dharui R Iii C I",
+   148,
+   4,
+   "Clay Loam"
+  ],
+  "18390": [
+   "D P F Dhayunser Iii",
+   149,
+   7,
+   "Loam"
+  ],
+  "18389": [
+   "D P F Dhayunser Ii",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18379": [
+   "D P F Dhayunser I",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18378": [
+   "D P F Behlan",
+   149,
+   7,
+   "Loam"
+  ],
+  "18366": [
+   "Bhallon",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18384": [
+   "Lalshah",
+   149,
+   7,
+   "Loam"
+  ],
+  "18386": [
+   "Baroa",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18382": [
+   "Behi",
+   149,
+   7,
+   "Loam"
+  ],
+  "18377": [
+   "Behlan",
+   149,
+   7,
+   "Loam"
+  ],
+  "18385": [
+   "Raunkhar",
+   149,
+   7,
+   "Loam"
+  ],
+  "18383": [
+   "Talmehra",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18387": [
+   "Bhalkhoon",
+   149,
+   7,
+   "Loam"
+  ],
+  "18504": [
+   "Deehar",
+   149,
+   7,
+   "Loam"
+  ],
+  "18402": [
+   "Kharol",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18401": [
+   "Nahri Dhian Singh",
+   149,
+   7,
+   "Loam"
+  ],
+  "18398": [
+   "Karor Rajputan",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18412": [
+   "Paproli",
+   149,
+   7,
+   "Loam"
+  ],
+  "18411": [
+   "Sai",
+   149,
+   7,
+   "Loam"
+  ],
+  "18408": [
+   "Bhiambi",
+   149,
+   7,
+   "Loam"
+  ],
+  "18407": [
+   "Chhattehr",
+   149,
+   7,
+   "Loam"
+  ],
+  "18405": [
+   "Charara",
+   149,
+   7,
+   "Loam"
+  ],
+  "18400": [
+   "Nahri Devi Singh",
+   149,
+   7,
+   "Loam"
+  ],
+  "18410": [
+   "Chaukahan",
+   149,
+   7,
+   "Loam"
+  ],
+  "18406": [
+   "Karmali",
+   149,
+   7,
+   "Loam"
+  ],
+  "18503": [
+   "Rajpura",
+   149,
+   7,
+   "Loam"
+  ],
+  "18399": [
+   "Karor Brahmna",
+   149,
+   7,
+   "Loam"
+  ],
+  "18393": [
+   "Arlu Kundu",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18392": [
+   "Arlu Gurmukh",
+   149,
+   7,
+   "Loam"
+  ],
+  "18395": [
+   "Shiv Nagar",
+   149,
+   7,
+   "Loam"
+  ],
+  "18214": [
+   "Kuhad Shhan",
+   148,
+   7,
+   "Loam"
+  ],
+  "18404": [
+   "D P F Sarkaru Ghorpalni Ii",
+   149,
+   7,
+   "Loam"
+  ],
+  "18403": [
+   "D P F Oeal Da Ban",
+   149,
+   7,
+   "Loam"
+  ],
+  "18413": [
+   "D P F Charara",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18505": [
+   "D P F Sarkaru Ghor Palani",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18422": [
+   "D P F Bharmot",
+   149,
+   7,
+   "Loam"
+  ],
+  "18068": [
+   "Bambansera",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18062": [
+   "Nari",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18077": [
+   "Duhal Bhatwalan",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18078": [
+   "Paplehra",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18086": [
+   "Aloh",
+   147,
+   7,
+   "Loam"
+  ],
+  "18090": [
+   "Jholan",
+   147,
+   7,
+   "Loam"
+  ],
+  "18093": [
+   "Bhatolan Padehr",
+   147,
+   7,
+   "Loam"
+  ],
+  "18092": [
+   "Lohara Khas",
+   147,
+   7,
+   "Loam"
+  ],
+  "18089": [
+   "Baher Bhagwalan",
+   147,
+   7,
+   "Loam"
+  ],
+  "18084": [
+   "Mawan",
+   147,
+   7,
+   "Loam"
+  ],
+  "18094": [
+   "Sarrha",
+   147,
+   7,
+   "Loam"
+  ],
+  "18095": [
+   "Guret",
+   147,
+   7,
+   "Loam"
+  ],
+  "18080": [
+   "Bagmahua",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18083": [
+   "Kotli Dharu",
+   147,
+   7,
+   "Loam"
+  ],
+  "18085": [
+   "Kinoo",
+   147,
+   7,
+   "Loam"
+  ],
+  "18079": [
+   "Thaneek Pura",
+   147,
+   7,
+   "Loam"
+  ],
+  "18082": [
+   "Kotli",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18067": [
+   "Duhal Bangwalan",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18072": [
+   "Amokla Sandu",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18088": [
+   "Lamba Panga",
+   147,
+   7,
+   "Loam"
+  ],
+  "18091": [
+   "Reserve Jangal B",
+   147,
+   7,
+   "Loam"
+  ],
+  "18081": [
+   "Ramnagar",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18073": [
+   "Amokla Pritam",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18066": [
+   "Chhaproh",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18076": [
+   "Haripur",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18074": [
+   "Rahi",
+   147,
+   7,
+   "Loam"
+  ],
+  "18075": [
+   "Mirgoo",
+   147,
+   4,
+   "Clay Loam"
+  ],
+  "18221": [
+   "Chuar",
+   148,
+   7,
+   "Loam"
+  ],
+  "18222": [
+   "Ardoh",
+   148,
+   7,
+   "Loam"
+  ],
+  "18224": [
+   "Band Bakshi",
+   148,
+   7,
+   "Loam"
+  ],
+  "18223": [
+   "Takoli",
+   148,
+   7,
+   "Loam"
+  ],
+  "18227": [
+   "Gangoti",
+   148,
+   7,
+   "Loam"
+  ],
+  "18225": [
+   "Amb Tilla",
+   148,
+   7,
+   "Loam"
+  ],
+  "18226": [
+   "Baihal",
+   148,
+   7,
+   "Loam"
+  ],
+  "18228": [
+   "Reserve Jangal Dharui R Iii",
+   148,
+   7,
+   "Loam"
+  ],
+  "18409": [
+   "Sukryal",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18433": [
+   "Alsahan",
+   149,
+   7,
+   "Loam"
+  ],
+  "18421": [
+   "Samlara",
+   149,
+   7,
+   "Loam"
+  ],
+  "18391": [
+   "Arlu Khas",
+   149,
+   7,
+   "Loam"
+  ],
+  "18415": [
+   "Aisan",
+   149,
+   7,
+   "Loam"
+  ],
+  "18432": [
+   "Ghaloon",
+   149,
+   7,
+   "Loam"
+  ],
+  "18431": [
+   "Rerku",
+   149,
+   7,
+   "Loam"
+  ],
+  "18430": [
+   "Samma",
+   149,
+   7,
+   "Loam"
+  ],
+  "18428": [
+   "Thana Uparla",
+   149,
+   7,
+   "Loam"
+  ],
+  "18429": [
+   "Thana Jhikla",
+   149,
+   7,
+   "Loam"
+  ],
+  "18427": [
+   "Talpi",
+   149,
+   7,
+   "Loam"
+  ],
+  "18425": [
+   "Behrar",
+   149,
+   7,
+   "Loam"
+  ],
+  "18416": [
+   "Damohad",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18420": [
+   "Hathlaun",
+   149,
+   7,
+   "Loam"
+  ],
+  "18414": [
+   "Jasana",
+   149,
+   7,
+   "Loam"
+  ],
+  "18396": [
+   "Bhabha",
+   149,
+   7,
+   "Loam"
+  ],
+  "18397": [
+   "Baggi",
+   149,
+   7,
+   "Loam"
+  ],
+  "18417": [
+   "Bharmot",
+   149,
+   7,
+   "Loam"
+  ],
+  "18418": [
+   "Lakhroon",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18446": [
+   "Dhagroon",
+   149,
+   7,
+   "Loam"
+  ],
+  "18442": [
+   "Riwar",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18419": [
+   "Majhiani",
+   149,
+   7,
+   "Loam"
+  ],
+  "18455": [
+   "Saloh",
+   149,
+   7,
+   "Loam"
+  ],
+  "18426": [
+   "Jhagrot",
+   149,
+   7,
+   "Loam"
+  ],
+  "18424": [
+   "Hatwana",
+   149,
+   7,
+   "Loam"
+  ],
+  "18447": [
+   "Bout",
+   149,
+   7,
+   "Loam"
+  ],
+  "18434": [
+   "Marhot Rajputan",
+   149,
+   7,
+   "Loam"
+  ],
+  "18438": [
+   "Mehed",
+   149,
+   7,
+   "Loam"
+  ],
+  "18437": [
+   "Hatli Sultanu",
+   149,
+   4,
+   "Clay Loam"
+  ],
+  "18441": [
+   "Danoh",
+   149,
+   7,
+   "Loam"
+  ],
+  "18436": [
+   "Hatli Kesru",
+   149,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 853,
+ "village_count_sampled": 840
+}

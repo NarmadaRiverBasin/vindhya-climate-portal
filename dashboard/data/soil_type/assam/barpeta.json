@@ -1,0 +1,4766 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Assam",
+  "district": "Barpeta",
+  "district_lgd": 280,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (787/846 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 7,
+  "dominant_class": "Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 4517,
+   "Sandy Clay Loam": 14127,
+   "Loam": 17350,
+   "Sandy Loam": 20
+  },
+  "n_pixels": 36015
+ },
+ "villages": {
+  "282905": [
+   "Mahammadpur",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282743": [
+   "Hatchara",
+   2019,
+   4,
+   "Clay Loam"
+  ],
+  "283078": [
+   "Patbaushi",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282987": [
+   "Bar Chenga",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282871": [
+   "Balajan",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282873": [
+   "Silashi Pathar",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282781": [
+   "Chatala Gaon",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282874": [
+   "Saorar Bhitha",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282869": [
+   "Sat Mukhi",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282770": [
+   "Kismat Moinbari",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282772": [
+   "Kismat Moinbari N C",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282762": [
+   "Uttar Moinbari",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282775": [
+   "Tarakandi",
+   2019,
+   4,
+   "Clay Loam"
+  ],
+  "282761": [
+   "Pachim Moinbari",
+   2019,
+   4,
+   "Clay Loam"
+  ],
+  "282786": [
+   "Phulora N C",
+   2019,
+   4,
+   "Clay Loam"
+  ],
+  "282760": [
+   "Niz Moinbari",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282778": [
+   "Roukhowa",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282843": [
+   "Niz Baghbar",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282782": [
+   "Pathar Chali",
+   2019,
+   4,
+   "Clay Loam"
+  ],
+  "282846": [
+   "Baghbar Pathar",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282868": [
+   "Saora Pathar",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282861": [
+   "Rowmari",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282867": [
+   "Jahanar Pam",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282785": [
+   "Bandarmora",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282862": [
+   "Balikuri Pam Barikuri Pam",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282844": [
+   "Baghbar Gaon",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282866": [
+   "Jahanar Par",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282863": [
+   "Jahanar Gaon",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282864": [
+   "Jahanar Pathar",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282777": [
+   "Hapachara Gaon",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282842": [
+   "Balapara",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282859": [
+   "Tekla Chuti",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282860": [
+   "Matha Ranga",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282841": [
+   "Dola Gaon",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282853": [
+   "Chapari Pathar",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282883": [
+   "Momin Pur",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282856": [
+   "Kalgachi",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282884": [
+   "Syed Pur",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282858": [
+   "Mowkhowa Char N C",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282878": [
+   "Kadam Tola",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282887": [
+   "Islam Pur",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282857": [
+   "Ujirar Char",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282783": [
+   "Chatala N C",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282784": [
+   "Chachapari",
+   2019,
+   4,
+   "Clay Loam"
+  ],
+  "282779": [
+   "Gobindapur",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282776": [
+   "Hapachara Pathar",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282876": [
+   "Bhatnapaity Char N C",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282840": [
+   "Dalarpam",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282773": [
+   "Khandakar Para",
+   2019,
+   7,
+   "Loam"
+  ],
+  "999999": [
+   "Brahmaputra River",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282665": [
+   "Bare Gaon",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282666": [
+   "Nil Chaka Bausi",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282667": [
+   "Uttar Bher Bheri",
+   2018,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282668": [
+   "Fewra Khowa",
+   2018,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282674": [
+   "Meda Gaon",
+   2018,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282676": [
+   "Madulijar",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282673": [
+   "Dakshin Bher Bheri",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282671": [
+   "Bala Pet",
+   2018,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282669": [
+   "Bala Gaon",
+   2018,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282682": [
+   "Jakua Para",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282675": [
+   "Dwarika",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282672": [
+   "Bagula Mari",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282684": [
+   "Barharid",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282683": [
+   "Ghilajari",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282685": [
+   "Raha Gaon",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282670": [
+   "Chandha Mari",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282687": [
+   "Ghugu Bari",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282686": [
+   "Dharma Pur",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282695": [
+   "Jamer Kur",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282696": [
+   "Bhera",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282707": [
+   "Dewkura",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282708": [
+   "Monakocha",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282709": [
+   "Dimapur",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282693": [
+   "Haldia Gaon",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282732": [
+   "Titapani",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282715": [
+   "Kalgachia",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282895": [
+   "Balikuri N C",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282734": [
+   "Rampur",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282736": [
+   "Banghugi",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282733": [
+   "Bankabhanga",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282765": [
+   "Jaurimari Gaon",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282788": [
+   "Kayakuchi Pathar",
+   2019,
+   4,
+   "Clay Loam"
+  ],
+  "282735": [
+   "Khelli",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282740": [
+   "Khudrakhowa",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282754": [
+   "Isabpur",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282752": [
+   "Chikni",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282758": [
+   "Sonabari",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282748": [
+   "Khatatari",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282744": [
+   "Barbhitha",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282756": [
+   "Balikuri Gaon",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282771": [
+   "Moyanbari Pam",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282751": [
+   "Sawrachar Gaon Sewrachera Gaon",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282872": [
+   "Morabhaj",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282747": [
+   "Chandmama Gaon",
+   2019,
+   4,
+   "Clay Loam"
+  ],
+  "282742": [
+   "Mohia",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282767": [
+   "Purana Sikartari",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282763": [
+   "Dhakalia Para",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282787": [
+   "Deuldi",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282766": [
+   "Sikartari Pathar",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282757": [
+   "Balikuri Pathar",
+   2019,
+   4,
+   "Clay Loam"
+  ],
+  "282870": [
+   "Siknir Par",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282664": [
+   "Dakshin Gonakgari",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282789": [
+   "Hatijuna",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282790": [
+   "Pathalia Para",
+   2019,
+   4,
+   "Clay Loam"
+  ],
+  "282791": [
+   "Kayakuchi Gaon",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282764": [
+   "Takakata",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282738": [
+   "Kandulia",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282753": [
+   "Jaurimari V G R",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282741": [
+   "Uprupi",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282746": [
+   "Solmari",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282745": [
+   "Chandmama Pathar",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282737": [
+   "Garali Pam",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282717": [
+   "Gunialguri",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282716": [
+   "Amguri",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282713": [
+   "Sutir Pathar",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282730": [
+   "Langla",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282722": [
+   "Balapathar",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282729": [
+   "Bagulamari",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282731": [
+   "Chenimari",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282719": [
+   "Nadiapara",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282725": [
+   "Chariatpur",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282726": [
+   "Digjani",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282718": [
+   "Dabandia",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282727": [
+   "Khudrakuchi",
+   2019,
+   4,
+   "Clay Loam"
+  ],
+  "282728": [
+   "Balagaon",
+   2019,
+   4,
+   "Clay Loam"
+  ],
+  "282901": [
+   "Chan Pur",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282755": [
+   "Manikpur",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282739": [
+   "Bartari",
+   2019,
+   7,
+   "Loam"
+  ],
+  "283120": [
+   "Bar Ghol",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282824": [
+   "Digir Pam",
+   2020,
+   7,
+   "Loam"
+  ],
+  "283131": [
+   "Chaka Bausi Gaon",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283121": [
+   "Khapan Baria Bhitha",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282811": [
+   "Pam Dongra",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282812": [
+   "Habi Dongra",
+   2020,
+   7,
+   "Loam"
+  ],
+  "283130": [
+   "Chaka Bausi Pathar",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282834": [
+   "Kanara",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282803": [
+   "Digir Pathar",
+   2020,
+   7,
+   "Loam"
+  ],
+  "283119": [
+   "Kachari Para",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282806": [
+   "Chachara",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282815": [
+   "Baksha Badha",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282944": [
+   "Chenimari",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282951": [
+   "Damdama N C",
+   2021,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282823": [
+   "Digir Par",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282825": [
+   "Lahara Para",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282949": [
+   "Damdama",
+   2021,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282808": [
+   "Garala Gaon",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282835": [
+   "Chasra Gaon",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282810": [
+   "Garala Pam",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282826": [
+   "Kharki",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282829": [
+   "Barali",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282807": [
+   "Garala Suti",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282837": [
+   "Kahibari Pam",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282819": [
+   "Ali Gaon Pathar",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282974": [
+   "Lakhimpur N C",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282822": [
+   "Ali Gaon N C",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282820": [
+   "Char Gaon",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282969": [
+   "Marisakandi N C",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282972": [
+   "Kholabandha N C",
+   2021,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282821": [
+   "Char Gaon Pam N C",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282956": [
+   "Mairadia N C",
+   2021,
+   4,
+   "Clay Loam"
+  ],
+  "282965": [
+   "Nirala N C",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282875": [
+   "Chakhowajar N C",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282889": [
+   "Chakhowajar",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282973": [
+   "Pathimari N C",
+   2021,
+   4,
+   "Clay Loam"
+  ],
+  "282959": [
+   "Mahsara",
+   2021,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282961": [
+   "Mahsara N C",
+   2021,
+   4,
+   "Clay Loam"
+  ],
+  "282958": [
+   "Kashimpur",
+   2021,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282882": [
+   "Majar Char N C",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282880": [
+   "Kalardia N C",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282954": [
+   "Kachumara N C",
+   2021,
+   4,
+   "Clay Loam"
+  ],
+  "282881": [
+   "Alupati N C",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282960": [
+   "Simalubari",
+   2021,
+   4,
+   "Clay Loam"
+  ],
+  "282957": [
+   "Kachumara",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282879": [
+   "Nichanir Char N C",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282962": [
+   "Halanga Para N C",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282847": [
+   "Baghmara N C",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282850": [
+   "Bagamara N C",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282849": [
+   "Baghmara N C",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282848": [
+   "Baghmara N C",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282955": [
+   "Aduripara N C",
+   2021,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282942": [
+   "Arimara N C",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282828": [
+   "Silosi",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282827": [
+   "Ranirpam",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282952": [
+   "Uttar Godhani N C",
+   2021,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282940": [
+   "Bardia N C",
+   2021,
+   7,
+   "Loam"
+  ],
+  "283355": [
+   "Maj Gaon",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283367": [
+   "Katola Pathar Katbal Pathar",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283358": [
+   "Hari Pur",
+   2025,
+   7,
+   "Loam"
+  ],
+  "282656": [
+   "Bala Bhitha",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283357": [
+   "Purbaluasur",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283369": [
+   "Niz Bhabanipur",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283356": [
+   "Ananda Pur",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283381": [
+   "Madha Pur",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282657": [
+   "Bhaluki",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283210": [
+   "Chapar Bari",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283373": [
+   "Pora Bhoral",
+   2025,
+   4,
+   "Clay Loam"
+  ],
+  "283371": [
+   "Dakshin Hati",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283372": [
+   "Namati",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283370": [
+   "Pub Hati",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283380": [
+   "Na Kuchi Gaon",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282678": [
+   "Sapana",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283382": [
+   "Datir Bori",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283375": [
+   "Galia",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283374": [
+   "Suk Manah Sukumanaha",
+   2025,
+   4,
+   "Clay Loam"
+  ],
+  "283379": [
+   "Na Kuchi Pathar Naruchi Pathar",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283008": [
+   "Joypur",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283376": [
+   "Gathi Para Gathia Para",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282627": [
+   "Moutupuri",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283384": [
+   "Karagari Pathar",
+   2025,
+   7,
+   "Loam"
+  ],
+  "282679": [
+   "Kurobaha Kurobaha",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283378": [
+   "Daira Buri",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282681": [
+   "Saru Harid",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282680": [
+   "Chal Chalia",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283383": [
+   "Karagari",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283009": [
+   "Nagarjar",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283015": [
+   "Itarbheta",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283377": [
+   "Tapa",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283040": [
+   "Kathalor Tari",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283010": [
+   "Kathlijar",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282690": [
+   "Jaknikura Jakanikura",
+   2018,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283223": [
+   "Kayakuchi Pam",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283038": [
+   "Kujarpith",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283037": [
+   "Kaljar",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283046": [
+   "Bhakuamari",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283045": [
+   "Ata",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282689": [
+   "Kamar Para",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283044": [
+   "Suagpur",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282688": [
+   "Khata Kuchi Lhta Kuchi",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282694": [
+   "Haldia Pathar",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283043": [
+   "Fulor Guri",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283041": [
+   "Bamun Bari",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283014": [
+   "Moiramara",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283011": [
+   "Hajipara",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283039": [
+   "Khandar Par",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282697": [
+   "Bardonga",
+   2019,
+   7,
+   "Loam"
+  ],
+  "249844": [
+   "Howli",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283047": [
+   "Kuriha",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283226": [
+   "Kayakuchi Gaon",
+   2023,
+   7,
+   "Loam"
+  ],
+  "282698": [
+   "Meni Simla",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282705": [
+   "Lachanga",
+   2019,
+   7,
+   "Loam"
+  ],
+  "283016": [
+   "Dewlipara",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283042": [
+   "Rangialor Tari",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283053": [
+   "Barbala",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283051": [
+   "Betbari Pathar",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282700": [
+   "Guileza",
+   2019,
+   4,
+   "Clay Loam"
+  ],
+  "283019": [
+   "Hatijana",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283052": [
+   "Betbari Gaon",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283049": [
+   "Marolor Tari",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283050": [
+   "Kamalpur",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283017": [
+   "Aichara Para",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283021": [
+   "Bagaijan Para",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283048": [
+   "Bunbahar Bonbaha",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282701": [
+   "Srirampur",
+   2019,
+   7,
+   "Loam"
+  ],
+  "283018": [
+   "Khandakar Para",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283022": [
+   "Kadam Guri",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283227": [
+   "Kayakuchi Pathar",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283060": [
+   "Khablar Bhitha",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283056": [
+   "Kamalpur Pam",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283020": [
+   "Jochihati",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283023": [
+   "Dabalia Para",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283229": [
+   "Teleria",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283062": [
+   "Maricha",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283055": [
+   "Jarabari",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283061": [
+   "Chakir Bhitha",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283025": [
+   "Dhakalia Para Dhakia Para",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283059": [
+   "Putlar Tari",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283026": [
+   "Kumulli Para Kumulia Para",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283230": [
+   "Gumir Pathar Gunir Pathar",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283024": [
+   "Datta Kuchi",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283238": [
+   "Jalkara",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283054": [
+   "Balarbhitha",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283058": [
+   "Bhalukabari Gaon",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283231": [
+   "Kapahar Tari",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283057": [
+   "Bhalukabari Pathar",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283063": [
+   "Bariar Pathar",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283236": [
+   "Thekar Pathar",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283237": [
+   "Theka Gaon Thekar Gaon",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283232": [
+   "Panimaricha Pathar",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283064": [
+   "Banti Pur",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283065": [
+   "Pakabetbaripam N C",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283066": [
+   "Pakabetbari Gaon",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283030": [
+   "Jogir Pam",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283028": [
+   "Garemara Gaon",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283027": [
+   "Baniara Para",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283029": [
+   "Garemara Pathar",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283233": [
+   "Maricha Pathar",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283234": [
+   "Panimaricha Gaon Punimaricha Gaon",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283100": [
+   "Kharadhara Pathar Kharadhara",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283032": [
+   "Deuri Kuchi",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283235": [
+   "Bhera Gaon",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282912": [
+   "Bangli Para",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283031": [
+   "Dona Kuchi",
+   2022,
+   4,
+   "Clay Loam"
+  ],
+  "283068": [
+   "Khandarkur",
+   2022,
+   4,
+   "Clay Loam"
+  ],
+  "283067": [
+   "Keot Para",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283069": [
+   "Paka Betbari Pathar",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283034": [
+   "Dhan Bandha",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283086": [
+   "Taparbori",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283035": [
+   "Dangarkuchi",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283071": [
+   "Bamuna",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283098": [
+   "Panichilla",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283094": [
+   "Kharua Para Nagaon Kharuapara",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283033": [
+   "Bahmura",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283036": [
+   "Jaher Pam Johar Pam",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283097": [
+   "Dokania",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282721": [
+   "Aditpur",
+   2019,
+   7,
+   "Loam"
+  ],
+  "283095": [
+   "Radhakuchi",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282724": [
+   "Sawpur Saalpur",
+   2019,
+   7,
+   "Loam"
+  ],
+  "283072": [
+   "Sundaridia",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282908": [
+   "Jania",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282927": [
+   "Ranga Pani",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283087": [
+   "Bheraldi",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "249843": [
+   "Barpeta",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283085": [
+   "Baradi",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282906": [
+   "Tapajuli",
+   2020,
+   7,
+   "Loam"
+  ],
+  "283096": [
+   "Radhakuchi Habi",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283073": [
+   "Joti Gaon",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282928": [
+   "Bhera",
+   2020,
+   7,
+   "Loam"
+  ],
+  "283070": [
+   "Bamun Baradi",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283091": [
+   "Banbaria",
+   2022,
+   4,
+   "Clay Loam"
+  ],
+  "283092": [
+   "Jabrikuchi",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283084": [
+   "Fatig Grah",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283083": [
+   "Satra Baradi",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283082": [
+   "Keotkuchi",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283110": [
+   "Barbila",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282894": [
+   "Gagalmari",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282930": [
+   "Gajia",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "283089": [
+   "Nasatra",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283088": [
+   "Bhella",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282723": [
+   "Udmari",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282900": [
+   "Sonapur",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282932": [
+   "Bhograndha",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283079": [
+   "Majkuchi",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283111": [
+   "Bara",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282929": [
+   "Medhirtari",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282896": [
+   "Rubhi",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282893": [
+   "Kanda Para",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283113": [
+   "Batikuriha",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282922": [
+   "Karertal",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "283112": [
+   "Kaljahi",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283081": [
+   "Moukhari Manikhari",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283090": [
+   "Khankarpara",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282933": [
+   "Barpalli",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282975": [
+   "Chutia Para",
+   2021,
+   7,
+   "Loam"
+  ],
+  "283075": [
+   "Major Gaon",
+   2022,
+   4,
+   "Clay Loam"
+  ],
+  "282793": [
+   "Agmandia",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282923": [
+   "Bhatkuchi",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282903": [
+   "Rasul Pur",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282891": [
+   "Lurfuria",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282898": [
+   "Islampur",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282902": [
+   "Rasul Pur",
+   2020,
+   7,
+   "Loam"
+  ],
+  "283080": [
+   "Gaher Pam",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282931": [
+   "Tetelirtol",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282892": [
+   "Sidhani",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282919": [
+   "Hasan Pur",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "283114": [
+   "Sila",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282925": [
+   "Pathlikuchi",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282915": [
+   "Gurala",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283077": [
+   "Kahibari",
+   2022,
+   4,
+   "Clay Loam"
+  ],
+  "283125": [
+   "Pakda Bilor Pathar Pakdahabila",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283140": [
+   "Teklabala Tekelabala",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283142": [
+   "Nangalkur",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283076": [
+   "Gandhi",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283126": [
+   "Milekuchi Mail Kuchi",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282917": [
+   "Ali Pur",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282982": [
+   "Gelabil",
+   2021,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283115": [
+   "Omura Gumura",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282890": [
+   "Citali",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282926": [
+   "Pathlikuchi Pathar",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282924": [
+   "Kopoha",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282802": [
+   "Mandia Bardalani N C",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283124": [
+   "Damal Jar",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283137": [
+   "Temura",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283139": [
+   "Pahumara Pomara",
+   2022,
+   4,
+   "Clay Loam"
+  ],
+  "283135": [
+   "Chakda Chakada",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283123": [
+   "Suha Bil Daloni Sohabil Doloni",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283116": [
+   "Bar Suha Barsoha",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282920": [
+   "Koemari",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282914": [
+   "Gobinda Pur",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282800": [
+   "Mouri Pam",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282794": [
+   "Bhairarpam",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283134": [
+   "Charag Para",
+   2022,
+   4,
+   "Clay Loam"
+  ],
+  "282795": [
+   "Gopalpur",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "283127": [
+   "Palhaji",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283138": [
+   "Dongra",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282916": [
+   "Bhera",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282921": [
+   "Dakhin Sitali",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282796": [
+   "Salimpur",
+   2020,
+   7,
+   "Loam"
+  ],
+  "283117": [
+   "Bar Baradi",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283122": [
+   "Dakreswar",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283129": [
+   "Garemari Gaon",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282799": [
+   "Mandia Pathar",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "283128": [
+   "Garemari Pathar",
+   2022,
+   4,
+   "Clay Loam"
+  ],
+  "282833": [
+   "Satra Kanara N C",
+   2020,
+   7,
+   "Loam"
+  ],
+  "283118": [
+   "Pajar Bhanga",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282836": [
+   "Chasra",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282813": [
+   "Bamun Dongra",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282801": [
+   "Mouri Gaon",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282805": [
+   "Tedhara Pathar",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283132": [
+   "Rahampur",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283141": [
+   "Belortari",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283004": [
+   "Balapara",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282797": [
+   "Jadabpur",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "282814": [
+   "Paharpur Katuli",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283133": [
+   "Garemari Habi",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282804": [
+   "Tedhara Gaon",
+   2020,
+   7,
+   "Loam"
+  ],
+  "283007": [
+   "Ghilajari",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282660": [
+   "Shalmara",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282659": [
+   "Jaisihati",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282626": [
+   "Barbari Jhar",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282625": [
+   "Hala Pakuri",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282658": [
+   "Raypur",
+   2018,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282663": [
+   "Keteki Bari",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282699": [
+   "Char Charia",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282703": [
+   "Mowamari",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282704": [
+   "Besimari",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282702": [
+   "Golia",
+   2019,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282712": [
+   "Kasukati",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282720": [
+   "Tapeswara",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282711": [
+   "Kaur Jahi",
+   2019,
+   7,
+   "Loam"
+  ],
+  "282899": [
+   "Kalampur",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282913": [
+   "Daukmari",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282909": [
+   "Salekura",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282910": [
+   "Rupakuchi",
+   2020,
+   7,
+   "Loam"
+  ],
+  "282907": [
+   "Chunpura",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283006": [
+   "Nunmati",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283012": [
+   "Phulkipara",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283013": [
+   "Ambari",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283074": [
+   "Ganak Kuchi Gaon",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282633": [
+   "Howli Gaon",
+   2018,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282632": [
+   "Guagacha",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282629": [
+   "Bahbari",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282631": [
+   "Mech Para",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282904": [
+   "Kadong",
+   2020,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282911": [
+   "Chapra",
+   2020,
+   4,
+   "Clay Loam"
+  ],
+  "283215": [
+   "Amda Pathar",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283295": [
+   "Kochdiga",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283214": [
+   "Amda Gaon",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283213": [
+   "Satra Barala",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283291": [
+   "Bargandubi",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283250": [
+   "Bagana",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283294": [
+   "Rupdiga",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283209": [
+   "Bhare Gaon",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283292": [
+   "Ban Gaon",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283252": [
+   "Hathina Pur",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283216": [
+   "Chagal Chari",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283251": [
+   "Niz Saldah",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283212": [
+   "Niz Barala",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283211": [
+   "Phinguwa Gaon",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283290": [
+   "Panara",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283293": [
+   "Maguri",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283217": [
+   "Bakala",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283253": [
+   "Kai Mari",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283221": [
+   "Hatir Tari",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283220": [
+   "Phinguwa Pathar",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283267": [
+   "Kashkuri Gaon",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283219": [
+   "Goli Bandha",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283254": [
+   "Barsimla",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283218": [
+   "Balapara",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283255": [
+   "Rampur",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283222": [
+   "Kirkira",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283224": [
+   "Kawaimarikaragari Reserve",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283265": [
+   "Parakuchi Gaon Parakhuchi Pam",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283269": [
+   "Parakuchi Pam Parakhuchi Pam",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283225": [
+   "Nali Gaon",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283257": [
+   "Kharia",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283270": [
+   "Kalatoli Pathar",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283258": [
+   "Satra Paka",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283228": [
+   "Nalir Pam Nabir Pam",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283240": [
+   "Helacha",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283243": [
+   "Era Gaon",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283247": [
+   "Newlar Bhitha",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283245": [
+   "Erar Tari Ara Tari",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283259": [
+   "Jabri Kuchi",
+   2023,
+   4,
+   "Clay Loam"
+  ],
+  "283241": [
+   "Nalir Pathar",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283202": [
+   "Hariadi",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283260": [
+   "Bamun Paka Bamen Paka",
+   2023,
+   4,
+   "Clay Loam"
+  ],
+  "283242": [
+   "Pithadi Gaon",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283244": [
+   "Era Kachari Para",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283239": [
+   "Pithadi Pam",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283196": [
+   "Khudra Amrikhowa",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283248": [
+   "Kurihar Pam",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283246": [
+   "Bamundi",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283262": [
+   "Na Satra",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283261": [
+   "Phul Bari",
+   2023,
+   4,
+   "Clay Loam"
+  ],
+  "283099": [
+   "Bhayraguri Pam",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283143": [
+   "Rangia Gaon",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283144": [
+   "Rangia Nadir Pam",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283145": [
+   "Bogchara",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283207": [
+   "Balipara Pam",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283177": [
+   "Lachima",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283146": [
+   "Josodar Pam",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283147": [
+   "Kaljahi Pathar",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283175": [
+   "Rawly",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283102": [
+   "Bagudi Bagadi",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283149": [
+   "Besimari Pam",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283174": [
+   "Bebari Gaon",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283176": [
+   "Kamar Para",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283178": [
+   "Haladhi Bari",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283101": [
+   "Kahikuchi",
+   2022,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283148": [
+   "Uttar Burikamar",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283153": [
+   "Singra",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283173": [
+   "Belbari Pathar",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283179": [
+   "Barkapala",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283180": [
+   "Kaldi Pathar",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283194": [
+   "Chinadi",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283152": [
+   "Garartari",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283103": [
+   "Debradi Debrodi",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283172": [
+   "Bhakua Tepa",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283151": [
+   "Gahia",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283104": [
+   "Hahchara",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283170": [
+   "Pachim Aladi",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283190": [
+   "Khapani Kuchi",
+   2023,
+   4,
+   "Clay Loam"
+  ],
+  "283150": [
+   "Agdia Pathar",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283192": [
+   "Khudra Chinadi",
+   2023,
+   4,
+   "Clay Loam"
+  ],
+  "283169": [
+   "Purba Aladi",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283171": [
+   "Barmara",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283155": [
+   "Bayasha",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283181": [
+   "Chengdi",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283191": [
+   "Potlarkur",
+   2023,
+   4,
+   "Clay Loam"
+  ],
+  "283182": [
+   "Kamalabari",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283109": [
+   "Bar Agdia",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283105": [
+   "Baramara",
+   2022,
+   7,
+   "Loam"
+  ],
+  "283154": [
+   "Sarimakuchi",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283158": [
+   "Khudrafaladi",
+   2023,
+   4,
+   "Clay Loam"
+  ],
+  "283189": [
+   "Chinadi Pathar",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283183": [
+   "Bagari Tari",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283167": [
+   "Byaskuchi",
+   2023,
+   4,
+   "Clay Loam"
+  ],
+  "283188": [
+   "Barghopa",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283157": [
+   "Bhogdia",
+   2023,
+   7,
+   "Loam"
+  ],
+  "282978": [
+   "Saru Chenga",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282990": [
+   "Muchalman Gaon",
+   2021,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283156": [
+   "Agdia",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283160": [
+   "Balar Bari",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283163": [
+   "Mazdia",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283159": [
+   "Barfaladi",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283187": [
+   "Chatala",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283107": [
+   "Dambra Bawa Damradoa",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282994": [
+   "Bechimari Pathar",
+   2021,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283184": [
+   "Garia Chatala",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283108": [
+   "Bamun Kuchi",
+   2022,
+   7,
+   "Loam"
+  ],
+  "282976": [
+   "Matabari",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282988": [
+   "Niz Chenga",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282979": [
+   "Kadamtala",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282977": [
+   "Batgaon",
+   2021,
+   7,
+   "Loam"
+  ],
+  "283161": [
+   "Kathal Bhuri",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283185": [
+   "Khudra Bamunbari",
+   2023,
+   7,
+   "Loam"
+  ],
+  "283162": [
+   "Kukar Par",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283000": [
+   "Roumari Pathar",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282999": [
+   "Roumari Gaon",
+   2021,
+   4,
+   "Clay Loam"
+  ],
+  "282980": [
+   "Bampara",
+   2021,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282998": [
+   "Chata Gaon",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282981": [
+   "Ganak Para",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282983": [
+   "Kakdhowa",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282989": [
+   "Subha",
+   2021,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282991": [
+   "Maneri",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282992": [
+   "Barbhitha",
+   2021,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282985": [
+   "Haripur",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282996": [
+   "Malipara",
+   2021,
+   4,
+   "Clay Loam"
+  ],
+  "282997": [
+   "Balartari",
+   2021,
+   4,
+   "Clay Loam"
+  ],
+  "282984": [
+   "Fulbari",
+   2021,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282986": [
+   "Niz Bahari",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282938": [
+   "Bandali",
+   2021,
+   7,
+   "Loam"
+  ],
+  "283003": [
+   "Guma Goma",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282947": [
+   "Chenglidia N C",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282943": [
+   "Chenglidia",
+   2021,
+   4,
+   "Clay Loam"
+  ],
+  "282935": [
+   "Sarudia",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282939": [
+   "Jatradia N C",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282936": [
+   "Atiya",
+   2021,
+   7,
+   "Loam"
+  ],
+  "283002": [
+   "Tarabari",
+   2021,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283001": [
+   "Kaltali",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282945": [
+   "Balidhari",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282934": [
+   "Bardia",
+   2021,
+   7,
+   "Loam"
+  ],
+  "283186": [
+   "Kaldi",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283164": [
+   "Garai Mari",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283166": [
+   "Barbil Pathar",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282941": [
+   "Sarudia N C",
+   2021,
+   7,
+   "Loam"
+  ],
+  "283165": [
+   "Gadeshali Pam",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "249846": [
+   "Sarthebari",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283203": [
+   "Karakuchi",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283199": [
+   "Namshala",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283204": [
+   "Palla",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283205": [
+   "Dewan Khetri",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283198": [
+   "Barshala Bilar Pathar",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283197": [
+   "Bar Amrikhowa",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283195": [
+   "Balipara Pather",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283206": [
+   "Hari Ghata",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283200": [
+   "Khudra Gomura",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283201": [
+   "Bar Gomura",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283264": [
+   "Batia",
+   2023,
+   4,
+   "Clay Loam"
+  ],
+  "283263": [
+   "Pakadalani",
+   2023,
+   4,
+   "Clay Loam"
+  ],
+  "283268": [
+   "Kashkuri Pam",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283266": [
+   "Kashkuri Pathar",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283256": [
+   "Maripur",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283296": [
+   "Tihu Dekhata",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283193": [
+   "Na Kuchi",
+   2023,
+   4,
+   "Clay Loam"
+  ],
+  "283005": [
+   "Bohari CT",
+   2021,
+   7,
+   "Loam"
+  ],
+  "282604": [
+   "Dotra",
+   2018,
+   4,
+   "Clay Loam"
+  ],
+  "282603": [
+   "Dakshinburi Khamar",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282605": [
+   "Sulikata Suliakata",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282606": [
+   "Kumuria",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282608": [
+   "Peragaon Pathar",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282607": [
+   "Peragaon",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282610": [
+   "Sukanjani",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282642": [
+   "Santaradaha Samtra",
+   2018,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282640": [
+   "Duramari",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282643": [
+   "Bairapur",
+   2018,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282647": [
+   "Bhaluk Doba",
+   2018,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282650": [
+   "Rampur",
+   2018,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "249842": [
+   "Sarbhog",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282649": [
+   "Nontola",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282646": [
+   "Dahla Para",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282648": [
+   "Kalita Para",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282651": [
+   "Gella Para",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282645": [
+   "Kismatdwarika",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282644": [
+   "Kalbari",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283340": [
+   "Botiamari",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283435": [
+   "Chaibari",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283334": [
+   "Garemari",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283272": [
+   "Pipla Piplala",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283276": [
+   "Bhotanta Mohitara",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283386": [
+   "Hakar Tup",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283271": [
+   "Chomua Ulua",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283278": [
+   "Kurobaha",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283277": [
+   "Borsaderi",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283336": [
+   "Bangna Bari Bangana Bari",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282621": [
+   "Safakamar",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283337": [
+   "Khara Dhara",
+   2024,
+   7,
+   "Loam"
+  ],
+  "282599": [
+   "Bogriguri Gaon",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283275": [
+   "Tuple Panbari",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283273": [
+   "Pakha Keteki Bari Ketkibari",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283274": [
+   "Nitananda Panbari",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283329": [
+   "Bania Gaon",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283332": [
+   "Nimua",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283393": [
+   "Puthimari",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283392": [
+   "Odalguri",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283331": [
+   "Maripur Anandapur",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283280": [
+   "Ratanpur",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283339": [
+   "Niz Sathi Samukha",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283283": [
+   "Ghotbar Saderi",
+   2024,
+   7,
+   "Loam"
+  ],
+  "282602": [
+   "Bogriguri Pathar",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283279": [
+   "Bhogpur Bhoupar",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283327": [
+   "Bichan Kuchi",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283281": [
+   "Doloi Gaon",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283397": [
+   "Pub Kordoiguri",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283396": [
+   "Ceki",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283328": [
+   "Doloi Gaon",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283351": [
+   "Dhemchar Pathar",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283289": [
+   "Barbang",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283330": [
+   "Bilpar",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283394": [
+   "Medhi Kuchi",
+   2025,
+   7,
+   "Loam"
+  ],
+  "282600": [
+   "Bhetomare Tup",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283395": [
+   "Hathina Pur",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283282": [
+   "Nagar Gaon",
+   2024,
+   7,
+   "Loam"
+  ],
+  "282609": [
+   "Kamar Gaon",
+   2018,
+   4,
+   "Clay Loam"
+  ],
+  "283288": [
+   "Bar Bamakhata",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283325": [
+   "Gobindapur",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282612": [
+   "Khudna Bari Pathar Khudabari",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283322": [
+   "Patacharkuchi",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283404": [
+   "Borbhitha",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283403": [
+   "Bangti",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283287": [
+   "Muguria",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283400": [
+   "Gomura Gaon",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283286": [
+   "Haguri Gaon",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283406": [
+   "Borkur",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283407": [
+   "Kotho Bari",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283323": [
+   "Sariha Chakla Sari Chakla",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282611": [
+   "Kayasta Gaon",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283405": [
+   "Dolor Pathar",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282634": [
+   "Nichuka",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283284": [
+   "Rahadhar Birkala",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283410": [
+   "Bagimari",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283285": [
+   "Nalana",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282614": [
+   "Jamadarbari Gaon",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283308": [
+   "Pathsala Gaon",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283412": [
+   "Bhogpur",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283413": [
+   "Bhalaguri",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283408": [
+   "Charal Para",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283409": [
+   "Batua",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283317": [
+   "Bornalikuchi",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "249847": [
+   "Pathsala",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283301": [
+   "Raipur",
+   2024,
+   7,
+   "Loam"
+  ],
+  "282637": [
+   "Shapur Sahpur",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282639": [
+   "Puthimari",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283310": [
+   "Dumuria",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283414": [
+   "Dakshin Bhalaguri",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282636": [
+   "Chengulia",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283303": [
+   "Bamunkuchi",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283309": [
+   "Titka Garia",
+   2024,
+   4,
+   "Clay Loam"
+  ],
+  "283415": [
+   "Luashur",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283364": [
+   "Tangla",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283363": [
+   "Rajakhat",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283362": [
+   "Kurobaha Gaon",
+   2025,
+   7,
+   "Loam"
+  ],
+  "282654": [
+   "Bandar Khowa",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283352": [
+   "Pata Gaon",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "249841": [
+   "Barpeta Road",
+   2018,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283297": [
+   "Dubi",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283361": [
+   "Kahara Gaon",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283419": [
+   "Gerua Para",
+   2025,
+   4,
+   "Clay Loam"
+  ],
+  "283304": [
+   "Bhethua",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283420": [
+   "Puran Bhabanipur",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283305": [
+   "Belona",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283300": [
+   "Titkataje",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283353": [
+   "Roumari",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282653": [
+   "Niz Damaka",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283312": [
+   "Konimara",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283314": [
+   "Khudra Bhaluki",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283360": [
+   "Bangli Para Para Bengali",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283318": [
+   "Bar Bairagi",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283359": [
+   "Kalbari",
+   2025,
+   7,
+   "Loam"
+  ],
+  "282628": [
+   "Sat Bainer Tup Satbaineea Tup",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283366": [
+   "Kurobaha Pathar",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283299": [
+   "Bargunari",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283307": [
+   "Nali Para",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283298": [
+   "Uparnoi",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283306": [
+   "Lechera Para",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283313": [
+   "Balipara",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283368": [
+   "Kahara Pathar",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283354": [
+   "Dhupal Para",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283208": [
+   "Kahar Para",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283249": [
+   "Debara",
+   2023,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283365": [
+   "Katola",
+   2025,
+   7,
+   "Loam"
+  ],
+  "282598": [
+   "Pora Gaon",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282613": [
+   "Jamadarbari Pathar",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282635": [
+   "Kala Bhanga",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282624": [
+   "Manipur",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282623": [
+   "Domani Gaon",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282615": [
+   "Hatapara",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282616": [
+   "Gamari Guri",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282617": [
+   "Uttar Sabakamar",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282622": [
+   "Katajar Pathar",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282652": [
+   "Uttar Ganakguri",
+   2018,
+   7,
+   "Loam"
+  ],
+  "283335": [
+   "Bagapara",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283326": [
+   "Pahala Simalu Bari Lalah",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283316": [
+   "Barsahan",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283321": [
+   "Barbatabari",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283302": [
+   "Jalikhata",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283319": [
+   "Niz Sariha Nizasariha",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283320": [
+   "Dharamtala",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283311": [
+   "Kukua Batabari",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283324": [
+   "Barbhala",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283389": [
+   "Singimari",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283390": [
+   "Siyalmari",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283388": [
+   "Dalimar Bhitha",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283387": [
+   "Bagula Para",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283385": [
+   "Bamunkutani",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283391": [
+   "Darupara",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283402": [
+   "Chaulia Bori",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283398": [
+   "Maidhya Kordoi Guri",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283399": [
+   "Paschim Kordoi Guri",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283350": [
+   "Soto Kamar",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283401": [
+   "Naosarka Pathar",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283418": [
+   "Borbori",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283417": [
+   "Sarupeta Town",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283411": [
+   "Gora Pit",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283416": [
+   "Sarupeta Gaon",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283423": [
+   "Barsidhani",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283421": [
+   "Batia Mari",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283422": [
+   "Kalbari",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283426": [
+   "Pachim Kathalmuri Kathalguri",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283427": [
+   "Bandha Sidhani",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283428": [
+   "Pub Kathal Muri",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283429": [
+   "Dakshin Rehabari",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283430": [
+   "Doisingri Doimingari",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283431": [
+   "Akaya",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283434": [
+   "Chemtia",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283432": [
+   "Bar Manikpur",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283424": [
+   "Baghmara",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283433": [
+   "Gergeria",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283425": [
+   "Pub Rehabari",
+   2024,
+   7,
+   "Loam"
+  ],
+  "283341": [
+   "Pan Para",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283342": [
+   "Madhapur",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283347": [
+   "Kathalmuri Ghat",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283348": [
+   "Hallang Bari",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283343": [
+   "Pakriguri Pathar",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283349": [
+   "Digjira",
+   2025,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283344": [
+   "Chinapatani",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283345": [
+   "Dhumar Pathar",
+   2025,
+   7,
+   "Loam"
+  ],
+  "283346": [
+   "Chengli Mari",
+   2025,
+   7,
+   "Loam"
+  ],
+  "282630": [
+   "Gandari Para",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282620": [
+   "Barugua Buragua",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282619": [
+   "Bilashi Para",
+   2018,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282618": [
+   "Bilashipara Pathar",
+   2018,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283315": [
+   "Bar Bhaluki",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283338": [
+   "Bhajkuchia Para",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "283333": [
+   "Bamunpara",
+   2024,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "282691": [
+   "Uttar Athiabari CT",
+   2018,
+   7,
+   "Loam"
+  ],
+  "282692": [
+   "Khaira Bari CT",
+   2018,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 846,
+ "village_count_sampled": 787
+}

@@ -1,0 +1,5596 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Andhra Pradesh",
+  "district": "Y.S.R.",
+  "district_lgd": 504,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (973/988 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay": 7335,
+   "Sandy Clay": 2,
+   "Clay Loam": 115038,
+   "Sandy Clay Loam": 91182,
+   "Loam": 31939,
+   "Sandy Loam": 5709
+  },
+  "n_pixels": 251207
+ },
+ "villages": {
+  "999999": [
+   "Reserved Forest",
+   5206,
+   4,
+   "Clay Loam"
+  ],
+  "593433": [
+   "Binduraopalle",
+   5232,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593113": [
+   "Thummalapadu",
+   5213,
+   4,
+   "Clay Loam"
+  ],
+  "593061": [
+   "Mohinuddinpuram",
+   5210,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592997": [
+   "Dulamvaripalle",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593399": [
+   "Sidhout",
+   5229,
+   7,
+   "Loam"
+  ],
+  "593503": [
+   "Motakatla",
+   5237,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593493": [
+   "Diguvagottiveedu",
+   5236,
+   7,
+   "Loam"
+  ],
+  "593496": [
+   "T Sakibanda",
+   5236,
+   7,
+   "Loam"
+  ],
+  "593498": [
+   "Mallur",
+   5236,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593499": [
+   "Devagudipalle",
+   5236,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593202": [
+   "Kommanuthala",
+   5218,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593209": [
+   "Lopatnuthala",
+   5218,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593208": [
+   "Lingala",
+   5218,
+   4,
+   "Clay Loam"
+  ],
+  "593248": [
+   "Sydapuram",
+   5221,
+   4,
+   "Clay Loam"
+  ],
+  "593247": [
+   "Gundlamadugu",
+   5221,
+   4,
+   "Clay Loam"
+  ],
+  "593206": [
+   "Dondlavagu",
+   5218,
+   4,
+   "Clay Loam"
+  ],
+  "593207": [
+   "Peddakudala",
+   5218,
+   4,
+   "Clay Loam"
+  ],
+  "593219": [
+   "Rayalapuram",
+   5219,
+   4,
+   "Clay Loam"
+  ],
+  "593220": [
+   "Ragimanupalle",
+   5219,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593222": [
+   "Atchavalle",
+   5219,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593252": [
+   "Yadavakunta",
+   5221,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593210": [
+   "Murarichintala",
+   5218,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593254": [
+   "Gotur",
+   5221,
+   4,
+   "Clay Loam"
+  ],
+  "593221": [
+   "Rachumarripalle",
+   5219,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593211": [
+   "Gunakanepalle",
+   5218,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593253": [
+   "Thimmapurampeta",
+   5221,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593212": [
+   "Ramanuthalapalle",
+   5218,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593215": [
+   "Chinnakudala",
+   5218,
+   4,
+   "Clay Loam"
+  ],
+  "593216": [
+   "Narsingaraopalle",
+   5218,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "253101": [
+   "Pulivendula",
+   5219,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593217": [
+   "Vadlavaripalle",
+   5218,
+   4,
+   "Clay Loam"
+  ],
+  "593218": [
+   "Ippatla",
+   5218,
+   4,
+   "Clay Loam"
+  ],
+  "593226": [
+   "Chintalajutur",
+   5220,
+   4,
+   "Clay Loam"
+  ],
+  "593231": [
+   "Gollalagudur",
+   5220,
+   4,
+   "Clay Loam"
+  ],
+  "593213": [
+   "Ambakapalle",
+   5218,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593214": [
+   "Herojipuram",
+   5218,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593227": [
+   "Peddajutur",
+   5220,
+   4,
+   "Clay Loam"
+  ],
+  "593224": [
+   "Erraballe",
+   5219,
+   7,
+   "Loam"
+  ],
+  "593230": [
+   "Vemula",
+   5220,
+   4,
+   "Clay Loam"
+  ],
+  "593228": [
+   "Velpula",
+   5220,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593225": [
+   "Konampalle",
+   5219,
+   7,
+   "Loam"
+  ],
+  "593229": [
+   "Meedipentla",
+   5220,
+   7,
+   "Loam"
+  ],
+  "593249": [
+   "Jalaparthi",
+   5221,
+   4,
+   "Clay Loam"
+  ],
+  "593223": [
+   "Ulimella R",
+   5219,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593531": [
+   "Gorlamudiveedu",
+   5239,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593492": [
+   "Eguvagottiveedu",
+   5235,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593490": [
+   "Galiveedu",
+   5235,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593491": [
+   "Araveedu",
+   5235,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593502": [
+   "Narayanareddipalle",
+   5237,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593497": [
+   "Vandadi",
+   5236,
+   7,
+   "Loam"
+  ],
+  "593495": [
+   "Paramatikona",
+   5236,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593507": [
+   "Sambepalle",
+   5237,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593508": [
+   "Routhukunta",
+   5237,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593500": [
+   "Chinnamandem",
+   5236,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593494": [
+   "Kalibanda",
+   5236,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593509": [
+   "Devapatla",
+   5237,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593501": [
+   "Bonamala",
+   5236,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593511": [
+   "Guttapalle",
+   5237,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593510": [
+   "Sho Somavaram",
+   5237,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593523": [
+   "Madithadu",
+   5238,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593514": [
+   "T Sundupalle",
+   5238,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593707": [
+   "Nukanapalle",
+   5248,
+   7,
+   "Loam"
+  ],
+  "593706": [
+   "Gadela",
+   5248,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593504": [
+   "Gunnikuntla",
+   5237,
+   9,
+   "Sandy Loam"
+  ],
+  "593522": [
+   "Rayavaram",
+   5238,
+   7,
+   "Loam"
+  ],
+  "593506": [
+   "Dudyala",
+   5237,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593505": [
+   "Guriginjakunta",
+   5237,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593520": [
+   "Akkampalle",
+   5238,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593525": [
+   "Peddinenikalva",
+   5238,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593519": [
+   "Thimmasamudram",
+   5238,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593516": [
+   "Yerramanenipalem",
+   5238,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593512": [
+   "Settipalle",
+   5237,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593515": [
+   "Bhagampalle",
+   5238,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593526": [
+   "Mudampadu",
+   5238,
+   7,
+   "Loam"
+  ],
+  "593521": [
+   "Perumallaiahgaripalle",
+   5238,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593524": [
+   "Chinnaiahgaripalle",
+   5238,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593518": [
+   "Gundlapalle",
+   5238,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593517": [
+   "Reddivaripalle",
+   5238,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593556": [
+   "Kalpanayunicheruvu",
+   5241,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593544": [
+   "Brahmana Yerragudi",
+   5240,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593467": [
+   "Errabommanapalle",
+   5234,
+   7,
+   "Loam"
+  ],
+  "593473": [
+   "Chilekampalle",
+   5234,
+   4,
+   "Clay Loam"
+  ],
+  "593472": [
+   "Chakrayapet",
+   5234,
+   4,
+   "Clay Loam"
+  ],
+  "593545": [
+   "Dinnepadu",
+   5240,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593559": [
+   "Neelakantharaopeta",
+   5241,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593476": [
+   "Surabhi",
+   5234,
+   7,
+   "Loam"
+  ],
+  "593561": [
+   "Nallaguttapalle",
+   5241,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593471": [
+   "Kuppam",
+   5234,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593560": [
+   "Suddamalla",
+   5241,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593474": [
+   "Nersupalle",
+   5234,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593468": [
+   "Kateneniyerragudi",
+   5234,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593562": [
+   "Saraswathipalle",
+   5241,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593470": [
+   "Rajupalle",
+   5234,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593475": [
+   "Kondappagaripalle",
+   5234,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593549": [
+   "Dappepalle",
+   5240,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593548": [
+   "Lakkireddipalle",
+   5240,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593477": [
+   "Mahadevapalle",
+   5234,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593546": [
+   "Gudlavaripalle",
+   5240,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593547": [
+   "Ananthapuram",
+   5240,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593565": [
+   "Chitlur",
+   5241,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593469": [
+   "Kallurupalle",
+   5234,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593481": [
+   "Pulikunta",
+   5235,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593478": [
+   "Gotlamitta",
+   5234,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593564": [
+   "Hasanapuram",
+   5241,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593554": [
+   "Maddirevula",
+   5240,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593480": [
+   "Korlakunta",
+   5235,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593479": [
+   "Talamudipi",
+   5235,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593553": [
+   "Kurnoothala",
+   5240,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593484": [
+   "Thumukunta",
+   5235,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593550": [
+   "Pandillapalle",
+   5240,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593566": [
+   "Bandlapalle",
+   5241,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593551": [
+   "Naraharibhatla Palle",
+   5240,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593483": [
+   "Pandikunta",
+   5235,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593555": [
+   "Kakulavaram",
+   5240,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593567": [
+   "Pothukurupalle",
+   5241,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593482": [
+   "Nooliveedu",
+   5235,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593527": [
+   "Guntimadugu",
+   5239,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593485": [
+   "Garugupalle",
+   5235,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593528": [
+   "Katimayakunta",
+   5239,
+   9,
+   "Sandy Loam"
+  ],
+  "593537": [
+   "Abbavaram",
+   5239,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593536": [
+   "Masapet R",
+   5239,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593538": [
+   "Indukurupalle",
+   5239,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "251786": [
+   "Rayachoti",
+   5239,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593486": [
+   "Gundlacheruvu",
+   5235,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593529": [
+   "Madhavaram",
+   5239,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593533": [
+   "Botlacheruvu",
+   5239,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593488": [
+   "Pyarampalle",
+   5235,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593532": [
+   "Yandapalle",
+   5239,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593534": [
+   "Peddakalvapalle",
+   5239,
+   9,
+   "Sandy Loam"
+  ],
+  "593487": [
+   "Gopanapalle",
+   5235,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593540": [
+   "Dullavaripalle",
+   5239,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593489": [
+   "Veligallu",
+   5235,
+   4,
+   "Clay Loam"
+  ],
+  "593541": [
+   "Pemmadapalle",
+   5239,
+   9,
+   "Sandy Loam"
+  ],
+  "593535": [
+   "Cherlopalle",
+   5239,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593552": [
+   "Somabotlapalle",
+   5240,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593539": [
+   "Syamalavaripalle",
+   5239,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593530": [
+   "Yerranagupalle",
+   5239,
+   9,
+   "Sandy Loam"
+  ],
+  "593431": [
+   "Machanur",
+   5232,
+   4,
+   "Clay Loam"
+  ],
+  "593271": [
+   "Animela",
+   5222,
+   4,
+   "Clay Loam"
+  ],
+  "593437": [
+   "Eguva Palle",
+   5232,
+   4,
+   "Clay Loam"
+  ],
+  "593310": [
+   "Podadurthi",
+   5224,
+   4,
+   "Clay Loam"
+  ],
+  "593232": [
+   "Nallacheruvupalle",
+   5220,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593267": [
+   "Northpalagiri",
+   5222,
+   1,
+   "Clay"
+  ],
+  "593266": [
+   "Moillacheruvu",
+   5222,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593408": [
+   "Thadigotla",
+   5231,
+   4,
+   "Clay Loam"
+  ],
+  "593430": [
+   "Chabali",
+   5232,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593438": [
+   "Rampathadu",
+   5232,
+   4,
+   "Clay Loam"
+  ],
+  "593407": [
+   "Kopparthi",
+   5231,
+   4,
+   "Clay Loam"
+  ],
+  "593436": [
+   "Moillakalava",
+   5232,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593434": [
+   "Konayapalle",
+   5232,
+   4,
+   "Clay Loam"
+  ],
+  "593429": [
+   "Tummalur",
+   5232,
+   4,
+   "Clay Loam"
+  ],
+  "593435": [
+   "Sangatipalle",
+   5232,
+   4,
+   "Clay Loam"
+  ],
+  "593452": [
+   "Ramireddipalle",
+   5233,
+   4,
+   "Clay Loam"
+  ],
+  "593451": [
+   "Muthukuru",
+   5233,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593413": [
+   "K Ramachandrapuram",
+   5231,
+   4,
+   "Clay Loam"
+  ],
+  "593409": [
+   "Pabbapuram",
+   5231,
+   4,
+   "Clay Loam"
+  ],
+  "593440": [
+   "Thippireddipalle",
+   5232,
+   4,
+   "Clay Loam"
+  ],
+  "593425": [
+   "Konduru",
+   5232,
+   7,
+   "Loam"
+  ],
+  "593441": [
+   "Ramapuram at Mittameedapalle",
+   5232,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593445": [
+   "Pendlimarri",
+   5232,
+   4,
+   "Clay Loam"
+  ],
+  "593443": [
+   "Chennamraju Palle",
+   5232,
+   4,
+   "Clay Loam"
+  ],
+  "593273": [
+   "U Rajupalem",
+   5222,
+   7,
+   "Loam"
+  ],
+  "593446": [
+   "Pagadalapalle",
+   5232,
+   4,
+   "Clay Loam"
+  ],
+  "593442": [
+   "Vellatur",
+   5232,
+   4,
+   "Clay Loam"
+  ],
+  "593270": [
+   "Gonumakulapalle",
+   5222,
+   4,
+   "Clay Loam"
+  ],
+  "593453": [
+   "Naguru",
+   5233,
+   4,
+   "Clay Loam"
+  ],
+  "593410": [
+   "Papasahebpet",
+   5231,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593412": [
+   "Balupalle",
+   5231,
+   4,
+   "Clay Loam"
+  ],
+  "593268": [
+   "Southpalagiri",
+   5222,
+   4,
+   "Clay Loam"
+  ],
+  "593233": [
+   "Pendluru",
+   5220,
+   4,
+   "Clay Loam"
+  ],
+  "593449": [
+   "Kothagiriapalle",
+   5232,
+   4,
+   "Clay Loam"
+  ],
+  "593415": [
+   "Chinthakommadinne",
+   5231,
+   4,
+   "Clay Loam"
+  ],
+  "593448": [
+   "Cheemalapenta",
+   5232,
+   4,
+   "Clay Loam"
+  ],
+  "593414": [
+   "Kammavaripalle",
+   5231,
+   4,
+   "Clay Loam"
+  ],
+  "593447": [
+   "Chinna Dasaripalle",
+   5232,
+   7,
+   "Loam"
+  ],
+  "593428": [
+   "Gondipalle",
+   5232,
+   7,
+   "Loam"
+  ],
+  "593416": [
+   "Apparajupalle",
+   5231,
+   4,
+   "Clay Loam"
+  ],
+  "593454": [
+   "Alavalapadu",
+   5233,
+   4,
+   "Clay Loam"
+  ],
+  "593455": [
+   "Pamulur",
+   5233,
+   4,
+   "Clay Loam"
+  ],
+  "593426": [
+   "Nandimandalam",
+   5232,
+   7,
+   "Loam"
+  ],
+  "593234": [
+   "Pernapadu",
+   5220,
+   4,
+   "Clay Loam"
+  ],
+  "593456": [
+   "Kathaluru",
+   5233,
+   4,
+   "Clay Loam"
+  ],
+  "593269": [
+   "Tangedupalle",
+   5222,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593235": [
+   "Chagaleru",
+   5220,
+   4,
+   "Clay Loam"
+  ],
+  "593420": [
+   "Kolumulapalle",
+   5231,
+   4,
+   "Clay Loam"
+  ],
+  "593459": [
+   "Vempalle",
+   5233,
+   4,
+   "Clay Loam"
+  ],
+  "593236": [
+   "Gondipalle",
+   5220,
+   4,
+   "Clay Loam"
+  ],
+  "593460": [
+   "Alireddipalle",
+   5233,
+   7,
+   "Loam"
+  ],
+  "593237": [
+   "V Kothapalle",
+   5220,
+   4,
+   "Clay Loam"
+  ],
+  "593457": [
+   "Tallapalle",
+   5233,
+   4,
+   "Clay Loam"
+  ],
+  "593458": [
+   "T Velamvaripalle",
+   5233,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593461": [
+   "Idupulapaya",
+   5233,
+   4,
+   "Clay Loam"
+  ],
+  "593465": [
+   "Marellamadaka",
+   5234,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593558": [
+   "Guvvalacheruvu",
+   5241,
+   4,
+   "Clay Loam"
+  ],
+  "593463": [
+   "Addalamarri",
+   5234,
+   7,
+   "Loam"
+  ],
+  "593557": [
+   "Gopagudipalle",
+   5241,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593462": [
+   "Kumarakalva",
+   5234,
+   9,
+   "Sandy Loam"
+  ],
+  "593466": [
+   "Gandikovvur",
+   5234,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593272": [
+   "Pillivaripalle",
+   5222,
+   4,
+   "Clay Loam"
+  ],
+  "593411": [
+   "Cherlopalle",
+   5231,
+   4,
+   "Clay Loam"
+  ],
+  "593444": [
+   "A Ramachandrapuram",
+   5232,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593450": [
+   "Pedda Dasaripalle",
+   5232,
+   4,
+   "Clay Loam"
+  ],
+  "593427": [
+   "Amaniviswanathapuram",
+   5232,
+   7,
+   "Loam"
+  ],
+  "593464": [
+   "Anjaneyapuram",
+   5234,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593439": [
+   "Ganganapalle",
+   5232,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593622": [
+   "Narayana Nellore",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593646": [
+   "Pulapathuru",
+   5246,
+   7,
+   "Loam"
+  ],
+  "593578": [
+   "Patur",
+   5243,
+   7,
+   "Loam"
+  ],
+  "593619": [
+   "Komantharajupuram",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593623": [
+   "Nallapureddipalle",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593652": [
+   "Kitchamambapuram",
+   5246,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593651": [
+   "Madanagopalapuram",
+   5246,
+   9,
+   "Sandy Loam"
+  ],
+  "593647": [
+   "Mandapalle",
+   5246,
+   4,
+   "Clay Loam"
+  ],
+  "593649": [
+   "Gundluru",
+   5246,
+   4,
+   "Clay Loam"
+  ],
+  "593650": [
+   "Tallapaka",
+   5246,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593648": [
+   "Seshamambapuram",
+   5246,
+   7,
+   "Loam"
+  ],
+  "593654": [
+   "Poli",
+   5246,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593659": [
+   "Kothapalle",
+   5246,
+   4,
+   "Clay Loam"
+  ],
+  "593658": [
+   "Hastavaram",
+   5246,
+   4,
+   "Clay Loam"
+  ],
+  "593570": [
+   "Gadikota",
+   5242,
+   7,
+   "Loam"
+  ],
+  "253102": [
+   "Rajampet",
+   5246,
+   4,
+   "Clay Loam"
+  ],
+  "593660": [
+   "Akepadu",
+   5246,
+   4,
+   "Clay Loam"
+  ],
+  "593563": [
+   "Rachapalle",
+   5241,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593653": [
+   "Sitarampuram",
+   5246,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593656": [
+   "Mannur",
+   5246,
+   4,
+   "Clay Loam"
+  ],
+  "593657": [
+   "Bahirajapalle",
+   5246,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593568": [
+   "Vongimalla",
+   5242,
+   7,
+   "Loam"
+  ],
+  "593666": [
+   "Utukur",
+   5246,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593663": [
+   "Srirangarajapuram",
+   5246,
+   4,
+   "Clay Loam"
+  ],
+  "593572": [
+   "Somavaram",
+   5242,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593676": [
+   "Anantaiahgaripalle",
+   5247,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593571": [
+   "Veeraballe",
+   5242,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593677": [
+   "Ramasamudram",
+   5247,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593667": [
+   "Mittameedapalle",
+   5246,
+   4,
+   "Clay Loam"
+  ],
+  "593679": [
+   "Utukuru Venkatampalle",
+   5247,
+   7,
+   "Loam"
+  ],
+  "593662": [
+   "Rollamadugu",
+   5246,
+   4,
+   "Clay Loam"
+  ],
+  "593674": [
+   "Pullampeta",
+   5247,
+   4,
+   "Clay Loam"
+  ],
+  "593669": [
+   "Sreerangarajupalem",
+   5247,
+   7,
+   "Loam"
+  ],
+  "593573": [
+   "Peddiveedu",
+   5242,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593670": [
+   "Thippayapalle",
+   5247,
+   4,
+   "Clay Loam"
+  ],
+  "593576": [
+   "Sanipaya",
+   5242,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593675": [
+   "Puthanavaripalle",
+   5247,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593683": [
+   "Kommanavaripalle",
+   5247,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593668": [
+   "Gopamambapuram",
+   5246,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593682": [
+   "Kothapalle Agraharam",
+   5247,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593671": [
+   "Devasamudram",
+   5247,
+   4,
+   "Clay Loam"
+  ],
+  "593684": [
+   "Dalavaipalle",
+   5247,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593673": [
+   "Immanur",
+   5247,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593574": [
+   "Matli",
+   5242,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593672": [
+   "Vathalur",
+   5247,
+   7,
+   "Loam"
+  ],
+  "593685": [
+   "Apparajupeta",
+   5247,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593690": [
+   "Thiruvengalanatharajapuram",
+   5247,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593691": [
+   "Perigavaram",
+   5247,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593686": [
+   "Garalamadugu",
+   5247,
+   4,
+   "Clay Loam"
+  ],
+  "593692": [
+   "Ketharajupalle",
+   5247,
+   7,
+   "Loam"
+  ],
+  "593688": [
+   "Ananthasamudram",
+   5247,
+   4,
+   "Clay Loam"
+  ],
+  "593513": [
+   "Polimerapalle",
+   5238,
+   9,
+   "Sandy Loam"
+  ],
+  "593689": [
+   "Rangampalle",
+   5247,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593693": [
+   "Reddipalle",
+   5247,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593575": [
+   "Odiveedu",
+   5242,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593687": [
+   "A Channamambapuram",
+   5247,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593542": [
+   "Sibyala",
+   5239,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593569": [
+   "Yadaballe",
+   5242,
+   7,
+   "Loam"
+  ],
+  "593678": [
+   "Utukuruchalivendla",
+   5247,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593664": [
+   "Brahmanapalle",
+   5246,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593655": [
+   "Rajampet R",
+   5246,
+   4,
+   "Clay Loam"
+  ],
+  "593665": [
+   "Anantharajupuram",
+   5246,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "251782": [
+   "Cuddapah",
+   5226,
+   4,
+   "Clay Loam"
+  ],
+  "593391": [
+   "Ponnavolu",
+   5229,
+   4,
+   "Clay Loam"
+  ],
+  "593394": [
+   "Jyothi",
+   5229,
+   4,
+   "Clay Loam"
+  ],
+  "593392": [
+   "Tokkolu",
+   5229,
+   4,
+   "Clay Loam"
+  ],
+  "593393": [
+   "Machupalle",
+   5229,
+   7,
+   "Loam"
+  ],
+  "593395": [
+   "Vontithatipalle",
+   5229,
+   7,
+   "Loam"
+  ],
+  "593396": [
+   "S Rajampeta",
+   5229,
+   7,
+   "Loam"
+  ],
+  "593373": [
+   "Kudumalur",
+   5228,
+   7,
+   "Loam"
+  ],
+  "593400": [
+   "Jangalapalle",
+   5229,
+   7,
+   "Loam"
+  ],
+  "593397": [
+   "Mulapalle",
+   5229,
+   7,
+   "Loam"
+  ],
+  "593370": [
+   "Darjipalle",
+   5228,
+   4,
+   "Clay Loam"
+  ],
+  "593398": [
+   "Gundlamoola",
+   5229,
+   7,
+   "Loam"
+  ],
+  "593403": [
+   "Nekanapuram",
+   5229,
+   4,
+   "Clay Loam"
+  ],
+  "593371": [
+   "Gollapalle",
+   5228,
+   7,
+   "Loam"
+  ],
+  "593372": [
+   "Pennaperuru",
+   5228,
+   4,
+   "Clay Loam"
+  ],
+  "593402": [
+   "Shakarajupalle",
+   5229,
+   7,
+   "Loam"
+  ],
+  "593404": [
+   "Kanumalapalle",
+   5229,
+   7,
+   "Loam"
+  ],
+  "593418": [
+   "Buggaletipalle",
+   5231,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593382": [
+   "Gangaperuru",
+   5228,
+   4,
+   "Clay Loam"
+  ],
+  "593406": [
+   "Peddapalle",
+   5229,
+   4,
+   "Clay Loam"
+  ],
+  "593417": [
+   "Boggalapalle",
+   5231,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593381": [
+   "Rachagudipalle",
+   5228,
+   4,
+   "Clay Loam"
+  ],
+  "593405": [
+   "Mandapalle",
+   5229,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593383": [
+   "Vontimitta",
+   5228,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593421": [
+   "Jamal Palle",
+   5231,
+   7,
+   "Loam"
+  ],
+  "593424": [
+   "Ippapenta",
+   5231,
+   7,
+   "Loam"
+  ],
+  "593384": [
+   "Jowkulapalle",
+   5228,
+   4,
+   "Clay Loam"
+  ],
+  "593422": [
+   "Chinnakampalle",
+   5231,
+   4,
+   "Clay Loam"
+  ],
+  "593585": [
+   "Rangayapalle",
+   5243,
+   7,
+   "Loam"
+  ],
+  "593423": [
+   "Peddakampalle",
+   5231,
+   4,
+   "Clay Loam"
+  ],
+  "593582": [
+   "Kommuru",
+   5243,
+   7,
+   "Loam"
+  ],
+  "593577": [
+   "Chintalakunta",
+   5243,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593587": [
+   "Pothapi",
+   5243,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593592": [
+   "Tanguturu",
+   5243,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593385": [
+   "Mangampeta",
+   5228,
+   4,
+   "Clay Loam"
+  ],
+  "593589": [
+   "Nookinenipalle",
+   5243,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593588": [
+   "Jangalapalle",
+   5243,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593594": [
+   "Lebaka",
+   5243,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593388": [
+   "Konarajupalle",
+   5228,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593387": [
+   "Mantapampalle",
+   5228,
+   4,
+   "Clay Loam"
+  ],
+  "593590": [
+   "Kunda Nellore",
+   5243,
+   4,
+   "Clay Loam"
+  ],
+  "593386": [
+   "Chintarajupalle",
+   5228,
+   7,
+   "Loam"
+  ],
+  "593593": [
+   "Tangutur Vengamambapuram",
+   5243,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593620": [
+   "Obili",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593579": [
+   "Nandalur",
+   5243,
+   7,
+   "Loam"
+  ],
+  "593595": [
+   "Nallathimmayapalle",
+   5243,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593596": [
+   "Lebaka Manga Mamba Puram",
+   5243,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593581": [
+   "Yellamarajupalle",
+   5243,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593621": [
+   "Jattivaripalle",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593580": [
+   "Adapur",
+   5243,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593366": [
+   "Thudur",
+   5227,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593367": [
+   "Uppatur",
+   5227,
+   7,
+   "Loam"
+  ],
+  "593368": [
+   "Chenduvoy",
+   5227,
+   4,
+   "Clay Loam"
+  ],
+  "593375": [
+   "Ponnapalle",
+   5228,
+   4,
+   "Clay Loam"
+  ],
+  "593377": [
+   "Brahmanapalle",
+   5228,
+   4,
+   "Clay Loam"
+  ],
+  "593376": [
+   "Gundlamada",
+   5228,
+   4,
+   "Clay Loam"
+  ],
+  "593419": [
+   "Rudrayagaripalle",
+   5231,
+   7,
+   "Loam"
+  ],
+  "593380": [
+   "Narayanarajupeta",
+   5228,
+   4,
+   "Clay Loam"
+  ],
+  "593583": [
+   "Ramamambapuram",
+   5243,
+   7,
+   "Loam"
+  ],
+  "593543": [
+   "Chennamukkapalle CT",
+   5239,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593597": [
+   "Nagireddipalle CT",
+   5243,
+   7,
+   "Loam"
+  ],
+  "593586": [
+   "Thimmarajupalle",
+   5243,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593703": [
+   "Korlakunta",
+   5248,
+   4,
+   "Clay Loam"
+  ],
+  "593645": [
+   "Nagavaram",
+   5245,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593709": [
+   "Anantharajupeta",
+   5249,
+   7,
+   "Loam"
+  ],
+  "593712": [
+   "Vasudevapuram",
+   5249,
+   7,
+   "Loam"
+  ],
+  "593713": [
+   "Vellelavari Khandrika",
+   5249,
+   7,
+   "Loam"
+  ],
+  "593705": [
+   "Yerraguntakota",
+   5248,
+   4,
+   "Clay Loam"
+  ],
+  "593714": [
+   "Obanapalle",
+   5249,
+   4,
+   "Clay Loam"
+  ],
+  "593711": [
+   "Gangarajupuram",
+   5249,
+   7,
+   "Loam"
+  ],
+  "593710": [
+   "Raghavarajupuram",
+   5249,
+   4,
+   "Clay Loam"
+  ],
+  "593719": [
+   "Kodur East",
+   5249,
+   7,
+   "Loam"
+  ],
+  "593715": [
+   "Kitchamambapuram Agraharam",
+   5249,
+   7,
+   "Loam"
+  ],
+  "593716": [
+   "Chiyyavaram",
+   5249,
+   7,
+   "Loam"
+  ],
+  "593644": [
+   "Kalvavarikandrika",
+   5245,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593717": [
+   "K Buduguntapalle",
+   5249,
+   4,
+   "Clay Loam"
+  ],
+  "593720": [
+   "Upparapalle",
+   5249,
+   4,
+   "Clay Loam"
+  ],
+  "593721": [
+   "Srinivasapuram",
+   5249,
+   4,
+   "Clay Loam"
+  ],
+  "593722": [
+   "Settigunta",
+   5249,
+   4,
+   "Clay Loam"
+  ],
+  "593718": [
+   "Kodur West",
+   5249,
+   4,
+   "Clay Loam"
+  ],
+  "593708": [
+   "Mangampeta CT",
+   5248,
+   4,
+   "Clay Loam"
+  ],
+  "593626": [
+   "Itimarpuram",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593625": [
+   "Pondalur",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593627": [
+   "Malemarpuram",
+   5245,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593629": [
+   "Chintala Chelika",
+   5245,
+   7,
+   "Loam"
+  ],
+  "593632": [
+   "Devamachupalle",
+   5245,
+   7,
+   "Loam"
+  ],
+  "593631": [
+   "Mylapalle",
+   5245,
+   7,
+   "Loam"
+  ],
+  "593630": [
+   "Rajukunta",
+   5245,
+   7,
+   "Loam"
+  ],
+  "593633": [
+   "Chitvel",
+   5245,
+   7,
+   "Loam"
+  ],
+  "593680": [
+   "Dandlopalle",
+   5247,
+   4,
+   "Clay Loam"
+  ],
+  "593635": [
+   "Bhakrapuram",
+   5245,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593636": [
+   "Cherlopalle",
+   5245,
+   7,
+   "Loam"
+  ],
+  "593634": [
+   "Kampasamudram",
+   5245,
+   4,
+   "Clay Loam"
+  ],
+  "593637": [
+   "Thimmayapalem",
+   5245,
+   7,
+   "Loam"
+  ],
+  "593638": [
+   "K S Agraharam",
+   5245,
+   7,
+   "Loam"
+  ],
+  "593639": [
+   "Nagiripadu",
+   5245,
+   7,
+   "Loam"
+  ],
+  "593696": [
+   "Pedda Rampadu",
+   5248,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593681": [
+   "Vallurupalle",
+   5247,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593698": [
+   "Botimeedapalle",
+   5248,
+   7,
+   "Loam"
+  ],
+  "593695": [
+   "Gobburuvaripalle",
+   5248,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593640": [
+   "Nethivaripalle",
+   5245,
+   7,
+   "Loam"
+  ],
+  "593697": [
+   "Rallacheruvupalle",
+   5248,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593701": [
+   "Mukkavaripalle",
+   5248,
+   4,
+   "Clay Loam"
+  ],
+  "593641": [
+   "Thummakonda",
+   5245,
+   7,
+   "Loam"
+  ],
+  "593642": [
+   "Maharajapuram at Siddareddipalle",
+   5245,
+   4,
+   "Clay Loam"
+  ],
+  "593699": [
+   "Bommavaram",
+   5248,
+   7,
+   "Loam"
+  ],
+  "593702": [
+   "Chinna Orampadu",
+   5248,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593700": [
+   "Govindampalle",
+   5248,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593643": [
+   "K V R R Puram",
+   5245,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593704": [
+   "Jillelamadaka",
+   5248,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593624": [
+   "Pondalurvenkatampalle",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593694": [
+   "Venkatesapuram",
+   5248,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593602": [
+   "Kondur",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593599": [
+   "Sirivaram",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593600": [
+   "Thirunampalle",
+   5244,
+   7,
+   "Loam"
+  ],
+  "593609": [
+   "Penagalur",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593591": [
+   "Komarunipalle",
+   5243,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593607": [
+   "Penagalur Agraharam",
+   5244,
+   4,
+   "Clay Loam"
+  ],
+  "593603": [
+   "Peddayapalle",
+   5244,
+   4,
+   "Clay Loam"
+  ],
+  "593608": [
+   "Konduruchinraya Samudram",
+   5244,
+   7,
+   "Loam"
+  ],
+  "593628": [
+   "Mallemadugu",
+   5245,
+   4,
+   "Clay Loam"
+  ],
+  "593614": [
+   "Indlur",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593611": [
+   "Thirumalarajupeta",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593606": [
+   "Velagacherla",
+   5244,
+   7,
+   "Loam"
+  ],
+  "593612": [
+   "Singareddipalle",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593605": [
+   "Yelagacherla Mangamambapuram",
+   5244,
+   4,
+   "Clay Loam"
+  ],
+  "593613": [
+   "Kambalakunta",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593604": [
+   "Damancherla",
+   5244,
+   4,
+   "Clay Loam"
+  ],
+  "593618": [
+   "Singanamala",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593601": [
+   "Thimmamambapuram",
+   5244,
+   7,
+   "Loam"
+  ],
+  "593615": [
+   "Singanamalachennarayasamudram",
+   5244,
+   4,
+   "Clay Loam"
+  ],
+  "593617": [
+   "Singanamalavengamambapuram",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593616": [
+   "Girijamambapuram",
+   5244,
+   7,
+   "Loam"
+  ],
+  "593598": [
+   "Narasingarajupuram",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593610": [
+   "Siddavaram",
+   5244,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593161": [
+   "Korrapadu",
+   5216,
+   4,
+   "Clay Loam"
+  ],
+  "593162": [
+   "Mangapatnam",
+   5216,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593165": [
+   "Chintakunta",
+   5216,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593160": [
+   "Obulapuram",
+   5216,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592826": [
+   "S Timmapuram",
+   5199,
+   4,
+   "Clay Loam"
+  ],
+  "592821": [
+   "Venkaiah Kalva",
+   5199,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592825": [
+   "Donkupalli",
+   5199,
+   4,
+   "Clay Loam"
+  ],
+  "592824": [
+   "Lavanuru",
+   5199,
+   1,
+   "Clay"
+  ],
+  "593183": [
+   "Pydipalem",
+   5217,
+   4,
+   "Clay Loam"
+  ],
+  "592823": [
+   "Chennamanenipalle",
+   5199,
+   4,
+   "Clay Loam"
+  ],
+  "593163": [
+   "Denepalle",
+   5216,
+   4,
+   "Clay Loam"
+  ],
+  "593184": [
+   "Devathapuram",
+   5217,
+   1,
+   "Clay"
+  ],
+  "593185": [
+   "Jangamreddipalle",
+   5217,
+   4,
+   "Clay Loam"
+  ],
+  "593181": [
+   "Chavvaripalle",
+   5217,
+   1,
+   "Clay"
+  ],
+  "593186": [
+   "Theliki",
+   5217,
+   4,
+   "Clay Loam"
+  ],
+  "593187": [
+   "Maddulapaya",
+   5217,
+   7,
+   "Loam"
+  ],
+  "593164": [
+   "Aravetipalle",
+   5216,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593182": [
+   "Nandyalampalle",
+   5217,
+   1,
+   "Clay"
+  ],
+  "593191": [
+   "Kasanur",
+   5217,
+   1,
+   "Clay"
+  ],
+  "593189": [
+   "Sunkesula",
+   5217,
+   1,
+   "Clay"
+  ],
+  "593190": [
+   "Duddekunta",
+   5217,
+   1,
+   "Clay"
+  ],
+  "593241": [
+   "Mallela",
+   5221,
+   4,
+   "Clay Loam"
+  ],
+  "593188": [
+   "Ravulakolanu",
+   5217,
+   4,
+   "Clay Loam"
+  ],
+  "593238": [
+   "Buchupalle",
+   5221,
+   4,
+   "Clay Loam"
+  ],
+  "593193": [
+   "Gurjala",
+   5217,
+   4,
+   "Clay Loam"
+  ],
+  "593192": [
+   "Simhadripuram",
+   5217,
+   4,
+   "Clay Loam"
+  ],
+  "593240": [
+   "Thondur",
+   5221,
+   4,
+   "Clay Loam"
+  ],
+  "593199": [
+   "Lomada",
+   5217,
+   4,
+   "Clay Loam"
+  ],
+  "593196": [
+   "Nidivelagala",
+   5217,
+   4,
+   "Clay Loam"
+  ],
+  "593197": [
+   "Agraharam",
+   5217,
+   4,
+   "Clay Loam"
+  ],
+  "593239": [
+   "Bhadrampalle",
+   5221,
+   1,
+   "Clay"
+  ],
+  "593198": [
+   "Ankalammagudur",
+   5217,
+   1,
+   "Clay"
+  ],
+  "593195": [
+   "Himakuntla",
+   5217,
+   4,
+   "Clay Loam"
+  ],
+  "593201": [
+   "Parnapalle",
+   5218,
+   4,
+   "Clay Loam"
+  ],
+  "593194": [
+   "Bidinamcherla",
+   5217,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592822": [
+   "Lingamanenipalle",
+   5199,
+   1,
+   "Clay"
+  ],
+  "593203": [
+   "Velidandla",
+   5218,
+   4,
+   "Clay Loam"
+  ],
+  "593200": [
+   "Balapanur",
+   5217,
+   4,
+   "Clay Loam"
+  ],
+  "593205": [
+   "Kamasamudram",
+   5218,
+   4,
+   "Clay Loam"
+  ],
+  "593242": [
+   "Udavagandla",
+   5221,
+   4,
+   "Clay Loam"
+  ],
+  "593243": [
+   "Agadur",
+   5221,
+   4,
+   "Clay Loam"
+  ],
+  "593204": [
+   "Bonala",
+   5218,
+   4,
+   "Clay Loam"
+  ],
+  "593244": [
+   "Inagalur",
+   5221,
+   4,
+   "Clay Loam"
+  ],
+  "593245": [
+   "Thellur",
+   5221,
+   4,
+   "Clay Loam"
+  ],
+  "593246": [
+   "Madur",
+   5221,
+   4,
+   "Clay Loam"
+  ],
+  "593250": [
+   "Palur",
+   5221,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592833": [
+   "Dhannavada",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592834": [
+   "Vaddirala",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592846": [
+   "Gollapalle",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592845": [
+   "Golla Uppalapadu",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592844": [
+   "Madhavapuram",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592830": [
+   "Murapandi",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592843": [
+   "Talamanchi Patnam",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592832": [
+   "Dhodium",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592847": [
+   "Kona Annathapuram",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592831": [
+   "Nakkavanipalle",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592793": [
+   "Koduru",
+   5199,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592842": [
+   "Duggana Palle",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592848": [
+   "Ramachandrayapalle",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592849": [
+   "Ponnampalle",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592797": [
+   "Chamaluru",
+   5199,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592792": [
+   "Murugampalli",
+   5199,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592798": [
+   "Koppolu",
+   5199,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592855": [
+   "Thorrivemula",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592850": [
+   "Malameedi Kambala Dinne",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592795": [
+   "Sankepalli",
+   5199,
+   7,
+   "Loam"
+  ],
+  "592800": [
+   "Bukkapatnam",
+   5199,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592796": [
+   "Yerragudi",
+   5199,
+   7,
+   "Loam"
+  ],
+  "592802": [
+   "K Bommepalli",
+   5199,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592853": [
+   "Lingapuram",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592854": [
+   "Mylavaram",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592851": [
+   "Nelanuthala",
+   5200,
+   7,
+   "Loam"
+  ],
+  "592799": [
+   "Thallaproddatur",
+   5199,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592812": [
+   "K Sugumanchipalle",
+   5199,
+   4,
+   "Clay Loam"
+  ],
+  "592811": [
+   "Jogapuram",
+   5199,
+   1,
+   "Clay"
+  ],
+  "592801": [
+   "Fakhirpeta",
+   5199,
+   4,
+   "Clay Loam"
+  ],
+  "592816": [
+   "Konavaripalli",
+   5199,
+   1,
+   "Clay"
+  ],
+  "593142": [
+   "Gandikota",
+   5215,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592815": [
+   "Burujupalli",
+   5199,
+   4,
+   "Clay Loam"
+  ],
+  "592810": [
+   "Regadipally",
+   5199,
+   4,
+   "Clay Loam"
+  ],
+  "592809": [
+   "Gangapuram",
+   5199,
+   4,
+   "Clay Loam"
+  ],
+  "593144": [
+   "Poorva Bommepalle",
+   5215,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592808": [
+   "Mutchumarri",
+   5199,
+   4,
+   "Clay Loam"
+  ],
+  "592813": [
+   "K Brahmanapalle",
+   5199,
+   1,
+   "Clay"
+  ],
+  "592828": [
+   "Eturu",
+   5199,
+   4,
+   "Clay Loam"
+  ],
+  "592814": [
+   "K Venkatapuram",
+   5199,
+   1,
+   "Clay"
+  ],
+  "592817": [
+   "Bedaduru",
+   5199,
+   1,
+   "Clay"
+  ],
+  "592806": [
+   "Obannapeta",
+   5199,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592807": [
+   "Kondapuram",
+   5199,
+   4,
+   "Clay Loam"
+  ],
+  "592818": [
+   "Yenamalachintala",
+   5199,
+   4,
+   "Clay Loam"
+  ],
+  "592829": [
+   "Anantapuram",
+   5199,
+   4,
+   "Clay Loam"
+  ],
+  "592820": [
+   "Pottipadu",
+   5199,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593159": [
+   "Kibili Raghavapuram",
+   5216,
+   4,
+   "Clay Loam"
+  ],
+  "592794": [
+   "Nagamalla Dinne",
+   5199,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592803": [
+   "Neknampeta",
+   5199,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593143": [
+   "Sanjeevapalle",
+   5215,
+   7,
+   "Loam"
+  ],
+  "592827": [
+   "Penjuvvi",
+   5199,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592819": [
+   "Sivapuram",
+   5199,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592858": [
+   "Kondasunkesula",
+   5201,
+   4,
+   "Clay Loam"
+  ],
+  "592859": [
+   "Diguva Kalvatala",
+   5201,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592835": [
+   "Chinna Venthurla",
+   5200,
+   4,
+   "Clay Loam"
+  ],
+  "592837": [
+   "Bestavemula",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592839": [
+   "Ayyavari Kambala Dinne",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592836": [
+   "Bestavemula Venkatapuram",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592856": [
+   "Veparala CT",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592937": [
+   "Settivaripalle",
+   5204,
+   4,
+   "Clay Loam"
+  ],
+  "593275": [
+   "Chinnadandluru",
+   5223,
+   4,
+   "Clay Loam"
+  ],
+  "593156": [
+   "Sirigepalle",
+   5215,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593109": [
+   "Nerrawada",
+   5213,
+   4,
+   "Clay Loam"
+  ],
+  "593127": [
+   "Kothapalle",
+   5214,
+   4,
+   "Clay Loam"
+  ],
+  "593276": [
+   "Illuru",
+   5223,
+   4,
+   "Clay Loam"
+  ],
+  "593107": [
+   "Somapuram",
+   5213,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593112": [
+   "Pallavolu",
+   5213,
+   4,
+   "Clay Loam"
+  ],
+  "593274": [
+   "P Gopalapuram",
+   5223,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593108": [
+   "Bhadripalle",
+   5213,
+   4,
+   "Clay Loam"
+  ],
+  "592933": [
+   "S Mydukur",
+   5204,
+   4,
+   "Clay Loam"
+  ],
+  "593111": [
+   "Chapad",
+   5213,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593129": [
+   "Thallamapuram",
+   5214,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593166": [
+   "Yamavaram",
+   5216,
+   4,
+   "Clay Loam"
+  ],
+  "593114": [
+   "Alladupalle",
+   5213,
+   4,
+   "Clay Loam"
+  ],
+  "593279": [
+   "Potladurthi",
+   5223,
+   1,
+   "Clay"
+  ],
+  "592934": [
+   "Sivapuram",
+   5204,
+   4,
+   "Clay Loam"
+  ],
+  "593277": [
+   "Kalamalla",
+   5223,
+   4,
+   "Clay Loam"
+  ],
+  "593167": [
+   "Kosinepalle",
+   5216,
+   4,
+   "Clay Loam"
+  ],
+  "592935": [
+   "Annalur",
+   5204,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593130": [
+   "Nanganurpalle",
+   5214,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593117": [
+   "Ananthapuram",
+   5213,
+   4,
+   "Clay Loam"
+  ],
+  "593278": [
+   "Malepadu",
+   5223,
+   4,
+   "Clay Loam"
+  ],
+  "593132": [
+   "Yerraguntlapalle",
+   5214,
+   4,
+   "Clay Loam"
+  ],
+  "592936": [
+   "Somayajulapalle",
+   5204,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593116": [
+   "Budidapadu",
+   5213,
+   4,
+   "Clay Loam"
+  ],
+  "593133": [
+   "Kallur",
+   5214,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593085": [
+   "Bhumayapalle",
+   5212,
+   4,
+   "Clay Loam"
+  ],
+  "593115": [
+   "Peddaguruvalur",
+   5213,
+   4,
+   "Clay Loam"
+  ],
+  "593280": [
+   "Hanumanagutti",
+   5223,
+   4,
+   "Clay Loam"
+  ],
+  "593131": [
+   "Regulapalle",
+   5214,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593120": [
+   "Chinnagurvalur",
+   5213,
+   4,
+   "Clay Loam"
+  ],
+  "593119": [
+   "Kutchupapa",
+   5213,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593173": [
+   "Bondalakunta",
+   5216,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593091": [
+   "Khajipet Sunkesula",
+   5212,
+   4,
+   "Clay Loam"
+  ],
+  "593093": [
+   "Miduthuru",
+   5212,
+   4,
+   "Clay Loam"
+  ],
+  "593172": [
+   "Nallaballe",
+   5216,
+   4,
+   "Clay Loam"
+  ],
+  "593171": [
+   "K Thimmapuram",
+   5216,
+   4,
+   "Clay Loam"
+  ],
+  "593281": [
+   "Kathugutavengannagaripalle",
+   5223,
+   1,
+   "Clay"
+  ],
+  "593118": [
+   "Vedurur",
+   5213,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593283": [
+   "Chilamkur",
+   5223,
+   4,
+   "Clay Loam"
+  ],
+  "593290": [
+   "Kokatam",
+   5224,
+   1,
+   "Clay"
+  ],
+  "593168": [
+   "Kadasani Kothapalle",
+   5216,
+   4,
+   "Clay Loam"
+  ],
+  "593282": [
+   "Nidizivve",
+   5223,
+   4,
+   "Clay Loam"
+  ],
+  "593092": [
+   "Thudumuladinne",
+   5212,
+   4,
+   "Clay Loam"
+  ],
+  "593170": [
+   "Rajulaguruvaiahpalle",
+   5216,
+   1,
+   "Clay"
+  ],
+  "593291": [
+   "Sambatur",
+   5224,
+   4,
+   "Clay Loam"
+  ],
+  "593169": [
+   "Penikalapadu",
+   5216,
+   4,
+   "Clay Loam"
+  ],
+  "593174": [
+   "Chinnadudyala",
+   5216,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593094": [
+   "Eturu",
+   5212,
+   4,
+   "Clay Loam"
+  ],
+  "593298": [
+   "Yerragudipadu",
+   5224,
+   1,
+   "Clay"
+  ],
+  "593096": [
+   "Kommaluru",
+   5212,
+   4,
+   "Clay Loam"
+  ],
+  "593175": [
+   "Peddadudyala",
+   5216,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593292": [
+   "Vibharampuram",
+   5224,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593176": [
+   "Velpucherla",
+   5216,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593285": [
+   "Valasapalle",
+   5223,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593097": [
+   "Thavvaripalle",
+   5212,
+   4,
+   "Clay Loam"
+  ],
+  "593324": [
+   "Kotluru",
+   5225,
+   4,
+   "Clay Loam"
+  ],
+  "593100": [
+   "Chemullapalle",
+   5212,
+   4,
+   "Clay Loam"
+  ],
+  "593098": [
+   "Ravulapalle",
+   5212,
+   4,
+   "Clay Loam"
+  ],
+  "593095": [
+   "Thripuravaram",
+   5212,
+   4,
+   "Clay Loam"
+  ],
+  "593293": [
+   "Gangavaram",
+   5224,
+   7,
+   "Loam"
+  ],
+  "593177": [
+   "V Raghavapuram",
+   5216,
+   4,
+   "Clay Loam"
+  ],
+  "593287": [
+   "T Sunkesala",
+   5223,
+   4,
+   "Clay Loam"
+  ],
+  "593297": [
+   "Pachikalapadu",
+   5224,
+   1,
+   "Clay"
+  ],
+  "593295": [
+   "Mirapuram",
+   5224,
+   4,
+   "Clay Loam"
+  ],
+  "593288": [
+   "Thippaluru",
+   5223,
+   4,
+   "Clay Loam"
+  ],
+  "593286": [
+   "Koduru",
+   5223,
+   4,
+   "Clay Loam"
+  ],
+  "593178": [
+   "Uppalur",
+   5216,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593294": [
+   "Kamalapuram",
+   5224,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593299": [
+   "Pandillapalle",
+   5224,
+   1,
+   "Clay"
+  ],
+  "593284": [
+   "Peddanapadu",
+   5223,
+   4,
+   "Clay Loam"
+  ],
+  "593179": [
+   "Kolavali",
+   5216,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593296": [
+   "C Gopalapuram",
+   5224,
+   4,
+   "Clay Loam"
+  ],
+  "593257": [
+   "Urutur",
+   5222,
+   4,
+   "Clay Loam"
+  ],
+  "593302": [
+   "T Sadipirala",
+   5224,
+   4,
+   "Clay Loam"
+  ],
+  "593323": [
+   "Vallur",
+   5225,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593314": [
+   "Tappetla",
+   5225,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593301": [
+   "Gollapalle",
+   5224,
+   1,
+   "Clay"
+  ],
+  "593300": [
+   "Nallingayapalle",
+   5224,
+   4,
+   "Clay Loam"
+  ],
+  "593308": [
+   "Thurakapalle",
+   5224,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593256": [
+   "Veldurthi",
+   5222,
+   4,
+   "Clay Loam"
+  ],
+  "593255": [
+   "Ankireddipalle",
+   5222,
+   4,
+   "Clay Loam"
+  ],
+  "593303": [
+   "Ramachandrapuram",
+   5224,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593315": [
+   "Lebaka",
+   5225,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593307": [
+   "Jambapuram",
+   5224,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593325": [
+   "Isukapalle",
+   5225,
+   4,
+   "Clay Loam"
+  ],
+  "593334": [
+   "Sivalapalle",
+   5226,
+   4,
+   "Clay Loam"
+  ],
+  "593110": [
+   "Kethavaram",
+   5213,
+   4,
+   "Clay Loam"
+  ],
+  "593086": [
+   "Buddayapalem",
+   5212,
+   4,
+   "Clay Loam"
+  ],
+  "593335": [
+   "Kokkarayapalle",
+   5226,
+   4,
+   "Clay Loam"
+  ],
+  "593306": [
+   "Apparaopalle",
+   5224,
+   4,
+   "Clay Loam"
+  ],
+  "593316": [
+   "Peddaputha",
+   5225,
+   4,
+   "Clay Loam"
+  ],
+  "593336": [
+   "Chennur",
+   5226,
+   4,
+   "Clay Loam"
+  ],
+  "593327": [
+   "Venkatesapuram",
+   5225,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593304": [
+   "Peddacheppalle",
+   5224,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593328": [
+   "Gotur",
+   5225,
+   4,
+   "Clay Loam"
+  ],
+  "593322": [
+   "Kumarunipalle",
+   5225,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593258": [
+   "Talapanur",
+   5222,
+   4,
+   "Clay Loam"
+  ],
+  "593265": [
+   "Kommaddi",
+   5222,
+   4,
+   "Clay Loam"
+  ],
+  "593321": [
+   "Putha Chinnayapalle",
+   5225,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593320": [
+   "Koppolu",
+   5225,
+   1,
+   "Clay"
+  ],
+  "593343": [
+   "Upparapalle",
+   5226,
+   4,
+   "Clay Loam"
+  ],
+  "593309": [
+   "Chinnachepalle",
+   5224,
+   4,
+   "Clay Loam"
+  ],
+  "593262": [
+   "Keerthipalle",
+   5222,
+   1,
+   "Clay"
+  ],
+  "593251": [
+   "Santhakovvur",
+   5221,
+   4,
+   "Clay Loam"
+  ],
+  "593317": [
+   "Chinnaputha",
+   5225,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593259": [
+   "Payasampalle",
+   5222,
+   4,
+   "Clay Loam"
+  ],
+  "593264": [
+   "Indukur",
+   5222,
+   4,
+   "Clay Loam"
+  ],
+  "593313": [
+   "Dadireddipalle",
+   5224,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593263": [
+   "Ayyavaripalle",
+   5222,
+   1,
+   "Clay"
+  ],
+  "593311": [
+   "Yellareddipalle",
+   5224,
+   4,
+   "Clay Loam"
+  ],
+  "593344": [
+   "Dugganapalle",
+   5226,
+   4,
+   "Clay Loam"
+  ],
+  "593261": [
+   "Lingala",
+   5222,
+   4,
+   "Clay Loam"
+  ],
+  "593318": [
+   "Paidikalva",
+   5225,
+   4,
+   "Clay Loam"
+  ],
+  "593333": [
+   "Thollaganganapalle",
+   5225,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593319": [
+   "Jangampalle",
+   5225,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593260": [
+   "Alidena",
+   5222,
+   4,
+   "Clay Loam"
+  ],
+  "593331": [
+   "Ambavaram",
+   5225,
+   4,
+   "Clay Loam"
+  ],
+  "593312": [
+   "Letapalle",
+   5224,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593432": [
+   "Kothapeta",
+   5232,
+   9,
+   "Sandy Loam"
+  ],
+  "593326": [
+   "Ankayapalle",
+   5225,
+   4,
+   "Clay Loam"
+  ],
+  "593329": [
+   "Obana Somayajulapalle",
+   5225,
+   4,
+   "Clay Loam"
+  ],
+  "593330": [
+   "Kodandaramapuram",
+   5225,
+   4,
+   "Clay Loam"
+  ],
+  "593332": [
+   "Yadavapuram",
+   5225,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593305": [
+   "Vankamada",
+   5224,
+   4,
+   "Clay Loam"
+  ],
+  "592862": [
+   "Bhutamapuram",
+   5201,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592877": [
+   "Balapana Gudur",
+   5201,
+   4,
+   "Clay Loam"
+  ],
+  "592878": [
+   "Chinamudium",
+   5201,
+   4,
+   "Clay Loam"
+  ],
+  "592923": [
+   "Yakarlapalem",
+   5204,
+   7,
+   "Loam"
+  ],
+  "592866": [
+   "B Venkatapuram",
+   5201,
+   4,
+   "Clay Loam"
+  ],
+  "592874": [
+   "Uppalur",
+   5201,
+   4,
+   "Clay Loam"
+  ],
+  "592863": [
+   "Bheemagundam",
+   5201,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592865": [
+   "Boditippanapadu",
+   5201,
+   4,
+   "Clay Loam"
+  ],
+  "592864": [
+   "Gundlakunta",
+   5201,
+   4,
+   "Clay Loam"
+  ],
+  "592875": [
+   "Nemalladinne",
+   5201,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592906": [
+   "Dasaripalle",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "592840": [
+   "Nawabpet",
+   5200,
+   1,
+   "Clay"
+  ],
+  "592876": [
+   "Garisaluru",
+   5201,
+   4,
+   "Clay Loam"
+  ],
+  "592886": [
+   "Gopayapalle",
+   5202,
+   1,
+   "Clay"
+  ],
+  "592841": [
+   "Chinna Komerla",
+   5200,
+   4,
+   "Clay Loam"
+  ],
+  "592903": [
+   "Idamadaka",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "592880": [
+   "Chidipiralladinne",
+   5201,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592887": [
+   "Vellala",
+   5202,
+   4,
+   "Clay Loam"
+  ],
+  "592879": [
+   "Medidinne",
+   5201,
+   4,
+   "Clay Loam"
+  ],
+  "592890": [
+   "Kulur",
+   5202,
+   1,
+   "Clay"
+  ],
+  "592889": [
+   "Doddanala",
+   5202,
+   4,
+   "Clay Loam"
+  ],
+  "592882": [
+   "Chinnapasupula",
+   5201,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593138": [
+   "Salevariuppalapadu",
+   5215,
+   4,
+   "Clay Loam"
+  ],
+  "592904": [
+   "Kanagudur",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "592888": [
+   "Paidala",
+   5202,
+   4,
+   "Clay Loam"
+  ],
+  "592881": [
+   "N Kottalapalle",
+   5201,
+   4,
+   "Clay Loam"
+  ],
+  "592892": [
+   "Tangatur",
+   5202,
+   4,
+   "Clay Loam"
+  ],
+  "592891": [
+   "Gadegudur",
+   5202,
+   4,
+   "Clay Loam"
+  ],
+  "592908": [
+   "Jillela",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "592907": [
+   "Neelapuram",
+   5203,
+   7,
+   "Loam"
+  ],
+  "592883": [
+   "Peddapasupula",
+   5201,
+   4,
+   "Clay Loam"
+  ],
+  "592884": [
+   "Ulavapalle",
+   5201,
+   4,
+   "Clay Loam"
+  ],
+  "592898": [
+   "Parlapadu",
+   5202,
+   4,
+   "Clay Loam"
+  ],
+  "592885": [
+   "G Kothapalle",
+   5201,
+   4,
+   "Clay Loam"
+  ],
+  "592897": [
+   "Arakatavemula",
+   5202,
+   4,
+   "Clay Loam"
+  ],
+  "592910": [
+   "Duvvur",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "592929": [
+   "Ganjikunta",
+   5204,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "251780": [
+   "Jammalamadugu",
+   5215,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592896": [
+   "Rajupalem",
+   5202,
+   4,
+   "Clay Loam"
+  ],
+  "592905": [
+   "Ramachandrapuram",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "592911": [
+   "Madirepalle",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "592893": [
+   "Thondaladinne",
+   5202,
+   4,
+   "Clay Loam"
+  ],
+  "592902": [
+   "Velavali",
+   5202,
+   4,
+   "Clay Loam"
+  ],
+  "592909": [
+   "Pedda Jonnavaram",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "592894": [
+   "Eruvapalem",
+   5202,
+   4,
+   "Clay Loam"
+  ],
+  "592895": [
+   "Chinna Jonnavaram",
+   5202,
+   4,
+   "Clay Loam"
+  ],
+  "593140": [
+   "Ponnathota",
+   5215,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592899": [
+   "Chinnasettipalle",
+   5202,
+   4,
+   "Clay Loam"
+  ],
+  "592901": [
+   "Korrapadu",
+   5202,
+   4,
+   "Clay Loam"
+  ],
+  "592912": [
+   "Chinna Singanapalle",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "592900": [
+   "Pottipadu",
+   5202,
+   1,
+   "Clay"
+  ],
+  "592914": [
+   "Gollapalle",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "593149": [
+   "Goriganur",
+   5215,
+   4,
+   "Clay Loam"
+  ],
+  "593151": [
+   "Danavulapadu",
+   5215,
+   4,
+   "Clay Loam"
+  ],
+  "592913": [
+   "T Sallabasayapalle",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "592916": [
+   "Rajupalem",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "593154": [
+   "Devagudi",
+   5215,
+   4,
+   "Clay Loam"
+  ],
+  "592928": [
+   "Audireddipalle",
+   5204,
+   4,
+   "Clay Loam"
+  ],
+  "592915": [
+   "Manerampalle",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "593155": [
+   "Poorvapu Sugumanchipalle",
+   5215,
+   4,
+   "Clay Loam"
+  ],
+  "593122": [
+   "Chowdur",
+   5214,
+   4,
+   "Clay Loam"
+  ],
+  "593139": [
+   "Gudemcheruvu",
+   5215,
+   4,
+   "Clay Loam"
+  ],
+  "592918": [
+   "Nelaturu",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "592917": [
+   "Gudipadu",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "593150": [
+   "Dharmapuram",
+   5215,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593123": [
+   "Peddasettipalle",
+   5214,
+   4,
+   "Clay Loam"
+  ],
+  "593125": [
+   "Kamanur",
+   5214,
+   1,
+   "Clay"
+  ],
+  "592919": [
+   "Ballakkivaripalle",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "593146": [
+   "Ambavaram",
+   5215,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592920": [
+   "Machanapalle",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "592927": [
+   "Onipenta",
+   5204,
+   4,
+   "Clay Loam"
+  ],
+  "592921": [
+   "Annapusastrula Palle",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "592922": [
+   "Chintakunta",
+   5203,
+   4,
+   "Clay Loam"
+  ],
+  "593145": [
+   "Vemaguntapalle",
+   5215,
+   7,
+   "Loam"
+  ],
+  "592930": [
+   "Gaddamayapalle",
+   5204,
+   4,
+   "Clay Loam"
+  ],
+  "593152": [
+   "Sunnapurallapalle",
+   5215,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593147": [
+   "Kothaguntapalle",
+   5215,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593103": [
+   "Vengannagaripalle",
+   5213,
+   4,
+   "Clay Loam"
+  ],
+  "592931": [
+   "Lingaladinne",
+   5204,
+   4,
+   "Clay Loam"
+  ],
+  "593153": [
+   "Peddandlur",
+   5215,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593102": [
+   "Madur",
+   5213,
+   4,
+   "Clay Loam"
+  ],
+  "593121": [
+   "Rangasayapuram",
+   5214,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593104": [
+   "Chiyyapadu",
+   5213,
+   4,
+   "Clay Loam"
+  ],
+  "251778": [
+   "Proddatur",
+   5214,
+   4,
+   "Clay Loam"
+  ],
+  "592932": [
+   "N Mydukur",
+   5204,
+   4,
+   "Clay Loam"
+  ],
+  "593106": [
+   "Pitchapadu",
+   5213,
+   4,
+   "Clay Loam"
+  ],
+  "593105": [
+   "Morrayapalle",
+   5213,
+   4,
+   "Clay Loam"
+  ],
+  "593128": [
+   "Upparapalle",
+   5214,
+   4,
+   "Clay Loam"
+  ],
+  "593124": [
+   "Dorasanipalle",
+   5214,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593148": [
+   "Thugutlapalle",
+   5215,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593126": [
+   "Sarvireddipalle",
+   5214,
+   4,
+   "Clay Loam"
+  ],
+  "248111": [
+   "Badvel",
+   5211,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593077": [
+   "Gopavaram",
+   5211,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592956": [
+   "Dirasavancha",
+   5205,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592938": [
+   "Nandyalampeta",
+   5204,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592954": [
+   "Darbhavariagraharam",
+   5205,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592958": [
+   "Nagisettipalle",
+   5205,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593064": [
+   "Vanampula",
+   5210,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593065": [
+   "Gopalapuram",
+   5210,
+   7,
+   "Loam"
+  ],
+  "593058": [
+   "Abbusahebpeta",
+   5210,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593060": [
+   "Bayanapalle",
+   5210,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593059": [
+   "Chintalacheruvu",
+   5210,
+   4,
+   "Clay Loam"
+  ],
+  "593062": [
+   "Imadapuram at Pedakesampalle",
+   5210,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593088": [
+   "Nagasanipalle",
+   5212,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593087": [
+   "Pullur",
+   5212,
+   4,
+   "Clay Loam"
+  ],
+  "593066": [
+   "Veerapalle",
+   5210,
+   7,
+   "Loam"
+  ],
+  "593068": [
+   "Kongalaveedu",
+   5210,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593072": [
+   "Godugunur",
+   5210,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593067": [
+   "Konasamudram",
+   5210,
+   4,
+   "Clay Loam"
+  ],
+  "593073": [
+   "Puttayapalle",
+   5210,
+   4,
+   "Clay Loam"
+  ],
+  "593078": [
+   "North Ramapuram",
+   5211,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593348": [
+   "Nallayapalle",
+   5227,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593069": [
+   "Thippanapalle",
+   5210,
+   7,
+   "Loam"
+  ],
+  "593071": [
+   "Rajupalem",
+   5210,
+   7,
+   "Loam"
+  ],
+  "593349": [
+   "Kamalakuru",
+   5227,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593070": [
+   "Venkatasettipalle",
+   5210,
+   7,
+   "Loam"
+  ],
+  "593090": [
+   "Pathur",
+   5212,
+   4,
+   "Clay Loam"
+  ],
+  "593079": [
+   "South Ramapuram",
+   5211,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593347": [
+   "Yerraballe",
+   5227,
+   9,
+   "Sandy Loam"
+  ],
+  "593350": [
+   "Madapur",
+   5227,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593351": [
+   "Thamballagondi",
+   5227,
+   7,
+   "Loam"
+  ],
+  "593099": [
+   "Dumpalagattu",
+   5212,
+   4,
+   "Clay Loam"
+  ],
+  "593101": [
+   "Chennamukkapalle",
+   5212,
+   7,
+   "Loam"
+  ],
+  "593352": [
+   "Gujjalavaripalle",
+   5227,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593353": [
+   "Shrotriya Venkatapuram",
+   5227,
+   7,
+   "Loam"
+  ],
+  "593339": [
+   "Kanuparthi",
+   5226,
+   4,
+   "Clay Loam"
+  ],
+  "593080": [
+   "Brahmanapalle",
+   5211,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593354": [
+   "Kumbhagiri",
+   5227,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593337": [
+   "Doulathapuram",
+   5226,
+   4,
+   "Clay Loam"
+  ],
+  "593355": [
+   "Kamasamudram",
+   5227,
+   4,
+   "Clay Loam"
+  ],
+  "593338": [
+   "Bayanapalle",
+   5226,
+   4,
+   "Clay Loam"
+  ],
+  "593357": [
+   "Kondur",
+   5227,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593356": [
+   "Vemalur",
+   5227,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593081": [
+   "Boddecherla",
+   5211,
+   4,
+   "Clay Loam"
+  ],
+  "593057": [
+   "C Kothapalle",
+   5210,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593089": [
+   "Machupalle",
+   5212,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593358": [
+   "Atlur",
+   5227,
+   7,
+   "Loam"
+  ],
+  "593359": [
+   "Muthukur",
+   5227,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593342": [
+   "Ramanapalle",
+   5226,
+   4,
+   "Clay Loam"
+  ],
+  "593340": [
+   "Nazeerbegpalle",
+   5226,
+   4,
+   "Clay Loam"
+  ],
+  "593341": [
+   "Gurrampadu",
+   5226,
+   4,
+   "Clay Loam"
+  ],
+  "593362": [
+   "Varikunta",
+   5227,
+   7,
+   "Loam"
+  ],
+  "593345": [
+   "Mundlapalle",
+   5226,
+   4,
+   "Clay Loam"
+  ],
+  "593346": [
+   "Rachinnayapalle",
+   5226,
+   4,
+   "Clay Loam"
+  ],
+  "593389": [
+   "Lingampalle",
+   5229,
+   4,
+   "Clay Loam"
+  ],
+  "593390": [
+   "Kadapayapalle",
+   5229,
+   4,
+   "Clay Loam"
+  ],
+  "593365": [
+   "Rangampalle",
+   5227,
+   7,
+   "Loam"
+  ],
+  "593082": [
+   "Rekalakunta",
+   5211,
+   7,
+   "Loam"
+  ],
+  "593083": [
+   "Viswanathapuram",
+   5211,
+   7,
+   "Loam"
+  ],
+  "593084": [
+   "Obulam",
+   5211,
+   4,
+   "Clay Loam"
+  ],
+  "593360": [
+   "Pidathalaveerayapalle",
+   5227,
+   7,
+   "Loam"
+  ],
+  "593361": [
+   "Jannavaram",
+   5227,
+   7,
+   "Loam"
+  ],
+  "593363": [
+   "Maddur",
+   5227,
+   7,
+   "Loam"
+  ],
+  "593063": [
+   "Kondugaripalle",
+   5210,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592924": [
+   "Thippireddipalle",
+   5204,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592975": [
+   "Savisettipalle",
+   5206,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593022": [
+   "Chinayerasala",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593023": [
+   "Siddavaram",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593016": [
+   "Pulliveedu",
+   5208,
+   4,
+   "Clay Loam"
+  ],
+  "593020": [
+   "Chinnayapalle",
+   5208,
+   9,
+   "Sandy Loam"
+  ],
+  "593019": [
+   "Chennareddipeta",
+   5208,
+   7,
+   "Loam"
+  ],
+  "593018": [
+   "Boppapuram",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592976": [
+   "Itigullapadu",
+   5206,
+   4,
+   "Clay Loam"
+  ],
+  "593034": [
+   "Munnelli",
+   5209,
+   4,
+   "Clay Loam"
+  ],
+  "592978": [
+   "Vankamarri",
+   5206,
+   4,
+   "Clay Loam"
+  ],
+  "593017": [
+   "Perammagaripalle",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593027": [
+   "Challagirigella",
+   5208,
+   7,
+   "Loam"
+  ],
+  "592977": [
+   "Akkampet",
+   5206,
+   7,
+   "Loam"
+  ],
+  "592940": [
+   "Mudumala",
+   5205,
+   4,
+   "Clay Loam"
+  ],
+  "593026": [
+   "T Seshampalle",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592925": [
+   "Mudireddipalle",
+   5204,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592941": [
+   "Palugurallapalle",
+   5205,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593028": [
+   "Yellapalle",
+   5208,
+   9,
+   "Sandy Loam"
+  ],
+  "593036": [
+   "Kodur",
+   5209,
+   4,
+   "Clay Loam"
+  ],
+  "593032": [
+   "Ganugapenta",
+   5208,
+   4,
+   "Clay Loam"
+  ],
+  "592939": [
+   "Mallepalle",
+   5205,
+   7,
+   "Loam"
+  ],
+  "593030": [
+   "Rowthupalle",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593029": [
+   "Venkataramapuram",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593037": [
+   "Channakesapuram",
+   5209,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592942": [
+   "Papireddipalle",
+   5205,
+   4,
+   "Clay Loam"
+  ],
+  "593039": [
+   "Maratipalle",
+   5209,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593038": [
+   "Papanapalle",
+   5209,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593043": [
+   "Madhavarayunipalle",
+   5209,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593021": [
+   "S Veerlapalle",
+   5208,
+   9,
+   "Sandy Loam"
+  ],
+  "593024": [
+   "S Seshampalle",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593025": [
+   "S Lingampalle",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593035": [
+   "Bodugundupalle",
+   5209,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593031": [
+   "Middepadu",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592943": [
+   "Palugurallapalle Part Iv",
+   5205,
+   7,
+   "Loam"
+  ],
+  "593040": [
+   "Ankanagodu Gunuru",
+   5209,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592946": [
+   "Godlaveedu",
+   5205,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593046": [
+   "Mekavaripalle",
+   5209,
+   4,
+   "Clay Loam"
+  ],
+  "592944": [
+   "Somireddipalle",
+   5205,
+   4,
+   "Clay Loam"
+  ],
+  "593075": [
+   "Lakkavaripalle",
+   5211,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593044": [
+   "Kamakunta",
+   5209,
+   7,
+   "Loam"
+  ],
+  "592945": [
+   "T Soudaravaripalle",
+   5205,
+   4,
+   "Clay Loam"
+  ],
+  "593045": [
+   "M Narasimhapuram",
+   5209,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593047": [
+   "Peddullapalle",
+   5209,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593074": [
+   "Kalvapalle",
+   5211,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592947": [
+   "Gundapuram",
+   5205,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593048": [
+   "Kondampalle",
+   5209,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592948": [
+   "G Narasimhapuram",
+   5205,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592926": [
+   "Mittamanipalle",
+   5204,
+   4,
+   "Clay Loam"
+  ],
+  "593056": [
+   "Anantharajupuram",
+   5210,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593049": [
+   "Prabhalaveedu",
+   5209,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593054": [
+   "Ethirajupalle",
+   5210,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592952": [
+   "Jangamrajupalle",
+   5205,
+   4,
+   "Clay Loam"
+  ],
+  "592949": [
+   "Diguva Nelatur",
+   5205,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593052": [
+   "Thipparajupalle",
+   5209,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592951": [
+   "Eguvanelatur",
+   5205,
+   4,
+   "Clay Loam"
+  ],
+  "593053": [
+   "Tiruvengalapuram",
+   5210,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593051": [
+   "Thangedupalle",
+   5209,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592950": [
+   "Boodavada",
+   5205,
+   7,
+   "Loam"
+  ],
+  "592953": [
+   "Rekalakunta",
+   5205,
+   4,
+   "Clay Loam"
+  ],
+  "593042": [
+   "Vemakunta",
+   5209,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593033": [
+   "Chennakrishnapuram",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593055": [
+   "Appajipeta",
+   5210,
+   4,
+   "Clay Loam"
+  ],
+  "593050": [
+   "Venkatapuram",
+   5209,
+   4,
+   "Clay Loam"
+  ],
+  "593076": [
+   "Ramapuram",
+   5211,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592955": [
+   "D Lingampalle",
+   5205,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592957": [
+   "D Narasimhapuram",
+   5205,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593135": [
+   "Modameedipalle CT",
+   5214,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593180": [
+   "Muddanur CT",
+   5216,
+   4,
+   "Clay Loam"
+  ],
+  "593289": [
+   "Yerraguntla CT",
+   5223,
+   4,
+   "Clay Loam"
+  ],
+  "593136": [
+   "Rameswaram CT",
+   5214,
+   4,
+   "Clay Loam"
+  ],
+  "592857": [
+   "Dommara Nandyala CT",
+   5200,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593157": [
+   "Moragudi CT",
+   5215,
+   4,
+   "Clay Loam"
+  ],
+  "593134": [
+   "Gopavaram CT",
+   5214,
+   4,
+   "Clay Loam"
+  ],
+  "593137": [
+   "Bollavaram R OG",
+   5214,
+   4,
+   "Clay Loam"
+  ],
+  "593041": [
+   "A Kothapalle",
+   5209,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592871": [
+   "Suddapalle",
+   5201,
+   4,
+   "Clay Loam"
+  ],
+  "592860": [
+   "Papayapalle",
+   5201,
+   4,
+   "Clay Loam"
+  ],
+  "592872": [
+   "Jangalapalle",
+   5201,
+   1,
+   "Clay"
+  ],
+  "592870": [
+   "Peddamudium",
+   5201,
+   1,
+   "Clay"
+  ],
+  "592869": [
+   "Nagarajupalle",
+   5201,
+   4,
+   "Clay Loam"
+  ],
+  "592868": [
+   "Palur",
+   5201,
+   1,
+   "Clay"
+  ],
+  "592873": [
+   "J Kottalapalle",
+   5201,
+   1,
+   "Clay"
+  ],
+  "592861": [
+   "Nagireddypalle",
+   5201,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592867": [
+   "Gopalapuram",
+   5201,
+   4,
+   "Clay Loam"
+  ],
+  "592982": [
+   "Chennupalle",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592979": [
+   "Gangayapalle",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592983": [
+   "Gopavarampalle",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593003": [
+   "Sancharala",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592980": [
+   "Reddypalle",
+   5207,
+   7,
+   "Loam"
+  ],
+  "592981": [
+   "Kothakota",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592990": [
+   "Rajupalem",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592991": [
+   "Malluvaripalle",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592984": [
+   "Eguva Thamballapalle",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592985": [
+   "Diguva Thamballapalle",
+   5207,
+   4,
+   "Clay Loam"
+  ],
+  "593004": [
+   "Akkalreddipalle",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592988": [
+   "Singarayapalle",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592989": [
+   "Brahmanapalle",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593002": [
+   "Sankavaram",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592987": [
+   "Patha Ramapuram",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592998": [
+   "Tellapadu",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592996": [
+   "Kalasapadu",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592992": [
+   "Pullareddypalle",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592993": [
+   "Musalareddipalle",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593005": [
+   "Lachampalle",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592994": [
+   "Mamillapalle Rural",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593008": [
+   "Musalreddipalle",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592999": [
+   "Kondapeta",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592995": [
+   "Mahanandipalle",
+   5207,
+   4,
+   "Clay Loam"
+  ],
+  "593000": [
+   "Siddamurthypalle",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592959": [
+   "Balayapalle",
+   5206,
+   4,
+   "Clay Loam"
+  ],
+  "593006": [
+   "Siddanakitchayapalle",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593001": [
+   "Pendlimarri",
+   5207,
+   4,
+   "Clay Loam"
+  ],
+  "592962": [
+   "Uppalur",
+   5206,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592964": [
+   "Obulapuram",
+   5206,
+   4,
+   "Clay Loam"
+  ],
+  "593007": [
+   "Korrapatupalle",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592967": [
+   "Varikunta",
+   5206,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593009": [
+   "Kavalakuntla",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592960": [
+   "Guntuvaripalle",
+   5206,
+   7,
+   "Loam"
+  ],
+  "592966": [
+   "Ganganapalle",
+   5206,
+   7,
+   "Loam"
+  ],
+  "592969": [
+   "Moolapalle",
+   5206,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593010": [
+   "Buchampalle",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592970": [
+   "Rampadu",
+   5206,
+   4,
+   "Clay Loam"
+  ],
+  "592968": [
+   "Nayunipalle",
+   5206,
+   4,
+   "Clay Loam"
+  ],
+  "592971": [
+   "Katheragandla",
+   5206,
+   4,
+   "Clay Loam"
+  ],
+  "593013": [
+   "Markapuram",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593012": [
+   "Dammanapalle",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593014": [
+   "Porumamilla",
+   5208,
+   7,
+   "Loam"
+  ],
+  "593011": [
+   "Cherlopalle",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "593015": [
+   "Ranga Samudram",
+   5208,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592986": [
+   "Ayyavaripalle",
+   5207,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592961": [
+   "Vasudevapuram",
+   5206,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592972": [
+   "Vengalampalle",
+   5206,
+   7,
+   "Loam"
+  ],
+  "592974": [
+   "Akkemgundla",
+   5206,
+   7,
+   "Loam"
+  ],
+  "592973": [
+   "Pagadalapalle",
+   5206,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592963": [
+   "Pittigunta",
+   5206,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "592965": [
+   "Narasapuram",
+   5206,
+   6,
+   "Sandy Clay Loam"
+  ]
+ },
+ "village_count_total": 988,
+ "village_count_sampled": 973
+}

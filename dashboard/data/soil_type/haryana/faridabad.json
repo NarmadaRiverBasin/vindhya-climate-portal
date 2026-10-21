@@ -1,0 +1,949 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Haryana",
+  "district": "Faridabad",
+  "district_lgd": 60,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (151/152 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 6,
+  "dominant_class": "Sandy Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 3600,
+   "Sandy Clay Loam": 99,
+   "Loam": 9788
+  },
+  "n_pixels": 13488
+ },
+ "villages": {
+  "63525": [
+   "Nawada Tigaon",
+   426,
+   7,
+   "Loam"
+  ],
+  "63548": [
+   "Chandpur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63531": [
+   "Badrola",
+   426,
+   7,
+   "Loam"
+  ],
+  "63470": [
+   "Rajpur Kalan",
+   425,
+   7,
+   "Loam"
+  ],
+  "63580": [
+   "Aterna",
+   426,
+   7,
+   "Loam"
+  ],
+  "63532": [
+   "Bahadurpur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63566": [
+   "Phophunda",
+   426,
+   7,
+   "Loam"
+  ],
+  "63496": [
+   "Badoli",
+   425,
+   7,
+   "Loam"
+  ],
+  "63536": [
+   "Alipur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63533": [
+   "Mandhawali",
+   426,
+   7,
+   "Loam"
+  ],
+  "63497": [
+   "Mortzapur",
+   425,
+   7,
+   "Loam"
+  ],
+  "63534": [
+   "Lehdola",
+   426,
+   7,
+   "Loam"
+  ],
+  "63535": [
+   "Bhainsrawali",
+   426,
+   7,
+   "Loam"
+  ],
+  "63524": [
+   "Mujeri",
+   426,
+   7,
+   "Loam"
+  ],
+  "63499": [
+   "Sarurpur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63526": [
+   "Bukharpur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63522": [
+   "Chandawali",
+   426,
+   7,
+   "Loam"
+  ],
+  "63530": [
+   "Pahladpur Majra Badrola",
+   426,
+   7,
+   "Loam"
+  ],
+  "63529": [
+   "Kurali",
+   426,
+   7,
+   "Loam"
+  ],
+  "63523": [
+   "Machhgarh",
+   426,
+   7,
+   "Loam"
+  ],
+  "63511": [
+   "Bhanakpur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63500": [
+   "Samaypur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63528": [
+   "Junehera",
+   426,
+   7,
+   "Loam"
+  ],
+  "63502": [
+   "Ferozepur Kalan",
+   426,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "63527": [
+   "Dayalpur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63503": [
+   "Zakopur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63501": [
+   "Karnera",
+   426,
+   7,
+   "Loam"
+  ],
+  "63520": [
+   "Malerna",
+   426,
+   7,
+   "Loam"
+  ],
+  "63512": [
+   "Khandawali",
+   426,
+   7,
+   "Loam"
+  ],
+  "63578": [
+   "Ahmadpur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63521": [
+   "Shahupura",
+   426,
+   7,
+   "Loam"
+  ],
+  "63568": [
+   "Sotai",
+   426,
+   7,
+   "Loam"
+  ],
+  "63514": [
+   "Kail Gaon",
+   426,
+   4,
+   "Clay Loam"
+  ],
+  "63507": [
+   "Sikrona",
+   426,
+   4,
+   "Clay Loam"
+  ],
+  "63517": [
+   "Jajru",
+   426,
+   7,
+   "Loam"
+  ],
+  "63564": [
+   "Atali",
+   426,
+   7,
+   "Loam"
+  ],
+  "63519": [
+   "Sunper",
+   426,
+   7,
+   "Loam"
+  ],
+  "63565": [
+   "Garkhera",
+   426,
+   7,
+   "Loam"
+  ],
+  "63513": [
+   "Nagla Jogian",
+   426,
+   7,
+   "Loam"
+  ],
+  "63518": [
+   "Sagarpur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63567": [
+   "Bahbalpur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63569": [
+   "Shahpur Kalan",
+   426,
+   7,
+   "Loam"
+  ],
+  "63515": [
+   "Sahapur Khurd",
+   426,
+   7,
+   "Loam"
+  ],
+  "63510": [
+   "Harphala",
+   426,
+   7,
+   "Loam"
+  ],
+  "63457": [
+   "Riwazpur",
+   425,
+   7,
+   "Loam"
+  ],
+  "63516": [
+   "Sikri",
+   426,
+   7,
+   "Loam"
+  ],
+  "63575": [
+   "Panehra Khurd",
+   426,
+   7,
+   "Loam"
+  ],
+  "63573": [
+   "Ladoli",
+   426,
+   7,
+   "Loam"
+  ],
+  "63576": [
+   "Narhawali",
+   426,
+   7,
+   "Loam"
+  ],
+  "63570": [
+   "Deeg",
+   426,
+   7,
+   "Loam"
+  ],
+  "63574": [
+   "Panehra Kalan",
+   426,
+   7,
+   "Loam"
+  ],
+  "63577": [
+   "Naryala",
+   426,
+   7,
+   "Loam"
+  ],
+  "63579": [
+   "Hirapur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63466": [
+   "Mouzabad",
+   425,
+   4,
+   "Clay Loam"
+  ],
+  "63464": [
+   "Mahavatpur",
+   425,
+   7,
+   "Loam"
+  ],
+  "63467": [
+   "Bhaskola",
+   425,
+   7,
+   "Loam"
+  ],
+  "63468": [
+   "Dungarpur",
+   425,
+   4,
+   "Clay Loam"
+  ],
+  "63455": [
+   "Badshahpur",
+   425,
+   7,
+   "Loam"
+  ],
+  "63456": [
+   "Tikawali",
+   425,
+   7,
+   "Loam"
+  ],
+  "63469": [
+   "Shikargah",
+   425,
+   4,
+   "Clay Loam"
+  ],
+  "63459": [
+   "Dhadar",
+   425,
+   7,
+   "Loam"
+  ],
+  "63454": [
+   "Palwali",
+   425,
+   7,
+   "Loam"
+  ],
+  "63458": [
+   "Bhupani",
+   425,
+   7,
+   "Loam"
+  ],
+  "63471": [
+   "Kanwara",
+   425,
+   7,
+   "Loam"
+  ],
+  "63472": [
+   "Nacholi",
+   425,
+   7,
+   "Loam"
+  ],
+  "63453": [
+   "Kheri Kalan",
+   425,
+   7,
+   "Loam"
+  ],
+  "63433": [
+   "Pali",
+   425,
+   7,
+   "Loam"
+  ],
+  "63475": [
+   "Phulera",
+   425,
+   7,
+   "Loam"
+  ],
+  "63434": [
+   "Gothra Mohbatabad",
+   425,
+   4,
+   "Clay Loam"
+  ],
+  "63474": [
+   "Sahrawak",
+   425,
+   7,
+   "Loam"
+  ],
+  "63481": [
+   "Tajpur",
+   425,
+   7,
+   "Loam"
+  ],
+  "63473": [
+   "Badarpur Said",
+   425,
+   7,
+   "Loam"
+  ],
+  "63480": [
+   "Sidhola",
+   425,
+   7,
+   "Loam"
+  ],
+  "63452": [
+   "Bhatola",
+   425,
+   7,
+   "Loam"
+  ],
+  "63482": [
+   "Jasana",
+   425,
+   7,
+   "Loam"
+  ],
+  "63489": [
+   "Kheri Khurd",
+   425,
+   7,
+   "Loam"
+  ],
+  "63483": [
+   "Dehkola",
+   425,
+   7,
+   "Loam"
+  ],
+  "63488": [
+   "Tajupur",
+   425,
+   7,
+   "Loam"
+  ],
+  "63484": [
+   "Kabulpur Patti Parwarish",
+   425,
+   7,
+   "Loam"
+  ],
+  "63494": [
+   "Faridpur",
+   425,
+   7,
+   "Loam"
+  ],
+  "63487": [
+   "Fattupura",
+   425,
+   7,
+   "Loam"
+  ],
+  "63486": [
+   "Shahbad",
+   425,
+   7,
+   "Loam"
+  ],
+  "63490": [
+   "Sadpura",
+   425,
+   7,
+   "Loam"
+  ],
+  "63485": [
+   "Mahmoodpur",
+   425,
+   7,
+   "Loam"
+  ],
+  "63495": [
+   "Fajjupur",
+   425,
+   7,
+   "Loam"
+  ],
+  "63491": [
+   "Bhuapur",
+   425,
+   7,
+   "Loam"
+  ],
+  "63448": [
+   "Selakhari",
+   425,
+   4,
+   "Clay Loam"
+  ],
+  "63493": [
+   "Neemka",
+   425,
+   7,
+   "Loam"
+  ],
+  "63505": [
+   "Auli",
+   426,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "63492": [
+   "Tigaon",
+   425,
+   7,
+   "Loam"
+  ],
+  "63449": [
+   "Pakhal",
+   425,
+   4,
+   "Clay Loam"
+  ],
+  "63447": [
+   "Pawta",
+   425,
+   4,
+   "Clay Loam"
+  ],
+  "63451": [
+   "Kheri Gujran",
+   425,
+   7,
+   "Loam"
+  ],
+  "63450": [
+   "Nekpur",
+   425,
+   7,
+   "Loam"
+  ],
+  "63441": [
+   "Dhouj",
+   425,
+   4,
+   "Clay Loam"
+  ],
+  "63446": [
+   "Qureshipur",
+   425,
+   7,
+   "Loam"
+  ],
+  "63444": [
+   "Fatehpur Tagga",
+   425,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "63445": [
+   "Madalpur",
+   425,
+   7,
+   "Loam"
+  ],
+  "63439": [
+   "Alampur",
+   425,
+   7,
+   "Loam"
+  ],
+  "63440": [
+   "Tikri Khera",
+   425,
+   7,
+   "Loam"
+  ],
+  "63438": [
+   "Sirohi",
+   425,
+   4,
+   "Clay Loam"
+  ],
+  "63572": [
+   "Fatehpur Biloch",
+   426,
+   7,
+   "Loam"
+  ],
+  "63571": [
+   "Deeg",
+   426,
+   7,
+   "Loam"
+  ],
+  "63504": [
+   "Bijopur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63506": [
+   "Ladhiyapur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63508": [
+   "Kabulpur Bangar",
+   426,
+   4,
+   "Clay Loam"
+  ],
+  "63435": [
+   "Mangar",
+   425,
+   7,
+   "Loam"
+  ],
+  "63436": [
+   "Kot",
+   425,
+   4,
+   "Clay Loam"
+  ],
+  "63509": [
+   "Mohla",
+   426,
+   7,
+   "Loam"
+  ],
+  "63581": [
+   "Jawan",
+   426,
+   7,
+   "Loam"
+  ],
+  "63437": [
+   "Khori Jamalpur",
+   425,
+   4,
+   "Clay Loam"
+  ],
+  "63442": [
+   "Dhauj",
+   425,
+   7,
+   "Loam"
+  ],
+  "63465": [
+   "Chakmazai",
+   425,
+   7,
+   "Loam"
+  ],
+  "63443": [
+   "Alawalpur",
+   425,
+   4,
+   "Clay Loam"
+  ],
+  "63583": [
+   "Piala CT",
+   426,
+   4,
+   "Clay Loam"
+  ],
+  "800436": [
+   "Faridabad",
+   425,
+   7,
+   "Loam"
+  ],
+  "63461": [
+   "Dadsiya",
+   425,
+   7,
+   "Loam"
+  ],
+  "63462": [
+   "Kirawali",
+   425,
+   7,
+   "Loam"
+  ],
+  "63463": [
+   "Lalpur",
+   425,
+   7,
+   "Loam"
+  ],
+  "63460": [
+   "Sherpur Khadar",
+   425,
+   7,
+   "Loam"
+  ],
+  "63498": [
+   "Tilpat CT",
+   425,
+   4,
+   "Clay Loam"
+  ],
+  "63558": [
+   "Bhikuka",
+   426,
+   4,
+   "Clay Loam"
+  ],
+  "63561": [
+   "Mohiapur",
+   426,
+   4,
+   "Clay Loam"
+  ],
+  "63582": [
+   "Mohna",
+   426,
+   7,
+   "Loam"
+  ],
+  "63547": [
+   "Nangla Majra Chandpur",
+   426,
+   4,
+   "Clay Loam"
+  ],
+  "63550": [
+   "Shahjahanpur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63549": [
+   "Immamudinpur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63551": [
+   "Faizupur Khadar",
+   426,
+   7,
+   "Loam"
+  ],
+  "63552": [
+   "Arwa",
+   426,
+   7,
+   "Loam"
+  ],
+  "63553": [
+   "Mothuka",
+   426,
+   7,
+   "Loam"
+  ],
+  "63555": [
+   "Latifpur",
+   426,
+   4,
+   "Clay Loam"
+  ],
+  "63554": [
+   "Sahupura",
+   426,
+   7,
+   "Loam"
+  ],
+  "63556": [
+   "Dulahpur Alias Parasrampur",
+   426,
+   4,
+   "Clay Loam"
+  ],
+  "63557": [
+   "Makanpur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63563": [
+   "Mojpur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63559": [
+   "Jalalpur Majra Chainsa",
+   426,
+   7,
+   "Loam"
+  ],
+  "63560": [
+   "Walipur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63562": [
+   "Chhainsa",
+   426,
+   7,
+   "Loam"
+  ],
+  "63540": [
+   "Akbarpur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63541": [
+   "Mozza Mabad Majra Sekhpur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63539": [
+   "Gharora",
+   426,
+   7,
+   "Loam"
+  ],
+  "63542": [
+   "Manjhawali",
+   426,
+   4,
+   "Clay Loam"
+  ],
+  "63537": [
+   "Raipur Kalan",
+   426,
+   7,
+   "Loam"
+  ],
+  "63545": [
+   "Ghurasan",
+   426,
+   7,
+   "Loam"
+  ],
+  "63546": [
+   "Dalelgarh",
+   426,
+   7,
+   "Loam"
+  ],
+  "63538": [
+   "Nangla Majra Jafalpur",
+   426,
+   7,
+   "Loam"
+  ],
+  "63476": [
+   "Tilori Khadar",
+   425,
+   4,
+   "Clay Loam"
+  ],
+  "63477": [
+   "Amipur",
+   425,
+   4,
+   "Clay Loam"
+  ],
+  "63479": [
+   "Kabulpur Patti Mahtab",
+   425,
+   7,
+   "Loam"
+  ],
+  "63478": [
+   "Chirsi",
+   425,
+   7,
+   "Loam"
+  ],
+  "63544": [
+   "Garhi Bagampur",
+   426,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 152,
+ "village_count_sampled": 151
+}

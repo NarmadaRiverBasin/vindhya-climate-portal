@@ -1,0 +1,967 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Nagaland",
+  "district": "Wokha",
+  "district_lgd": 250,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "full"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 23060,
+   "Sandy Clay Loam": 464,
+   "Loam": 4590
+  },
+  "n_pixels": 28115
+ },
+ "villages": {
+  "267519": [
+   "Humtso",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267493": [
+   "Chandalashung New",
+   1787,
+   4,
+   "Clay Loam"
+  ],
+  "267494": [
+   "Lishayan",
+   1787,
+   4,
+   "Clay Loam"
+  ],
+  "267495": [
+   "Chandalashung B",
+   1787,
+   4,
+   "Clay Loam"
+  ],
+  "267496": [
+   "Chandalashung Old",
+   1787,
+   4,
+   "Clay Loam"
+  ],
+  "267497": [
+   "Woroku",
+   1787,
+   4,
+   "Clay Loam"
+  ],
+  "267498": [
+   "Ronsuyan",
+   1787,
+   4,
+   "Clay Loam"
+  ],
+  "267499": [
+   "Yampha",
+   1787,
+   4,
+   "Clay Loam"
+  ],
+  "267500": [
+   "Ralan Old",
+   1787,
+   4,
+   "Clay Loam"
+  ],
+  "267502": [
+   "Ralan Hq",
+   1787,
+   4,
+   "Clay Loam"
+  ],
+  "267503": [
+   "Ralan New",
+   1787,
+   4,
+   "Clay Loam"
+  ],
+  "267530": [
+   "Satsuphen Ur",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267504": [
+   "Phiro",
+   1788,
+   4,
+   "Clay Loam"
+  ],
+  "267506": [
+   "Shaki",
+   1788,
+   4,
+   "Clay Loam"
+  ],
+  "267507": [
+   "Sankiton",
+   1788,
+   4,
+   "Clay Loam"
+  ],
+  "267508": [
+   "Hanku",
+   1788,
+   4,
+   "Clay Loam"
+  ],
+  "267509": [
+   "N Longchum",
+   1788,
+   4,
+   "Clay Loam"
+  ],
+  "267512": [
+   "Wozhuro Hq",
+   1788,
+   4,
+   "Clay Loam"
+  ],
+  "267533": [
+   "N Longidang",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267534": [
+   "Ruzumphen Ur",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267487": [
+   "Liphayan",
+   1787,
+   4,
+   "Clay Loam"
+  ],
+  "267489": [
+   "S Wochan",
+   1787,
+   4,
+   "Clay Loam"
+  ],
+  "267490": [
+   "Yanlum",
+   1787,
+   4,
+   "Clay Loam"
+  ],
+  "267491": [
+   "Soshan",
+   1787,
+   4,
+   "Clay Loam"
+  ],
+  "267492": [
+   "Wochan",
+   1787,
+   4,
+   "Clay Loam"
+  ],
+  "267457": [
+   "Koro Old",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267448": [
+   "Liowokha Old",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267449": [
+   "Liowokha New",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267452": [
+   "Liphi",
+   1782,
+   7,
+   "Loam"
+  ],
+  "267454": [
+   "Yanmhon Old",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267456": [
+   "Yanmhon New",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267515": [
+   "Vankhosung",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267516": [
+   "Wokha Vill",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267518": [
+   "Elumyo",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267531": [
+   "Tsungtsutong Ur",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "249719": [
+   "Wokha Town Council",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267478": [
+   "Chudi",
+   1785,
+   4,
+   "Clay Loam"
+  ],
+  "999999": [
+   "Data Partially Available",
+   1791,
+   4,
+   "Clay Loam"
+  ],
+  "267480": [
+   "Longtsung",
+   1786,
+   4,
+   "Clay Loam"
+  ],
+  "267523": [
+   "Longsa",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267529": [
+   "Longsachung",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267520": [
+   "Tsungza",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267521": [
+   "Pongitong",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267522": [
+   "Ekok Ju Ur",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267481": [
+   "Morakjo",
+   1786,
+   4,
+   "Clay Loam"
+  ],
+  "267482": [
+   "Lotsu Vill",
+   1786,
+   4,
+   "Clay Loam"
+  ],
+  "267483": [
+   "Lotsu Hq",
+   1786,
+   4,
+   "Clay Loam"
+  ],
+  "267484": [
+   "Pyangsa",
+   1786,
+   4,
+   "Clay Loam"
+  ],
+  "267485": [
+   "Moilan",
+   1786,
+   4,
+   "Clay Loam"
+  ],
+  "267486": [
+   "Pyotchu",
+   1786,
+   4,
+   "Clay Loam"
+  ],
+  "267438": [
+   "Yimparasa",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267439": [
+   "Pangtong",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267440": [
+   "Roni Old",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267442": [
+   "Roni New",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267443": [
+   "Yimza",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267444": [
+   "Mongphio",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267445": [
+   "Lishuyo",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267450": [
+   "Sungkha",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267535": [
+   "Doyang Hydro Left Bank South Wing",
+   1790,
+   7,
+   "Loam"
+  ],
+  "267542": [
+   "Englan Comp",
+   1790,
+   4,
+   "Clay Loam"
+  ],
+  "267544": [
+   "Yikhum",
+   1790,
+   4,
+   "Clay Loam"
+  ],
+  "267471": [
+   "Sunglup",
+   1785,
+   4,
+   "Clay Loam"
+  ],
+  "267472": [
+   "Yonchicho",
+   1785,
+   4,
+   "Clay Loam"
+  ],
+  "267473": [
+   "Doyang Hydro Right Bank North Wing",
+   1785,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "267474": [
+   "Sanis Vill",
+   1785,
+   4,
+   "Clay Loam"
+  ],
+  "267475": [
+   "Menshangpen",
+   1785,
+   4,
+   "Clay Loam"
+  ],
+  "267476": [
+   "Sanis Hq",
+   1785,
+   4,
+   "Clay Loam"
+  ],
+  "267477": [
+   "Tsopo",
+   1785,
+   4,
+   "Clay Loam"
+  ],
+  "267461": [
+   "Baghty Hq",
+   1783,
+   4,
+   "Clay Loam"
+  ],
+  "267462": [
+   "Soku",
+   1783,
+   4,
+   "Clay Loam"
+  ],
+  "267517": [
+   "New Wokha",
+   1789,
+   7,
+   "Loam"
+  ],
+  "267524": [
+   "Niroyo",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267526": [
+   "Yanthamo",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267527": [
+   "Yimkha",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267528": [
+   "Longla",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267536": [
+   "Changsu Old",
+   1790,
+   4,
+   "Clay Loam"
+  ],
+  "267537": [
+   "Changsu New",
+   1790,
+   4,
+   "Clay Loam"
+  ],
+  "267468": [
+   "Aree New",
+   1784,
+   4,
+   "Clay Loam"
+  ],
+  "267470": [
+   "Aree Old",
+   1784,
+   4,
+   "Clay Loam"
+  ],
+  "267545": [
+   "Nungying",
+   1791,
+   4,
+   "Clay Loam"
+  ],
+  "267546": [
+   "Koio",
+   1791,
+   4,
+   "Clay Loam"
+  ],
+  "267547": [
+   "Seluku",
+   1791,
+   4,
+   "Clay Loam"
+  ],
+  "267548": [
+   "Chukitong",
+   1791,
+   4,
+   "Clay Loam"
+  ],
+  "267550": [
+   "Tsungiki",
+   1791,
+   4,
+   "Clay Loam"
+  ],
+  "267551": [
+   "Mungya",
+   1791,
+   4,
+   "Clay Loam"
+  ],
+  "267436": [
+   "Khumchoyan",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267437": [
+   "Serika A Plus B",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267431": [
+   "Longayim",
+   1782,
+   7,
+   "Loam"
+  ],
+  "267432": [
+   "Merapani",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267433": [
+   "Liolongchum",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267434": [
+   "Bhandari Hq",
+   1782,
+   7,
+   "Loam"
+  ],
+  "267435": [
+   "Bhandari Vill",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267428": [
+   "Mekirang",
+   1782,
+   7,
+   "Loam"
+  ],
+  "267429": [
+   "Yimpang",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267430": [
+   "Alikhum",
+   1782,
+   7,
+   "Loam"
+  ],
+  "267423": [
+   "Akuk New",
+   1781,
+   4,
+   "Clay Loam"
+  ],
+  "267425": [
+   "Akuk Old",
+   1781,
+   4,
+   "Clay Loam"
+  ],
+  "267426": [
+   "Aitepyong Station",
+   1781,
+   4,
+   "Clay Loam"
+  ],
+  "267427": [
+   "Lakhuti",
+   1781,
+   4,
+   "Clay Loam"
+  ],
+  "267459": [
+   "Upper Baghty",
+   1783,
+   4,
+   "Clay Loam"
+  ],
+  "267408": [
+   "Tssori Old",
+   1780,
+   4,
+   "Clay Loam"
+  ],
+  "267410": [
+   "Sumito",
+   1780,
+   4,
+   "Clay Loam"
+  ],
+  "267411": [
+   "Lichuyan",
+   1780,
+   7,
+   "Loam"
+  ],
+  "267412": [
+   "New Wozhu",
+   1780,
+   4,
+   "Clay Loam"
+  ],
+  "267413": [
+   "Wozhu Old",
+   1780,
+   7,
+   "Loam"
+  ],
+  "267414": [
+   "Changpang Hq",
+   1780,
+   4,
+   "Clay Loam"
+  ],
+  "267415": [
+   "Changpang Vill",
+   1780,
+   4,
+   "Clay Loam"
+  ],
+  "267416": [
+   "Ongc Changpang",
+   1780,
+   4,
+   "Clay Loam"
+  ],
+  "267418": [
+   "Lio Longidang",
+   1780,
+   4,
+   "Clay Loam"
+  ],
+  "267409": [
+   "Azuhoto",
+   1780,
+   7,
+   "Loam"
+  ],
+  "267419": [
+   "Zukeshe",
+   1781,
+   4,
+   "Clay Loam"
+  ],
+  "267421": [
+   "Akuk Mhayan Ur",
+   1781,
+   4,
+   "Clay Loam"
+  ],
+  "267422": [
+   "Chanaka",
+   1781,
+   4,
+   "Clay Loam"
+  ],
+  "267424": [
+   "Mekokla",
+   1781,
+   4,
+   "Clay Loam"
+  ],
+  "267463": [
+   "Okotso",
+   1784,
+   4,
+   "Clay Loam"
+  ],
+  "267464": [
+   "Asha",
+   1784,
+   4,
+   "Clay Loam"
+  ],
+  "267465": [
+   "Sungro Station",
+   1784,
+   4,
+   "Clay Loam"
+  ],
+  "267466": [
+   "Okotso Yanthanro Ur",
+   1784,
+   4,
+   "Clay Loam"
+  ],
+  "267467": [
+   "Pangti",
+   1784,
+   4,
+   "Clay Loam"
+  ],
+  "267401": [
+   "Amboto Old",
+   1780,
+   7,
+   "Loam"
+  ],
+  "267402": [
+   "Akuhaiqua",
+   1780,
+   7,
+   "Loam"
+  ],
+  "267403": [
+   "Amboto New",
+   1780,
+   7,
+   "Loam"
+  ],
+  "267404": [
+   "Khakuthato",
+   1780,
+   7,
+   "Loam"
+  ],
+  "267406": [
+   "Mithehe Mithelijan",
+   1780,
+   4,
+   "Clay Loam"
+  ],
+  "267407": [
+   "Tssori New",
+   1780,
+   7,
+   "Loam"
+  ],
+  "267399": [
+   "Akahuto",
+   1780,
+   4,
+   "Clay Loam"
+  ],
+  "267400": [
+   "Aghuatito",
+   1780,
+   4,
+   "Clay Loam"
+  ],
+  "267501": [
+   "Likayan Ur",
+   1787,
+   4,
+   "Clay Loam"
+  ],
+  "267510": [
+   "Yankeli",
+   1788,
+   4,
+   "Clay Loam"
+  ],
+  "267505": [
+   "Totsu",
+   1788,
+   4,
+   "Clay Loam"
+  ],
+  "267511": [
+   "Meriyan",
+   1788,
+   7,
+   "Loam"
+  ],
+  "267513": [
+   "L Yanthung Ur",
+   1788,
+   4,
+   "Clay Loam"
+  ],
+  "267488": [
+   "Tchuchanphen",
+   1787,
+   4,
+   "Clay Loam"
+  ],
+  "267453": [
+   "Ruchanyan",
+   1782,
+   7,
+   "Loam"
+  ],
+  "267455": [
+   "Renthanyan Ur",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267458": [
+   "Koro New Ur",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267441": [
+   "Suphayan",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267446": [
+   "Yencho",
+   1782,
+   4,
+   "Clay Loam"
+  ],
+  "267451": [
+   "Hayiyan",
+   1782,
+   7,
+   "Loam"
+  ],
+  "267479": [
+   "Sheru Echuk",
+   1786,
+   4,
+   "Clay Loam"
+  ],
+  "267447": [
+   "Longjung Ur",
+   1782,
+   7,
+   "Loam"
+  ],
+  "267539": [
+   "Thillong Ur",
+   1790,
+   4,
+   "Clay Loam"
+  ],
+  "267540": [
+   "Riphyim New",
+   1790,
+   7,
+   "Loam"
+  ],
+  "267541": [
+   "Riphyim Old",
+   1790,
+   4,
+   "Clay Loam"
+  ],
+  "267543": [
+   "Englan Hq",
+   1790,
+   4,
+   "Clay Loam"
+  ],
+  "267525": [
+   "Nyiro Comp",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267532": [
+   "Okhyeyan",
+   1789,
+   4,
+   "Clay Loam"
+  ],
+  "267538": [
+   "Ekhyoyan Ur",
+   1790,
+   4,
+   "Clay Loam"
+  ],
+  "267469": [
+   "Mhayan Ur",
+   1784,
+   4,
+   "Clay Loam"
+  ],
+  "267549": [
+   "Thenyayan Ur",
+   1791,
+   4,
+   "Clay Loam"
+  ],
+  "267460": [
+   "Makharong",
+   1783,
+   4,
+   "Clay Loam"
+  ],
+  "267417": [
+   "Longtsiri",
+   1780,
+   4,
+   "Clay Loam"
+  ],
+  "267420": [
+   "Yankhum Ur",
+   1781,
+   4,
+   "Clay Loam"
+  ],
+  "267405": [
+   "Shuvukhu Ur",
+   1780,
+   7,
+   "Loam"
+  ]
+ },
+ "village_count_total": 165,
+ "village_count_sampled": 165
+}

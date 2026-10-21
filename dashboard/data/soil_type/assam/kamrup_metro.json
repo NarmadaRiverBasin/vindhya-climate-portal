@@ -1,0 +1,1357 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Assam",
+  "district": "Kamrup Metro",
+  "district_lgd": 618,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (223/228 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 10420,
+   "Sandy Clay Loam": 1885,
+   "Loam": 3972
+  },
+  "n_pixels": 16278
+ },
+ "villages": {
+  "303606": [
+   "Kurkuria Grant",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303460": [
+   "Batakuchi N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "249854": [
+   "Guwahati",
+   2128,
+   7,
+   "Loam"
+  ],
+  "303405": [
+   "Garbhanga N C",
+   2127,
+   4,
+   "Clay Loam"
+  ],
+  "303404": [
+   "Lakhara",
+   2127,
+   7,
+   "Loam"
+  ],
+  "303401": [
+   "Gog",
+   2127,
+   7,
+   "Loam"
+  ],
+  "303402": [
+   "Gog N C",
+   2127,
+   7,
+   "Loam"
+  ],
+  "303403": [
+   "Lakhara N C",
+   2127,
+   7,
+   "Loam"
+  ],
+  "303398": [
+   "Pamehi",
+   2127,
+   4,
+   "Clay Loam"
+  ],
+  "303417": [
+   "Deurali",
+   2127,
+   7,
+   "Loam"
+  ],
+  "303416": [
+   "Pacheniapara",
+   2127,
+   7,
+   "Loam"
+  ],
+  "303414": [
+   "Matikutni",
+   2127,
+   4,
+   "Clay Loam"
+  ],
+  "303413": [
+   "Jogipara",
+   2127,
+   7,
+   "Loam"
+  ],
+  "303412": [
+   "Jabe",
+   2127,
+   7,
+   "Loam"
+  ],
+  "303411": [
+   "Pat Gaon",
+   2127,
+   7,
+   "Loam"
+  ],
+  "303410": [
+   "Barjhar",
+   2127,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303407": [
+   "Mirzapur",
+   2127,
+   7,
+   "Loam"
+  ],
+  "303409": [
+   "Agcia",
+   2127,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303406": [
+   "Mikirpara Chokardoi",
+   2127,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303408": [
+   "Kendukuchi",
+   2127,
+   7,
+   "Loam"
+  ],
+  "303418": [
+   "Jangaliapara",
+   2127,
+   4,
+   "Clay Loam"
+  ],
+  "303415": [
+   "Kamar Gaon",
+   2127,
+   4,
+   "Clay Loam"
+  ],
+  "303399": [
+   "Char Majir N C",
+   2127,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303400": [
+   "Chanchali",
+   2127,
+   7,
+   "Loam"
+  ],
+  "303422": [
+   "Kahi Kuchi CT",
+   2127,
+   7,
+   "Loam"
+  ],
+  "303419": [
+   "Azara CT",
+   2127,
+   7,
+   "Loam"
+  ],
+  "303420": [
+   "Garal CT",
+   2127,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303421": [
+   "Majir Gaon CT",
+   2127,
+   7,
+   "Loam"
+  ],
+  "303423": [
+   "Dharapur CT",
+   2127,
+   7,
+   "Loam"
+  ],
+  "999999": [
+   "South Amsang R F",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303482": [
+   "Aparikola Gaon",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303497": [
+   "Barkacharang N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303495": [
+   "Kakar N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303494": [
+   "Bandargog N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303496": [
+   "Tegheria N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303473": [
+   "Sarutari N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303493": [
+   "Aparikola N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303481": [
+   "Moupur Gaon",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303483": [
+   "Barni",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303466": [
+   "Sarutari Gaon",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303467": [
+   "Tamulikuchi Gaon",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303472": [
+   "Maragdola N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303474": [
+   "Ambher N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303468": [
+   "Ambher Gaon",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303448": [
+   "Kamarkuchi",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303450": [
+   "Upar Tepechia N C",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303445": [
+   "Kamarkuchi N C",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303449": [
+   "Amerigog N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303439": [
+   "Amseng",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303444": [
+   "Bozra N C",
+   2130,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303443": [
+   "Amseng N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303446": [
+   "Tepechia",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303465": [
+   "Maragdala",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303471": [
+   "Sonai N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303451": [
+   "Tepechia N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303452": [
+   "Karchia N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303442": [
+   "Bamunkhat N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303438": [
+   "Bamunkhat",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303437": [
+   "Ghagua Gaon",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303453": [
+   "Batakuchi",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303447": [
+   "Kachia Gaon",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303470": [
+   "Kamalajari N C",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303492": [
+   "Moupur N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303480": [
+   "Dhemai Gaon",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303491": [
+   "Dhemai N C",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303490": [
+   "Lofar N C",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303478": [
+   "Nartap",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303489": [
+   "Nartap N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303487": [
+   "Bhakuagog N C",
+   2130,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303477": [
+   "Luri Gaon",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303484": [
+   "Luri Grant",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303488": [
+   "Luri N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303476": [
+   "Bhakuagog",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303485": [
+   "Barkuchi N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303535": [
+   "Khat Tetelia N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303475": [
+   "Barkuchi",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303504": [
+   "Dikchak N C",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303464": [
+   "Sonai Gaon",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303463": [
+   "Kamalajari Gaon",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303469": [
+   "Loflong N C",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303462": [
+   "Loflong",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303459": [
+   "Dhamara Pathar",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303461": [
+   "Barkhat N C",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303458": [
+   "Barkhat Gaon",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303457": [
+   "Sialekhaiti",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303456": [
+   "Moirakuchi",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303454": [
+   "Dhangiri",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303455": [
+   "Lomati",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303436": [
+   "Juboi",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303441": [
+   "Digarupar N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303501": [
+   "Kachutali Pathar",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303500": [
+   "Sonapur Pathar",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303503": [
+   "Dikchak",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303486": [
+   "Tamuli Kuchi N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303502": [
+   "Chamata Pathar",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303511": [
+   "Bajeni Gaon",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303519": [
+   "Bejeni Grant",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303509": [
+   "Bargog",
+   2130,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303521": [
+   "Bargog N C",
+   2130,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303518": [
+   "Gomaria Bagicha",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303520": [
+   "Gomaria Pathar",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303512": [
+   "Gomaria Gaon",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303513": [
+   "Gomaria N C",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303515": [
+   "Amara Pathar N C",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303525": [
+   "Teteliguri Pathar",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303529": [
+   "Khat Tetelia",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303532": [
+   "Teteliguri N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303479": [
+   "Lofar Gaon",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303528": [
+   "Tetelia Pathar",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303581": [
+   "Kharghuli N C",
+   2131,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303597": [
+   "Kamarpur Village",
+   2131,
+   7,
+   "Loam"
+  ],
+  "303596": [
+   "Kamarpur Pahar",
+   2131,
+   7,
+   "Loam"
+  ],
+  "303598": [
+   "Dhamkhunda",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303595": [
+   "Dhamkhunda",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303594": [
+   "Govali",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303600": [
+   "Dhipujijan Pam",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303599": [
+   "Dhipuji Pathar",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303623": [
+   "Borbila Bill",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303593": [
+   "Ghoramarajan Pam",
+   2131,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303592": [
+   "Gobardhan Grant",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303591": [
+   "Hatibagara",
+   2131,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303589": [
+   "Kajalichowki",
+   2131,
+   7,
+   "Loam"
+  ],
+  "303587": [
+   "Chandrapur",
+   2131,
+   7,
+   "Loam"
+  ],
+  "303607": [
+   "Juboi",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303608": [
+   "Gharua",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303618": [
+   "Thakurkuchi N C",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303617": [
+   "Birkuchi",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303615": [
+   "Bonda",
+   2131,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303616": [
+   "Bonda",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303605": [
+   "Niz Panbari",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303604": [
+   "Michamari",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303601": [
+   "Michamari",
+   2131,
+   7,
+   "Loam"
+  ],
+  "303586": [
+   "Tatimara",
+   2131,
+   7,
+   "Loam"
+  ],
+  "303588": [
+   "Chandrapur",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303602": [
+   "Thakurkuchi Gaon",
+   2131,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303603": [
+   "Thakurbari",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303619": [
+   "Khankar N C",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303611": [
+   "Hojobari",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303585": [
+   "Barchapahi",
+   2131,
+   7,
+   "Loam"
+  ],
+  "303584": [
+   "Hojobari",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303583": [
+   "Khankar",
+   2131,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303612": [
+   "Khankar",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303613": [
+   "Panikhati",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303433": [
+   "Tintukura N C",
+   2129,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303582": [
+   "Panikhaiti",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303614": [
+   "Kharghuli",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303609": [
+   "Niz Panbari",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303434": [
+   "Kharghuli",
+   2129,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303431": [
+   "Bonda Grant",
+   2129,
+   4,
+   "Clay Loam"
+  ],
+  "303432": [
+   "Bonda Grant",
+   2129,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303430": [
+   "Kalitakuchi N C",
+   2129,
+   4,
+   "Clay Loam"
+  ],
+  "303440": [
+   "Bozra",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303590": [
+   "Mikirpam",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303610": [
+   "Ahorigog",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303621": [
+   "Hajobari N C",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303622": [
+   "Niz Panbari N C",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303620": [
+   "Michamari N C",
+   2131,
+   4,
+   "Clay Loam"
+  ],
+  "303559": [
+   "Ouzari",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303575": [
+   "Nibira N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303576": [
+   "Topatoli N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303499": [
+   "Uppar Killing N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303498": [
+   "Kalangpur N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303570": [
+   "Topatoli Gaon",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303571": [
+   "Nibira",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303573": [
+   "Bherakuchi Pathar",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303572": [
+   "Bherakuchi Gaon",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303577": [
+   "Bejeni N C",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303510": [
+   "Hahara Gaon",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303505": [
+   "Amarapathar",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303506": [
+   "Bagibari Pathar",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303507": [
+   "Hahara Pathar",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303517": [
+   "Hahara N C",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303516": [
+   "Mitani N C",
+   2130,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303514": [
+   "Mitani Gaon",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303508": [
+   "Mitani Pathar",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303534": [
+   "Rewa N C",
+   2130,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303522": [
+   "Rewa Gaon",
+   2130,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303533": [
+   "Lomsum N C",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303536": [
+   "Tegheria Gaon",
+   2130,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303538": [
+   "Khaloibari",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303543": [
+   "Khaloibari N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303544": [
+   "Bhogpur N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303567": [
+   "Talani N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303566": [
+   "Dharbam",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303541": [
+   "Bhogpur",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303540": [
+   "Salana",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303531": [
+   "Tetelia N C",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303527": [
+   "Tetelia Gaon",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303530": [
+   "Lomsum Gaon",
+   2130,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "303524": [
+   "Teteliguri",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303526": [
+   "Lomsum Pathar",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303523": [
+   "Rewa Pathar",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303539": [
+   "Helagog",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303537": [
+   "Tegheria Gaon",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303545": [
+   "Ulubam",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303550": [
+   "Maloibari Gaon",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303551": [
+   "Maloibari Jangle",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303547": [
+   "Kendubam",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303548": [
+   "Kendubam Bagicha",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303546": [
+   "Senabar",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303560": [
+   "Gaon Dimoria",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303562": [
+   "Ullani",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303563": [
+   "Tamhalong",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303565": [
+   "Dakhin Dimoria",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303568": [
+   "Killing N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303564": [
+   "Uttar Dimoria",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303569": [
+   "Kahikuchi",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303555": [
+   "Ouzari",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303554": [
+   "Murkata",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303556": [
+   "Maloibari N C",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303561": [
+   "Niz Dimoria",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303558": [
+   "Ouzari",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303542": [
+   "Tegharia N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303574": [
+   "Bherakuchi N C",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303579": [
+   "Barua Bari Gaon CT",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303580": [
+   "Sonapur Gaon CT",
+   2130,
+   7,
+   "Loam"
+  ],
+  "303578": [
+   "Digaru Gaon Digarubar Gaon CT",
+   2130,
+   4,
+   "Clay Loam"
+  ],
+  "303624": [
+   "Chandrapur Baghicha CT",
+   2131,
+   7,
+   "Loam"
+  ],
+  "303435": [
+   "Narengi OG",
+   2129,
+   4,
+   "Clay Loam"
+  ]
+ },
+ "village_count_total": 228,
+ "village_count_sampled": 223
+}

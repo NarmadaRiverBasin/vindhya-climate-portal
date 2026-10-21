@@ -1,0 +1,619 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Tripura",
+  "district": "Khowai",
+  "district_lgd": 652,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "full"
+ },
+ "district": {
+  "dominant_class_id": 5,
+  "dominant_class": "Silty Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 5018,
+   "Sandy Clay Loam": 10761,
+   "Loam": 2713
+  },
+  "n_pixels": 18494
+ },
+ "villages": {
+  "271976": [
+   "Atharamura R F",
+   6698,
+   4,
+   "Clay Loam"
+  ],
+  "271980": [
+   "Nunachhara R F",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271978": [
+   "Teliamura R F Part",
+   6698,
+   4,
+   "Clay Loam"
+  ],
+  "271979": [
+   "Dakshin Gakulnagar Part",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271961": [
+   "Sardu Karkari",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271965": [
+   "Dakshin Gakulnagar Part",
+   6698,
+   7,
+   "Loam"
+  ],
+  "271962": [
+   "Teliamura R F Part",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271938": [
+   "Mainakbari",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271909": [
+   "Gournagar",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271900": [
+   "Purba Ramchandraghat Part",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271902": [
+   "Dwarikapur Part",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271901": [
+   "Laxminarayanpur Part",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271903": [
+   "Ramdayalbari Part",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271899": [
+   "Akhrabari",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271904": [
+   "Paglabari",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271898": [
+   "Tuihachingbari",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271897": [
+   "Dakshin Ramchandraghat",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271896": [
+   "Uttar Ramchandraghat Part",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271893": [
+   "Gayamanibari",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271894": [
+   "Dakshin Padmabil",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271916": [
+   "Laxminarayanpur Part",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271917": [
+   "Santinagar Part",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271914": [
+   "Purba Ramchandraghat Part",
+   6684,
+   7,
+   "Loam"
+  ],
+  "271912": [
+   "Uttar Ramchandraghat Part",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271939": [
+   "Jagna Kobrabari Part",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271915": [
+   "Chebri",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271934": [
+   "Purba Rajnagar",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271940": [
+   "Dakshin Promodenagar Part",
+   6684,
+   7,
+   "Loam"
+  ],
+  "271936": [
+   "Santinagar Part",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271933": [
+   "Ramkrishnabari",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271937": [
+   "Badlabari",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271935": [
+   "Paschim Rajnagar",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271954": [
+   "Krishnapur Part",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271967": [
+   "Uttar Promodenagar",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271970": [
+   "Karaibari",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271969": [
+   "Tuichindraibari",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271972": [
+   "Maharanipur Part",
+   6698,
+   4,
+   "Clay Loam"
+  ],
+  "271973": [
+   "Dakshin Maharani Part",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271971": [
+   "Sriramkhara",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271977": [
+   "Uttar Gakulnagar Part",
+   6698,
+   7,
+   "Loam"
+  ],
+  "271975": [
+   "Laxmipur Part",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271974": [
+   "Ramkrishnapur",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271945": [
+   "Uttar Ghilatali",
+   6698,
+   7,
+   "Loam"
+  ],
+  "271960": [
+   "Hawaibari",
+   6698,
+   7,
+   "Loam"
+  ],
+  "271959": [
+   "Tuichindrai",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271957": [
+   "Laxmipur Part",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271958": [
+   "Dakshin Pulinpur",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271956": [
+   "Uttar Pulinpur",
+   6698,
+   7,
+   "Loam"
+  ],
+  "271963": [
+   "Brahmachhara",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "249784": [
+   "Teliamura Np",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271955": [
+   "Moharchhara",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271949": [
+   "Madhya Kalyanpur",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271947": [
+   "Kunjaban",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271948": [
+   "Paschim Kalyanpur",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271950": [
+   "Purba Kalyanpur",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271951": [
+   "Kamalnagar",
+   6698,
+   7,
+   "Loam"
+  ],
+  "271952": [
+   "Ghilatali",
+   6698,
+   7,
+   "Loam"
+  ],
+  "271944": [
+   "Maharanipur Part",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271942": [
+   "Durgapur",
+   6698,
+   4,
+   "Clay Loam"
+  ],
+  "271941": [
+   "Dwarikapur Part",
+   6698,
+   4,
+   "Clay Loam"
+  ],
+  "271946": [
+   "Ramdayalbari Part",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271966": [
+   "Teliamura Part",
+   6698,
+   7,
+   "Loam"
+  ],
+  "271968": [
+   "Jagna Kobrabari Part",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271964": [
+   "Uttar Gakulnagar",
+   6698,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271953": [
+   "Dakshin Maharani",
+   6698,
+   7,
+   "Loam"
+  ],
+  "271943": [
+   "Dakshin Promodenagar Part",
+   6698,
+   4,
+   "Clay Loam"
+  ],
+  "271890": [
+   "Paschim Belchhara",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271889": [
+   "Ratanpur",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271888": [
+   "Bagabil",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271892": [
+   "Uttar Padmabil Part",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271891": [
+   "Purba Belchhara",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271887": [
+   "Khengrabari",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271895": [
+   "Dhalabil Part",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271921": [
+   "Paschim Karangichhara",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271907": [
+   "Ganki Part",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271910": [
+   "Uttar Padmabil Part",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271908": [
+   "Paharmura",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271911": [
+   "Dhalabil Part",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271913": [
+   "Sonatala",
+   6684,
+   7,
+   "Loam"
+  ],
+  "271906": [
+   "Purba Singhichhara",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271925": [
+   "Purba Laxmichhara",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271905": [
+   "Paschim Singhichhara Part",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "249783": [
+   "Khowai Np",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271932": [
+   "Maidanbari",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271931": [
+   "Shikaribari",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271924": [
+   "Remachhara",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271923": [
+   "Sukhiabari",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271918": [
+   "Chamubasti",
+   6684,
+   4,
+   "Clay Loam"
+  ],
+  "271919": [
+   "Banbazar",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271920": [
+   "Asharambari",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271922": [
+   "Purba Karangichhara",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271926": [
+   "Paschim Laxmichhara",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271928": [
+   "Purba Bachaibari",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271929": [
+   "Paschim Champachhara",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271930": [
+   "Purba Champachhara",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "271927": [
+   "Paschim Bachaibari",
+   6684,
+   6,
+   "Sandy Clay Loam"
+  ]
+ },
+ "village_count_total": 96,
+ "village_count_sampled": 96
+}

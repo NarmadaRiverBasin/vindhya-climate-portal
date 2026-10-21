@@ -1,0 +1,6340 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Karnataka",
+  "district": "Chitradurga",
+  "district_lgd": 533,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (1049/1072 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 5,
+  "dominant_class": "Silty Clay Loam",
+  "class_pixel_counts": {
+   "Clay": 463,
+   "Sandy Clay": 58,
+   "Clay Loam": 11704,
+   "Sandy Clay Loam": 120907,
+   "Loam": 160,
+   "Sandy Loam": 3512
+  },
+  "n_pixels": 136806
+ },
+ "villages": {
+  "606025": [
+   "Rangenahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605901": [
+   "Karalamavinahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605479": [
+   "Veeravvanagatihalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605815": [
+   "Rangasamudra",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605914": [
+   "Bandihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605927": [
+   "Bylahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605933": [
+   "Jammapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606010": [
+   "Dalavaihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605877": [
+   "Neeragunda",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605809": [
+   "Giddanahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605840": [
+   "Chikkamanahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605925": [
+   "Benakanahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605653": [
+   "Nandihalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605636": [
+   "Marapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605790": [
+   "Goppenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605445": [
+   "Hullehal",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605508": [
+   "Chikkajagalur",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605773": [
+   "Veerapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606065": [
+   "Adiralu",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "605618": [
+   "Matadakurubarahatti CT",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606173": [
+   "Bagganadu",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "605321": [
+   "Donehalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605254": [
+   "Ramasagara",
+   5504,
+   9,
+   "Sandy Loam"
+  ],
+  "605659": [
+   "Gandumalenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605223": [
+   "Duppi",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605197": [
+   "Mahimenahatti",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605193": [
+   "Hirekerehalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605176": [
+   "Venkatapura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605167": [
+   "Jambalamalki",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605560": [
+   "Rottihalli",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605793": [
+   "Gondihalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605763": [
+   "Kannenahalli",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605767": [
+   "Amalapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605766": [
+   "Aralikere",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605643": [
+   "Davanahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605630": [
+   "Tyagadahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605724": [
+   "Garaga",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606024": [
+   "Giriyapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605837": [
+   "Kadivanakatte",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605830": [
+   "Krishnapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605836": [
+   "Kondapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605715": [
+   "Sadarahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605649": [
+   "Iyyanahalli Kaval",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605727": [
+   "Chatnahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605719": [
+   "Makunte",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605598": [
+   "Huligundi",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605453": [
+   "Heggadehalu",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605789": [
+   "Nandihalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605468": [
+   "Halerangapura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606023": [
+   "Doddakarpuradakatte",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605992": [
+   "Mallihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605885": [
+   "Goravigondanahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605751": [
+   "Hanumanahalli Kaval",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605816": [
+   "Muligeranahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605811": [
+   "Gundikere",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605806": [
+   "Baragenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605755": [
+   "Dodderikatti",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605690": [
+   "Amblihalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605677": [
+   "N Mallapura",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605326": [
+   "Gorlakatte",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605930": [
+   "Galabenahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605850": [
+   "Chinnapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605852": [
+   "Rangapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605863": [
+   "Honnekere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605682": [
+   "Hanumali",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605701": [
+   "Devarahosahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605702": [
+   "Thuppadahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605700": [
+   "Kenchapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605703": [
+   "Singenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605704": [
+   "Kanivehalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605688": [
+   "Talikatti",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605687": [
+   "Talikatte Kaval",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605679": [
+   "Dummi",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605681": [
+   "Kalkere",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605678": [
+   "Dogganal",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605680": [
+   "Hosuru",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606020": [
+   "Kasappanahalli",
+   5507,
+   4,
+   "Clay Loam"
+  ],
+  "606019": [
+   "Guddadaneralakere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606021": [
+   "Laxmidevarahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606037": [
+   "Kanubenahalli",
+   5507,
+   4,
+   "Clay Loam"
+  ],
+  "606038": [
+   "Chikkabyladakere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606011": [
+   "Thippenahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606009": [
+   "Ajjikamasagara",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606012": [
+   "Mathodu",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606027": [
+   "Balenahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606015": [
+   "Tarikere Jodi",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606036": [
+   "Kaggalakatte",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606039": [
+   "Kittadal",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606035": [
+   "Kanchipura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606041": [
+   "Mugilodu",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606042": [
+   "Naganaikanakatte",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606043": [
+   "Bydarahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606044": [
+   "Doddabyladakere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606028": [
+   "Hottugondanahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606008": [
+   "Karehalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606006": [
+   "Ganjigere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606029": [
+   "Chikkatekalavatti Kaval",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606034": [
+   "Chikkathekalavatti",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606033": [
+   "Bukkasagara",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605981": [
+   "Mylarapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606002": [
+   "Kudurekanive Forest",
+   5507,
+   4,
+   "Clay Loam"
+  ],
+  "605973": [
+   "Grantapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605972": [
+   "Chikkahullenahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605971": [
+   "Arenahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605970": [
+   "Mengasandra",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605975": [
+   "Sadarahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606000": [
+   "Vengalapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605974": [
+   "Kadavagere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606001": [
+   "Kachapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605997": [
+   "Heggere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605897": [
+   "Bagasettihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605898": [
+   "Koratikere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605899": [
+   "Ballalasamudra Kaval",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605943": [
+   "Alagatta",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605900": [
+   "Kadadanakere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605902": [
+   "Mettinahole",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605947": [
+   "Handanakere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605903": [
+   "Kannagondi",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606005": [
+   "Menasinadu",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606003": [
+   "Hagalakere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605999": [
+   "Sriramapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606004": [
+   "Muttagundi",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605948": [
+   "Hosural",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605949": [
+   "Ulavinagondi",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605945": [
+   "Thimmalapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605944": [
+   "Ballalasamudra",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605950": [
+   "Kalkere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605951": [
+   "Aralahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605955": [
+   "Mallenahalli Jodi",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605956": [
+   "Mathur",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605954": [
+   "Kabbala",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605953": [
+   "Tumbinakere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605957": [
+   "Sirigepura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605959": [
+   "Ballalasamudrakere Kaval",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605986": [
+   "Belagur",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605987": [
+   "Hariyanahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605988": [
+   "Singenahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605958": [
+   "Kodihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605985": [
+   "Kerehosahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605960": [
+   "Bommenahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605962": [
+   "Thonechenahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605963": [
+   "Kainadu",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605983": [
+   "Yadagatta",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605984": [
+   "Garaga",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605982": [
+   "Yaraduguddasandi Kaval",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605989": [
+   "Tandaga",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605990": [
+   "Kurubarahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605952": [
+   "Malappanahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605964": [
+   "Somasandra",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606031": [
+   "Sirigondanahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605978": [
+   "Naigere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605979": [
+   "Nagaragere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606032": [
+   "Doddathekalavatti",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605969": [
+   "Gollarahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605873": [
+   "Byrapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605968": [
+   "Bachavara",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605977": [
+   "Agrahara",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605976": [
+   "Neralakere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605991": [
+   "Somenahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605996": [
+   "Gavirangapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605995": [
+   "Goolihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605993": [
+   "Sujikal",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605980": [
+   "Haragondanahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605998": [
+   "Banapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605878": [
+   "Sanihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605880": [
+   "Adrikatte",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605896": [
+   "Aladahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605892": [
+   "Kangavalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605891": [
+   "Adavi Sangenahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605890": [
+   "Kyadigere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605893": [
+   "Kondajji",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605881": [
+   "Marabagatta",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605879": [
+   "Hurulihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605887": [
+   "Jogammanahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605888": [
+   "Lingadhahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605889": [
+   "Attigatta",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605886": [
+   "Bommenahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605904": [
+   "Kellodu",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605874": [
+   "Kumaranakanive",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605862": [
+   "Kodihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605883": [
+   "Machenahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605875": [
+   "Channasamudra",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605882": [
+   "Malali",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605876": [
+   "Peelapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605864": [
+   "Aralihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605865": [
+   "Bokikere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606022": [
+   "Chikkakarpuradakatte",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606040": [
+   "Gollarahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606007": [
+   "Niruvagal",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606030": [
+   "Kadlekamasagara",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605946": [
+   "Kallihosahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605965": [
+   "Kainaduval Kaval",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605967": [
+   "Kainaduhora Kaval",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605994": [
+   "Sujikal Amanikere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605894": [
+   "Thippajjanahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605895": [
+   "Veerapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605884": [
+   "Kyadigere Kaval",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605966": [
+   "Kainadu Amanikere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605851": [
+   "Shivanekatte",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605797": [
+   "Kolalu",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605798": [
+   "Kumaranahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605817": [
+   "Gulihosahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605800": [
+   "Kereyagalahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605814": [
+   "Upparigenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605813": [
+   "Halenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605812": [
+   "Budipura",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605801": [
+   "Gollarahalli",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605802": [
+   "Chowdagondanahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605803": [
+   "Nandanahosur",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605807": [
+   "Papenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605808": [
+   "Hulikere",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605810": [
+   "Kumminagatta",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605805": [
+   "Ghattihosahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605804": [
+   "Neralakatte",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605785": [
+   "Malaninganahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605784": [
+   "Hunasepanche",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605783": [
+   "Sirappanahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605705": [
+   "Muddapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605706": [
+   "Bidarakere",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605712": [
+   "Channasamudra",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605713": [
+   "Bommenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605707": [
+   "Mallenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605708": [
+   "Arabagatta",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605711": [
+   "Jakkanahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605709": [
+   "G Vaderahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605710": [
+   "Gundasamudra",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605696": [
+   "Gowdihalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605699": [
+   "Rangaiahnadurga Kaval",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605693": [
+   "Gollarahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605694": [
+   "Narayanagondanahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605695": [
+   "Uganekatte",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605756": [
+   "Santhenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605754": [
+   "Viswanathanahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605750": [
+   "Thirumalapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605749": [
+   "Lokadolalu",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605753": [
+   "Edehalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605748": [
+   "Bommanakatte",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605689": [
+   "T Vaderahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605698": [
+   "Talagatta",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605697": [
+   "Gangasamudra",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605799": [
+   "Kantamaranahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605818": [
+   "Shankaranahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605819": [
+   "Lingadevarahalli",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605686": [
+   "Dasikatte",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605691": [
+   "Ramagiri",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605746": [
+   "Malenahalli Kaval",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605745": [
+   "Malenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605744": [
+   "Kamasamudra",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605752": [
+   "Gunderi",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605747": [
+   "Gunderi Kaval",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605683": [
+   "Rangapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605675": [
+   "Basapura",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605676": [
+   "R Nulenur",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605743": [
+   "Arehalli Kaval",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605841": [
+   "Jammapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605839": [
+   "Mallapanahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605838": [
+   "Chikkayagati",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605829": [
+   "Hebballi",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606013": [
+   "Arehalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605918": [
+   "Lakkihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605942": [
+   "Seeranakatte",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606018": [
+   "Ittigehalli",
+   5507,
+   4,
+   "Clay Loam"
+  ],
+  "606016": [
+   "Nagathihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606014": [
+   "Siddagondanahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605842": [
+   "Burudekatte",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605858": [
+   "Ballekere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605843": [
+   "Anivala",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605859": [
+   "Kabbinakere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605860": [
+   "Settyhalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605906": [
+   "Duggavara",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605907": [
+   "Goolihatti",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605908": [
+   "Mallapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605825": [
+   "Kabbala",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605822": [
+   "Nagarakatte",
+   5507,
+   9,
+   "Sandy Loam"
+  ],
+  "605823": [
+   "Thumbinakere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605824": [
+   "Beesanahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605826": [
+   "Mavinakatte",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605828": [
+   "Herur",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605827": [
+   "Kallahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605831": [
+   "Kumbaragatte",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605832": [
+   "Devigere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605835": [
+   "Janthikolalu",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605834": [
+   "Guthikatte",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605846": [
+   "Mantenahalli Jodi",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605847": [
+   "Lakkenahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605848": [
+   "Madhure",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605849": [
+   "Kanivesangenahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605905": [
+   "Doddagatta",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605909": [
+   "Thanigekal",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605911": [
+   "Sevanagara",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605913": [
+   "Nakikere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605916": [
+   "Doddakittadahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605917": [
+   "Sannakittadahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605926": [
+   "Banasihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605929": [
+   "Narasipura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605924": [
+   "Devapura Kavalu",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605923": [
+   "Kodihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605931": [
+   "Honnenahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605932": [
+   "Devapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605910": [
+   "Janakal",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605921": [
+   "Veeravvanagathihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605920": [
+   "Kenkere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605922": [
+   "Hullukatti",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605934": [
+   "Masanihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605935": [
+   "Rangavvanahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605941": [
+   "Iyyanahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605940": [
+   "Bevinahalli",
+   5507,
+   4,
+   "Clay Loam"
+  ],
+  "605939": [
+   "Mallapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605938": [
+   "Madadakere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605856": [
+   "Srirangapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605937": [
+   "Ramajjanahalli",
+   5507,
+   9,
+   "Sandy Loam"
+  ],
+  "605936": [
+   "Athimage",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605870": [
+   "Sodaranal",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605871": [
+   "Kappagere",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605872": [
+   "Kurubarahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605868": [
+   "Hosahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605869": [
+   "Hunavinadu",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605844": [
+   "Kundur",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605845": [
+   "Iyalapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605855": [
+   "Palyadahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "251936": [
+   "Hosdurga",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605867": [
+   "Srirangapura Jodi",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605866": [
+   "Goravinakal",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605853": [
+   "Nagenahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606080": [
+   "Goguddu",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606081": [
+   "Gownahalli",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606082": [
+   "Gudihalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606130": [
+   "Bharamagiri",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606146": [
+   "Vanivilasapura",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606145": [
+   "Kambadahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606147": [
+   "Myakenahalli",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606144": [
+   "Kurubarahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606131": [
+   "Yarekenagenahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606148": [
+   "Kattehole",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606143": [
+   "Katrikenahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606079": [
+   "Hulithotlu",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606078": [
+   "Sooragondanahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606083": [
+   "Beerenahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606132": [
+   "Kunikere",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606017": [
+   "Agasarahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605692": [
+   "Ramagiri Kaval",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605685": [
+   "R Mallapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605684": [
+   "Harogutti Kaval",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605821": [
+   "Veerapura Kaval",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605857": [
+   "Channapura",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605833": [
+   "Dasarahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605915": [
+   "Jogihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605912": [
+   "Kenchihalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605919": [
+   "Hanumanahalli",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605928": [
+   "Karadikatte",
+   5507,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606150": [
+   "Haladyamenahalli",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "605621": [
+   "Ingaladahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605620": [
+   "Andanur",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605619": [
+   "Hiriyur",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605633": [
+   "Mallenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605635": [
+   "Dandigenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605634": [
+   "Vishvanathanahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605637": [
+   "Kalagatta",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605652": [
+   "Dasarahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605663": [
+   "Ajjikyatanahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605654": [
+   "Anthapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605664": [
+   "Kamanahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605662": [
+   "Hireyemmiganur",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605666": [
+   "Chikkanakatti",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605671": [
+   "Ramagatta",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605670": [
+   "Vanakemaradi Kaval",
+   5506,
+   1,
+   "Clay"
+  ],
+  "605672": [
+   "Abradasikatte",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605667": [
+   "Chikkayemmiganur",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605673": [
+   "Kengunte",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605674": [
+   "Malladihalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605655": [
+   "Agrahara",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605665": [
+   "Vaderahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605661": [
+   "Vamapura Kavalu",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605651": [
+   "Kadur Kaval",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605660": [
+   "Chikkayemmiganur Kaval",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605537": [
+   "Dyamavvanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605433": [
+   "Beerapura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605489": [
+   "Jampannanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605548": [
+   "Vyasamallapura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605550": [
+   "Marijogihalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605594": [
+   "Jagadalipura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605245": [
+   "Bhairanayakanahatti",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605323": [
+   "Jannenahalli",
+   5504,
+   9,
+   "Sandy Loam"
+  ],
+  "605242": [
+   "Kavalanahalli",
+   5504,
+   9,
+   "Sandy Loam"
+  ],
+  "605243": [
+   "Mallaurahatti",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605244": [
+   "Jogihatti",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605246": [
+   "Hirekere Kaval",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605247": [
+   "Bheemagondanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605248": [
+   "Gowdagere",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605266": [
+   "Gollahalli",
+   5504,
+   9,
+   "Sandy Loam"
+  ],
+  "605268": [
+   "Nelagetanahatti",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605267": [
+   "Sarjavvanahalli",
+   5504,
+   9,
+   "Sandy Loam"
+  ],
+  "605265": [
+   "Ramadurga",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605249": [
+   "Naikanahatti",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605423": [
+   "Bahadurghatta",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605424": [
+   "Kadehude",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605425": [
+   "Kodihalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605426": [
+   "Kariyannanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605428": [
+   "Gollarahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605429": [
+   "Nallikatte",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605446": [
+   "Bastihalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605444": [
+   "Ajjappanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605603": [
+   "Jampannanaikanakote",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605577": [
+   "Toparamalige",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605578": [
+   "Doddasiddavvanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605580": [
+   "Sevapura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605579": [
+   "Kunchiganahal",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605601": [
+   "Ingaladalu",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605602": [
+   "Sevalalnagar",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605604": [
+   "Kurumaradikere",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605617": [
+   "Yerehalli",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605616": [
+   "Kenne Hadlu",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605615": [
+   "Doddapura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605613": [
+   "Kakkeharavu",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605612": [
+   "Mahadevanakatte",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605611": [
+   "Annehal",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605605": [
+   "Obannanahalli",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605606": [
+   "Nandipura",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605608": [
+   "Sondekola",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605607": [
+   "Uppanaikanahalli",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605609": [
+   "Godabanahal",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605610": [
+   "Pandarahalli",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605569": [
+   "Singapura",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605500": [
+   "Kadambanakatte",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605502": [
+   "Upparatti",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605501": [
+   "Doddagatta",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605495": [
+   "Chikkagondanahalli",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605499": [
+   "Avalenahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605498": [
+   "Bogalerahatti",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605496": [
+   "Turuvanur",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605497": [
+   "Bangarakkanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605503": [
+   "Kunabevu",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605504": [
+   "Ragalobanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605505": [
+   "Bommakkanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605506": [
+   "Haikal",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605521": [
+   "Pelorahatti",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605507": [
+   "Baggalurangavvanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605509": [
+   "Bagenahal",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605510": [
+   "Hunesekatte",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605519": [
+   "Belaghatta",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605571": [
+   "Kallenahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605573": [
+   "Dyamavvanahalli",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605572": [
+   "Gonur",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605581": [
+   "Medakeripura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605511": [
+   "Madanaikanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605512": [
+   "Chikkappanahalli",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605494": [
+   "Chippinakere",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605493": [
+   "Muddapura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605513": [
+   "Surenahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605514": [
+   "Sultanipura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605516": [
+   "Rimmaghatta",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605518": [
+   "Rayannanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605517": [
+   "Papenahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605570": [
+   "Guddadarangavvanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605583": [
+   "Mallapura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605587": [
+   "Tamatakallu",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605586": [
+   "Mallanakatte",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605584": [
+   "Megalahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "251934": [
+   "Chitradurga",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605582": [
+   "Pillekerenahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605585": [
+   "Medehalli Part",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605541": [
+   "Seebara",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605435": [
+   "Hemmanaghatta",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605437": [
+   "Sriramanagara",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605436": [
+   "Nandihalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605434": [
+   "Chowlihalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605432": [
+   "Kakabalu",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605430": [
+   "Hosapete",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605443": [
+   "Pamarahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605440": [
+   "Dyapanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605439": [
+   "Bevinahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605457": [
+   "Yemmehatti",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605456": [
+   "Bharamasagara",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605441": [
+   "Rangavvanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605431": [
+   "Issamudra",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605442": [
+   "Haralakatte",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605449": [
+   "Adavigollarahalli",
+   5505,
+   9,
+   "Sandy Loam"
+  ],
+  "605492": [
+   "Chikkabbigere",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605524": [
+   "Malenahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605515": [
+   "Siddavvanadurga",
+   5505,
+   9,
+   "Sandy Loam"
+  ],
+  "605528": [
+   "Vaddanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605491": [
+   "Hire Kabbigere",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605452": [
+   "Bedarashivanakere",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605450": [
+   "Basavanashivanakere",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605454": [
+   "Kasavanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605458": [
+   "Hampanur",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605455": [
+   "Heggere",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605473": [
+   "Pudukalahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605471": [
+   "Obalapura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605475": [
+   "Alagavadi",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605482": [
+   "Palakihalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605484": [
+   "Doddiganahal",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605485": [
+   "Medakeripura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605481": [
+   "Jammenahalli",
+   5505,
+   7,
+   "Loam"
+  ],
+  "605480": [
+   "Siddapura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605476": [
+   "Hosarangapura",
+   5505,
+   7,
+   "Loam"
+  ],
+  "605469": [
+   "Seegehalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605459": [
+   "Eshwaranagara",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605470": [
+   "Halavudara",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605461": [
+   "Kolahal",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605467": [
+   "Lingavvanagatihalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605466": [
+   "Cheelangi",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605463": [
+   "Chikkabennur",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605464": [
+   "Hirebennur",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605451": [
+   "Byalahal",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605522": [
+   "Kalkunte",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605523": [
+   "Baligatte",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605526": [
+   "Beeravara",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605527": [
+   "Katralu",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605529": [
+   "Iyyanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605540": [
+   "Guttinadu",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605530": [
+   "K Ballekatte",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605539": [
+   "Maraghatta",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605477": [
+   "Sirigere",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605534": [
+   "Obavvanagathihalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605478": [
+   "Chikkenahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605490": [
+   "Bommavvanagathihalli",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605488": [
+   "Konanur",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605535": [
+   "Alaghatta",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605533": [
+   "Chikkalaghatta",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605465": [
+   "Gowrammanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605532": [
+   "Vijapura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605531": [
+   "Lakshmisagara",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605536": [
+   "Siddavvanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605538": [
+   "Sadarahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605543": [
+   "Chikkapura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605545": [
+   "Kyasapura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605555": [
+   "Chikkaguntanur",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605546": [
+   "Kodagavalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605547": [
+   "Hunasekatte",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605553": [
+   "Bommenahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605549": [
+   "Kadleguddu",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605551": [
+   "Megalahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605552": [
+   "Bedarabommenahalli",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605562": [
+   "Dindadahalli",
+   5505,
+   7,
+   "Loam"
+  ],
+  "605563": [
+   "Palya",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605564": [
+   "Nallikatte",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605565": [
+   "N Ballikatte",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605559": [
+   "Hullur",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605593": [
+   "Janukonda",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605592": [
+   "Dalavaihalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605595": [
+   "Sollapura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605596": [
+   "Jalikatte",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605588": [
+   "Kavadigarahatti",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605542": [
+   "Echalanagenahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605589": [
+   "Siddapura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605544": [
+   "Hosahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605590": [
+   "Katihalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605591": [
+   "Manangi",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605558": [
+   "Thirumalapura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605556": [
+   "Haliyur",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605557": [
+   "Kurubarahalli",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605554": [
+   "Hireguntanur",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605561": [
+   "Thurebailu",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605568": [
+   "Bettadanagenahalli",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605796": [
+   "Tekalavatti",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605795": [
+   "Sangenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605794": [
+   "Kanivehalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605791": [
+   "Kanivejogihalli",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605792": [
+   "Kasavanahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605788": [
+   "Horakeredevarapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605781": [
+   "Madderu",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605787": [
+   "Mathigatta",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605778": [
+   "Borenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605779": [
+   "Ramenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605780": [
+   "Nellikatte",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605776": [
+   "Nagaraghatta",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605777": [
+   "Pampapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605771": [
+   "Brahmapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605770": [
+   "Banjagondanahalli",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605769": [
+   "T Nulenur",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605716": [
+   "Keshavapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605757": [
+   "Basavapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605758": [
+   "Thirumalapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605760": [
+   "Thodranal",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605759": [
+   "Lingadahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605764": [
+   "Gowripura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605762": [
+   "Kashipura",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605761": [
+   "Amruthapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605765": [
+   "Kondapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605597": [
+   "Kirubanakallu",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605768": [
+   "Chitrahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605772": [
+   "Echaghatta",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605775": [
+   "Shivaganga",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605774": [
+   "Mahadevapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605717": [
+   "Hanumanakatte",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605614": [
+   "Rampura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605520": [
+   "Veeramadakeripura",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605600": [
+   "Chitradurga Rural",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605438": [
+   "Arasuru",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605448": [
+   "Kenchavvanagatihalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605525": [
+   "Kariyammanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605472": [
+   "Lingadahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605474": [
+   "Kenchamaranahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605483": [
+   "Konammanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605486": [
+   "Horakenahalli",
+   5505,
+   4,
+   "Clay Loam"
+  ],
+  "605460": [
+   "Gurappanahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605462": [
+   "Jatlahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605487": [
+   "Huligere",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605625": [
+   "Ganjigatte",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605626": [
+   "Udogere",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605627": [
+   "Kagalagere",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605629": [
+   "Tanigehalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605642": [
+   "Hirekandavadi",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605640": [
+   "Kallavvanagathihalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605622": [
+   "Bande Bommenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605623": [
+   "Gyarehalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605782": [
+   "T Yemmiganur",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605738": [
+   "Halehalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605725": [
+   "Gilkenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605718": [
+   "Arasanaghatta",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605726": [
+   "Garaga Forest",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605632": [
+   "Kutvihalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605631": [
+   "Muthugaduru",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605638": [
+   "Sasalu",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605650": [
+   "Iyyanahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605639": [
+   "B Durga",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605656": [
+   "Kadur",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605658": [
+   "Kodagavalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605731": [
+   "Hulemalali",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605732": [
+   "Shivapura",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605742": [
+   "Arehalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605741": [
+   "Amanahal",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605734": [
+   "Gundimadu",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605733": [
+   "Kunugali",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605735": [
+   "Punajur",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605736": [
+   "Malkapura",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605740": [
+   "Holalkere Rural",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605739": [
+   "Kudineerakatti",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "251935": [
+   "Holalkere",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605737": [
+   "Cheeranahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605723": [
+   "Harenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605722": [
+   "Dasarahalli Inam",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605730": [
+   "Agrahara",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605729": [
+   "Padigatte",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605668": [
+   "Hosahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605728": [
+   "Adanur",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605721": [
+   "Apparasanahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605714": [
+   "Chikkandavadi",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605646": [
+   "Rangavvanahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605648": [
+   "Sringeri Hanumanahalli",
+   5506,
+   4,
+   "Clay Loam"
+  ],
+  "605647": [
+   "Honnakaluve",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605645": [
+   "Gunjiganur",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605644": [
+   "Chikkajajur Kaval",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605720": [
+   "Channapatna",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605669": [
+   "Banagere",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605657": [
+   "Kotehal",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606047": [
+   "Palavvanahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606046": [
+   "Chikkasiddavvanahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606062": [
+   "Yelakurnahalli",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606061": [
+   "Maradidevigere",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606049": [
+   "Maradihalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606048": [
+   "Burujanaroppa",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606064": [
+   "Bharamapura",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606060": [
+   "Aimangala",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "605566": [
+   "Malali",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605599": [
+   "Attikatte",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605624": [
+   "Jogera Hanumanahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605628": [
+   "Chowdenahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605641": [
+   "Shanubhoganahalli",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605820": [
+   "Chikkajajur CT",
+   5506,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606045": [
+   "Jayasuvarnapura",
+   5507,
+   4,
+   "Clay Loam"
+  ],
+  "606194": [
+   "Arasinagundi",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606195": [
+   "Ulivinahal",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606196": [
+   "Halumadenahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606197": [
+   "Byaramadu",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606198": [
+   "Sheshappanahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606192": [
+   "Handiganadu",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606199": [
+   "Pilali",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606202": [
+   "Mavinamadu",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606200": [
+   "Veeravvanagathihalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606201": [
+   "Lakkenahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606203": [
+   "Kilaradahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606152": [
+   "Paremenahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606193": [
+   "Yelladakere",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606191": [
+   "Layaradasarahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606189": [
+   "Obalapura",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606188": [
+   "Kariyala",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606184": [
+   "Malagondanahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606187": [
+   "Javanagondanahalli",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606172": [
+   "Gorladaku",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606185": [
+   "Katanayakanahalli",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606186": [
+   "Anesidri",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606183": [
+   "Madenahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606182": [
+   "Rangapura",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606151": [
+   "Hindasakatte",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606180": [
+   "Iddalanagenahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606179": [
+   "Challamadu",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606181": [
+   "Gowadanahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606077": [
+   "Tavandi",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606142": [
+   "Doddaghatta",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606154": [
+   "Hulugalakunte",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606133": [
+   "Mayasandra",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606084": [
+   "Yaradakatte",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606076": [
+   "Metikurke",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606114": [
+   "Eswaragere",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606115": [
+   "Devarakotta",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606165": [
+   "Koodlahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606116": [
+   "Byadarahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606085": [
+   "Gannayakanahalli",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606086": [
+   "Balenahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606087": [
+   "Hemadala",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606137": [
+   "Maskal",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606138": [
+   "Bojapura",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606164": [
+   "Yelanadu",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606166": [
+   "Toresal Nagenahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606134": [
+   "Huchavvanahalli",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606141": [
+   "Lakkavvanahalli",
+   5508,
+   1,
+   "Clay"
+  ],
+  "251937": [
+   "Hiriyur",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606155": [
+   "Somerahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606178": [
+   "Ganjalagunte",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606158": [
+   "Patrehalli",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606157": [
+   "Lakkanahal",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606156": [
+   "Indiranagar",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606174": [
+   "Bagganadu Kaval",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606175": [
+   "Vaddanahalli",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606170": [
+   "Boranakunte",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606176": [
+   "Rayabommanahalli",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606171": [
+   "Kasturirangappenahalli",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606162": [
+   "Yerachikkenahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606177": [
+   "Adivala",
+   5508,
+   1,
+   "Clay"
+  ],
+  "606125": [
+   "Myadanahole",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606128": [
+   "Ikkanur",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606122": [
+   "Kodihalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606129": [
+   "Kurubarahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606136": [
+   "Babbur",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606117": [
+   "Huvinahole",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606123": [
+   "Yennegere",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606127": [
+   "Thimmalapura",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606126": [
+   "Kundalagura",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606167": [
+   "Samudradahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606163": [
+   "Pitlali",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606168": [
+   "Uppalagere",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606169": [
+   "Ranganathapura",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606160": [
+   "Kasavanahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606161": [
+   "Nandihalli",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606159": [
+   "Alur",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606139": [
+   "Sevalalnagar",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606135": [
+   "Myakalurahalli",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606118": [
+   "Venukalgudda",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606121": [
+   "Sakkara",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606140": [
+   "Hiriyur Rural",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606124": [
+   "Appasamudra",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605273": [
+   "Katavvanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605299": [
+   "Chennaganahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605413": [
+   "Kyathanamale",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605288": [
+   "Mannekote",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605386": [
+   "Junjaragunte",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606119": [
+   "Dharmapura",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605414": [
+   "Kalamarahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605415": [
+   "Gorlathu",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605416": [
+   "Torebeeranahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605417": [
+   "Thimmannanayakanakote",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605418": [
+   "Obalapura",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605419": [
+   "Doddabeeranahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605406": [
+   "Gosikere",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605402": [
+   "Chikkachellur",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605420": [
+   "Doddachellur",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605401": [
+   "Obanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605421": [
+   "Kadegude",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605422": [
+   "Kyadigunte",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605356": [
+   "Dyavaranahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605398": [
+   "Pillahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605400": [
+   "Mahadevapura",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605397": [
+   "Gowripura",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605382": [
+   "Putloorahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605381": [
+   "Pagadalabande Kaval",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605384": [
+   "Korlakunte",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605385": [
+   "Bommanakunte",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605395": [
+   "Viswanathapura",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605396": [
+   "Parasuramapura",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605404": [
+   "Chowlur Kaval",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605394": [
+   "Chowluru",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605380": [
+   "Pagadalabande",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605411": [
+   "Hulikunte",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605412": [
+   "Belagere Kaval",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605410": [
+   "Belagere",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605409": [
+   "Yalagatta",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605408": [
+   "Konigarahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605407": [
+   "Konigarahalli Kaval",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605405": [
+   "Gosikere Kaval",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605393": [
+   "Suranahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605392": [
+   "Purlahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605390": [
+   "Channammanagathihalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605387": [
+   "Thimmannanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605388": [
+   "Chattekamba",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605391": [
+   "Channammanagatihalli Kaval",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605357": [
+   "Vaderahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605358": [
+   "Bomberahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605360": [
+   "Nallurahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605371": [
+   "Badavanahalli B",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605361": [
+   "Chikkenahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605359": [
+   "Devara Marikunte",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605362": [
+   "Badavanahalli Kaval B",
+   5504,
+   9,
+   "Sandy Loam"
+  ],
+  "605370": [
+   "Jadekunte",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605369": [
+   "Kaparahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605368": [
+   "Heggere",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605350": [
+   "Sevalalnagar",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605366": [
+   "Ganjigunte",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605349": [
+   "Hiremadhure",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605348": [
+   "Chikkamadhure",
+   5504,
+   4,
+   "Clay Loam"
+  ],
+  "605345": [
+   "Balenahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605343": [
+   "Kurudihalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605346": [
+   "Nandanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605344": [
+   "Ramajogihalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605324": [
+   "Nannivala",
+   5504,
+   9,
+   "Sandy Loam"
+  ],
+  "605342": [
+   "Kannenahalli B",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605325": [
+   "Challakere Rural",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605341": [
+   "Somaguddu",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605365": [
+   "Sanikere",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605351": [
+   "Kammathmarikunte",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605264": [
+   "Manamainahatti",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605320": [
+   "Doddabadihalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605319": [
+   "Chikkabadihalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605340": [
+   "Lakshmipura",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605322": [
+   "Thippareddyhalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605315": [
+   "Katamdevarakote",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605314": [
+   "Thappagondanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605375": [
+   "Jajuru Kaval",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605389": [
+   "Matasamudra",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605378": [
+   "Haligondanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605379": [
+   "Haravigondanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605373": [
+   "Moduru Kaval",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605374": [
+   "Moduru",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605376": [
+   "Jajur",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605377": [
+   "Nagagondanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605372": [
+   "Lakumagondanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605312": [
+   "Gudihalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605313": [
+   "Kasavigondanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605295": [
+   "Renukapura",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605250": [
+   "Kamplisagara B",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605251": [
+   "Mahadevapura",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605252": [
+   "Giddapura",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605263": [
+   "Khudapura",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605262": [
+   "Gowripura",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605352": [
+   "Hotteppanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605363": [
+   "Gopanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605354": [
+   "Reddihalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605355": [
+   "Kasturi Thimmanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605334": [
+   "Vidupanakunte",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605332": [
+   "Visweswarapura",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605333": [
+   "Karikere",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605309": [
+   "Kaluvehalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605310": [
+   "Kyatagondanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605311": [
+   "Yadalagatta",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605308": [
+   "Doddaullarthi",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605298": [
+   "Chitranayakanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605296": [
+   "Mylanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605297": [
+   "Banavigondanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605292": [
+   "Ghataparthi",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605300": [
+   "Valase",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605301": [
+   "Thimmannanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605291": [
+   "Banjigere",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605253": [
+   "Obaiahnahatti",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605255": [
+   "Gajjaganahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605287": [
+   "Chikkahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605290": [
+   "Byadareddyhalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605271": [
+   "Neralagunte",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605274": [
+   "Katrikenahatti",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605269": [
+   "Varavoo Kaval",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605327": [
+   "Veeradimmanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "251933": [
+   "Challakere",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605328": [
+   "Budnahatti",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605338": [
+   "Nagaramgere",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605339": [
+   "Siddapura",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605337": [
+   "Dodderi",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605335": [
+   "Meerasabihalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605336": [
+   "Bommasamudra",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605331": [
+   "Rangavvanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605329": [
+   "Duggavara",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605330": [
+   "Bharamasagara",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605306": [
+   "Chikkaullarti",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605305": [
+   "Chikkaammanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605304": [
+   "Giriyammanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605302": [
+   "Harishchandranayakana Halli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605256": [
+   "Thimmappaiahnahalli",
+   5504,
+   9,
+   "Sandy Loam"
+  ],
+  "605257": [
+   "Kereyagalahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605258": [
+   "Jambaiahnahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605259": [
+   "Thippaiahnakote",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605261": [
+   "Devarahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605576": [
+   "Sajjanakere",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605575": [
+   "Pallavagere",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605574": [
+   "Chikkenahalli",
+   5505,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605383": [
+   "Putloorahalli Kaval",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605367": [
+   "Sanikere Kaval B",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605347": [
+   "Govinahal B",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606066": [
+   "Thadapinachinnammana Halli",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "605316": [
+   "Donehalli Kaval",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605317": [
+   "Obalapura Kaval",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605272": [
+   "Lingavvanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605364": [
+   "Mummadisagara B",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605353": [
+   "Jangamarahalli B",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605270": [
+   "Mallavvanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605307": [
+   "Ullarthi Kaval",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605289": [
+   "Henjimuttenahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606059": [
+   "Talavatti",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606067": [
+   "Guilalu",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606068": [
+   "Giddaobanahalli",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606070": [
+   "Mallappanahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606073": [
+   "Golagondanahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606075": [
+   "Kariobenahalli",
+   5508,
+   4,
+   "Clay Loam"
+  ],
+  "606071": [
+   "Salabommanahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606058": [
+   "Vaddikere",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606051": [
+   "Sondekere",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606052": [
+   "Jodipura",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606053": [
+   "Ramajogihalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606054": [
+   "Maddanakunte",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606055": [
+   "Gollahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606072": [
+   "Kalavibagi",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606057": [
+   "Yaraballi",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606056": [
+   "Khandikere",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606088": [
+   "Gudunurhalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606089": [
+   "Rangenahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606090": [
+   "Shidlaiahnakote",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606091": [
+   "Sangenahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606094": [
+   "Upparahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606092": [
+   "Bidarakere",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606101": [
+   "Salhunse",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606100": [
+   "Hosahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606099": [
+   "Gulya",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606098": [
+   "Yelagondanahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606113": [
+   "Chillahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606112": [
+   "Gollahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606111": [
+   "Mungasavalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606102": [
+   "Sugur",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606110": [
+   "Hariyabbe",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606097": [
+   "Abbinahole",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606095": [
+   "Ambalagere",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606096": [
+   "Toreobenahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606103": [
+   "Kanajanahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606109": [
+   "Shravanagere",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606120": [
+   "Benkanahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606107": [
+   "Parasuramadevarakote",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606104": [
+   "Hosakere",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606105": [
+   "Khandenahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606106": [
+   "Halagaladdi",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605260": [
+   "Bheemanakere",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606069": [
+   "Kurudugirenahalli",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606093": [
+   "Bhagavathikere",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "606108": [
+   "Amanitalav",
+   5508,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605148": [
+   "Swamikere",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605277": [
+   "Obannanahalli Kaval",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605229": [
+   "Torekolammanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605241": [
+   "Guntakolammanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605228": [
+   "Giddanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605206": [
+   "Rayapura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605227": [
+   "Konsagara",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605209": [
+   "Marlahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "251932": [
+   "Molakalmuru",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605175": [
+   "Vittalapura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605225": [
+   "Kondlahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605226": [
+   "Netrenahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605222": [
+   "Mogalahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605224": [
+   "Marammanahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605210": [
+   "Nerlahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605208": [
+   "Gundluru",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605207": [
+   "Sulenahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605205": [
+   "Yerrenahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605211": [
+   "Adavimallapura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605221": [
+   "Bommagondanakere",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605220": [
+   "Mathigarahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605218": [
+   "Surammanhalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605217": [
+   "Harvinadoddi",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605216": [
+   "Chikkobanahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605215": [
+   "Chikkumthi",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605212": [
+   "Tumkurlahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605213": [
+   "Donetammenahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605214": [
+   "Yerapothajogihalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605204": [
+   "Siddaiahnakote",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605203": [
+   "Iyanahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605202": [
+   "Matadajogihalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605201": [
+   "Tuppadakkanahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605199": [
+   "Yerajinnenahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605200": [
+   "Hanagal",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605198": [
+   "Bommalinganahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605194": [
+   "Talavarahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605185": [
+   "Bhatrahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605189": [
+   "Katanaikanahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605190": [
+   "Guddadahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605186": [
+   "Chikkerahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605191": [
+   "Byrapura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605187": [
+   "Amakundi",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605192": [
+   "Obalapura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605146": [
+   "Karadihalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605188": [
+   "Nagasamudra",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605182": [
+   "Heruru",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605181": [
+   "Chikkanahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605173": [
+   "Vaderahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605183": [
+   "Siddapura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605160": [
+   "Hosanagalapura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605184": [
+   "Machenahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605179": [
+   "Veerapura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605180": [
+   "Gowrasamudra",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605178": [
+   "Ramasagara",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605177": [
+   "Urthal",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605161": [
+   "Pennammanahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605145": [
+   "Kanakuppe",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605144": [
+   "Thammenahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605147": [
+   "Sirekola",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605143": [
+   "Bommadevarahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605149": [
+   "Rajapura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605159": [
+   "Murudi",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605162": [
+   "Thimmalapura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605174": [
+   "Devasamudra",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605163": [
+   "Kerekondapura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605164": [
+   "Rampura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605165": [
+   "Basapura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605219": [
+   "Kamara Kaval",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605196": [
+   "Rangaiahnadurga",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605195": [
+   "Puraboranahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605166": [
+   "Dadaguru",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605172": [
+   "Hosahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605169": [
+   "Chinivaladagudda",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605168": [
+   "Jahagirbuddenahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605154": [
+   "Pokkurthi",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605155": [
+   "Nallareddikondapura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605156": [
+   "Obalapura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605158": [
+   "Bommakkanahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605157": [
+   "Konapura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605150": [
+   "Kelaginakanive",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605151": [
+   "Malleharavu",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605142": [
+   "Melinakanive",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605233": [
+   "Mustalagummi",
+   5504,
+   9,
+   "Sandy Loam"
+  ],
+  "605234": [
+   "Chowlakere",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605232": [
+   "Maleboranahatti",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605231": [
+   "Abbaiahnahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605230": [
+   "Koradihalli",
+   5504,
+   9,
+   "Sandy Loam"
+  ],
+  "605240": [
+   "Rekhalagere Kaval B",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605237": [
+   "Baramasagara B",
+   5504,
+   9,
+   "Sandy Loam"
+  ],
+  "605238": [
+   "Dasaramuthenahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605279": [
+   "Hanumanthanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605280": [
+   "Gowrasamudra Kaval",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605281": [
+   "Bandethimmalapura",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605283": [
+   "Mallasamudra",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605278": [
+   "Obannanahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605282": [
+   "Gowrasamudra",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605284": [
+   "Devarahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605293": [
+   "Bhoganahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605285": [
+   "Devareddyhalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605235": [
+   "Buklorahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605236": [
+   "Mallurahalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605276": [
+   "Hirehalli",
+   5504,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605171": [
+   "Sanjeevarayanakote",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605170": [
+   "Jalipente",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605153": [
+   "Jilladagundi",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605152": [
+   "Yerrenahalli",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605141": [
+   "Krishnarajapura",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605139": [
+   "Bandravi",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "605140": [
+   "Santhegudda",
+   5503,
+   6,
+   "Sandy Clay Loam"
+  ]
+ },
+ "village_count_total": 1072,
+ "village_count_sampled": 1049
+}

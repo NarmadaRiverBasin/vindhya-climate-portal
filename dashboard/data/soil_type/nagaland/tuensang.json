@@ -1,0 +1,918 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Nagaland",
+  "district": "Tuensang",
+  "district_lgd": 249,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "full"
+ },
+ "district": {
+  "dominant_class_id": 4,
+  "dominant_class": "Clay Loam",
+  "class_pixel_counts": {
+   "Clay Loam": 30258,
+   "Loam": 7919
+  },
+  "n_pixels": 38177
+ },
+ "villages": {
+  "267976": [
+   "Chingmei Hq",
+   1822,
+   7,
+   "Loam"
+  ],
+  "267977": [
+   "Chendang Saddle",
+   1822,
+   7,
+   "Loam"
+  ],
+  "267908": [
+   "Dikhu Village",
+   1815,
+   4,
+   "Clay Loam"
+  ],
+  "999999": [
+   "Data Partially Available",
+   1822,
+   4,
+   "Clay Loam"
+  ],
+  "268006": [
+   "Rurur A Plus B",
+   1826,
+   4,
+   "Clay Loam"
+  ],
+  "268007": [
+   "Sukiur A Plus B",
+   1826,
+   4,
+   "Clay Loam"
+  ],
+  "268032": [
+   "Thonoknyu Hq",
+   1829,
+   4,
+   "Clay Loam"
+  ],
+  "268033": [
+   "Thonoknyu Vill",
+   1829,
+   4,
+   "Clay Loam"
+  ],
+  "268008": [
+   "Tsurungto Hq",
+   1826,
+   4,
+   "Clay Loam"
+  ],
+  "268027": [
+   "Peshu Nokya Ur",
+   1829,
+   4,
+   "Clay Loam"
+  ],
+  "268029": [
+   "Chilliso",
+   1829,
+   4,
+   "Clay Loam"
+  ],
+  "268034": [
+   "Thoktsur",
+   1829,
+   4,
+   "Clay Loam"
+  ],
+  "268036": [
+   "Pang",
+   1829,
+   4,
+   "Clay Loam"
+  ],
+  "268037": [
+   "Thongsonyu",
+   1829,
+   7,
+   "Loam"
+  ],
+  "268035": [
+   "Chipur",
+   1829,
+   4,
+   "Clay Loam"
+  ],
+  "268031": [
+   "Kenjong",
+   1829,
+   4,
+   "Clay Loam"
+  ],
+  "268038": [
+   "New Thongsonyu",
+   1829,
+   7,
+   "Loam"
+  ],
+  "268013": [
+   "Hukir",
+   1827,
+   4,
+   "Clay Loam"
+  ],
+  "268014": [
+   "Aiponger",
+   1827,
+   4,
+   "Clay Loam"
+  ],
+  "267919": [
+   "Kiding",
+   1815,
+   4,
+   "Clay Loam"
+  ],
+  "267918": [
+   "New Tsadanger",
+   1815,
+   4,
+   "Clay Loam"
+  ],
+  "267922": [
+   "Chungtore",
+   1816,
+   4,
+   "Clay Loam"
+  ],
+  "267928": [
+   "Lirise",
+   1816,
+   4,
+   "Clay Loam"
+  ],
+  "267929": [
+   "Angangba",
+   1816,
+   4,
+   "Clay Loam"
+  ],
+  "267921": [
+   "Phirahir",
+   1816,
+   4,
+   "Clay Loam"
+  ],
+  "267923": [
+   "Holongba",
+   1816,
+   4,
+   "Clay Loam"
+  ],
+  "267930": [
+   "Longkhim Hq",
+   1816,
+   4,
+   "Clay Loam"
+  ],
+  "267927": [
+   "Sangsomong",
+   1816,
+   4,
+   "Clay Loam"
+  ],
+  "267931": [
+   "Yangli Mission Centre",
+   1816,
+   4,
+   "Clay Loam"
+  ],
+  "267926": [
+   "New Sangsomong",
+   1816,
+   4,
+   "Clay Loam"
+  ],
+  "267924": [
+   "Old Mangakhi",
+   1816,
+   4,
+   "Clay Loam"
+  ],
+  "267925": [
+   "New Mangakhi",
+   1816,
+   4,
+   "Clay Loam"
+  ],
+  "267961": [
+   "Longtokur",
+   1820,
+   7,
+   "Loam"
+  ],
+  "267957": [
+   "Sipongsang",
+   1820,
+   4,
+   "Clay Loam"
+  ],
+  "267916": [
+   "Longthrox S Comp",
+   1815,
+   4,
+   "Clay Loam"
+  ],
+  "267937": [
+   "Ngangpong",
+   1817,
+   4,
+   "Clay Loam"
+  ],
+  "267936": [
+   "Helipong Agri Farm Ur",
+   1817,
+   4,
+   "Clay Loam"
+  ],
+  "267955": [
+   "Chendang",
+   1819,
+   7,
+   "Loam"
+  ],
+  "267956": [
+   "Helipong",
+   1820,
+   7,
+   "Loam"
+  ],
+  "267958": [
+   "Chingmelen",
+   1820,
+   4,
+   "Clay Loam"
+  ],
+  "267959": [
+   "Kuthur",
+   1820,
+   4,
+   "Clay Loam"
+  ],
+  "267960": [
+   "Sotokur",
+   1820,
+   4,
+   "Clay Loam"
+  ],
+  "267962": [
+   "K Longsore",
+   1820,
+   4,
+   "Clay Loam"
+  ],
+  "267986": [
+   "Yokao",
+   1824,
+   4,
+   "Clay Loam"
+  ],
+  "267989": [
+   "Ekhao",
+   1824,
+   4,
+   "Clay Loam"
+  ],
+  "267990": [
+   "Panso Hq",
+   1824,
+   4,
+   "Clay Loam"
+  ],
+  "267992": [
+   "Pathso Nokeng",
+   1824,
+   4,
+   "Clay Loam"
+  ],
+  "267993": [
+   "Pathso",
+   1824,
+   4,
+   "Clay Loam"
+  ],
+  "267995": [
+   "Yakor",
+   1825,
+   4,
+   "Clay Loam"
+  ],
+  "267997": [
+   "Sangphur",
+   1825,
+   4,
+   "Clay Loam"
+  ],
+  "267998": [
+   "Chassir",
+   1825,
+   4,
+   "Clay Loam"
+  ],
+  "267999": [
+   "Muleangkiur",
+   1825,
+   4,
+   "Clay Loam"
+  ],
+  "268000": [
+   "Shamator N A P Post",
+   1825,
+   4,
+   "Clay Loam"
+  ],
+  "268001": [
+   "Liangkonger",
+   1825,
+   4,
+   "Clay Loam"
+  ],
+  "268003": [
+   "Shamator Village",
+   1825,
+   4,
+   "Clay Loam"
+  ],
+  "268002": [
+   "Shamator Hq",
+   1825,
+   4,
+   "Clay Loam"
+  ],
+  "268004": [
+   "Waphur",
+   1825,
+   4,
+   "Clay Loam"
+  ],
+  "268005": [
+   "Lasikiur",
+   1825,
+   4,
+   "Clay Loam"
+  ],
+  "268011": [
+   "Chessore Vill",
+   1827,
+   4,
+   "Clay Loam"
+  ],
+  "268012": [
+   "Chessore Hq",
+   1827,
+   4,
+   "Clay Loam"
+  ],
+  "268021": [
+   "Shiponger B",
+   1828,
+   4,
+   "Clay Loam"
+  ],
+  "268020": [
+   "Shiponger A",
+   1828,
+   4,
+   "Clay Loam"
+  ],
+  "268019": [
+   "Mangko Hq",
+   1828,
+   4,
+   "Clay Loam"
+  ],
+  "268018": [
+   "Kiutsukiur",
+   1828,
+   4,
+   "Clay Loam"
+  ],
+  "268015": [
+   "Y Anner Vill",
+   1828,
+   4,
+   "Clay Loam"
+  ],
+  "268017": [
+   "Kephore B Ur",
+   1828,
+   4,
+   "Clay Loam"
+  ],
+  "268016": [
+   "Kephore A",
+   1828,
+   7,
+   "Loam"
+  ],
+  "267975": [
+   "Chingmei",
+   1822,
+   7,
+   "Loam"
+  ],
+  "249716": [
+   "Tuensang Town Council",
+   1817,
+   7,
+   "Loam"
+  ],
+  "267898": [
+   "Litem",
+   1814,
+   4,
+   "Clay Loam"
+  ],
+  "267900": [
+   "Kumpong",
+   1814,
+   4,
+   "Clay Loam"
+  ],
+  "267903": [
+   "Yimrup",
+   1814,
+   4,
+   "Clay Loam"
+  ],
+  "267905": [
+   "Alisopur",
+   1815,
+   4,
+   "Clay Loam"
+  ],
+  "267910": [
+   "Tonglongsor",
+   1815,
+   4,
+   "Clay Loam"
+  ],
+  "267911": [
+   "Longkhitpeh",
+   1815,
+   4,
+   "Clay Loam"
+  ],
+  "267913": [
+   "Tronger",
+   1815,
+   4,
+   "Clay Loam"
+  ],
+  "267909": [
+   "Chare Old Town",
+   1815,
+   4,
+   "Clay Loam"
+  ],
+  "267907": [
+   "Chare Hq",
+   1815,
+   4,
+   "Clay Loam"
+  ],
+  "267912": [
+   "Chare Village",
+   1815,
+   4,
+   "Clay Loam"
+  ],
+  "267914": [
+   "Chungliyimti New",
+   1815,
+   4,
+   "Clay Loam"
+  ],
+  "267915": [
+   "Chungliyimti",
+   1815,
+   4,
+   "Clay Loam"
+  ],
+  "267917": [
+   "Old Tsadanger",
+   1815,
+   4,
+   "Clay Loam"
+  ],
+  "267920": [
+   "Chimonger",
+   1816,
+   4,
+   "Clay Loam"
+  ],
+  "267897": [
+   "Noksen Hq",
+   1814,
+   4,
+   "Clay Loam"
+  ],
+  "267895": [
+   "Longra",
+   1814,
+   4,
+   "Clay Loam"
+  ],
+  "267896": [
+   "Yangpi Kongsang",
+   1814,
+   4,
+   "Clay Loam"
+  ],
+  "267899": [
+   "Noksen Village",
+   1814,
+   4,
+   "Clay Loam"
+  ],
+  "267901": [
+   "Yokumsang S Comp Ur",
+   1814,
+   4,
+   "Clay Loam"
+  ],
+  "267902": [
+   "Younyu",
+   1814,
+   4,
+   "Clay Loam"
+  ],
+  "267904": [
+   "Sangtak",
+   1814,
+   4,
+   "Clay Loam"
+  ],
+  "267934": [
+   "Tuensang Village",
+   1817,
+   4,
+   "Clay Loam"
+  ],
+  "267932": [
+   "Thimlak Fishery Farm Ur",
+   1817,
+   4,
+   "Clay Loam"
+  ],
+  "267935": [
+   "Khudei",
+   1817,
+   4,
+   "Clay Loam"
+  ],
+  "267939": [
+   "Longtang",
+   1818,
+   4,
+   "Clay Loam"
+  ],
+  "267938": [
+   "Yali",
+   1818,
+   4,
+   "Clay Loam"
+  ],
+  "267947": [
+   "Hak",
+   1818,
+   4,
+   "Clay Loam"
+  ],
+  "267946": [
+   "Nakshou",
+   1818,
+   4,
+   "Clay Loam"
+  ],
+  "267944": [
+   "Lokong",
+   1818,
+   4,
+   "Clay Loam"
+  ],
+  "267945": [
+   "Ngoungchung Hq",
+   1818,
+   4,
+   "Clay Loam"
+  ],
+  "267942": [
+   "Momching",
+   1818,
+   4,
+   "Clay Loam"
+  ],
+  "267940": [
+   "Bhumpak",
+   1818,
+   4,
+   "Clay Loam"
+  ],
+  "267941": [
+   "Saoshou",
+   1818,
+   4,
+   "Clay Loam"
+  ],
+  "267948": [
+   "Sangsangnyu Hq",
+   1819,
+   4,
+   "Clay Loam"
+  ],
+  "267952": [
+   "Nyinyem",
+   1819,
+   4,
+   "Clay Loam"
+  ],
+  "267950": [
+   "Maksha",
+   1819,
+   4,
+   "Clay Loam"
+  ],
+  "267951": [
+   "Hakchang",
+   1819,
+   7,
+   "Loam"
+  ],
+  "267953": [
+   "Kejok",
+   1819,
+   4,
+   "Clay Loam"
+  ],
+  "267954": [
+   "Konya",
+   1819,
+   4,
+   "Clay Loam"
+  ],
+  "267943": [
+   "Sangchen Compound Ur",
+   1818,
+   4,
+   "Clay Loam"
+  ],
+  "267985": [
+   "Tsuwao",
+   1824,
+   4,
+   "Clay Loam"
+  ],
+  "267987": [
+   "Lengnyu",
+   1824,
+   4,
+   "Clay Loam"
+  ],
+  "267994": [
+   "Kingniu",
+   1824,
+   4,
+   "Clay Loam"
+  ],
+  "268022": [
+   "Sanglao",
+   1829,
+   7,
+   "Loam"
+  ],
+  "268025": [
+   "Peshu",
+   1829,
+   4,
+   "Clay Loam"
+  ],
+  "268028": [
+   "Wui",
+   1829,
+   4,
+   "Clay Loam"
+  ],
+  "267978": [
+   "Langnok",
+   1823,
+   4,
+   "Clay Loam"
+  ],
+  "267982": [
+   "Aniashu",
+   1823,
+   4,
+   "Clay Loam"
+  ],
+  "267979": [
+   "Nokhu Hq",
+   1823,
+   4,
+   "Clay Loam"
+  ],
+  "267980": [
+   "Nokhu",
+   1823,
+   4,
+   "Clay Loam"
+  ],
+  "267984": [
+   "Choklangan",
+   1823,
+   4,
+   "Clay Loam"
+  ],
+  "267965": [
+   "Dan",
+   1821,
+   7,
+   "Loam"
+  ],
+  "267964": [
+   "Pangsha Old",
+   1821,
+   7,
+   "Loam"
+  ],
+  "267963": [
+   "Pangsha New",
+   1821,
+   4,
+   "Clay Loam"
+  ],
+  "267966": [
+   "Wansoi",
+   1821,
+   4,
+   "Clay Loam"
+  ],
+  "267967": [
+   "Nokyan",
+   1821,
+   4,
+   "Clay Loam"
+  ],
+  "267968": [
+   "Nokyan B",
+   1821,
+   4,
+   "Clay Loam"
+  ],
+  "267969": [
+   "Noklak Vill",
+   1821,
+   4,
+   "Clay Loam"
+  ],
+  "267971": [
+   "Kusong",
+   1821,
+   4,
+   "Clay Loam"
+  ],
+  "267970": [
+   "Noklak Hq",
+   1821,
+   4,
+   "Clay Loam"
+  ],
+  "267972": [
+   "Taknyu",
+   1822,
+   7,
+   "Loam"
+  ],
+  "267973": [
+   "Yimpang",
+   1822,
+   4,
+   "Clay Loam"
+  ],
+  "267974": [
+   "Waoshu",
+   1822,
+   4,
+   "Clay Loam"
+  ],
+  "268023": [
+   "Kingphu Ur",
+   1829,
+   4,
+   "Clay Loam"
+  ],
+  "268026": [
+   "Thongtsou Ur",
+   1829,
+   4,
+   "Clay Loam"
+  ],
+  "267991": [
+   "Tsangkoi Ur",
+   1824,
+   4,
+   "Clay Loam"
+  ],
+  "267996": [
+   "Kihoto Theological College Campus",
+   1825,
+   4,
+   "Clay Loam"
+  ],
+  "268010": [
+   "Kelonger",
+   1827,
+   4,
+   "Clay Loam"
+  ],
+  "268009": [
+   "K Longsore Ur",
+   1827,
+   4,
+   "Clay Loam"
+  ],
+  "267906": [
+   "Jnv School Compound",
+   1815,
+   4,
+   "Clay Loam"
+  ],
+  "267933": [
+   "Bothanpou",
+   1817,
+   4,
+   "Clay Loam"
+  ],
+  "267949": [
+   "Keshai Ur",
+   1819,
+   4,
+   "Clay Loam"
+  ],
+  "267988": [
+   "Lumoking Ur",
+   1824,
+   4,
+   "Clay Loam"
+  ],
+  "268024": [
+   "New Sanglao",
+   1829,
+   4,
+   "Clay Loam"
+  ],
+  "268030": [
+   "Jejeiking Ur",
+   1829,
+   4,
+   "Clay Loam"
+  ],
+  "267983": [
+   "Kingpao",
+   1823,
+   4,
+   "Clay Loam"
+  ],
+  "267981": [
+   "Kenking Ur",
+   1823,
+   7,
+   "Loam"
+  ]
+ },
+ "village_count_total": 161,
+ "village_count_sampled": 161
+}

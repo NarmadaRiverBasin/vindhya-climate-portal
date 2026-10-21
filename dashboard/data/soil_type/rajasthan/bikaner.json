@@ -1,0 +1,5583 @@
+{
+ "metadata": {
+  "source": "OpenLandMap Soil Texture Class, USDA system (ISRIC World Soil Information / OpenLandMap project), via Google Earth Engine -- a global statistical soil map, NOT an India-specific ground survey (Soil Health Card / ICAR-NBSS&LUP have no public bulk API as of 2026-10-21 -- see scripts/config.py's header above for what was checked and rejected).",
+  "resolution": "250 m native pixel, surface (0cm) depth band",
+  "band": "b0 (0cm depth) of SOL_TEXTURE-CLASS_USDA-TT_M/v02 -- the asset also carries b10/b30/b60/b100/b200 (deeper soil layers), not used here; this pipeline reports surface texture only, matching what a farmer standing in the field would judge by hand.",
+  "method": "Per district/block/village polygon: ee.Reducer.mode() over the real raster pixels inside that polygon (the dominant texture class by pixel count -- a categorical class cannot be averaged, so mode, not mean, is the only honest reducer). Village/block tiers computed in ONE batched ee.Image.reduceRegions() call per district over that district's whole village FeatureCollection, not one GEE call per village.",
+  "classes": {
+   "1": "Clay",
+   "2": "Silty Clay",
+   "3": "Sandy Clay",
+   "4": "Clay Loam",
+   "5": "Silty Clay Loam",
+   "6": "Sandy Clay Loam",
+   "7": "Loam",
+   "8": "Silty Loam",
+   "9": "Sandy Loam",
+   "10": "Silt",
+   "11": "Loamy Sand",
+   "12": "Sand"
+  },
+  "data_quality": "verified-official (real OpenLandMap/ISRIC dataset, GEE-computed)",
+  "state": "Rajasthan",
+  "district": "Bikaner",
+  "district_lgd": 93,
+  "block_tier_note": "Not computed this pass -- honest gap, not derived/guessed from the village data below.",
+  "last_updated": "2026-10-21",
+  "village_boundary_coverage": "partial (923/925 villages had a usable centroid + real pixel)"
+ },
+ "district": {
+  "dominant_class_id": 9,
+  "dominant_class": "Sandy Loam",
+  "class_pixel_counts": {
+   "Loamy Sand": 611,
+   "Clay Loam": 312,
+   "Sandy Clay Loam": 142615,
+   "Loam": 1285,
+   "Sandy Loam": 406212
+  },
+  "n_pixels": 551037
+ },
+ "villages": {
+  "69817": [
+   "5 Awm A",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69379": [
+   "Gajjewala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69672": [
+   "Shobhana",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69680": [
+   "Swaroopsar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69682": [
+   "Taant",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69681": [
+   "Kedli",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69674": [
+   "Sarunda",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69679": [
+   "Sadhuna",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69678": [
+   "Kahira",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69677": [
+   "Chittana",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69676": [
+   "Baasi",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69675": [
+   "Mandeliya",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69136": [
+   "Harkhasar Bagodan",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69649": [
+   "Nagarjana",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69039": [
+   "Sharah Sutharan Gopalan",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69417": [
+   "Araji Jitoosingh",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69581": [
+   "Rasisar Talariya Baas",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69706": [
+   "Durgapura",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69358": [
+   "Bikendri",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69423": [
+   "Gangapura",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69388": [
+   "Bhatiyon Ki Dhani",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69390": [
+   "Mankasar",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69372": [
+   "Gokal",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69366": [
+   "Sheruwala",
+   6913,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69380": [
+   "Rawalotan Ka Tala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69542": [
+   "Bhom Akhesingh",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69540": [
+   "Khariyabas",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69551": [
+   "Sharah Ekaliya",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69345": [
+   "Barsalpur",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69356": [
+   "Bhinyawala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69365": [
+   "Bijeri",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69343": [
+   "Akhoosar",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69364": [
+   "Gulamwala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69378": [
+   "Ranjeetpura",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69357": [
+   "Dandkalan",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69377": [
+   "Raowala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69376": [
+   "Chheela Kashmeer",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69394": [
+   "Angneu",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69396": [
+   "Randheesar",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69452": [
+   "Narayansar",
+   6913,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69531": [
+   "Raoneri",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69530": [
+   "Chhaneri",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69537": [
+   "Tokla",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69373": [
+   "Sadolai",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69374": [
+   "Meghji Ka Tala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69391": [
+   "Bangarsar",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69393": [
+   "Prithviraj Ka Bera",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69432": [
+   "Surjara",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69434": [
+   "Ranasar",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69385": [
+   "Godoo",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69387": [
+   "Shastri Nagar",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69447": [
+   "Panwarwala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69442": [
+   "Lakhasar",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69381": [
+   "Charanwala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69431": [
+   "Loombasar",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69389": [
+   "Puranwala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69428": [
+   "Chak No 5",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69448": [
+   "Modayat",
+   6913,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69446": [
+   "Bajju Khalsa",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69435": [
+   "Chak No 4",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69426": [
+   "Chak No 7",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69445": [
+   "Bajju Tej Pura",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69424": [
+   "Motawatai",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69440": [
+   "Samorkhi",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69449": [
+   "Berasar",
+   6913,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69443": [
+   "Gura",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69456": [
+   "Mithriya",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69439": [
+   "Deh",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69541": [
+   "Khariya Malinath",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69454": [
+   "Gogariyawala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69473": [
+   "Grandhi",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69487": [
+   "Chak Dadar",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69486": [
+   "Chak Saliya",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69484": [
+   "Chak Madhogarh",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69492": [
+   "Madh",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69485": [
+   "Chak Khuddi",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69453": [
+   "Beekampur",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69474": [
+   "Gariyala",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69458": [
+   "Kolasar West",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69490": [
+   "Chak Bandha No 2",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69483": [
+   "Chak Beethnokh",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69488": [
+   "Chak Bandha No 4",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69491": [
+   "Chak Bandha No 1",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69477": [
+   "Mandal Charnan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69459": [
+   "Pabusar West",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69514": [
+   "Chak Gujarsinghwala",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69475": [
+   "Motasar",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69515": [
+   "Diyatara",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69476": [
+   "Govindsar",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69482": [
+   "Sharah Bokolai",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69471": [
+   "Girajsar",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69510": [
+   "Khetolai Burj",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69511": [
+   "Khetolai Budhan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69481": [
+   "Sharah Punolao",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69478": [
+   "Mandal Bhatiyan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69517": [
+   "Chak Kanya Bandh",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69520": [
+   "Khetolai Shimbhoo",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69461": [
+   "Sevda",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69369": [
+   "Bhaloori",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69375": [
+   "Keharli",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69441": [
+   "Pabusar Sindooka",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69444": [
+   "Beethnokh",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69518": [
+   "Sharah Sandayat",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69519": [
+   "Sharah Kiklet",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69524": [
+   "Khetolai Mulwan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69521": [
+   "Sharah Karnet",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69479": [
+   "Mandal Rawalotan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69522": [
+   "Lohiya",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69463": [
+   "Bera Dedawatan",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69532": [
+   "Ladkhan at Nayagaon",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69533": [
+   "Chak Bhatiya Bandh",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69534": [
+   "Hirai Ki Dhani",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69548": [
+   "Khikhniya Kundaliyan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69527": [
+   "Bhane Ka Gaon",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69464": [
+   "Nagrasar",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69523": [
+   "Sharah Kumbholai",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69535": [
+   "Nokhra",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69526": [
+   "Hadan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69437": [
+   "Chak No 2",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69525": [
+   "Khakhoosar",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69460": [
+   "Dadoo Ka Gaon",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69543": [
+   "Bhom Hemsingh",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69544": [
+   "Bhom Naharsingh",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69553": [
+   "Lambana Moolwan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69545": [
+   "Sharah Thoomli",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69427": [
+   "Chak No 1",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69550": [
+   "Kheendasar",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69538": [
+   "Khariya Patawatan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69546": [
+   "Miyakor",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69539": [
+   "Udat",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69528": [
+   "Janasar",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69549": [
+   "Dasori",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69569": [
+   "Khajora",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69536": [
+   "Modiya",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69547": [
+   "Khikhniya Patta",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69201": [
+   "Bhanipura",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69395": [
+   "Burj Chobdaran",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69489": [
+   "Chak Bandha No 3",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69480": [
+   "Chak Mandal Bandh",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69516": [
+   "Sharah Ambayat",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69355": [
+   "Dehria",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69342": [
+   "Sanchu",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69450": [
+   "Phulasar Bara",
+   6913,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69451": [
+   "Phulasar Chhota",
+   6913,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69438": [
+   "Sharah Bhaleri",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69429": [
+   "Sharah Jodki",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69513": [
+   "Chak Mulajman",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69512": [
+   "Chak Sethia",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69529": [
+   "Kanya Ki Basti",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69436": [
+   "Chak No 3",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69472": [
+   "Dewdo Ki Dhani",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69467": [
+   "Shimbhoo Ka Burj",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69468": [
+   "Pethado Ki Dhani",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69470": [
+   "Panchpeeth Ki Dhani",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69466": [
+   "Solankiyo Ki Dhani",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69469": [
+   "Jetugo Ki Dhani",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69465": [
+   "Kumharo Ki Dhani",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69384": [
+   "21 C W B",
+   6913,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69382": [
+   "Ganpatpura",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69383": [
+   "Bharatsinghpura",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69462": [
+   "Medi Ka Magar",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69392": [
+   "1 Cdy Jagat Singh Pura",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69371": [
+   "Bhandhli",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69566": [
+   "Siyana Sutharan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69370": [
+   "2 Blm Naya Gaon",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69367": [
+   "6 8 Santosh Nagar",
+   6913,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69190": [
+   "Sukhdeopura",
+   474,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69191": [
+   "Amarpura",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69344": [
+   "7 Am First",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69359": [
+   "Modiya",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69386": [
+   "Kandharli",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69433": [
+   "Dabli",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69457": [
+   "Kudaratiwali Dhani",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69189": [
+   "4Rjd",
+   474,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69455": [
+   "Sukhpura",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69564": [
+   "Siyana Kundaliyan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69094": [
+   "Basi",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69552": [
+   "Lambana Bhatiyan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69508": [
+   "Jhajhoo",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69509": [
+   "Jhajhoobas Nathotan",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69505": [
+   "Mokha Khalsa",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69637": [
+   "Budhro Ki Dhani",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69506": [
+   "Mokha Charnan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69560": [
+   "Chak Vijaisinghpura",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69561": [
+   "Siyana Jodhasar",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69556": [
+   "Sharah Gageri",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69559": [
+   "Siyana Bhatiyan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69563": [
+   "Siyana Charnan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69557": [
+   "Sharah Lavayat",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69555": [
+   "Sharah Adwayat",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69558": [
+   "Neniya",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69554": [
+   "Bala Ka Gol",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69568": [
+   "Nandra",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69701": [
+   "Thawariya",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69507": [
+   "Sharah Kabadiyan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69570": [
+   "Bheloo",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69567": [
+   "Khara Lohan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69577": [
+   "Jegla Gogliyan",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69578": [
+   "Jegla Panna Daroga",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69655": [
+   "Mukam",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69693": [
+   "Raisar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69666": [
+   "Khara",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69627": [
+   "Sainsar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69583": [
+   "Sowa",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69579": [
+   "Rasisar Purohitan Baas",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69599": [
+   "Lalasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69596": [
+   "Meusar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69647": [
+   "Sadhasar",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69602": [
+   "Morkhana Aguna",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69601": [
+   "Sindhu",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69603": [
+   "Morkhana Athuna",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69598": [
+   "Mehramsar",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69600": [
+   "Kukaniya",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69575": [
+   "Pithrasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69576": [
+   "Jangloo",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69606": [
+   "Kirtasar",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69580": [
+   "Rasisar Bada Baas",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69574": [
+   "Jaisingh Desar Magra",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69605": [
+   "Bhom Kirtasar",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69648": [
+   "Jasrasar",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69604": [
+   "Manaksar",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69608": [
+   "Surpura",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69607": [
+   "Sinjguru",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69643": [
+   "Sinyala",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69644": [
+   "Kurjadi",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69646": [
+   "Sajanwasi",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69609": [
+   "Parwa",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69641": [
+   "Berasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69611": [
+   "Manyana",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69621": [
+   "Shrah Kalasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69572": [
+   "Khet Bheloo",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69617": [
+   "Sharah Teliya",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69612": [
+   "Desalsar Purohitan",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69653": [
+   "Kakra",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69652": [
+   "Udsar",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69640": [
+   "Ankhisar",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69618": [
+   "Bandhala",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69610": [
+   "Bhamatsar",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69651": [
+   "Jhareli",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69613": [
+   "Desalsar Mandlawatan",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69639": [
+   "Ghattu",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69619": [
+   "Muridsar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69654": [
+   "Himmatasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69638": [
+   "Salundiya",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69614": [
+   "Desalsar Bhatiyan",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69656": [
+   "Nimbdiyasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69622": [
+   "Meghasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69626": [
+   "Dharnok",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69616": [
+   "Dhingasari",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69615": [
+   "Kisnasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69635": [
+   "Hiyadesar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69623": [
+   "Sathika",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69636": [
+   "Nokha Gaon",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69657": [
+   "Talwa",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69658": [
+   "Somalsar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69650": [
+   "Gajsukhdesar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69659": [
+   "Madiya",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69660": [
+   "Bikasar",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69624": [
+   "Shrah Manksar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69631": [
+   "Panchoo",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69625": [
+   "Ratdiya",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69632": [
+   "Udasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69634": [
+   "Kudsu",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69699": [
+   "Dhunpaliya",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69696": [
+   "Maiyasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69695": [
+   "Dasnu",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69698": [
+   "Khichiyasar",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69662": [
+   "Rora",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69710": [
+   "Bagseoo",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69703": [
+   "Jaisalsar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69630": [
+   "Kumbhasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69504": [
+   "Bhayala",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69707": [
+   "Gundusar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69697": [
+   "Bhom Maiyasar",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69717": [
+   "Moondar",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69628": [
+   "Nathusar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69629": [
+   "Lumbasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69709": [
+   "Mainsar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69667": [
+   "Hansasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69691": [
+   "Charakada",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69690": [
+   "Kawlisar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69689": [
+   "Shekhasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69692": [
+   "Biramsar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69671": [
+   "Sharah Panchoo",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69688": [
+   "Bhyanoo",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69668": [
+   "Kakkoo",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69687": [
+   "Dawa",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69669": [
+   "Bhadla",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69686": [
+   "Moolwas",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69685": [
+   "Lilka",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69684": [
+   "Silwa",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69683": [
+   "Bandhra",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69582": [
+   "Rasisar Panchayati Baas",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69700": [
+   "Badh Kakra",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "248669": [
+   "Nokha",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69708": [
+   "Shree Rampura",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69704": [
+   "Chachaniya",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69705": [
+   "Hemolaai",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69702": [
+   "Chainasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69694": [
+   "Ladhupura",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69661": [
+   "Nokhamandi Rural",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69620": [
+   "Munjasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69633": [
+   "Ram Nagar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69670": [
+   "Teliyasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69562": [
+   "Siyana Sakhlan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69571": [
+   "Hanuman Nagar",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69665": [
+   "Govind Nagar",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69664": [
+   "Jagrampura",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69663": [
+   "Prahlad Pura",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69673": [
+   "Tardo Ki Basti",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69713": [
+   "Dudawas",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69714": [
+   "Hanumanpura",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69711": [
+   "Shri Jasnathnagar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69712": [
+   "Bhom Bagseoo",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69645": [
+   "Annasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69597": [
+   "Baasi Udavtan",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69047": [
+   "Chak Garbi Rural",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69116": [
+   "Norang Desar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69051": [
+   "Nagasar Sugni",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69080": [
+   "Raisar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69352": [
+   "20 S M D",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69060": [
+   "Dhirera",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69023": [
+   "Dandoosar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69034": [
+   "Bhairupawa",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69028": [
+   "Khara",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69059": [
+   "Katriasar",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69033": [
+   "Bherookheera",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69062": [
+   "Ladera",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69029": [
+   "Kanasar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69070": [
+   "Anandpura",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69058": [
+   "Gairsar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69075": [
+   "Bhojera",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69074": [
+   "Asera",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69072": [
+   "Sherera",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69035": [
+   "Shobhasar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69057": [
+   "Husangsar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69055": [
+   "Basi Sahajbardan",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69037": [
+   "Nal Badi",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69076": [
+   "Ranisar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69077": [
+   "Bambloo",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69054": [
+   "Sharah Koojiya",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69052": [
+   "Pemasar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69049": [
+   "Beechhwal Rural",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69053": [
+   "Nagasar Pawaran",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69078": [
+   "Panpalsar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69117": [
+   "Gusainsar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69050": [
+   "Udasar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69043": [
+   "Daiya",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69044": [
+   "Nal Chhoti",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69118": [
+   "Tejrasar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69174": [
+   "11 14 Ad",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69083": [
+   "Ridmalsar Purohitan",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69081": [
+   "Himmtasar",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69115": [
+   "Sinthal",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69082": [
+   "Neno Ka Bas",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69113": [
+   "Napasar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69089": [
+   "Bachhasar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69120": [
+   "Belasar",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69084": [
+   "Sharah Kajani",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69114": [
+   "Lalsingpura",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69045": [
+   "Basti Chavdan",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69112": [
+   "Gadhwala",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69086": [
+   "Jodbeed",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69255": [
+   "Sharah Haneerwas",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69090": [
+   "Kolasar",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69110": [
+   "Kalyansar Agoona",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69091": [
+   "Meghasar",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69088": [
+   "Swaroopdesar",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69107": [
+   "Kilchu Devran",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69109": [
+   "Kalyansar Utrada",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69056": [
+   "Jagnnathsar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69121": [
+   "Moondsar",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69108": [
+   "Kalyansar Bara",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69106": [
+   "Kilchu Sahlotan",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69101": [
+   "Surdhana Chouhanan",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69100": [
+   "Surdhana Padiharan",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69122": [
+   "Ramsar",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69099": [
+   "Ambasar",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69097": [
+   "Palana",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69105": [
+   "Kesar Desar Bohran",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69123": [
+   "Suratsinghpura",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69098": [
+   "Sujasar",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69095": [
+   "Barsingsar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69092": [
+   "Bhojusar",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69102": [
+   "Geegasar",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69104": [
+   "Kesar Desar Jatan",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69103": [
+   "Kesar Desar Gangaguran",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69093": [
+   "Lalamdesar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69071": [
+   "Hemera",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69038": [
+   "Sarah Golparatap Singh",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69402": [
+   "Kodam Desar",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69087": [
+   "Udai Ramsar",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69397": [
+   "Nokha at Daiya",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69494": [
+   "Inda Ka Bala",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69398": [
+   "Khari Charnan",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69401": [
+   "Sharah Bhiyanimani",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69399": [
+   "Modiya Mansar",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69400": [
+   "Gajner",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69422": [
+   "Rekh Ranasar",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69409": [
+   "Salasar",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69415": [
+   "Chandasar",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69411": [
+   "Naiyon Ki Basti",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69414": [
+   "Basti Chauhanan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69416": [
+   "Goyalri",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69421": [
+   "Sharah Kishnayat",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69412": [
+   "Sharah Gujarayat",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69410": [
+   "Balala",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69496": [
+   "Chani",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69502": [
+   "Hadla Rawalotan",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69499": [
+   "Akasar",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69493": [
+   "Kotri",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69495": [
+   "Chak Chani",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69500": [
+   "Bholasar Budhan",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69498": [
+   "Sheeshan",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69497": [
+   "Araji Nala",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69501": [
+   "Bholasar Chauhanan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69503": [
+   "Hadla Bhatiyan",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69590": [
+   "Badhnoo",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69587": [
+   "Kuchor Athuni",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69588": [
+   "Lalam Desar Chhota",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69591": [
+   "Bidasariya",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69586": [
+   "Jaisingh Desar Kaliyan",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69595": [
+   "Uttmamdesar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69585": [
+   "Baniya",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69593": [
+   "Masoori",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69079": [
+   "Sharah Acharjan",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69405": [
+   "Sharah Panibharamani",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69589": [
+   "Kuchor Aguni",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69594": [
+   "Lalam Desar Bara",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69584": [
+   "Gajroopdesar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69141": [
+   "Kawani May Chak 22 To 28 Jmd",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69139": [
+   "Badrasar",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69142": [
+   "Jaimalsar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69861": [
+   "Jodhasar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69140": [
+   "Mehrasar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69899": [
+   "Sanwatsar",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69843": [
+   "Punrasar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69863": [
+   "Seruna",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69862": [
+   "Jhanjheu",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69031": [
+   "Sharah Bardi",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69864": [
+   "Narsisar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69870": [
+   "Gopalsar",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69866": [
+   "Sudsar",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69868": [
+   "Dulchasar",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69867": [
+   "Teu",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69900": [
+   "Likhamisar Uttrada",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69865": [
+   "Derajsar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69898": [
+   "Kotasar",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69143": [
+   "Sharah Borla",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69407": [
+   "Sharah Kulera",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69046": [
+   "Sharah Nathaniya",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "248667": [
+   "Bikaner",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "248668": [
+   "Deshnoke",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69413": [
+   "Khet Chandasar",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69419": [
+   "Shiv Sutharan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69418": [
+   "Kishnayat Budhan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69869": [
+   "Basi Maiyan",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69420": [
+   "Magrewala",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69032": [
+   "Sharah Bhauvyas",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69030": [
+   "Rawatsar Kumahiran",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69085": [
+   "Ridmalsar Sipahiyan",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69111": [
+   "Devasar",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69096": [
+   "Deshnok Rural",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69403": [
+   "Kotra",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69592": [
+   "Bhom Bidasariya",
+   477,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69048": [
+   "Sharah Teliya Rural",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69408": [
+   "Sharah Kiradu",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69349": [
+   "Bhoorasar",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69350": [
+   "Maganwala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69346": [
+   "Kabrawala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69351": [
+   "Miranwala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69361": [
+   "Jagasar",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69354": [
+   "Karnisar",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69348": [
+   "Musewala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69353": [
+   "Nasooma",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69360": [
+   "Tanwarawala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69363": [
+   "Dand Khurd",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69347": [
+   "Kayamwala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69341": [
+   "Anewala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69362": [
+   "11 S M D Moombala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69743": [
+   "8 Kyd A",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69182": [
+   "Chakosa",
+   474,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69152": [
+   "Ranewala",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69159": [
+   "Khairoowala",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69158": [
+   "Rasoolsar Daber",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69179": [
+   "Dhodha",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69157": [
+   "Pahalwan Ka Bera",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69155": [
+   "Ranisar 15 Dd",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69147": [
+   "6 Sjm A",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69148": [
+   "16 Lkd",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69154": [
+   "Phalawali",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69178": [
+   "Karanpura",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69146": [
+   "2 Pb",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69144": [
+   "5 Pb A",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69160": [
+   "Kheersar",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69172": [
+   "Pugal",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69173": [
+   "8A D",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69171": [
+   "Chhagoliya",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69162": [
+   "Gangajali",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69161": [
+   "Ganeshwali 7 Rmd",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69165": [
+   "Makeri 3Msm",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69163": [
+   "Jhookiya",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69164": [
+   "Sammewala 6 Smd",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69186": [
+   "Amrewala",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69184": [
+   "Gogaliwala 6 Rm",
+   474,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69259": [
+   "Sharah Netawas",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69166": [
+   "Ramda 1 Rmd",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69187": [
+   "Jodhasar",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69192": [
+   "Shiv Nagar 3 Bd",
+   474,
+   7,
+   "Loam"
+  ],
+  "69194": [
+   "Soorasar",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69149": [
+   "10 Dkd A",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69199": [
+   "Deensar",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69150": [
+   "4 Dkd",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69145": [
+   "3 Bld A",
+   474,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69151": [
+   "8 Dkd",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69153": [
+   "2 Dkd",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69177": [
+   "7Ad",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69176": [
+   "5Msm",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69175": [
+   "5Kwm Kumhar Wala",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69170": [
+   "Aduri 3 Ad",
+   474,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69183": [
+   "Ramai 7 Rma",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69193": [
+   "Ramsar Chota",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69185": [
+   "Roopnagar Raiko Ki Dhani Nada",
+   474,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69168": [
+   "Hanuman Nagar 30 Dod A",
+   474,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69169": [
+   "2Do A",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69188": [
+   "Delitalai 1Doddb",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69719": [
+   "Ballar Barani",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69720": [
+   "Anandgarh",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69724": [
+   "39 Kjd",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69725": [
+   "33 Kjd",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69723": [
+   "2Kld",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69722": [
+   "Gulamaliwala",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69754": [
+   "1 Kjd",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69757": [
+   "2 Gwm",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69756": [
+   "4 Bgm A",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69727": [
+   "1 Alm Aldin",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69726": [
+   "40 Kyd",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69729": [
+   "34 Kyd",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69728": [
+   "31 Kyd",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69755": [
+   "3 Pwm",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69760": [
+   "3 Bgm A",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69759": [
+   "28 Kjd",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69758": [
+   "Dantor Barani",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69761": [
+   "Siyasar Chogan",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69762": [
+   "Nosera",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69731": [
+   "28 Kyd",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69730": [
+   "28 Bd A",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69733": [
+   "2 Kwm A",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69734": [
+   "20 Bd",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69735": [
+   "19Bd",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69736": [
+   "16Bd",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69737": [
+   "22 Kyd",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69732": [
+   "24 25 Kyd",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69738": [
+   "5 Kjd",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69766": [
+   "Aladin Ka Bera",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69763": [
+   "Madhodigi",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69765": [
+   "10 Kjd",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69764": [
+   "9 Kjd",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69753": [
+   "6 Kjd",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69752": [
+   "12 Kjd",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69751": [
+   "2 Brwm",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69750": [
+   "17 Kyd",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69739": [
+   "14 Bd A",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69740": [
+   "10 Bd A",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69742": [
+   "6Bd A",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69741": [
+   "6 Bd B",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69768": [
+   "10 Kld Kundal",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69767": [
+   "13 Kld",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69769": [
+   "7 Kld",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69773": [
+   "6 Phm A",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69772": [
+   "7 Phm A",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69775": [
+   "Sanjarwala",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69771": [
+   "13 Kyd A",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69749": [
+   "12 Kyd",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69745": [
+   "5 Kyd A",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69747": [
+   "1Phm B",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69748": [
+   "3Kyd A",
+   478,
+   7,
+   "Loam"
+  ],
+  "69746": [
+   "4Kyd",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69744": [
+   "2Ad",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69824": [
+   "13 Kpd Jiyan Wali",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69823": [
+   "12 Lkd",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69825": [
+   "Kishanpura 14 Kpd",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69822": [
+   "1 Mmwm",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69827": [
+   "Sumerpur 3 M D W M",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69826": [
+   "Lunkhan",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69156": [
+   "Noor Mohed Ka Dhandla",
+   474,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69721": [
+   "Akasar Barani",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69770": [
+   "Ramjanwala",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69774": [
+   "Karamwala",
+   478,
+   9,
+   "Sandy Loam"
+  ],
+  "69293": [
+   "264 R D",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69245": [
+   "Ajeetmana",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69246": [
+   "Karnali",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69024": [
+   "Rakba Jalasar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69260": [
+   "Khatiyawas",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69261": [
+   "Sharah Beecharwas",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69067": [
+   "Rupera",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69025": [
+   "Jamsar",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69068": [
+   "Kharda",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69021": [
+   "Daudsar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69020": [
+   "Lalsar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69064": [
+   "Bandha",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69065": [
+   "Karnisar Beekan",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69022": [
+   "Jagdevwala",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69063": [
+   "Malasar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69061": [
+   "Molaniya",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69066": [
+   "Runia Badabas",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69026": [
+   "Jalalsar",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69069": [
+   "Rajera",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69019": [
+   "Akadeeyawala",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69818": [
+   "5 Awm B",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69027": [
+   "Kheenchiya",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69297": [
+   "Kakadwala",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69833": [
+   "Kela",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69296": [
+   "Bhom Malkisar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69238": [
+   "Meghana",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69235": [
+   "Dhani Laxminaray Ansar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69236": [
+   "Delana Chhota",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69239": [
+   "Delana Bara",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69295": [
+   "Pepera",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69294": [
+   "Lalawali",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69289": [
+   "Rojha",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69292": [
+   "Udana",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69244": [
+   "Lakhawar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69242": [
+   "Khileriya",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69253": [
+   "Gantan",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69313": [
+   "Nathwana",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69243": [
+   "Subhlai",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69288": [
+   "Phuldesar Singhas",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69286": [
+   "Loonkaransar",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69315": [
+   "Kisanasar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69250": [
+   "Aloda",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69252": [
+   "Lalera",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69248": [
+   "Binjharwali",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69256": [
+   "Unchaira",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69249": [
+   "Muslki",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69262": [
+   "Khiyera",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69316": [
+   "Kalvas",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69263": [
+   "Bhadera",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69257": [
+   "Udeshiya",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69265": [
+   "Dudiwali",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69266": [
+   "Sodhwali",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69278": [
+   "Jakhr Wala",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69277": [
+   "Hansera",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69275": [
+   "Dhirera",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69274": [
+   "Sadera",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69282": [
+   "Surnana",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69317": [
+   "Unchgadesar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69247": [
+   "Makadasar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69276": [
+   "Dulmera Ganva",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69264": [
+   "Dudi Muklera",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69284": [
+   "Kalkal Muklera",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69273": [
+   "Mehrana",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69181": [
+   "Panchokosa",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69267": [
+   "Haphasar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69272": [
+   "Jaisa",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69318": [
+   "Jogiya Basti",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69319": [
+   "Sahajarasar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69269": [
+   "Bamanwali",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69268": [
+   "Kisturiya",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69279": [
+   "Dulmera Station",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69271": [
+   "Dhirera Station",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69281": [
+   "Kujati",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69280": [
+   "Khari",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69270": [
+   "Uttamdesar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69125": [
+   "Noorsar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69254": [
+   "Bhojabas",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69196": [
+   "Karnisar Bhatiyan",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69197": [
+   "Barjoo",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69195": [
+   "Bhanawatawala",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69131": [
+   "Sawaisar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69124": [
+   "Lakhusar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69198": [
+   "Barala",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69200": [
+   "Bandarwala",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69842": [
+   "Rajpura",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69135": [
+   "Dholera Hissa Pemji",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69283": [
+   "Kakd Icha",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69241": [
+   "Khokhrana",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69573": [
+   "Kolayat",
+   476,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69776": [
+   "Khajuwala",
+   478,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69314": [
+   "247 800 Rd L",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69290": [
+   "Chak Phuldesar",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69285": [
+   "Dhani Bhopalaram",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69287": [
+   "300 700 Rd",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69320": [
+   "Bas Sahajrasar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69240": [
+   "Birmana",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69130": [
+   "Jognath Nagar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69129": [
+   "Kalasar",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69137": [
+   "Jalwali",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69126": [
+   "Dholera No 1",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69134": [
+   "Dholera Hissa Maghji",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69133": [
+   "Dholera No 2",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69128": [
+   "Derjogran",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69127": [
+   "Sarah Rupayat",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69138": [
+   "Noor Mohammad Ki Dhani",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69180": [
+   "Tharoosar",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69837": [
+   "Sadolai",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69838": [
+   "Dhani Kunda",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69841": [
+   "Rajasar Bhatiyan",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69828": [
+   "3 Lkd B",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69829": [
+   "2 Lkd",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69814": [
+   "Chhataragarh",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69816": [
+   "4 Awm",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69835": [
+   "Satasar",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69839": [
+   "Napasariya",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69834": [
+   "Rawalpura",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69831": [
+   "Motigarh",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69832": [
+   "Sardarpura",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69830": [
+   "Kankarwala",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69132": [
+   "Sharah Dholera",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69840": [
+   "Ambaran",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69821": [
+   "9Awm A",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69813": [
+   "9 Chtm",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69799": [
+   "10 Gm",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69812": [
+   "4Arm Kharali",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69810": [
+   "Surjanwali",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69811": [
+   "1 Chtm",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69809": [
+   "4 Rjd",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69791": [
+   "1Dlsm Damolai",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69808": [
+   "3 Kwsm",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69806": [
+   "3 Rjd",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69807": [
+   "Sansardesar",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69802": [
+   "1 Km",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69800": [
+   "5 Gm",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69793": [
+   "Lakhansar",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69795": [
+   "4 Dlsm",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69796": [
+   "5 Dlm",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69794": [
+   "Ramnagar",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69805": [
+   "Gheghra",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69803": [
+   "Mahadev Vali",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69804": [
+   "Bas Karnisar",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69836": [
+   "Gorisar",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69820": [
+   "11Awm",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69819": [
+   "8 Awm Aawa",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69798": [
+   "12 Sld",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69779": [
+   "3 Zwm A",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69778": [
+   "Takhtpura",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69780": [
+   "7 Sld A",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69797": [
+   "Raner",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69781": [
+   "Sherpura",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69777": [
+   "4 5 Sm",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69783": [
+   "2 Ssm",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69782": [
+   "6 Kpm",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69789": [
+   "Kharbara",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69792": [
+   "2 Rm 465 Rd",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69790": [
+   "1 Sld",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69232": [
+   "Manoharia",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69233": [
+   "Baderan",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69299": [
+   "Mokhapura",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69203": [
+   "Phuleji",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69204": [
+   "Chakjor",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69205": [
+   "Chak Asrasar",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69206": [
+   "Ramsara",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69208": [
+   "Jaswantsar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69207": [
+   "Asrasar",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69226": [
+   "Lalera Patta Mahajan",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69227": [
+   "Ratnisar",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69224": [
+   "Ghesura",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69229": [
+   "Baladesar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69228": [
+   "Mahajan",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69230": [
+   "Gusaina",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69237": [
+   "Bhikhnera",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69234": [
+   "Sulera",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69298": [
+   "Tejana",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69202": [
+   "Mahajan Fieldfiring Range",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69231": [
+   "Shyodanpura",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69785": [
+   "Bhansar",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69784": [
+   "Takhatpura",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69786": [
+   "2 Dl",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69787": [
+   "4Dsm B",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69788": [
+   "Krishan Nagar",
+   479,
+   9,
+   "Sandy Loam"
+  ],
+  "69715": [
+   "Bilaniyasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69716": [
+   "Bhom Bilaniyasar",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69935": [
+   "Soniyasar Gogliyan",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69937": [
+   "Kunpalsar",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69932": [
+   "Soniyasar Mithiya",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69933": [
+   "Soniyasar Godaran",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69936": [
+   "Soniyasar Uchaira",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69934": [
+   "Soniyasar Shivdan Singh",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69718": [
+   "Bhagwanpura",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69930": [
+   "Ranasar Narukan",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69857": [
+   "Dholiya",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69878": [
+   "Lalasar",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69938": [
+   "Barjangsar",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69926": [
+   "Rajedu",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69904": [
+   "Upani",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69911": [
+   "Amritwasi",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69918": [
+   "Indpalsar Gusainsar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69912": [
+   "Surjanwasi",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69914": [
+   "Indpalsar Sankhlan",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69858": [
+   "Gusainsar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69859": [
+   "Mankarasar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69856": [
+   "Thukariasar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69879": [
+   "Momasar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69876": [
+   "Likhmadesar",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69860": [
+   "Samandsar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69875": [
+   "Toliyasar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69877": [
+   "Sattasar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69874": [
+   "Jaitasar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69872": [
+   "Lakhasar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69873": [
+   "Benisar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69886": [
+   "Kuntasar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69889": [
+   "Jaisalsar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69871": [
+   "Gajpura",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69893": [
+   "Hemasar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69910": [
+   "Bigga Bass Ramsara",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69882": [
+   "Sital Nagar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69907": [
+   "Ridi",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69896": [
+   "Dusarna Pandreekji",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69905": [
+   "Bana",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69902": [
+   "Kalayansar",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69915": [
+   "Indpalsar Bara",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69923": [
+   "Keu",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69919": [
+   "Dharmas",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69921": [
+   "Nosariya",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69922": [
+   "Badela",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69920": [
+   "Mingsarya",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69901": [
+   "Likhamisar Dikhnada",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69924": [
+   "Jakhasar",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69927": [
+   "Bapeu",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69939": [
+   "Dhaneru",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69855": [
+   "Dhirdesar Purohitan",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69885": [
+   "Rewada",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69880": [
+   "Dhirdesar Chotiyan",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69909": [
+   "Bigga",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69888": [
+   "Satlera",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69881": [
+   "Kitasar Bhatiyan",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69891": [
+   "Salasar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69883": [
+   "Kitasar Bidawatan",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69892": [
+   "Pundalsar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69894": [
+   "Bhojas",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69908": [
+   "Abhaysinghpura",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69895": [
+   "Dusarna Bara",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69897": [
+   "Dusarna Pipasariya",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69906": [
+   "Khiyani Bas",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69913": [
+   "Indpalsar Raikan",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69917": [
+   "Indpalsar Hirawatan",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69925": [
+   "Bapeu Purohitan",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69928": [
+   "Jakhasar Bhomisinghawatan",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69929": [
+   "Jakhasar Bhomudaikarnawatan",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69931": [
+   "Ranasar Hansawatan",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "248675": [
+   "Sri Dungargarh",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69884": [
+   "Basi Hirawtan",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69887": [
+   "Basi Marnotan",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69916": [
+   "Hathana Johar",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69903": [
+   "Kalayansar Naya",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69890": [
+   "Sridungargarh Rural",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69310": [
+   "Kapurisar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69309": [
+   "Shekhsar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69312": [
+   "Gopalan",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69327": [
+   "Amarpura",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69326": [
+   "Dhirdan",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69323": [
+   "Kalu",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69328": [
+   "Dhani Pandusar",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69325": [
+   "Manadhrsar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69329": [
+   "Rajasar Urf Karnisar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69331": [
+   "Kagasar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69330": [
+   "Chatasar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69332": [
+   "Garabdesar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69339": [
+   "Kubiya",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69338": [
+   "Khaphrsar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69333": [
+   "Nathusar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69340": [
+   "Nakodesar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69334": [
+   "Adsar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69337": [
+   "Chandsar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69335": [
+   "Bas Karnisar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69336": [
+   "Ranwasar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69324": [
+   "Rajpura Hudan",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69847": [
+   "Lodera",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69849": [
+   "Lakhansar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69850": [
+   "Biramsar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69851": [
+   "Udrasar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69852": [
+   "Udasar Charnan",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69848": [
+   "Jalabsar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69844": [
+   "Binjhasar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69853": [
+   "Surjansar",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69846": [
+   "Delwa",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69845": [
+   "Ladhariya",
+   480,
+   9,
+   "Sandy Loam"
+  ],
+  "69854": [
+   "Adsar",
+   480,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69302": [
+   "9 Mkd",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69311": [
+   "1 Lkd",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69308": [
+   "Khodala",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69213": [
+   "Dhani Chiplai",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69301": [
+   "11 Mkd",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69305": [
+   "Suin",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69216": [
+   "Dhani Chila",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69300": [
+   "Bir Sangreu",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69211": [
+   "Arjunsar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69212": [
+   "Sabniyan",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69210": [
+   "Mithriya",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69222": [
+   "Chak Surajpura",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69214": [
+   "Jaitpur",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69220": [
+   "Ranisar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69225": [
+   "Chak Bhanvariya",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69223": [
+   "Ram Bag",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69215": [
+   "Taliwala",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69218": [
+   "Dhani Khoda",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69217": [
+   "Sherpura",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69219": [
+   "Chak Ranjeetpura",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69306": [
+   "Sui",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69304": [
+   "Malkisar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69307": [
+   "Bakhoosar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69303": [
+   "18 Mkd",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69221": [
+   "Chak Arjunsar",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69404": [
+   "Sharah Gheroolal",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69322": [
+   "Bhanipura",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69430": [
+   "Chak No 6",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69425": [
+   "Chak No 8",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69565": [
+   "Siyana Kabadiyan",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69368": [
+   "Jaganwala",
+   6913,
+   9,
+   "Sandy Loam"
+  ],
+  "69642": [
+   "Bkhtawarpura",
+   477,
+   9,
+   "Sandy Loam"
+  ],
+  "69167": [
+   "4 Rm",
+   474,
+   9,
+   "Sandy Loam"
+  ],
+  "69258": [
+   "Sharah Boochawas",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69321": [
+   "Basi Chadwan",
+   475,
+   9,
+   "Sandy Loam"
+  ],
+  "69251": [
+   "Ratanpura at Bhobiya",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69815": [
+   "Bagrala",
+   479,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69209": [
+   "Arjunsar Station",
+   475,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69036": [
+   "Sharah Jatan",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69073": [
+   "Sharah Bedana",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ],
+  "69040": [
+   "Sarah Sutharan Makdan",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69041": [
+   "Sharah Brahmanan",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69042": [
+   "Sharah Ratani Vyas",
+   473,
+   9,
+   "Sandy Loam"
+  ],
+  "69406": [
+   "Sharah Jugaldas",
+   476,
+   9,
+   "Sandy Loam"
+  ],
+  "69119": [
+   "Barh Karnidan",
+   473,
+   6,
+   "Sandy Clay Loam"
+  ]
+ },
+ "village_count_total": 925,
+ "village_count_sampled": 923
+}
