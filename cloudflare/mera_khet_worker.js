@@ -792,6 +792,34 @@ function croplandFractionFromHistogram(hist) {
   return cropPixels / total;
 }
 
+// Owner request (2026-10-22): a crop/bund/uncultivated breakdown of the
+// drawn field. Google Dynamic World V1's own published 9-class schema
+// (https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1)
+// at 10 m resolution -- NOT a substitute for distinguishing an actual
+// field bund (1-2 m wide, already documented elsewhere in this repo as
+// below this sensor's resolution): "trees" (class 1) is reported
+// separately as the real forest/tree-cover signal that IS resolvable at
+// 10 m; everything that isn't cropland or trees (water/grass/flooded-
+// vegetation/shrub/built/bare/snow) is grouped as "other_noncrop" --
+// bund, path, fallow and farm boundary all fall inside that bucket,
+// honestly NOT separated out, never claimed to be.
+const DW_TREES_CLASS = '1';
+function landUseBreakdownFromHistogram(hist) {
+  let total = 0;
+  for (const k of Object.keys(hist)) total += Number(hist[k]) || 0;
+  if (!(total > 0)) return null;
+  const crop = Number(hist[DW_CROPLAND_CLASS]) || 0;
+  const trees = Number(hist[DW_TREES_CLASS]) || 0;
+  const other = total - crop - trees;
+  return {
+    cropland_fraction: crop / total,
+    forest_tree_cover_fraction: trees / total,
+    other_noncrop_fraction: Math.max(0, other) / total,
+    note: '"other_noncrop" includes bund/path/fallow/built/water/bare -- individual field bunds (~1-2 m) are '
+        + 'narrower than this 10 m sensor and are never separated out as their own real measurement.',
+  };
+}
+
 const GEE_COMPUTE_TIMEOUT_MS = 20000;
 const TIMEOUT_SENTINEL = { __timeout: true };
 
@@ -852,10 +880,11 @@ async function handleAnalyze(request, env) {
   ]);
   const [dwOutcome, ndviOutcome, s1Outcome, ...windowOutcomes] = outcomes;
 
-  let croplandFraction = null, croplandError = null;
+  let croplandFraction = null, croplandError = null, landUseBreakdown = null;
   if (dwOutcome.status === 'fulfilled' && dwOutcome.value && dwOutcome.value !== TIMEOUT_SENTINEL) {
     croplandFraction = croplandFractionFromHistogram(dwOutcome.value.label);
     if (croplandFraction === null) croplandError = 'no_dynamic_world_pixels_in_polygon';
+    else landUseBreakdown = landUseBreakdownFromHistogram(dwOutcome.value.label);
   } else if (dwOutcome.status === 'fulfilled' && dwOutcome.value === TIMEOUT_SENTINEL) {
     croplandError = 'gee_timeout';
   } else {
@@ -935,6 +964,7 @@ async function handleAnalyze(request, env) {
     available: true,
     ndvi: ndviVal,
     cropland_fraction: croplandFraction,
+    land_use_breakdown: landUseBreakdown,
     field_wetness_index_relative: wetnessIndexPct,
     field_wetness_index_detail: wetnessDetail,
     field_wetness_index_caveat: 'NOT a m3/m3 soil-moisture measurement. Sentinel-1 radar backscatter (VV, dB) compared against the SAME satellite pass over the field\'s containing district -- a real relative comparison (calibration/speckle mostly cancel in the ratio), but backscatter also responds to vegetation and surface roughness, not moisture alone, so it cannot be inverted to an absolute moisture value.',
