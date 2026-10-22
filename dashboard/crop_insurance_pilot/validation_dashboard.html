@@ -153,8 +153,6 @@
   <a class="back" href="pilot_study.html">100-Farmer Pilot Study</a>
   &nbsp;·&nbsp;
   <a class="back" href="index.html">8-Module Prototype</a>
-  &nbsp;·&nbsp;
-  <a class="back" href="draw_demo.html">Draw Your Field (What-If)</a>
   <h1>GeoAI Crop Insurance Validation Dashboard</h1>
   <div class="positioning">
     Officer-side validation workflow: pick a farmer, see their cadastral parcel on the village map, and validate the
@@ -216,6 +214,7 @@
         <button id="btnBaseCad" class="on">Cadastral sheet</button>
         <button id="btnBaseSat">Satellite (Esri)</button>
         <button id="btnBaseGee" title="Real Sentinel-2 imagery, live via Google Earth Engine">Satellite (GEE)</button>
+        <button id="btnDrawField" title="Draw a rectangular field anywhere on this map -- real area + real GEE land-use split">Draw a new field</button>
         <button id="btnLyrKhasra" class="on">Khasra numbers</button>
         <button id="btnLyrComp" class="on">Land-use split</button>
         <button id="btnLyrMedh" class="on">Medh (bund) lines</button>
@@ -223,6 +222,7 @@
         <button id="btnZoomParcel" disabled>Zoom to parcel</button>
       </div>
       <div id="map"></div>
+      <div id="drawFieldStatus" class="note" style="display:none;margin-top:6px;"></div>
       <div class="maplegend">
         <span><i style="background:#2f7d4f"></i>Cultivated (GeoAI)</span>
         <span><i style="background:#a9803f"></i>Bund</span>
@@ -234,6 +234,11 @@
         <span><i style="background:transparent;border:2px solid #b3341f"></i>Selected parcel</span>
         <span><i style="background:transparent;border:2px solid #0d5c63"></i>Village boundary (real SoI)</span>
       </div>
+    </div>
+
+    <div class="card" id="cardDrawField" style="display:none;">
+      <h3>Draw Your Own Field &mdash; What-If <span class="tag syn">synthetic khasra</span> <span class="tag ai">real GEE</span></h3>
+      <div class="body" id="panelDrawField"></div>
     </div>
 
     <div class="card" id="cardIntegrated">

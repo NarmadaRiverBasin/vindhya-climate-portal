@@ -48,6 +48,9 @@
 
   var DATA = null, FARMERS = [], META = {};
   var map = null, baseCad = null, baseSat = null, baseGee = null;
+  var layerDrawField = null, drawFieldMode = false, drawFieldFirstCorner = null;
+  var drawFieldAnalyze = null, drawFieldAreaHa = null, drawFieldKhasra = null;
+  var WORKER_ANALYZE_URL = 'https://vindhya-mera-khet.vindhyaresearch25.workers.dev/analyze';
   var layerVillage = null, layerParcels = null, layerLabels = null,
       layerSelected = null, layerComponents = null;
   var selected = null;
@@ -168,10 +171,13 @@
     layerLabels = L.layerGroup().addTo(map);
     layerComponents = L.layerGroup().addTo(map);
     layerSelected = L.layerGroup().addTo(map);
+    layerDrawField = L.layerGroup().addTo(map);
+    map.on('click', function (e) { if (drawFieldMode) onDrawFieldClick(e.latlng); });
 
     el('btnBaseCad').onclick = function () { setBase('cad'); };
     el('btnBaseSat').onclick = function () { setBase('sat'); };
     el('btnBaseGee').onclick = function () { setBase('gee'); };
+    el('btnDrawField').onclick = toggleDrawFieldMode;
     el('btnLyrKhasra').onclick = function () {
       showKhasra = !showKhasra; this.classList.toggle('on', showKhasra);
       if (showKhasra) map.addLayer(layerLabels); else map.removeLayer(layerLabels);
@@ -206,6 +212,216 @@
     el('btnBaseGee').classList.toggle('on', which === 'gee');
     [baseCad, baseSat, baseGee].forEach(function (l) { if (map.hasLayer(l)) map.removeLayer(l); });
     ({ cad: baseCad, sat: baseSat, gee: baseGee })[which].addTo(map);
+  }
+
+  // ------------------------------------------------------------------
+  // Draw Your Own Field (owner request 2026-10-22: integrated into this
+  // SAME page/map, not a separate one; RECTANGLE only, not a free-hand
+  // polygon -- two opposite corners give a simple, correctly-wound,
+  // self-intersection-free ring, so the real GEE area/land-use fetch
+  // (even-odd polygon fill rule, cloudflare/mera_khet_worker.js) is
+  // always well-defined. Reuses the SAME map/basemap toggle above, the
+  // SAME real DES+mandi district context already loaded for the farmer
+  // picker (el('selDistrict')/el('selVillage')), and the SAME live Worker
+  // /analyze endpoint the 100 pre-generated farmers' evidence panel uses.
+  // ------------------------------------------------------------------
+  var R_EARTH_M = 6371000, RAD = Math.PI / 180;
+  function rectAreaHa(corners) {
+    // corners: 4-point axis-aligned ring [lon,lat] -- plain spherical-
+    // excess formula, same one used throughout this repo (geoai_
+    // professional.js, the Python generators).
+    var total = 0;
+    for (var i = 0; i < corners.length; i++) {
+      var p1 = corners[i], p2 = corners[(i + 1) % corners.length];
+      total += (p2[0] - p1[0]) * RAD * (2 + Math.sin(p1[1] * RAD) + Math.sin(p2[1] * RAD));
+    }
+    return Math.abs(total * R_EARTH_M * R_EARTH_M / 2) / 10000;
+  }
+
+  function toggleDrawFieldMode() {
+    drawFieldMode = !drawFieldMode;
+    drawFieldFirstCorner = null;
+    el('btnDrawField').classList.toggle('on', drawFieldMode);
+    var status = el('drawFieldStatus');
+    if (drawFieldMode) {
+      map.getContainer().style.cursor = 'crosshair';
+      status.style.display = 'block';
+      status.textContent = 'Draw mode ON: click one corner of your field, then click the OPPOSITE corner to close the rectangle.';
+    } else {
+      map.getContainer().style.cursor = '';
+      status.style.display = 'none';
+    }
+  }
+
+  function onDrawFieldClick(latlng) {
+    if (!drawFieldFirstCorner) {
+      drawFieldFirstCorner = latlng;
+      layerDrawField.clearLayers();
+      L.circleMarker(latlng, { radius: 5, color: '#1a6b3c', fillColor: '#fff', fillOpacity: 1, weight: 2 }).addTo(layerDrawField);
+      el('drawFieldStatus').textContent = 'First corner placed. Click the opposite corner to close the rectangle.';
+      return;
+    }
+    var a = drawFieldFirstCorner, b = latlng;
+    drawFieldFirstCorner = null;
+    drawFieldMode = false;
+    el('btnDrawField').classList.remove('on');
+    map.getContainer().style.cursor = '';
+    // Axis-aligned rectangle from the two diagonal corners -- consistent
+    // winding order by construction, never self-intersecting.
+    var ring = [[a.lng, a.lat], [b.lng, a.lat], [b.lng, b.lat], [a.lng, b.lat]];
+    layerDrawField.clearLayers();
+    var rectLayer = L.polygon(ring.map(function (p) { return [p[1], p[0]]; }), { color: '#1a6b3c', weight: 2.5, fillColor: '#1a6b3c', fillOpacity: 0.15 }).addTo(layerDrawField);
+    map.fitBounds(rectLayer.getBounds(), { padding: [30, 30] });
+    el('drawFieldStatus').textContent = 'Rectangle closed. Running real satellite check...';
+    runDrawFieldAnalysis(ring);
+  }
+
+  function randomKhasra() {
+    return 'SYN-DRAW-' + Math.floor(1000 + Math.random() * 9000) + '/' + (1 + Math.floor(Math.random() * 4));
+  }
+
+  function runDrawFieldAnalysis(ring) {
+    var areaHa = rectAreaHa(ring);
+    drawFieldAreaHa = areaHa;
+    var khasra = randomKhasra();
+    drawFieldKhasra = khasra;
+    var card = el('cardDrawField');
+    card.style.display = 'block';
+    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    el('panelDrawField').innerHTML = '<div class="empty">Querying Google Earth Engine (live)&hellip;</div>';
+
+    fetch(WORKER_ANALYZE_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ring: ring }) })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        drawFieldAnalyze = data;
+        renderDrawField(khasra, areaHa, data);
+      })
+      .catch(function () {
+        drawFieldAnalyze = { available: false, reason: 'request_failed' };
+        renderDrawField(khasra, areaHa, drawFieldAnalyze);
+      });
+  }
+
+  function renderDrawField(khasra, areaHa, data) {
+    var h = '<div class="kv">' +
+      row('Synthetic khasra <span class="tag syn">synthetic</span>', esc(khasra)) +
+      row('Total area (real geometry) <span class="tag ok">real</span>', areaHa.toFixed(3) + ' ha') +
+      '</div>';
+
+    if (!data || !data.available) {
+      h += '<div class="note" style="color:#96231f;"><b>Live satellite query unavailable</b> (' +
+        esc((data && (data.reason || data.error)) || 'unknown') + '). No land-use split shown -- not substituted with a guess.</div>';
+      el('panelDrawField').innerHTML = h;
+      return;
+    }
+
+    var lu = data.land_use_breakdown;
+    h = h.slice(0, -'</div>'.length); // reopen the kv block above to keep one continuous grid (matches renderParcel's own .sep usage)
+    if (lu) {
+      var cropHa = areaHa * lu.cropland_fraction, forestHa = areaHa * lu.forest_tree_cover_fraction, otherHa = areaHa * lu.other_noncrop_fraction;
+      h += '<div class="sep"></div>' +
+        row('Cropland (live Dynamic World) <span class="tag ok">real</span>', cropHa.toFixed(3) + ' ha (' + (lu.cropland_fraction * 100).toFixed(1) + '%)') +
+        row('Forest/tree cover <span class="tag ok">real</span>', forestHa.toFixed(3) + ' ha (' + (lu.forest_tree_cover_fraction * 100).toFixed(1) + '%)') +
+        row('Other (bund/path/fallow/built/water) <span class="tag ok">real</span>', otherHa.toFixed(3) + ' ha (' + (lu.other_noncrop_fraction * 100).toFixed(1) + '%)');
+    }
+    h += '<div class="sep"></div>' +
+      row('NDVI now <span class="tag ok">real</span>', data.ndvi != null ? data.ndvi.toFixed(3) : (esc(data.ndvi_error) || '--')) +
+      row('Field wetness vs. district <span class="tag ok">real</span>', data.field_wetness_index_relative != null ? data.field_wetness_index_relative.toFixed(1) + '%' : (esc(data.wetness_error) || '--')) +
+      '</div>';
+    if (lu) h += '<div class="note">' + esc(lu.note) + '</div>';
+
+    if (lu) h += renderDrawFieldLossCalc(areaHa, lu);
+    el('panelDrawField').innerHTML = h;
+    if (lu) wireDrawFieldLossCalc();
+  }
+
+  // Crop/loss% what-if -- reuses whichever district the farmer-picker
+  // cascade currently has selected (falls back to Indore, this pilot's
+  // one fully-populated real district) so a second district picker isn't
+  // needed just for this tool.
+  function drawFieldCrops() {
+    var district = el('selDistrict').value || 'Indore';
+    var desKey = slug(district);
+    var des = window._drawFieldDES && window._drawFieldDES.key === desKey ? window._drawFieldDES.data : null;
+    var mandi = (MANDI && MANDI.districts) ? MANDI.districts[desKey] : null;
+    if (!des || !mandi || !mandi.records) return [];
+    var desCrops = {};
+    des.records.forEach(function (r) {
+      if (r.yield_per_ha != null) { if (!desCrops[r.crop] || r.year > desCrops[r.crop].year) desCrops[r.crop] = r; }
+    });
+    var mandiCrops = {};
+    mandi.records.forEach(function (r) { (mandiCrops[r.commodity] = mandiCrops[r.commodity] || []).push(r.modal_price); });
+    var out = [];
+    Object.keys(desCrops).forEach(function (c) {
+      var matchKey = Object.keys(mandiCrops).filter(function (m) { return slug(m).indexOf(slug(c)) === 0 || slug(c).indexOf(slug(m)) === 0; })[0];
+      if (matchKey) {
+        var prices = mandiCrops[matchKey];
+        out.push({
+          crop: c, yield_per_ha: desCrops[c].yield_per_ha, mandi_commodity: matchKey,
+          modal_price_per_qtl: prices.reduce(function (a, b) { return a + b; }, 0) / prices.length,
+          n_mandi_rows: prices.length,
+        });
+      }
+    });
+    return out.sort(function (a, b) { return a.crop.localeCompare(b.crop); });
+  }
+
+  function renderDrawFieldLossCalc(areaHa, lu) {
+    var district = el('selDistrict').value || 'Indore';
+    var desKey = slug(district);
+    if (!window._drawFieldDES || window._drawFieldDES.key !== desKey) {
+      window._drawFieldDES = { key: desKey, data: null };
+      fetchJson('../data/crop_stats_des_by_district/madhya_pradesh/' + desKey + '.json').then(function (d) {
+        window._drawFieldDES = { key: desKey, data: d };
+        if (drawFieldKhasra && drawFieldAnalyze) renderDrawField(drawFieldKhasra, drawFieldAreaHa, drawFieldAnalyze);
+      });
+    }
+    var crops = drawFieldCrops();
+    var h = '<div class="sep"></div><div id="drawFieldLossBody">';
+    if (!crops.length) {
+      h += '<div class="note">No crop in ' + esc(district) + ' has both a real DES yield baseline and a real current AGMARKNET price right now -- loss what-if not computed.</div>';
+    } else {
+      h += '<div class="ctrlrow" style="display:flex;gap:8px;margin-bottom:6px;"><select id="drawFieldCropSel">' +
+        crops.map(function (c, i) { return '<option value="' + i + '">' + esc(c.crop) + '</option>'; }).join('') + '</select></div>';
+      h += '<div style="display:flex;align-items:center;gap:10px;"><span style="font-size:12px;color:var(--dim)">Loss %</span>' +
+        '<input type="range" id="drawFieldLossSlider" min="10" max="100" step="5" value="50" style="flex:1">' +
+        '<span id="drawFieldLossVal" style="font-weight:800">50%</span></div>';
+      h += '<div id="drawFieldLossResult" style="margin-top:8px;"></div>';
+    }
+    h += '</div>';
+    window._drawFieldCrops = crops;
+    window._drawFieldAreaHa = areaHa;
+    window._drawFieldLu = lu;
+    return h;
+  }
+
+  function wireDrawFieldLossCalc() {
+    var sel = el('drawFieldCropSel'), slider = el('drawFieldLossSlider');
+    if (!sel || !slider) return;
+    function compute() {
+      var c = (window._drawFieldCrops || [])[parseInt(sel.value, 10)];
+      if (!c) return;
+      var lossPct = parseInt(slider.value, 10);
+      el('drawFieldLossVal').textContent = lossPct + '%';
+      var cultHa = window._drawFieldAreaHa * window._drawFieldLu.cropland_fraction;
+      var normalProdT = cultHa * c.yield_per_ha;
+      var lossQtl = normalProdT * (lossPct / 100) * 10; // tonnes -> quintals
+      var indicativeValue = lossQtl * c.modal_price_per_qtl;
+      var h = '<div class="kv">' +
+        row('Cultivated area used <span class="tag ok">real</span>', cultHa.toFixed(3) + ' ha') +
+        row('DES yield baseline <span class="tag ok">real</span>', c.yield_per_ha.toFixed(3) + ' t/ha') +
+        row('Mandi modal price <span class="tag ok">real</span>', inr(c.modal_price_per_qtl) + ' / quintal (' + esc(c.mandi_commodity) + ')') +
+        '</div>';
+      h += '<div style="margin-top:8px;padding:9px 11px;background:var(--ok-bg);border-radius:8px;">' +
+        '<div style="font-size:10px;color:var(--ok);font-weight:800;text-transform:uppercase;">Indicative loss value at ' + lossPct + '%</div>' +
+        '<div style="font-size:19px;font-weight:800;color:var(--brand-ink);">' + inr(indicativeValue) + '</div></div>';
+      h += '<div class="note"><b>Decision-support arithmetic only.</b> Loss % is your own what-if input, not an AI damage estimate, ' +
+        'and the real notified PMFBY Sum Insured is not used here -- this is a market-value illustration, not an official claim calculation.</div>';
+      el('drawFieldLossResult').innerHTML = h;
+    }
+    sel.onchange = compute;
+    slider.oninput = compute;
+    compute();
   }
 
   function drawVillage(geo) {
