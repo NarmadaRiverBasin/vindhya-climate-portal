@@ -437,6 +437,7 @@
     destroyCharts();
     renderParcel(f);
     renderArea(f);
+    renderEvidence(f);
     renderLandUse(f);
     renderHazard(f);
     renderLoss(f);
@@ -491,6 +492,60 @@
   }
 
   function row(k, v) { return '<div class="k">' + k + '</div><div class="v">' + v + '</div>'; }
+
+  // Owner-approved crop-loss-safeguards plan, items 1/2/3: real multi-
+  // temporal satellite evidence, honest insufficient-evidence states, and
+  // a confidence/uncertainty summary -- never a single image/threshold
+  // deciding crop status. Reads dashboard/data/crop_insurance_pilot/
+  // synthetic_farmers_100.json's `live_satellite_check` (REAL, live GEE --
+  // see that field's own `note`), completely separate from the scenario-
+  // driven rs_series fields rendered elsewhere, which stay synthetic.
+  function renderEvidence(f) {
+    var lc = f.live_satellite_check;
+    if (!lc) { el('panelEvidence').innerHTML = '<div class="empty">No live satellite check recorded for this parcel.</div>'; return; }
+
+    var levelMeta = {
+      full_evidence: { label: 'Full evidence', color: '#1a6b3c', bg: '#e6f4ec' },
+      partial_evidence: { label: 'Partial evidence', color: '#8a6100', bg: '#fff6e0' },
+      insufficient_evidence: { label: 'Insufficient evidence', color: '#96231f', bg: '#fdecec' },
+      no_data: { label: 'No data', color: '#64798e', bg: '#eef2f6' },
+    }[lc.evidence_level] || { label: lc.evidence_level || 'Unknown', color: '#64798e', bg: '#eef2f6' };
+
+    var h = '<div class="b" style="background:' + levelMeta.bg + ';border:1px solid ' + levelMeta.color + '33;' +
+      'border-radius:8px;padding:8px 11px;margin-bottom:8px;">' +
+      '<div style="font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:' + levelMeta.color + ';">' +
+      levelMeta.label + '</div>' +
+      '<div style="font-size:11.5px;color:#33465a;margin-top:2px;">' +
+      t(lc.ndvi_series_confidence && lc.ndvi_series_confidence.note) + '</div></div>';
+
+    if (!lc.available) {
+      h += '<div class="note" style="color:#96231f;"><b>Live satellite query unavailable</b> at generation time ' +
+        '(' + t(lc.error) + '). This is reported honestly -- no value was substituted or guessed.</div>';
+      el('panelEvidence').innerHTML = h;
+      return;
+    }
+
+    var series = lc.ndvi_series || [];
+    if (series.length) {
+      h += '<div class="kv">' + series.map(function (w) {
+        var val = w.insufficient_evidence
+          ? '<span style="color:#96231f;">Insufficient evidence</span> <span style="color:#64798e;font-size:10.5px;">(' + t(w.reason) + ')</span>'
+          : '<b>NDVI ' + (w.ndvi != null ? w.ndvi.toFixed(3) : '--') + '</b> <span style="color:#64798e;font-size:10.5px;">(real scene, ' + t(w.obs_date) + ')</span>';
+        return row(esc(w.label || '') + ' <span style="color:#64798e;font-weight:400;">(' + t(w.window_start) + ' to ' + t(w.window_end) + ')</span>', val);
+      }).join('') + '</div>';
+    }
+
+    h += '<div class="sep"></div><div class="kv">' +
+      row('Cropland fraction (live Dynamic World)', lc.cropland_fraction_now != null ? pct(lc.cropland_fraction_now * 100) : '--') +
+      row('Field wetness vs. district (live Sentinel-1)', lc.field_wetness_index_relative_pct != null ? lc.field_wetness_index_relative_pct.toFixed(1) + '%' : '--') +
+      '</div>';
+    h += '<div class="note">' + t(lc.field_wetness_caveat) + '</div>';
+    h += '<div class="note"><b>Decision-support only.</b> This satellite evidence does not by itself approve, reduce ' +
+      'or deny any claim. A healthy reading here never overrides farmer-reported loss, field photographs or official ' +
+      'crop-cutting records -- see the Integrated Validation View for how conflicting evidence is flagged for human review.</div>';
+
+    el('panelEvidence').innerHTML = h;
+  }
 
   function renderArea(f) {
     var tech = f.tech || {};
@@ -841,7 +896,84 @@
     });
     h += '</div>';
     h += '<div class="note">' + esc(META.SYNTHETIC_DATA_NOTICE || '') + '</div>';
+    h += renderAuditTrailBlock(f);
     el('integratedBody').innerHTML = h;
+    wireAuditTrailActions(f);
+  }
+
+  // ------------------------------------------------------------------
+  // Reviewer audit trail (owner-approved crop-loss-safeguards plan, item
+  // 4: "allow authorized reviewers to correct ... with an auditable
+  // record of each correction"). PROTOTYPE, stated as such everywhere --
+  // this whole page has no backend/database, so entries live only in
+  // THIS browser's localStorage, not synced across reviewers or devices.
+  // It demonstrates the workflow pattern (every action timestamped,
+  // original evidence never overwritten, correction stacked on top as a
+  // new entry) for a future real multi-user audit system; it is not that
+  // system. Never gates/changes any computed number on this page.
+  // ------------------------------------------------------------------
+  var AUDIT_LOG_KEY = 'vindhya_insurance_audit_log_prototype';
+
+  function loadAuditLog() {
+    try { return JSON.parse(localStorage.getItem(AUDIT_LOG_KEY) || '{}'); } catch (e) { return {}; }
+  }
+  function saveAuditLog(log) {
+    try { localStorage.setItem(AUDIT_LOG_KEY, JSON.stringify(log)); } catch (e) {}
+  }
+  function appendAuditEntry(farmerId, action, note) {
+    var log = loadAuditLog();
+    if (!log[farmerId]) log[farmerId] = [];
+    log[farmerId].push({
+      ts: new Date().toISOString(),
+      action: action,
+      note: note || '',
+      reviewer: 'local-browser-session (prototype -- no login system)',
+    });
+    saveAuditLog(log);
+  }
+
+  function renderAuditTrailBlock(f) {
+    var log = loadAuditLog()[f.farmer_id] || [];
+    var h = '<div style="margin-top:14px;border-top:1px solid var(--line);padding-top:11px">' +
+      '<div style="font-size:10px;font-weight:800;letter-spacing:.06em;color:#8a2f00;text-transform:uppercase;margin-bottom:5px">' +
+      'Reviewer actions &middot; PROTOTYPE (this browser only, not a real multi-user audit system)</div>';
+    h += '<div style="font-size:11.5px;color:#33465a;margin-bottom:8px;">Demonstrates the correction workflow -- ' +
+      'every action is timestamped and stacked, the original satellite/AI evidence above is never overwritten.</div>';
+    h += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">' +
+      '<button class="auditBtn" data-action="verified">Mark Verified</button>' +
+      '<button class="auditBtn" data-action="field_visit_required">Flag for Field Visit</button>' +
+      '<button class="auditBtn" data-action="override">Override / Correction</button></div>';
+    h += '<input type="text" id="auditNoteInput" placeholder="Reviewer note (required for Override)" ' +
+      'style="width:100%;box-sizing:border-box;padding:6px 8px;border:1px solid var(--line);border-radius:6px;font-size:12px;margin-bottom:8px;">';
+    if (log.length) {
+      h += '<div style="font-size:11px;color:#64798e;font-weight:700;margin-bottom:4px;">History (' + log.length + ')</div>';
+      h += '<div style="max-height:140px;overflow:auto;">' + log.slice().reverse().map(function (e) {
+        return '<div style="font-size:11.5px;padding:4px 0;border-bottom:1px solid var(--line);">' +
+          '<b>' + esc(e.action) + '</b> &middot; ' + esc(e.ts.slice(0, 16).replace('T', ' ')) +
+          (e.note ? '<br><span style="color:#64798e;">' + esc(e.note) + '</span>' : '') + '</div>';
+      }).join('') + '</div>';
+    } else {
+      h += '<div style="font-size:11.5px;color:#64798e;">No reviewer action recorded yet for this parcel.</div>';
+    }
+    h += '</div>';
+    return h;
+  }
+
+  function wireAuditTrailActions(f) {
+    var btns = document.querySelectorAll('#integratedBody .auditBtn');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].onclick = function () {
+        var action = this.getAttribute('data-action');
+        var noteEl = el('auditNoteInput');
+        var note = noteEl ? noteEl.value.trim() : '';
+        if (action === 'override' && !note) {
+          alert('An Override requires a reviewer note explaining the correction.');
+          return;
+        }
+        appendAuditEntry(f.farmer_id, action, note);
+        renderIntegrated(f); // re-render with the new log entry, same pattern as other panels
+      };
+    }
   }
 
   // ------------------------------------------------------------------

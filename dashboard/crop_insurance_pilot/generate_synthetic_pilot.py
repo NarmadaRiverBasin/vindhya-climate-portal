@@ -83,13 +83,30 @@ from shapely.ops import transform as shp_transform
 WORKER_ANALYZE_URL = "https://vindhya-mera-khet.vindhyaresearch25.workers.dev/analyze"
 
 
+
+# Multi-temporal windows (owner-approved crop-loss-safeguards plan, item 1:
+# "compare pre-event, event-period, and post-event observations ... never a
+# single NDVI threshold or a single satellite image"). Generic calendar
+# windows, not tied to each farmer's individual sowing date (no real sowing-
+# date source exists per-farmer) -- labelled by season stage, not claimed to
+# be that farmer's exact phenological stage.
+LIVE_NDVI_WINDOWS = [
+    {"label": "early-season", "start": "2026-05-01", "end": "2026-06-15"},
+    {"label": "mid-season", "start": "2026-07-15", "end": "2026-08-31"},
+    {"label": "recent", "start": "2026-09-15", "end": "2026-10-22"},
+]
+
+
 def call_live_analyze(ring_lonlat):
     """Real live GEE query via the deployed Mera Khet Worker -- same
     contract as dashboard/mera_khet_pilot/generate_synthetic_pilot.py's
     call_analyze(). Any failure is written honestly (available: false),
-    never substituted with a plausible-looking guess."""
+    never substituted with a plausible-looking guess. Requests the
+    multi-temporal ndvi_series (LIVE_NDVI_WINDOWS) alongside the single-
+    snapshot ndvi/cropland_fraction/wetness fields."""
     try:
-        r = requests.post(WORKER_ANALYZE_URL, json={"ring": ring_lonlat}, timeout=60)
+        r = requests.post(WORKER_ANALYZE_URL,
+                           json={"ring": ring_lonlat, "windows": LIVE_NDVI_WINDOWS}, timeout=90)
         return r.json()
     except Exception as e:
         return {"available": False, "reason": "generator_request_failed", "detail": str(e)[:200]}
@@ -629,8 +646,8 @@ def build_farmer(n, pm, scenario, scen_label, crop, binfo, base, rng, props, lon
         "components": {k: geo(comps[k]) for k in
                        ("cultivated", "bund", "fallow", "noncrop", "road", "water")},
 
-        "live_satellite_check": {
-            "note": "REAL, not synthetic -- a live Google Earth Engine query against this "
+        "live_satellite_check": (lambda _series, _conf: {
+            "note": "REAL, not synthetic -- live Google Earth Engine queries against this "
                     "farmer's actual parcel polygon, generated at script-run time. Independent "
                     "of the scenario/rs_series fields above, which stay deliberately synthetic "
                     "for demonstration.",
@@ -641,7 +658,17 @@ def build_farmer(n, pm, scenario, scen_label, crop, binfo, base, rng, props, lon
             "field_wetness_caveat": live_check.get("field_wetness_index_caveat"),
             "source": live_check.get("source"),
             "error": None if live_check.get("available") else (live_check.get("reason") or live_check.get("error")),
-        },
+            # Multi-temporal (plan item 1): pre-event/event-period/post-event
+            # real observations, never a single image deciding crop status.
+            "ndvi_series": _series,
+            "ndvi_series_confidence": _conf,
+            "evidence_level": (
+                "no_data" if not _series else
+                "insufficient_evidence" if _conf and _conf.get("windows_with_real_observation") == 0 else
+                "partial_evidence" if _conf and _conf.get("windows_with_real_observation", 0) < _conf.get("windows_requested", 0) else
+                "full_evidence"
+            ),
+        })(live_check.get("ndvi_series") or [], live_check.get("ndvi_series_confidence")),
 
         "girdawari": {
             "crop": crop, "season": season, "reported_area_ha": reported_area,

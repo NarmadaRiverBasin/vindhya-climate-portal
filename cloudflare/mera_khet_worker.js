@@ -413,6 +413,76 @@ function buildDwExpression(ring, startDate, endDate) {
   };
 }
 
+// Multi-temporal variant (2026-10-22, crop-loss safeguards): same real
+// Sentinel-2 selection as buildNdviExpression below (least-cloudy real
+// scene in the given window) but also returns that scene's own real
+// acquisition date (Image.date().format()) alongside the NDVI mean, via
+// Dictionary.set -- so a caller stacking several windows (pre-season/
+// mid-season/now) can show genuine per-observation dates, not assume one.
+// Exact field-name/function-name graph verified against the real GEE API
+// via ee.serializer.encode() in Python before being hand-ported here (same
+// discipline as every other expression in this file).
+function buildNdviExpressionWithDate(ring, startDate, endDate) {
+  return {
+    result: '0',
+    values: {
+      '1': ringToPolygonNode(ring),
+      '4': { constantValue: 'system:time_start' },
+      '3': { functionInvocationValue: { functionName: 'Collection.first', arguments: {
+        collection: { functionInvocationValue: { functionName: 'Collection.limit', arguments: {
+          ascending: { constantValue: false },
+          collection: { functionInvocationValue: { functionName: 'Collection.filter', arguments: {
+            collection: { functionInvocationValue: { functionName: 'Collection.filter', arguments: {
+              collection: { functionInvocationValue: { functionName: 'Collection.filter', arguments: {
+                collection: { functionInvocationValue: { functionName: 'ImageCollection.load', arguments: {
+                  id: { constantValue: 'COPERNICUS/S2_SR_HARMONIZED' },
+                } } },
+                filter: { functionInvocationValue: { functionName: 'Filter.intersects', arguments: {
+                  leftField: { constantValue: '.all' },
+                  rightValue: { functionInvocationValue: { functionName: 'Feature', arguments: {
+                    geometry: { valueReference: '1' },
+                  } } } } } },
+              } } },
+              filter: { functionInvocationValue: { functionName: 'Filter.dateRangeContains', arguments: {
+                leftValue: { functionInvocationValue: { functionName: 'DateRange', arguments: {
+                  end: { constantValue: endDate }, start: { constantValue: startDate },
+                } } },
+                rightField: { valueReference: '4' },
+              } } },
+            } } },
+            filter: { functionInvocationValue: { functionName: 'Filter.lessThan', arguments: {
+              leftField: { constantValue: 'CLOUDY_PIXEL_PERCENTAGE' },
+              rightValue: { constantValue: 20 },
+            } } },
+          } } },
+          key: { valueReference: '4' },
+        } } },
+      } } },
+      '0': { functionInvocationValue: { functionName: 'Dictionary.set', arguments: {
+        dictionary: { functionInvocationValue: { functionName: 'Image.reduceRegion', arguments: {
+          geometry: { valueReference: '1' },
+          image: { functionInvocationValue: { functionName: 'Image.rename', arguments: {
+            input: { functionInvocationValue: { functionName: 'Image.normalizedDifference', arguments: {
+              bandNames: { constantValue: ['B8', 'B4'] },
+              input: { valueReference: '3' },
+            } } },
+            names: { constantValue: ['ndvi'] },
+          } } },
+          reducer: { functionInvocationValue: { functionName: 'Reducer.mean', arguments: {} } },
+          scale: { constantValue: 10 },
+        } } },
+        key: { constantValue: 'obs_date' },
+        value: { functionInvocationValue: { functionName: 'Date.format', arguments: {
+          date: { functionInvocationValue: { functionName: 'Image.date', arguments: {
+            image: { valueReference: '3' },
+          } } },
+          format: { constantValue: 'YYYY-MM-dd' },
+        } } },
+      } } },
+    },
+  };
+}
+
 function buildNdviExpression(ring, startDate, endDate) {
   return {
     result: '0',
@@ -764,11 +834,23 @@ async function handleAnalyze(request, env) {
   const ndviExpr = buildNdviExpression(ring, s2Start, s2End);
   const s1Expr = buildS1WetnessExpression(ring, s1Start, s1End);
 
-  const [dwOutcome, ndviOutcome, s1Outcome] = await Promise.allSettled([
+  // Multi-temporal NDVI (2026-10-22, crop-loss safeguards: owner-approved
+  // plan item 1 -- "pre-event, event-period, and post-event observations,
+  // never a single NDVI threshold or single image"). Opt-in via
+  // body.windows -- Mera Khet's own live single-field call never sends
+  // this, so its existing behaviour/response shape is unchanged. Capped
+  // at 5 windows per request (a deliberate limit, not a silent truncation
+  // -- the caller gets fewer results back if it asks for more).
+  const windows = Array.isArray(body.windows) ? body.windows.slice(0, 5) : [];
+  const windowExprs = windows.map((w) => buildNdviExpressionWithDate(ring, String(w.start), String(w.end)));
+
+  const outcomes = await Promise.allSettled([
     withTimeout(eeCompute(dwExpr, token, projectId), GEE_COMPUTE_TIMEOUT_MS, TIMEOUT_SENTINEL),
     withTimeout(eeCompute(ndviExpr, token, projectId), GEE_COMPUTE_TIMEOUT_MS, TIMEOUT_SENTINEL),
     withTimeout(eeCompute(s1Expr, token, projectId), GEE_COMPUTE_TIMEOUT_MS, TIMEOUT_SENTINEL),
+    ...windowExprs.map((e) => withTimeout(eeCompute(e, token, projectId), GEE_COMPUTE_TIMEOUT_MS, TIMEOUT_SENTINEL)),
   ]);
+  const [dwOutcome, ndviOutcome, s1Outcome, ...windowOutcomes] = outcomes;
 
   let croplandFraction = null, croplandError = null;
   if (dwOutcome.status === 'fulfilled' && dwOutcome.value && dwOutcome.value !== TIMEOUT_SENTINEL) {
@@ -827,6 +909,28 @@ async function handleAnalyze(request, env) {
     }, 502, origin);
   }
 
+  // Multi-temporal series (owner-approved plan item 1/2): each requested
+  // window gets its own real-or-honestly-failed entry -- a window with no
+  // cloud-free scene is reported as insufficient_evidence:true, NEVER
+  // silently dropped or backfilled from a neighbouring window.
+  const ndviSeries = windows.map((w, i) => {
+    const o = windowOutcomes[i];
+    const entry = { label: w.label || null, window_start: String(w.start), window_end: String(w.end) };
+    if (o && o.status === 'fulfilled' && o.value && o.value !== TIMEOUT_SENTINEL && o.value.ndvi != null) {
+      entry.ndvi = o.value.ndvi;
+      entry.obs_date = o.value.obs_date || null;
+      entry.insufficient_evidence = false;
+    } else {
+      entry.ndvi = null;
+      entry.obs_date = null;
+      entry.insufficient_evidence = true;
+      entry.reason = (o && o.value === TIMEOUT_SENTINEL) ? 'gee_timeout'
+        : (o && o.status === 'fulfilled') ? 'no_cloud_free_sentinel2_scene_in_window'
+        : String((o && o.reason && o.reason.message) || (o && o.reason) || 'gee_error');
+    }
+    return entry;
+  });
+
   const resp = {
     available: true,
     ndvi: ndviVal,
@@ -839,6 +943,19 @@ async function handleAnalyze(request, env) {
   if (ndviError) resp.ndvi_error = ndviError;
   if (croplandError) resp.cropland_error = croplandError;
   if (wetnessError) resp.wetness_error = wetnessError;
+  if (windows.length) {
+    resp.ndvi_series = ndviSeries;
+    const realCount = ndviSeries.filter((e) => !e.insufficient_evidence).length;
+    resp.ndvi_series_confidence = {
+      windows_requested: windows.length,
+      windows_with_real_observation: realCount,
+      note: realCount === windows.length
+        ? 'Real satellite observation found for every requested window.'
+        : realCount === 0
+          ? 'No window had a cloud-free scene -- treat as insufficient evidence, not as a flat/healthy reading.'
+          : (windows.length - realCount) + ' of ' + windows.length + ' window(s) had no cloud-free scene (cloud cover, sensor gap, or revisit timing) -- missing windows are reported as insufficient_evidence, never interpolated or assumed.',
+    };
+  }
   return jsonResponse(resp, 200, origin);
 }
 
